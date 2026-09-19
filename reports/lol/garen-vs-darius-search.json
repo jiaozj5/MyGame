@@ -1,0 +1,187 @@
+{
+  "best": {
+    "config": {
+      "player": {
+        "champion": "Garen",
+        "level": 1,
+        "skill_order": [
+          "E",
+          "Q",
+          "W",
+          "E",
+          "E",
+          "R"
+        ],
+        "items": [
+          "1055"
+        ],
+        "rune": "conqueror",
+        "summoners": [
+          "flash",
+          "ignite"
+        ],
+        "policy": "short_trade",
+        "wave": "freeze",
+        "combo": [
+          "Q",
+          "AA",
+          "E"
+        ]
+      },
+      "opponent": {
+        "champion": "Darius",
+        "level": 1,
+        "skill_order": [
+          "Q",
+          "W",
+          "E",
+          "Q",
+          "Q",
+          "R"
+        ],
+        "items": [
+          "1055"
+        ],
+        "rune": "conqueror",
+        "summoners": [
+          "flash",
+          "ghost"
+        ],
+        "policy": "all_in",
+        "wave": "freeze",
+        "combo": [
+          "Q",
+          "AA",
+          "W",
+          "E"
+        ]
+      },
+      "duration": 180,
+      "seed": 42,
+      "start_time": 90,
+      "accuracy": 0.8,
+      "opponent_accuracy": 0.75,
+      "distance": 300,
+      "mode": "lane",
+      "starting_gold": 500
+    },
+    "mean_score": -999.43,
+    "worst_score": -1433.06,
+    "stddev": 490.16,
+    "win_rate": 0.0,
+    "mean_cs_diff": -1.4,
+    "mean_hp_diff": 0.4882,
+    "mean_kill_diff": -2.2,
+    "seed_scores": {
+      "0": -1433.06,
+      "1": -850.01,
+      "2": -112.16,
+      "3": -1405.42,
+      "4": -1196.51
+    }
+  },
+  "ranking": [
+    {
+      "config": {
+        "player": {
+          "champion": "Garen",
+          "level": 1,
+          "skill_order": [
+            "E",
+            "Q",
+            "W",
+            "E",
+            "E",
+            "R"
+          ],
+          "items": [
+            "1055"
+          ],
+          "rune": "conqueror",
+          "summoners": [
+            "flash",
+            "ignite"
+          ],
+          "policy": "short_trade",
+          "wave": "freeze",
+          "combo": [
+            "Q",
+            "AA",
+            "E"
+          ]
+        },
+        "opponent": {
+          "champion": "Darius",
+          "level": 1,
+          "skill_order": [
+            "Q",
+            "W",
+            "E",
+            "Q",
+            "Q",
+            "R"
+          ],
+          "items": [
+            "1055"
+          ],
+          "rune": "conqueror",
+          "summoners": [
+            "flash",
+            "ghost"
+          ],
+          "policy": "all_in",
+          "wave": "freeze",
+          "combo": [
+            "Q",
+            "AA",
+            "W",
+            "E"
+          ]
+        },
+        "duration": 180,
+        "seed": 42,
+        "start_time": 90,
+        "accuracy": 0.8,
+        "opponent_accuracy": 0.75,
+        "distance": 300,
+        "mode": "lane",
+        "starting_gold": 500
+      },
+      "mean_score": -999.43,
+      "worst_score": -1433.06,
+      "stddev": 490.16,
+      "win_rate": 0.0,
+      "mean_cs_diff": -1.4,
+      "mean_hp_diff": 0.4882,
+      "mean_kill_diff": -2.2,
+      "seed_scores": {
+        "0": -1433.06,
+        "1": -850.01,
+        "2": -112.16,
+        "3": -1405.42,
+        "4": -1196.51
+      }
+    }
+  ],
+  "search": {
+    "candidates": 1,
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "trials": 5,
+    "objective": "mean",
+    "score_formula": "净资产差（金币+已购装备价值） + 0.25×新增经验差 + 200×剩余生命比例差 + 120×击杀差"
+  },
+  "patch": "26.18",
+  "model": "approximate-lane-v1",
+  "warnings": [
+    "这是可复现的近似对线模型，不是 Riot 游戏服务器；分数仅用于本模型、同条件方案比较。",
+    "兵线位置、走位命中、回城/复活返线和防御塔为简化模型；不包含打野、视野、碰撞、仇恨拉扯和逐帧取消后摇。",
+    "天赋仅模拟主系基石的近似效果；未选择副系、属性碎片及其他天赋。召唤师施放由固定策略控制。",
+    "优化仅搜索明确列出的候选与种子，对手为固定策略，并非全局最优或真实对局胜率。"
+  ]
+}

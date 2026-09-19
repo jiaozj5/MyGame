@@ -1,0 +1,24 @@
+{
+  "schema_version": "0.1.0",
+  "ruleset_id": "smalltown-v0.1",
+  "setting_id": "smalltown",
+  "revision": 0,
+  "day": 0,
+  "player_id": "p",
+  "persons": {
+    "p": {"id":"p","name":"林禾","birth_day":-8760,"alive":true,"death_day":null,"location":"town","cash":600,"energy":70,"health":80,"stress":35,"housing_reserve":500,"knowledge":{"shared_walk":-365}},
+    "f": {"id":"f","name":"周远","birth_day":-8760,"alive":true,"death_day":null,"location":"town","cash":50,"energy":65,"health":75,"stress":60,"housing_reserve":450,"repayment_willing":true,"knowledge":{"shared_walk":-365}},
+    "m": {"id":"m","name":"许岚","birth_day":-17520,"alive":true,"death_day":null,"location":"town","cash":800,"energy":60,"health":70,"stress":30,"housing_reserve":500,"knowledge":{}}
+  },
+  "relationships": [
+    {"from":"p","to":"f","kind":"friend","trust":55,"closeness":65},
+    {"from":"f","to":"p","kind":"friend","trust":60,"closeness":65},
+    {"from":"p","to":"m","kind":"parent","trust":75,"closeness":80},
+    {"from":"m","to":"p","kind":"child","trust":75,"closeness":80}
+  ],
+  "facts": {"friend_request_open":true,"friend_request_person":"f","letter_handled":false,"letter_read":false},
+  "historical_facts": {"shared_walk":{"day":-365,"summary":"林禾与周远曾一起沿河散步。","participants":["p","f"]}},
+  "artifacts": {"letter_f":{"author":"f","created_day":-1,"fact_ids":["shared_walk"],"text":"我还记得我们沿河散步的那个傍晚。谢谢你愿意听我说话。"}},
+  "loans": {},
+  "tasks": []
+}

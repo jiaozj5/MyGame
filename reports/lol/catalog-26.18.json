@@ -1,0 +1,1250 @@
+{
+  "patch": "26.18",
+  "ddragon_version": "16.18.1",
+  "model": "approximate-lane-v1",
+  "checked_at": "2026-09-18",
+  "sources": [
+    {
+      "title": "Riot Patch 26.18 Notes",
+      "url": "https://www.leagueoflegends.com/en-us/news/game-updates/league-of-legends-patch-26-18-notes/",
+      "kind": "patch",
+      "status": "official"
+    },
+    {
+      "title": "Riot Data Dragon",
+      "url": "https://ddragon.leagueoflegends.com/cdn/16.18.1/data/en_US/champion/",
+      "kind": "champion-data",
+      "status": "official-static-snapshot"
+    },
+    {
+      "title": "Riot Patch Schedule",
+      "url": "https://support-leagueoflegends.riotgames.com/hc/en-us/articles/360018987893-Patch-Schedule",
+      "kind": "schedule",
+      "status": "official"
+    },
+    {
+      "title": "U.GG Darius rune table",
+      "url": "https://u.gg/lol/champions/darius/runes-table",
+      "kind": "build-statistics",
+      "status": "community-aggregate"
+    },
+    {
+      "title": "U.GG Jax build",
+      "url": "https://u.gg/lol/champions/jax/build",
+      "kind": "build-statistics",
+      "status": "community-aggregate"
+    },
+    {
+      "title": "U.GG Malphite build",
+      "url": "https://u.gg/lol/champions/malphite/build",
+      "kind": "build-statistics",
+      "status": "community-aggregate"
+    }
+  ],
+  "data_quality": {
+    "scope": "PC Summoner's Rift top-lane levels 1-6",
+    "official_values": "base stats and spell tooltip snapshots",
+    "approximation": "animation, hitbox, wave aggro, exact rune/item proc scripts, jungle pressure and player mind games are simplified",
+    "optimization_claim": "best among submitted model candidates and seeds; not a universal matchup truth",
+    "refresh": "re-run the Data Dragon fetch and update checked_at when a new patch is live"
+  },
+  "champions": {
+    "Garen": {
+      "id": "Garen",
+      "name": "盖伦",
+      "role": "近战战士",
+      "stats": {
+        "hp": 690,
+        "hpperlevel": 98,
+        "mp": 0,
+        "mpperlevel": 0,
+        "attackdamage": 69,
+        "attackdamageperlevel": 0,
+        "armor": 38,
+        "armorperlevel": 4.2,
+        "spellblock": 32,
+        "spellblockperlevel": 1.55,
+        "attackspeed": 0.625,
+        "attackspeedperlevel": 3.65,
+        "hpregen": 8,
+        "hpregenperlevel": 0.5,
+        "mpregen": 0,
+        "mpregenperlevel": 0,
+        "attackrange": 175,
+        "movespeed": 340
+      },
+      "abilities": {
+        "Q": {
+          "name": "致命打击",
+          "damage": [
+            30,
+            60,
+            90,
+            120,
+            150
+          ],
+          "ad_ratio": 0.5,
+          "bonus_ad_ratio": 0.0,
+          "ap_ratio": 0.0,
+          "cooldown": [
+            8,
+            8,
+            8,
+            8,
+            8
+          ],
+          "cost": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "range": 300,
+          "damage_type": "physical",
+          "cast_time": 0.25,
+          "auto_reset": true,
+          "silence": 1.5,
+          "notes": "强化下一次普攻；解除减速"
+        },
+        "W": {
+          "name": "勇气",
+          "damage": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "ad_ratio": 0.0,
+          "bonus_ad_ratio": 0.0,
+          "ap_ratio": 0.0,
+          "cooldown": [
+            22,
+            19.5,
+            17,
+            14.5,
+            12
+          ],
+          "cost": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "range": 300,
+          "damage_type": "physical",
+          "cast_time": 0.25,
+          "shield": [
+            65,
+            85,
+            105,
+            125,
+            145
+          ],
+          "shield_hp_ratio": 0.18,
+          "shield_duration": 0.75,
+          "reduction_duration": 4,
+          "damage_reduction": [
+            0.25,
+            0.29,
+            0.33,
+            0.37,
+            0.41
+          ],
+          "tenacity": 0.6,
+          "notes": "前0.75秒盾与60%韧性，随后减伤持续至4秒；被动击杀单位叠双抗未在模型中逐个计数"
+        },
+        "E": {
+          "name": "审判",
+          "damage": [
+            4,
+            7,
+            10,
+            13,
+            16
+          ],
+          "ad_ratio": [
+            0.01,
+            0.02,
+            0.03,
+            0.04,
+            0.05
+          ],
+          "bonus_ad_ratio": 0.0,
+          "ap_ratio": 0.0,
+          "cooldown": [
+            9,
+            8.25,
+            7.5,
+            6.75,
+            6
+          ],
+          "cost": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "range": 300,
+          "damage_type": "physical",
+          "cast_time": 0.25,
+          "duration": 3,
+          "channel": 3,
+          "ticks": 7,
+          "damage_per_tick": true,
+          "armor_shred": 0.25,
+          "notes": "每级7次旋转伤害；最近目标伤害提高25%，未在引擎中展开"
+        },
+        "R": {
+          "name": "德玛西亚正义",
+          "damage": [
+            150,
+            250,
+            350
+          ],
+          "ad_ratio": 0.0,
+          "bonus_ad_ratio": 0.0,
+          "ap_ratio": 0,
+          "cooldown": [
+            120,
+            100,
+            80
+          ],
+          "cost": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "range": 400,
+          "damage_type": "true",
+          "cast_time": 0.25,
+          "missing_health_ratio": 0.25,
+          "target_missing_hp_ratio": [
+            0.25,
+            0.3,
+            0.35
+          ],
+          "notes": "按目标已损失生命值增加真实伤害"
+        }
+      },
+      "passive": {
+        "name": "坚韧",
+        "regen_after": 8,
+        "regen_ratio": 0.015
+      },
+      "recommended": {
+        "skill_order": [
+          "E",
+          "Q",
+          "W",
+          "E",
+          "E",
+          "R"
+        ],
+        "runes": [
+          "conqueror",
+          "grasp"
+        ],
+        "summoners": [
+          [
+            "flash",
+            "ignite"
+          ],
+          [
+            "flash",
+            "teleport"
+          ]
+        ],
+        "items": [
+          [
+            "1055"
+          ],
+          [
+            "1055",
+            "3047"
+          ],
+          [
+            "1055",
+            "3067"
+          ]
+        ]
+      }
+    },
+    "Darius": {
+      "id": "Darius",
+      "name": "德莱厄斯",
+      "role": "近战战士",
+      "stats": {
+        "hp": 652,
+        "hpperlevel": 114,
+        "mp": 263,
+        "mpperlevel": 58,
+        "attackdamage": 64,
+        "attackdamageperlevel": 0,
+        "armor": 37,
+        "armorperlevel": 5.2,
+        "spellblock": 32,
+        "spellblockperlevel": 2.05,
+        "attackspeed": 0.625,
+        "attackspeedperlevel": 1,
+        "hpregen": 10,
+        "hpregenperlevel": 0.95,
+        "mpregen": 6.6,
+        "mpregenperlevel": 0.35,
+        "attackrange": 175,
+        "movespeed": 340
+      },
+      "abilities": {
+        "Q": {
+          "name": "大杀四方",
+          "damage": [
+            50,
+            80,
+            110,
+            140,
+            170
+          ],
+          "ad_ratio": 1.0,
+          "bonus_ad_ratio": 0.0,
+          "ap_ratio": 0.0,
+          "cooldown": [
+            9,
+            8,
+            7,
+            6,
+            5
+          ],
+          "cost": [
+            25,
+            30,
+            35,
+            40,
+            45
+          ],
+          "range": 425,
+          "damage_type": "physical",
+          "cast_time": 0.25,
+          "outer_ratio": 1.0,
+          "inner_ratio": 0.35,
+          "heal_missing": 0.15,
+          "notes": "外圈命中伤害/回血并施加流血；内圈低伤且不叠层"
+        },
+        "W": {
+          "name": "致残打击",
+          "damage": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "ad_ratio": [
+            0.4,
+            0.45,
+            0.5,
+            0.55,
+            0.6
+          ],
+          "bonus_ad_ratio": 0.0,
+          "ap_ratio": 0.0,
+          "cooldown": [
+            5,
+            5,
+            5,
+            5,
+            5
+          ],
+          "cost": [
+            40,
+            40,
+            40,
+            40,
+            40
+          ],
+          "range": 300,
+          "damage_type": "physical",
+          "cast_time": 0.25,
+          "auto_reset": true,
+          "slow": 0.9,
+          "notes": "强化普攻并重置攻击"
+        },
+        "E": {
+          "name": "无情铁手",
+          "damage": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "ad_ratio": 0.0,
+          "bonus_ad_ratio": 0.0,
+          "ap_ratio": 0.0,
+          "cooldown": [
+            26,
+            23.5,
+            21,
+            18.5,
+            16
+          ],
+          "cost": [
+            70,
+            60,
+            50,
+            40,
+            30
+          ],
+          "range": 535,
+          "damage_type": "physical",
+          "cast_time": 0.25,
+          "armor_pen": [
+            0.15,
+            0.2,
+            0.25,
+            0.3,
+            0.35
+          ],
+          "notes": "被动护甲穿透；主动拉回"
+        },
+        "R": {
+          "name": "诺克萨斯断头台",
+          "damage": [
+            125,
+            250,
+            375
+          ],
+          "ad_ratio": 0.0,
+          "bonus_ad_ratio": [
+            0.75,
+            0.75,
+            0.75
+          ],
+          "ap_ratio": 0.0,
+          "cooldown": [
+            120,
+            100,
+            80
+          ],
+          "cost": [
+            100,
+            100,
+            0
+          ],
+          "range": 460,
+          "damage_type": "true",
+          "cast_time": 0.25,
+          "bleed_amp": [
+            25,
+            50,
+            75
+          ],
+          "bleed_amp_bonus_ad_ratio": 0.15,
+          "notes": "每层流血额外25/50/75 (+15% bonus AD)真伤；击杀可刷新"
+        }
+      },
+      "passive": {
+        "name": "出血",
+        "stacks": 5,
+        "duration": 5,
+        "damage": [
+          16.25,
+          20,
+          23.75,
+          27.5,
+          31.25,
+          35,
+          37.5
+        ],
+        "bonus_ad": [
+          30,
+          50,
+          70,
+          90,
+          110,
+          130,
+          150,
+          170,
+          190,
+          210,
+          230
+        ],
+        "bonus_ad_ratio": 0.075
+      },
+      "recommended": {
+        "skill_order": [
+          "Q",
+          "W",
+          "E",
+          "Q",
+          "Q",
+          "R"
+        ],
+        "runes": [
+          "conqueror",
+          "phase_rush"
+        ],
+        "summoners": [
+          [
+            "flash",
+            "ghost"
+          ],
+          [
+            "flash",
+            "teleport"
+          ]
+        ],
+        "items": [
+          [
+            "1055"
+          ],
+          [
+            "1055",
+            "3047"
+          ],
+          [
+            "1055",
+            "3071"
+          ]
+        ]
+      }
+    },
+    "Jax": {
+      "id": "Jax",
+      "name": "贾克斯",
+      "role": "近战战士",
+      "stats": {
+        "hp": 650,
+        "hpperlevel": 103,
+        "mp": 339,
+        "mpperlevel": 52,
+        "attackdamage": 68,
+        "attackdamageperlevel": 0,
+        "armor": 36,
+        "armorperlevel": 4.2,
+        "spellblock": 32,
+        "spellblockperlevel": 2.05,
+        "attackspeed": 0.638,
+        "attackspeedperlevel": 3.4,
+        "hpregen": 8.5,
+        "hpregenperlevel": 0.55,
+        "mpregen": 8.2,
+        "mpregenperlevel": 0.7,
+        "attackrange": 125,
+        "movespeed": 350
+      },
+      "abilities": {
+        "Q": {
+          "name": "跳斩",
+          "damage": [
+            65,
+            105,
+            145,
+            185,
+            225
+          ],
+          "ad_ratio": 0.0,
+          "bonus_ad_ratio": 1.0,
+          "ap_ratio": 0.6,
+          "cooldown": [
+            8,
+            7.5,
+            7,
+            6.5,
+            6
+          ],
+          "cost": [
+            50,
+            50,
+            50,
+            50,
+            50
+          ],
+          "range": 700,
+          "damage_type": "physical",
+          "cast_time": 0.25
+        },
+        "W": {
+          "name": "蓄力一击",
+          "damage": [
+            50,
+            85,
+            120,
+            155,
+            190
+          ],
+          "ad_ratio": 0.0,
+          "bonus_ad_ratio": 0.0,
+          "ap_ratio": 0.6,
+          "cooldown": [
+            7,
+            6,
+            5,
+            4,
+            3
+          ],
+          "cost": [
+            30,
+            30,
+            30,
+            30,
+            30
+          ],
+          "range": 300,
+          "damage_type": "magic",
+          "cast_time": 0.25,
+          "auto_reset": true
+        },
+        "E": {
+          "name": "反击风暴",
+          "damage": [
+            40,
+            70,
+            100,
+            130,
+            160
+          ],
+          "ad_ratio": 0.0,
+          "bonus_ad_ratio": 0.0,
+          "ap_ratio": 0.7,
+          "cooldown": [
+            17,
+            15,
+            13,
+            11,
+            9
+          ],
+          "cost": [
+            50,
+            60,
+            70,
+            80,
+            90
+          ],
+          "range": 300,
+          "damage_type": "magic",
+          "cast_time": 0.25,
+          "target_max_hp_ratio": 0.04,
+          "duration": 2,
+          "dodge": true,
+          "stun": 1,
+          "notes": "闪避普攻后晕眩；每次闪避提高20%，上限100%"
+        },
+        "R": {
+          "name": "宗师之威",
+          "damage": [
+            100,
+            175,
+            250
+          ],
+          "ad_ratio": 0.0,
+          "bonus_ad_ratio": 0.0,
+          "ap_ratio": 1.0,
+          "cooldown": [
+            110,
+            100,
+            90
+          ],
+          "cost": [
+            100,
+            100,
+            100
+          ],
+          "range": 375,
+          "damage_type": "magic",
+          "cast_time": 0.25,
+          "onhit_damage": [
+            75,
+            130,
+            185
+          ],
+          "onhit_every": 3,
+          "armor_bonus": [
+            45,
+            60,
+            75
+          ],
+          "mr_bonus": [
+            27,
+            36,
+            45
+          ],
+          "duration": 8
+        }
+      },
+      "passive": {
+        "name": "无情突袭",
+        "attack_speed_per_stack": 0.03,
+        "stacks": 8
+      },
+      "recommended": {
+        "skill_order": [
+          "E",
+          "Q",
+          "W",
+          "Q",
+          "Q",
+          "R"
+        ],
+        "runes": [
+          "grasp",
+          "conqueror"
+        ],
+        "summoners": [
+          [
+            "flash",
+            "ignite"
+          ],
+          [
+            "flash",
+            "teleport"
+          ]
+        ],
+        "items": [
+          [
+            "1055"
+          ],
+          [
+            "1055",
+            "3047"
+          ],
+          [
+            "1055",
+            "3078"
+          ]
+        ]
+      }
+    },
+    "Malphite": {
+      "id": "Malphite",
+      "name": "墨菲特",
+      "role": "坦克/法师",
+      "stats": {
+        "hp": 665,
+        "hpperlevel": 104,
+        "mp": 280,
+        "mpperlevel": 60,
+        "attackdamage": 62,
+        "attackdamageperlevel": 0,
+        "armor": 40,
+        "armorperlevel": 4.95,
+        "spellblock": 28,
+        "spellblockperlevel": 2.05,
+        "attackspeed": 0.736,
+        "attackspeedperlevel": 3.4,
+        "hpregen": 7,
+        "hpregenperlevel": 0.55,
+        "mpregen": 7.3,
+        "mpregenperlevel": 0.55,
+        "attackrange": 125,
+        "movespeed": 335
+      },
+      "abilities": {
+        "Q": {
+          "name": "地震碎片",
+          "damage": [
+            70,
+            120,
+            170,
+            220,
+            270
+          ],
+          "ad_ratio": 0.0,
+          "bonus_ad_ratio": 0.0,
+          "ap_ratio": 0.6,
+          "cooldown": [
+            8,
+            8,
+            8,
+            8,
+            8
+          ],
+          "cost": [
+            70,
+            75,
+            80,
+            85,
+            90
+          ],
+          "range": 625,
+          "damage_type": "magic",
+          "cast_time": 0.25,
+          "notes": "偷取移速 3 秒"
+        },
+        "W": {
+          "name": "雷霆拍击",
+          "damage": [
+            30,
+            40,
+            50,
+            60,
+            70
+          ],
+          "ad_ratio": 0.0,
+          "bonus_ad_ratio": 0.0,
+          "ap_ratio": 0.2,
+          "cooldown": [
+            10,
+            9.5,
+            9,
+            8.5,
+            8
+          ],
+          "cost": [
+            30,
+            35,
+            40,
+            45,
+            50
+          ],
+          "range": 400,
+          "damage_type": "physical",
+          "cast_time": 0.25,
+          "auto_reset": true,
+          "cone_damage_ratio": 0.15,
+          "armor_ratio": 0.15,
+          "passive_armor_ratio": [
+            0.1,
+            0.15,
+            0.2,
+            0.25,
+            0.3
+          ],
+          "shield_multiplier": 3
+        },
+        "E": {
+          "name": "大地震颤",
+          "damage": [
+            60,
+            95,
+            130,
+            165,
+            200
+          ],
+          "ad_ratio": 0.0,
+          "bonus_ad_ratio": 0.0,
+          "ap_ratio": 0.6,
+          "cooldown": [
+            7,
+            7,
+            7,
+            7,
+            7
+          ],
+          "cost": [
+            50,
+            55,
+            60,
+            65,
+            70
+          ],
+          "range": 400,
+          "damage_type": "magic",
+          "cast_time": 0.25,
+          "armor_ratio": 0.4,
+          "attack_speed_slow": [
+            0.3,
+            0.35,
+            0.4,
+            0.45,
+            0.5
+          ],
+          "slow_duration": 3
+        },
+        "R": {
+          "name": "势不可挡",
+          "damage": [
+            200,
+            300,
+            400
+          ],
+          "ad_ratio": 0.0,
+          "bonus_ad_ratio": 0.0,
+          "ap_ratio": 0.9,
+          "cooldown": [
+            130,
+            115,
+            100
+          ],
+          "cost": [
+            100,
+            100,
+            100
+          ],
+          "range": 1000,
+          "damage_type": "magic",
+          "cast_time": 0.25,
+          "knockup": 1.5
+        }
+      },
+      "passive": {
+        "name": "花岗岩护盾",
+        "shield_ratio": 0.1,
+        "recharge": 8
+      },
+      "recommended": {
+        "skill_order": [
+          "Q",
+          "E",
+          "W",
+          "Q",
+          "Q",
+          "R"
+        ],
+        "runes": [
+          "comet",
+          "grasp"
+        ],
+        "summoners": [
+          [
+            "flash",
+            "teleport"
+          ],
+          [
+            "flash",
+            "ignite"
+          ]
+        ],
+        "items": [
+          [
+            "1056"
+          ],
+          [
+            "1056",
+            "3047"
+          ],
+          [
+            "1056",
+            "3068"
+          ]
+        ]
+      }
+    }
+  },
+  "items": {
+    "1054": {
+      "id": "1054",
+      "name": "多兰之盾",
+      "gold": 450,
+      "stats": {
+        "hp": 110,
+        "hp_regen": 0.8
+      }
+    },
+    "1055": {
+      "id": "1055",
+      "name": "多兰之刃",
+      "gold": 450,
+      "stats": {
+        "hp": 80,
+        "ad": 10,
+        "lifesteal": 0.025
+      }
+    },
+    "1056": {
+      "id": "1056",
+      "name": "多兰之戒",
+      "gold": 400,
+      "stats": {
+        "hp": 90,
+        "ap": 18
+      }
+    },
+    "1036": {
+      "id": "1036",
+      "name": "长剑",
+      "gold": 350,
+      "stats": {
+        "ad": 10
+      }
+    },
+    "1028": {
+      "id": "1028",
+      "name": "红水晶",
+      "gold": 400,
+      "stats": {
+        "hp": 150
+      }
+    },
+    "3047": {
+      "id": "3047",
+      "name": "铁板靴",
+      "gold": 1200,
+      "stats": {
+        "armor": 25,
+        "movespeed": 45
+      }
+    },
+    "3111": {
+      "id": "3111",
+      "name": "水银之靴",
+      "gold": 1250,
+      "stats": {
+        "mr": 20,
+        "movespeed": 45,
+        "tenacity": 0.3
+      }
+    },
+    "3009": {
+      "id": "3009",
+      "name": "轻灵之靴",
+      "gold": 1000,
+      "stats": {
+        "movespeed": 55
+      }
+    },
+    "3067": {
+      "id": "3067",
+      "name": "燃烧宝石",
+      "gold": 800,
+      "stats": {
+        "hp": 200,
+        "haste": 10
+      }
+    },
+    "3071": {
+      "id": "3071",
+      "name": "黑色切割者",
+      "gold": 3000,
+      "stats": {
+        "hp": 400,
+        "ad": 45,
+        "haste": 20
+      }
+    },
+    "3078": {
+      "id": "3078",
+      "name": "三相之力",
+      "gold": 3333,
+      "stats": {
+        "hp": 333,
+        "ad": 36,
+        "attack_speed": 0.3,
+        "haste": 15
+      }
+    },
+    "3068": {
+      "id": "3068",
+      "name": "日炎圣盾",
+      "gold": 2800,
+      "stats": {
+        "hp": 350,
+        "armor": 50,
+        "haste": 10
+      }
+    },
+    "2003": {
+      "id": "2003",
+      "name": "生命药水",
+      "gold": 50,
+      "stats": {}
+    }
+  },
+  "runes": {
+    "conqueror": {
+      "name": "征服者",
+      "tree": "精密",
+      "effects": {
+        "adaptive_per_stack": 1.08,
+        "stacks": 12,
+        "heal_at_max": 0.05
+      },
+      "notes": "持续战斗叠层；模型以命中事件近似"
+    },
+    "grasp": {
+      "name": "不灭之握",
+      "tree": "坚决",
+      "effects": {
+        "magic_damage_max_hp": 0.03,
+        "heal_max_hp": 0.013,
+        "hp_melee": 7
+      },
+      "notes": "战斗中每4秒充能一次"
+    },
+    "press_the_attack": {
+      "name": "强攻",
+      "tree": "精密",
+      "effects": {
+        "amp": 0.08,
+        "hits": 3
+      }
+    },
+    "fleet": {
+      "name": "迅捷步法",
+      "tree": "精密",
+      "effects": {
+        "heal": 0.0,
+        "move_speed": 0.2
+      }
+    },
+    "comet": {
+      "name": "奥术彗星",
+      "tree": "巫术",
+      "effects": {
+        "damage": 30,
+        "ap_ratio": 0.05,
+        "ad_ratio": 0.1,
+        "cooldown": 20
+      },
+      "notes": "技能命中后触发；落点命中在模型中按 accuracy 处理"
+    },
+    "phase_rush": {
+      "name": "相位猛冲",
+      "tree": "巫术",
+      "effects": {
+        "move_speed": 0.4,
+        "hits": 3
+      }
+    },
+    "fleet_footwork": {
+      "name": "迅捷步法",
+      "tree": "精密",
+      "effects": {
+        "move_speed": 0.2
+      }
+    }
+  },
+  "summoners": {
+    "flash": {
+      "name": "闪现",
+      "cooldown": 300,
+      "effect": "位移/追击/脱离",
+      "modelled": false
+    },
+    "ignite": {
+      "name": "引燃",
+      "cooldown": 180,
+      "damage": 410,
+      "damage_type": "true",
+      "duration": 5,
+      "modelled": true
+    },
+    "teleport": {
+      "name": "传送",
+      "cooldown": 360,
+      "effect": "回线/支援",
+      "modelled": "economy_only"
+    },
+    "ghost": {
+      "name": "幽灵疾步",
+      "cooldown": 240,
+      "effect": "持续移速",
+      "modelled": "engage_probability"
+    },
+    "barrier": {
+      "name": "屏障",
+      "cooldown": 180,
+      "shield": 120,
+      "modelled": true
+    },
+    "exhaust": {
+      "name": "虚弱",
+      "cooldown": 210,
+      "effect": "减速/减伤",
+      "modelled": "damage_reduction"
+    }
+  },
+  "policies": {
+    "farm": "只补刀，避免主动换血",
+    "short_trade": "短换血后拉开",
+    "all_in": "有击杀线时持续追击",
+    "poke": "远程/技能消耗后控线"
+  },
+  "waves": {
+    "freeze": "塔前控线",
+    "slow_push": "叠大波推线",
+    "fast_push": "快速清线抢回合"
+  },
+  "defaults": {
+    "player": {
+      "champion": "Garen",
+      "level": 1,
+      "skill_order": [
+        "E",
+        "Q",
+        "W",
+        "E",
+        "E",
+        "R"
+      ],
+      "items": [
+        "1055"
+      ],
+      "rune": "conqueror",
+      "summoners": [
+        "flash",
+        "ignite"
+      ],
+      "policy": "short_trade",
+      "wave": "freeze",
+      "combo": [
+        "Q",
+        "AA",
+        "E"
+      ]
+    },
+    "opponent": {
+      "champion": "Darius",
+      "level": 1,
+      "skill_order": [
+        "Q",
+        "W",
+        "E",
+        "Q",
+        "Q",
+        "R"
+      ],
+      "items": [
+        "1055"
+      ],
+      "rune": "conqueror",
+      "summoners": [
+        "flash",
+        "ghost"
+      ],
+      "policy": "all_in",
+      "wave": "freeze",
+      "combo": [
+        "Q",
+        "AA",
+        "W",
+        "E"
+      ]
+    },
+    "duration": 180,
+    "seed": 42,
+    "start_time": 90,
+    "accuracy": 0.8,
+    "opponent_accuracy": 0.75,
+    "distance": 300,
+    "mode": "lane"
+  },
+  "controls": {
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "duration_range": [
+      30,
+      300
+    ],
+    "accuracy_range": [
+      0,
+      1
+    ],
+    "supported_champions": [
+      "Garen",
+      "Darius",
+      "Jax",
+      "Malphite"
+    ]
+  }
+}

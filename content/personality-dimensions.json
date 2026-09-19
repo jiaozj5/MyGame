@@ -1,0 +1,230 @@
+{
+  "schema_version": "0.2.0",
+  "status": "unvalidated_contextual_behavior_profile",
+  "default_subject": "player_character_in_current_run",
+  "output_policy": {
+    "mode": "contextual_behavior_counts_and_evidence",
+    "psychometric_scores": false,
+    "confidence_probabilities": false,
+    "personality_types": false,
+    "real_player_inference": false,
+    "locked_option_is_rejection": false,
+    "positive_examples_mean": "可支持观察的情境例子，不表示道德更好",
+    "counter_examples_mean": "限制或推翻简单归因的情境，不表示负面人格",
+    "aggregation_unit": "run_id + decision_id + dimension_id",
+    "required_eligibility": [
+      "情境已实际展示",
+      "至少两个相关且可执行的方案",
+      "玩家拥有区分方案的关键信息",
+      "行为差异未被硬性约束完全决定",
+      "事件事先声明观察维度和失效条件"
+    ]
+  },
+  "prototype_adapter": {
+    "status": "raw_contextual_observations_only",
+    "engine_path": "prototype/engine.py",
+    "catalog_path": "content/events.json",
+    "preserve_raw_behavior": true,
+    "apply_behavior_mapping_automatically": false,
+    "full_aggregation_implemented": false,
+    "opportunity_means": "实际可行选项至少为二，仅为机械门槛，不保证维度相关替代方案、充分信息或真实自由偏好",
+    "strength_policy": {
+      "limited": "作者预先标注的有限情境观察，不自动升级为 direct_contextual",
+      "ambiguous": "动机或含义尤其不明确的候选观察，不自动升级为有效人格证据"
+    },
+    "observation_row_fields": ["dimension_id", "behavior", "strength", "evidence_id", "event_id", "context_tags", "resources_before", "cash_cost", "locked_options"],
+    "additional_context_in_choice_payload": ["opportunity", "options", "event_version", "choice_id", "choice_label", "bindings", "task_id", "age", "player_knowledge", "presented_facts", "cash_cost_share", "below_housing_reserve_after"],
+    "behavior_mappings": [
+      {
+        "dimension_id": "care",
+        "prototype_behavior": "material_support",
+        "candidate_category": "provide_practical_support",
+        "qualifier": "全额借款，不是捐赠；保留偿还约定和资源负担"
+      },
+      {
+        "dimension_id": "care",
+        "prototype_behavior": "partial_material_support",
+        "candidate_category": "provide_practical_support",
+        "qualifier": "部分借款；金额多少不自动表示关怀强弱"
+      },
+      {
+        "dimension_id": "care",
+        "prototype_behavior": "practical_support_attempt",
+        "candidate_category": "offer_alternative_support",
+        "qualifier": "付出精力尝试寻找办法，不证明帮助已成功，也不声称完整模拟时间成本"
+      },
+      {
+        "dimension_id": "care",
+        "prototype_behavior": "declined_this_request",
+        "candidate_category": "decline_support",
+        "qualifier": "只拒绝当前借钱请求；借款被锁定时不能据此推断不愿借钱"
+      },
+      {
+        "dimension_id": "risk_taking",
+        "prototype_behavior": "accept_financial_exposure",
+        "candidate_category": "accept_risk",
+        "qualifier": "只记录接受资金占用及违约暴露；缺少完整的还款概率和风险信息模型"
+      },
+      {
+        "dimension_id": "risk_taking",
+        "prototype_behavior": "limit_financial_exposure",
+        "candidate_category": "mitigate_risk",
+        "qualifier": "相比全额减少出借；全额不可行时不能证明主动降低风险"
+      },
+      {
+        "dimension_id": "conflict_style",
+        "prototype_behavior": "negotiated_extension",
+        "candidate_category": "compromise",
+        "qualifier": "原型只修改期限，未模拟双方协商；最多描述同意延长期限"
+      },
+      {
+        "dimension_id": "conflict_style",
+        "prototype_behavior": "deferred_confrontation",
+        "candidate_category": "avoid_engagement",
+        "qualifier": "暂停当次催促并保留债权；不证明长期回避冲突"
+      }
+    ]
+  },
+  "runtime_adapter": {
+    "status": "implemented_contextual_aggregation",
+    "engine_path": "game/portrait.py",
+    "subdimensions": true,
+    "episode_deduplication": true,
+    "context_counts": true,
+    "pressure_and_relationship_counts": true,
+    "psychometric_scores": false,
+    "personality_types": false
+  },
+  "evaluation_framework": {
+    "version": "0.2.0",
+    "unit_of_analysis": "run_id + decision_id + dimension_id",
+    "purpose": "从角色在具体约束、信息和关系条件下的可执行选择中，生成可追溯的行为画像；不输出现实玩家心理诊断。",
+    "evidence_states": {
+      "eligible": "至少两个与该维度相关且可执行的方案，关键信息已展示，选择不是硬性约束的唯一结果。",
+      "constrained": "资源、身份、能力、时间或安全条件使关键方案不可执行；保留为人生事实，不计入自由偏好。",
+      "ambiguous": "方案可执行，但动机或行为含义被奖励、关系义务、扮演目标等多个因素混合。",
+      "insufficient": "缺少可行方案、上下文、事件标注或版本信息，禁止补猜。"
+    },
+    "aggregation": {
+      "counting_rule": "每个独立剧情 episode_id 在一个维度最多贡献一次主要行为；同一决定的后续结果不重复计数。",
+      "group_by": ["dimension_id", "life_stage", "context_tags", "pressure_band", "relationship_scope"],
+      "counterexample_rule": "优先在相同或明确可比情境中保留不同策略；反例不抵消事实，也不等于负面人格。",
+      "minimum_report": ["eligible_opportunities", "independent_episodes", "behavior_counts", "evidence_ids", "excluded_evidence_ids", "limitations"],
+      "forbidden_outputs": ["psychometric_score", "percentile", "personality_type", "confidence_probability", "real_player_inference"]
+    },
+    "context_axes": {
+      "life_stage": ["childhood", "adolescence", "young_adult", "midlife", "later_life"],
+      "pressure_band": ["low", "moderate", "high", "essential_need_threat", "unknown"],
+      "relationship_scope": ["self", "dependent", "family", "friend", "neighbor", "stranger", "institution", "group", "unknown"]
+    }
+  },
+  "dimensions": [
+    {
+      "id": "exploration",
+      "label": "探索与熟悉偏好",
+      "description": "观察角色有可行替代方案时，如何接触新信息、尝试陌生事物或保留熟悉做法。按内容领域和风险条件分别记录，不生成总体开放性分数。",
+      "subcontexts": ["学习与知识", "职业尝试", "迁居与旅行", "文化与审美", "低风险日常新体验"],
+      "behavior_categories": ["try_unfamiliar", "seek_information_first", "choose_familiar", "defer_exploration", "combined_strategy"],
+      "not_equivalent_to": ["智力", "知识量", "创新能力", "承担危险的意愿", "财富带来的机会数量"],
+      "positive_examples": ["已有足够时间和基本安全保障时，在熟悉活动与陌生活动之间主动选择尝试陌生活动。", "面对新职业机会先调查，再决定是否转入；记录为先获取信息，不能直接合并为接受或拒绝探索。"],
+      "counter_examples": ["角色无法支付旅行费用而留在家中，不构成偏好熟悉环境的证据。", "为逃离灾害被迫迁居，不构成主动追求新体验的证据。", "已经掌握某项知识而跳过重复学习，不构成缺乏好奇心的证据。"]
+    },
+    {
+      "id": "persistence",
+      "label": "目标坚持与调整",
+      "description": "观察角色在目标仍可继续、替代方案真实存在时，选择坚持、调整方法、暂停、重新评价或退出的方式。记录目标价值、投入负担和新信息，不把所有坚持视为优点。",
+      "subcontexts": ["长期学习", "职业目标", "技能练习", "照护责任", "遭遇挫折后的计划调整"],
+      "behavior_categories": ["continue_plan", "adapt_method", "pause_goal", "reassess_goal", "abandon_goal", "combined_strategy"],
+      "not_equivalent_to": ["成功次数", "体力充沛", "服从权威", "无法退出的持续行为", "忽视沉没成本的能力"],
+      "positive_examples": ["遭遇一次可承受的失败后，有时间和资源继续，也有可行退出方案，角色选择继续练习。", "发现原方法无效后仍追求同一目标，但改用另一种方法；记录为调整方法。", "新信息表明目标已不值得投入，角色重新评估并退出；描述退出条件，不扣除所谓毅力分。"],
+      "counter_examples": ["因伤无法继续体力训练，不构成缺乏坚持的证据。", "被契约或强制措施限制而无法离职，不构成自愿坚持的证据。", "轻松完成熟练任务，不足以推断面对挫折时的坚持方式。"]
+    },
+    {
+      "id": "social_initiative",
+      "label": "社交发起方式",
+      "description": "观察角色在能够接触他人的场合是否主动发起互动、等待回应、回应邀请或选择独处。区分工作义务、关系对象、安全与疲惫状态。",
+      "subcontexts": ["熟人交往", "陌生群体", "工作合作", "公共发言", "私人休闲"],
+      "behavior_categories": ["initiate_contact", "wait_for_contact", "respond_to_invitation", "choose_solitude", "combined_strategy"],
+      "not_equivalent_to": ["沟通技能", "朋友数量", "社会地位", "受欢迎程度", "求助意愿", "害怕或不害怕社交"],
+      "positive_examples": ["在安全且有精力的聚会中，可以独处也可以交谈，角色主动与陌生人开始交流。", "休息时间有熟悉朋友的可行邀约，角色仍选择独处；记录当前休闲偏好，不推断能力不足。"],
+      "counter_examples": ["职业要求角色主持会议，不足以表明私下偏好主动交往。", "角色不知道聚会地点而未出席，不构成回避社交。", "受到排斥或缺少无障碍条件而无法参与，不构成选择独处。"]
+    },
+    {
+      "id": "care",
+      "label": "关怀行为与对象范围",
+      "description": "观察角色注意并回应他人需求的实际方式，包括时间、物资、情绪支持及拒绝帮助。按对象、负担、承诺与资源压力分别记录，不以支出总额衡量关怀。",
+      "subcontexts": ["亲属照护", "朋友与邻里", "陌生人求助", "情绪支持", "多个求助者之间的分配"],
+      "behavior_categories": ["provide_practical_support", "provide_emotional_support", "offer_alternative_support", "prioritize_dependents", "decline_support", "combined_strategy"],
+      "not_equivalent_to": ["可支配财富", "无条件服从", "牺牲越多越好", "获得他人感谢", "现实玩家的同情心"],
+      "positive_examples": ["帮助与拒绝都可行时，角色用可支配时间陪同邻居就医；记录时间占比及是否危及自身基本需求。", "无法提供金钱但可以提供信息和陪伴时，角色选择提供替代支持。", "面对同时求助的亲人与陌生人，角色优先照顾受其抚养者；保留对象差异与责任背景。"],
+      "counter_examples": ["捐款选项因余额不足被锁定，不算拒绝捐款。", "受到胁迫交出财物，不算自愿帮助。", "帮助行为附带明确个人报酬时，可能存在多重动机，应单独记录而非直接归因为关怀。"]
+    },
+    {
+      "id": "fairness",
+      "label": "公平与承诺取舍",
+      "description": "观察角色如何分配利益和负担、遵守或重议承诺、披露利益冲突，以及如何处理规则与个人关系的冲突。明确公平原则和竞争目标，不将守法、平均分配与公平混同。",
+      "subcontexts": ["共同劳动的收益分配", "资源稀缺时的分配", "私人承诺", "利益冲突披露", "对熟人与陌生人的规则应用"],
+      "behavior_categories": ["apply_equal_rule", "allocate_by_need", "allocate_by_contribution", "honor_commitment", "renegotiate_commitment", "disclose_conflict", "favor_self_or_affiliate", "combined_strategy"],
+      "not_equivalent_to": ["合法性", "平均分配", "不惜任何代价守约", "讨好所有人", "对身份群体的固定道德评价"],
+      "positive_examples": ["角色能够隐瞒利益关系并获利，也可以如实说明，最终选择披露；记录可知后果与现实负担。", "在需求分配、平均分配和按贡献分配都可执行时，角色选择其中一种，并记录所采用原则。", "原承诺与紧急照护责任发生冲突时，角色主动重议承诺；保留冲突背景。"],
+      "counter_examples": ["因缺乏侵占机会而没有侵占，不构成已观察到的公平选择。", "遵守一条明显偏袒特定身份的规则，不应自动记为公平。", "因不可抗力无法履约，不直接记为不守信。"]
+    },
+    {
+      "id": "conflict_style",
+      "label": "冲突处理方式",
+      "description": "观察角色处理分歧的策略组合及使用条件，包括协商、坚持、妥协、离开、回避和求助第三方。各分类没有统一高低顺序，不压成善恶、强弱或好坏脾气分数。",
+      "subcontexts": ["亲密关系分歧", "职场利益冲突", "陌生人冲突", "权力不对等情境", "存在人身安全威胁的冲突"],
+      "behavior_categories": ["negotiate", "assert_boundary", "compromise", "compete", "avoid_engagement", "leave_situation", "seek_mediation", "combined_strategy"],
+      "not_equivalent_to": ["善良或恶劣", "勇敢或怯懦", "愤怒程度", "沟通能力", "冲突结果的胜负", "总是退让或总是强硬的稳定人格"],
+      "positive_examples": ["在可安全协商且可拒绝的情况下，角色提出双方均可接受的调整方案。", "面对持续越界行为，角色选择明确拒绝并离开；记录为维护边界和离开情境的复合策略。", "与上级争议时选择第三方调解；保留权力关系与可能的报复成本。"],
+      "counter_examples": ["为逃离即时暴力威胁而撤离，不能简化成性格软弱或回避冲突。", "唯一能保证生存的选项是服从时，不能据此推断偏好妥协。", "谈判失败可能来自对方立场，不能据此推断角色缺少合作倾向。"]
+    },
+    {
+      "id": "risk_taking",
+      "label": "风险应对方式",
+      "description": "观察角色面对已知或不确定风险时，选择接受、拒绝、先调查、降低或转移风险的方式。分开记录身体、经济和关系风险，基于当时信息而非事后结果解释。",
+      "subcontexts": ["身体安全", "职业与收入", "财务投入", "关系与声誉", "信息不足的不确定决策"],
+      "behavior_categories": ["accept_risk", "decline_risk", "investigate_risk", "mitigate_risk", "transfer_risk", "combined_strategy"],
+      "not_equivalent_to": ["勇敢", "冲动", "无知", "探索欲", "好运", "被迫承担危险", "不同领域统一的风险偏好"],
+      "positive_examples": ["了解潜在损失且有安全替代工作时，角色仍接受有风险的高收入工作。", "角色先购买防护、降低暴露再执行行动；记录为降低风险，不能简单归为接受或拒绝。", "能承受损失且理解条件时选择稳妥方案；只描述该领域、该情境中的选择。"],
+      "counter_examples": ["不知道食物有毒而吃下，不是自愿承担已知身体风险。", "面临饥饿且没有替代收入来源时接受危险工作，不足以推断稳定冒险偏好。", "冒险成功和失败是结果，不改变决策时已有的风险信息。"]
+    },
+    {
+      "id": "help_seeking",
+      "label": "求助与自主应对",
+      "description": "观察角色在存在可信且可用的支持渠道时，如何请求、接受、暂缓或拒绝帮助，以及是否先独立尝试。区分羞耻、互惠负担、隐私、信任和能力因素，不将求助或独立规定为更成熟。",
+      "subcontexts": ["实际困难", "学习与职业指导", "情绪支持", "家庭互助", "机构与公共服务求助"],
+      "behavior_categories": ["request_help", "accept_help", "try_independently_first", "defer_help", "decline_help", "combined_strategy"],
+      "not_equivalent_to": ["软弱", "依赖人格", "自信", "实际能力", "支持网络规模", "有没有可求助的人"],
+      "positive_examples": ["可信朋友可以提供帮助，角色也能自行承担成本，最终选择说明困难并求助。", "求助渠道可靠且成本清楚时，角色先独立尝试，并保留失败后求助的计划。", "角色拒绝一项带有明显互惠义务的帮助；记录所拒绝的条件，而非笼统判断不愿求助。"],
+      "counter_examples": ["唯一求助者曾伤害角色，未求助不构成普遍偏好独立。", "服务因身份资格不符而不可用，不算拒绝帮助。", "角色从未得知有人愿意提供支持，不能记为没有接受帮助。"]
+    }
+  ],
+  "subdimension_catalog": {
+    "exploration": ["novelty_approach", "information_seeking", "familiarity_preference"],
+    "persistence": ["goal_commitment", "method_adaptation", "exit_reassessment"],
+    "social_initiative": ["contact_initiation", "social_selectivity", "solitude_choice"],
+    "care": ["need_attention", "support_mode", "care_scope_boundary"],
+    "fairness": ["allocation_principle", "commitment_management", "conflict_disclosure"],
+    "conflict_style": ["assertion_boundary", "negotiation_compromise", "withdrawal_mediation"],
+    "risk_taking": ["risk_acceptance", "risk_information", "risk_mitigation"],
+    "help_seeking": ["support_initiation", "autonomy_first", "trust_and_reciprocity"]
+  },
+  "references": [
+    {
+      "title": "Soto & John: The next Big Five Inventory (BFI-2)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
+      "use": "分层描述的概念参考；本设计没有实施或验证 BFI-2 测量"
+    },
+    {
+      "title": "Lee & Ashton: HEXACO Scale Descriptions",
+      "url": "https://hexaco.org/scaledescriptions",
+      "use": "区分人格概念的参考；不复制问卷题项，不继承量表效度"
+    },
+    {
+      "title": "Schwartz: An Overview of the Theory of Basic Values",
+      "url": "https://scholarworks.gvsu.edu/orpc/vol2/iss1/11/",
+      "use": "将价值目标、目标冲突与行为倾向分开的概念参考"
+    }
+  ]
+}

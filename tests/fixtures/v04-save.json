@@ -1,0 +1,2689 @@
+{
+  "schema_version": "1.2.0",
+  "state": {
+    "version": "1.2.0",
+    "content_version": "0.4.0",
+    "name": "人群升级回归",
+    "origin": "ordinary",
+    "born_year": 1,
+    "age": 23,
+    "year": 24,
+    "revision": 10,
+    "finished": false,
+    "death_reason": null,
+    "stats": {
+      "cash": 27736,
+      "energy": 58,
+      "health": 90,
+      "stress": 28,
+      "education": 40,
+      "skill": 36
+    },
+    "status": {
+      "job": "apprentice",
+      "job_label": "学徒",
+      "income": 21053,
+      "expenses": 17640
+    },
+    "npcs": {
+      "mother": {
+        "id": "mother",
+        "name": "许岚",
+        "role": "母亲",
+        "birth_year": -23,
+        "age": 47,
+        "alive": true,
+        "met": true,
+        "closeness": 79,
+        "cash": 29200,
+        "death_year": null,
+        "death_age": null,
+        "description": ""
+      },
+      "father": {
+        "id": "father",
+        "name": "林川",
+        "role": "父亲",
+        "birth_year": -26,
+        "age": 50,
+        "alive": true,
+        "met": true,
+        "closeness": 73,
+        "cash": 47200,
+        "death_year": null,
+        "death_age": null,
+        "description": ""
+      },
+      "friend": {
+        "id": "friend",
+        "name": "周远",
+        "role": "朋友",
+        "birth_year": 1,
+        "age": 23,
+        "alive": true,
+        "met": true,
+        "closeness": 57,
+        "cash": 9650,
+        "death_year": null,
+        "death_age": null,
+        "description": ""
+      },
+      "partner": {
+        "id": "partner",
+        "name": "陈安",
+        "role": "相识的人",
+        "birth_year": 2,
+        "age": 22,
+        "alive": true,
+        "met": true,
+        "closeness": 35,
+        "cash": 8050,
+        "death_year": null,
+        "death_age": null,
+        "description": ""
+      }
+    },
+    "flags": {
+      "partner_met": true,
+      "partnered": false,
+      "has_child": false,
+      "work_pace": "steady",
+      "work_push_years": 0,
+      "work_push_seen": false,
+      "loan_mother_open": false,
+      "loan_mother_due": false,
+      "loan_father_open": false,
+      "loan_father_due": false,
+      "loan_friend_open": false,
+      "loan_friend_due": false,
+      "loan_partner_open": false,
+      "loan_partner_due": false,
+      "school_interest": true,
+      "friend_support": true,
+      "society_culture_personal_response": "share_work",
+      "repair_interest": true,
+      "society_economy_family_response": "repair",
+      "study_plan": true,
+      "training_completed": true,
+      "work_pace_chosen": true
+    },
+    "loans": [],
+    "last_outcome": {
+      "title": "修伞摊旁的人",
+      "text": "陈安说起自己常走的那条路。你们交换了联系办法，往后是否再见仍要各自决定。",
+      "changes": [
+        "精力 -5",
+        "与陈安的亲近 +20"
+      ]
+    },
+    "current_event": {
+      "id": "teen.repair_request",
+      "title": "有人看见你会修东西",
+      "category": "手艺",
+      "scene": "school",
+      "age_min": 15,
+      "age_max": 26,
+      "once": true,
+      "requires": [
+        {
+          "path": "flags.repair_interest",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "stats.skill",
+          "op": "gte",
+          "value": 15
+        }
+      ],
+      "actors": [],
+      "text": "听说你学过一些修理，活动室的人请你看看几张松动的木凳。他们愿意出材料费，也希望先听清楚哪些是你能做的。",
+      "choices": [
+        {
+          "id": "take_project",
+          "label": "接下自己能胜任的部分",
+          "description": "花费精力完成小项目，留下可以展示的手艺。",
+          "requires": [
+            {
+              "path": "stats.energy",
+              "op": "gte",
+              "value": 10
+            }
+          ],
+          "effects": [
+            {
+              "op": "stat",
+              "key": "energy",
+              "delta": -10
+            },
+            {
+              "op": "stat",
+              "key": "skill",
+              "delta": 7
+            },
+            {
+              "op": "flag",
+              "key": "repair_project_completed",
+              "value": true
+            }
+          ],
+          "observations": [
+            {
+              "dimension": "persistence",
+              "behavior": "把早期兴趣做成一个完成的项目"
+            },
+            {
+              "dimension": "conflict_style",
+              "behavior": "在接活前说明能力范围"
+            }
+          ],
+          "outcome": "你把修好的木凳一张张摆稳，给还需另找人处理的地方做了记号。有人问起你的名字，想把你介绍给镇里的作坊。"
+        },
+        {
+          "id": "assist",
+          "label": "找有经验的人带着一起做",
+          "description": "分一些精力给这件事，先学着配合。",
+          "requires": [
+            {
+              "path": "stats.energy",
+              "op": "gte",
+              "value": 6
+            }
+          ],
+          "effects": [
+            {
+              "op": "stat",
+              "key": "energy",
+              "delta": -6
+            },
+            {
+              "op": "stat",
+              "key": "skill",
+              "delta": 5
+            },
+            {
+              "op": "flag",
+              "key": "repair_project_completed",
+              "value": true
+            }
+          ],
+          "observations": [
+            {
+              "dimension": "help_seeking",
+              "behavior": "在实践中向有经验的人求助"
+            }
+          ],
+          "outcome": "你负责了几道适合自己的工序，难处由对方示范。最后交付的那几张凳子，也有你的功劳。"
+        },
+        {
+          "id": "decline",
+          "label": "说明目前不接这件事",
+          "description": "保留精力，让组织者另外找人。",
+          "requires": [],
+          "effects": [],
+          "observations": [],
+          "outcome": "对方收回清单，说会继续询问。你学过的手艺仍在，这次没有变成一份新差事。"
+        }
+      ],
+      "_kind": "slot"
+    },
+    "seed": 307,
+    "random_counter": 11,
+    "slot_index": 10,
+    "used_events": [
+      "child.first_day",
+      "child.river_friend",
+      "society.culture.personal",
+      "child.father_tools",
+      "child.class_fee",
+      "society.economy.family",
+      "youth.school_exit",
+      "youth.apprentice",
+      "adult.work_pace",
+      "youth.partner_meet"
+    ],
+    "aid_remaining": 12000,
+    "family_grant_given": true,
+    "sequence": 29,
+    "child_birth_year": null,
+    "migration_note": null,
+    "survival": {
+      "cooldown_until": 1,
+      "adjustment_count": 0,
+      "consecutive_push_years": 0
+    },
+    "timeline": [
+      {
+        "id": "life-1",
+        "age": 0,
+        "year": 1,
+        "title": "来到青溪镇",
+        "text": "新历 1 年，人群升级回归出生在澄川诸邦的青溪镇。",
+        "kind": "birth"
+      },
+      {
+        "id": "life-2",
+        "age": 6,
+        "year": 7,
+        "title": "窗边的第一张课桌",
+        "text": "你讲得有点磕巴，但有人追问那条河在哪里。石头留在了课桌角。",
+        "kind": "choice",
+        "choice": "举起石头，讲讲河边的发现",
+        "choice_id": "show_stone",
+        "event_id": "child.first_day",
+        "observations": [
+          {
+            "dimension": "social_initiative",
+            "behavior": "主动分享自己的发现"
+          },
+          {
+            "dimension": "exploration",
+            "behavior": "把日常发现带进课堂"
+          }
+        ],
+        "npc_ids": [],
+        "gained_flags": {
+          "school_interest": true
+        },
+        "context": {
+          "available_choice_ids": [
+            "show_stone",
+            "listen_first",
+            "stay_quiet"
+          ],
+          "locked_options": [],
+          "resources_before": {
+            "cash": 80,
+            "energy": 80,
+            "health": 90,
+            "stress": 10,
+            "education": 5,
+            "skill": 3
+          },
+          "cash_cost": 0,
+          "cash_cost_share": 0.0,
+          "npc_knowledge": [
+            {
+              "id": "mother",
+              "name": "许岚",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "father",
+              "name": "林川",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "friend",
+              "name": "周远",
+              "alive": true,
+              "met": true
+            }
+          ],
+          "context_tags": [
+            "入学",
+            "童年"
+          ],
+          "presented_text": "青溪镇的小学校里，粉笔灰落在窗台上。老师让每个人介绍一样自己喜欢的东西，你把带来的小石头攥在手里。",
+          "opportunity": true,
+          "world_context": [],
+          "world_modifiers": {
+            "income_percent": 101,
+            "expense_percent": 100
+          }
+        },
+        "stats_after": {
+          "cash": 80,
+          "energy": 75,
+          "health": 90,
+          "stress": 10,
+          "education": 8,
+          "skill": 3
+        }
+      },
+      {
+        "id": "life-3",
+        "age": 6,
+        "year": 7,
+        "title": "河边的纸船",
+        "text": "你们给船底多折了一道边。它绕过石头，漂到了柳树影子下。",
+        "kind": "choice",
+        "choice": "一起改折法，再试一次",
+        "choice_id": "try_together",
+        "event_id": "child.river_friend",
+        "observations": [
+          {
+            "dimension": "persistence",
+            "behavior": "在失败后继续一起尝试"
+          },
+          {
+            "dimension": "care",
+            "behavior": "把时间用于同伴的困难"
+          }
+        ],
+        "npc_ids": [
+          "friend"
+        ],
+        "gained_flags": {
+          "friend_support": true
+        },
+        "context": {
+          "available_choice_ids": [
+            "try_together",
+            "ask_boat",
+            "watch"
+          ],
+          "locked_options": [],
+          "resources_before": {
+            "cash": 80,
+            "energy": 75,
+            "health": 90,
+            "stress": 10,
+            "education": 8,
+            "skill": 3
+          },
+          "cash_cost": 0,
+          "cash_cost_share": 0.0,
+          "npc_knowledge": [
+            {
+              "id": "mother",
+              "name": "许岚",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "father",
+              "name": "林川",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "friend",
+              "name": "周远",
+              "alive": true,
+              "met": true
+            }
+          ],
+          "context_tags": [
+            "友谊",
+            "童年"
+          ],
+          "presented_text": "周远把折歪的纸船放进浅水里，船很快靠上了岸。他问你要不要一起想办法，让船多走一段。",
+          "opportunity": true,
+          "world_context": [],
+          "world_modifiers": {
+            "income_percent": 101,
+            "expense_percent": 100
+          }
+        },
+        "stats_after": {
+          "cash": 80,
+          "energy": 70,
+          "health": 90,
+          "stress": 10,
+          "education": 8,
+          "skill": 6
+        }
+      },
+      {
+        "id": "life-4",
+        "age": 7,
+        "year": 8,
+        "title": "又长大了一岁",
+        "text": "家人承担日常生活开支。你得到 50 元零用钱，继续读书和成长。",
+        "kind": "annual",
+        "accounting": {
+          "income": 50,
+          "expenses": 0,
+          "cash_after": 130
+        },
+        "annual_plan": {
+          "job": "none",
+          "pace": "steady",
+          "pace_label": "在家人与学校支持下成长",
+          "income": 50,
+          "expenses": 0,
+          "energy_change": 1,
+          "stress_change": 1,
+          "health_change": 0,
+          "world_modifiers": {
+            "income_percent": 101,
+            "expense_percent": 100
+          },
+          "world_year": 8
+        },
+        "resource_changes": {
+          "cash": 50,
+          "energy": 1,
+          "health": 0,
+          "stress": 1,
+          "education": 2,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 130,
+          "energy": 71,
+          "health": 90,
+          "stress": 11,
+          "education": 10,
+          "skill": 7
+        }
+      },
+      {
+        "id": "life-5",
+        "age": 8,
+        "year": 9,
+        "title": "又长大了一岁",
+        "text": "家人承担日常生活开支。你得到 50 元零用钱，继续读书和成长。",
+        "kind": "annual",
+        "accounting": {
+          "income": 50,
+          "expenses": 0,
+          "cash_after": 180
+        },
+        "annual_plan": {
+          "job": "none",
+          "pace": "steady",
+          "pace_label": "在家人与学校支持下成长",
+          "income": 50,
+          "expenses": 0,
+          "energy_change": 1,
+          "stress_change": 1,
+          "health_change": 0,
+          "world_modifiers": {
+            "income_percent": 101,
+            "expense_percent": 101
+          },
+          "world_year": 9
+        },
+        "resource_changes": {
+          "cash": 50,
+          "energy": 1,
+          "health": 0,
+          "stress": 1,
+          "education": 2,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 180,
+          "energy": 72,
+          "health": 90,
+          "stress": 12,
+          "education": 12,
+          "skill": 8
+        }
+      },
+      {
+        "id": "life-6",
+        "age": 9,
+        "year": 10,
+        "title": "又长大了一岁",
+        "text": "家人承担日常生活开支。你得到 50 元零用钱，继续读书和成长。",
+        "kind": "annual",
+        "accounting": {
+          "income": 50,
+          "expenses": 0,
+          "cash_after": 230
+        },
+        "annual_plan": {
+          "job": "none",
+          "pace": "steady",
+          "pace_label": "在家人与学校支持下成长",
+          "income": 50,
+          "expenses": 0,
+          "energy_change": 1,
+          "stress_change": 1,
+          "health_change": 0,
+          "world_modifiers": {
+            "income_percent": 101,
+            "expense_percent": 101
+          },
+          "world_year": 10
+        },
+        "resource_changes": {
+          "cash": 50,
+          "energy": 1,
+          "health": 0,
+          "stress": 1,
+          "education": 2,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 230,
+          "energy": 73,
+          "health": 90,
+          "stress": 13,
+          "education": 14,
+          "skill": 9
+        }
+      },
+      {
+        "id": "life-7",
+        "age": 9,
+        "year": 10,
+        "title": "第一次给自己的故事留位置",
+        "text": "你举起作品讲完了它的来历，有人追问了一个你没想到的问题。回座位时还略紧张，话已经说出去了。",
+        "kind": "choice",
+        "choice": "带上小作品，花时间讲它从哪里来",
+        "choice_id": "share_work",
+        "event_id": "society.culture.personal",
+        "observations": [
+          {
+            "dimension": "social_initiative",
+            "behavior": "在公共场合主动分享自己的生活经验"
+          }
+        ],
+        "npc_ids": [],
+        "gained_flags": {
+          "society_culture_personal_response": "share_work"
+        },
+        "context": {
+          "available_choice_ids": [
+            "share_work",
+            "materials",
+            "listen"
+          ],
+          "locked_options": [],
+          "resources_before": {
+            "cash": 230,
+            "energy": 73,
+            "health": 90,
+            "stress": 13,
+            "education": 14,
+            "skill": 9
+          },
+          "cash_cost": 0,
+          "cash_cost_share": 0.0,
+          "npc_knowledge": [
+            {
+              "id": "mother",
+              "name": "许岚",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "father",
+              "name": "林川",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "friend",
+              "name": "周远",
+              "alive": true,
+              "met": true
+            }
+          ],
+          "context_tags": [
+            "社会·个人",
+            "童年"
+          ],
+          "presented_text": "公共活动室征集一段本地生活故事。你可以展示手头的小作品、帮助别人布置，也可以只听而不把自己的经历拿出来。",
+          "opportunity": true,
+          "world_context": [
+            {
+              "id": "world-2",
+              "title": "不同窗口约定互相接件",
+              "year": 5
+            }
+          ],
+          "world_modifiers": {
+            "income_percent": 101,
+            "expense_percent": 101
+          }
+        },
+        "stats_after": {
+          "cash": 230,
+          "energy": 66,
+          "health": 90,
+          "stress": 13,
+          "education": 16,
+          "skill": 9
+        }
+      },
+      {
+        "id": "life-8",
+        "age": 10,
+        "year": 11,
+        "title": "又长大了一岁",
+        "text": "家人承担日常生活开支。你得到 50 元零用钱，继续读书和成长。",
+        "kind": "annual",
+        "accounting": {
+          "income": 50,
+          "expenses": 0,
+          "cash_after": 280
+        },
+        "annual_plan": {
+          "job": "none",
+          "pace": "steady",
+          "pace_label": "在家人与学校支持下成长",
+          "income": 50,
+          "expenses": 0,
+          "energy_change": 2,
+          "stress_change": 0,
+          "health_change": 0,
+          "world_modifiers": {
+            "income_percent": 101,
+            "expense_percent": 101
+          },
+          "world_year": 11
+        },
+        "resource_changes": {
+          "cash": 50,
+          "energy": 2,
+          "health": 0,
+          "stress": 0,
+          "education": 2,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 280,
+          "energy": 68,
+          "health": 90,
+          "stress": 13,
+          "education": 18,
+          "skill": 10
+        }
+      },
+      {
+        "id": "life-9",
+        "age": 11,
+        "year": 12,
+        "title": "又长大了一岁",
+        "text": "家人承担日常生活开支。你得到 50 元零用钱，继续读书和成长。",
+        "kind": "annual",
+        "accounting": {
+          "income": 50,
+          "expenses": 0,
+          "cash_after": 330
+        },
+        "annual_plan": {
+          "job": "none",
+          "pace": "steady",
+          "pace_label": "在家人与学校支持下成长",
+          "income": 50,
+          "expenses": 0,
+          "energy_change": 2,
+          "stress_change": 0,
+          "health_change": 0,
+          "world_modifiers": {
+            "income_percent": 101,
+            "expense_percent": 101
+          },
+          "world_year": 12
+        },
+        "resource_changes": {
+          "cash": 50,
+          "energy": 2,
+          "health": 0,
+          "stress": 0,
+          "education": 2,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 330,
+          "energy": 70,
+          "health": 90,
+          "stress": 13,
+          "education": 20,
+          "skill": 11
+        }
+      },
+      {
+        "id": "life-10",
+        "age": 12,
+        "year": 13,
+        "title": "又长大了一岁",
+        "text": "家人承担日常生活开支。你得到 50 元零用钱，继续读书和成长。",
+        "kind": "annual",
+        "accounting": {
+          "income": 50,
+          "expenses": 0,
+          "cash_after": 380
+        },
+        "annual_plan": {
+          "job": "none",
+          "pace": "steady",
+          "pace_label": "在家人与学校支持下成长",
+          "income": 50,
+          "expenses": 0,
+          "energy_change": 1,
+          "stress_change": 0,
+          "health_change": 0,
+          "world_modifiers": {
+            "income_percent": 101,
+            "expense_percent": 101
+          },
+          "world_year": 13
+        },
+        "resource_changes": {
+          "cash": 50,
+          "energy": 1,
+          "health": 0,
+          "stress": 0,
+          "education": 2,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 380,
+          "energy": 71,
+          "health": 90,
+          "stress": 13,
+          "education": 22,
+          "skill": 12
+        }
+      },
+      {
+        "id": "life-11",
+        "age": 12,
+        "year": 13,
+        "title": "父亲的旧工具盒",
+        "text": "你把最后一角磨平，父亲让你在凳底写下名字。后来你仍记得木头的气味。",
+        "kind": "choice",
+        "choice": "跟着完成一小段打磨",
+        "choice_id": "learn",
+        "event_id": "child.father_tools",
+        "observations": [
+          {
+            "dimension": "exploration",
+            "behavior": "学习陌生的手工方法"
+          },
+          {
+            "dimension": "persistence",
+            "behavior": "完成一段重复练习"
+          }
+        ],
+        "npc_ids": [
+          "father"
+        ],
+        "gained_flags": {
+          "repair_interest": true
+        },
+        "context": {
+          "available_choice_ids": [
+            "learn",
+            "ask_story",
+            "leave"
+          ],
+          "locked_options": [],
+          "resources_before": {
+            "cash": 380,
+            "energy": 71,
+            "health": 90,
+            "stress": 13,
+            "education": 22,
+            "skill": 12
+          },
+          "cash_cost": 0,
+          "cash_cost_share": 0.0,
+          "npc_knowledge": [
+            {
+              "id": "mother",
+              "name": "许岚",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "father",
+              "name": "林川",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "friend",
+              "name": "周远",
+              "alive": true,
+              "met": true
+            }
+          ],
+          "context_tags": [
+            "手艺",
+            "少年"
+          ],
+          "presented_text": "父亲林川把一张摇晃的小凳子翻过来，工具盒里整齐排着钳子和砂纸。他问你愿不愿意在旁边学一学简单的整理和打磨。",
+          "opportunity": true,
+          "world_context": [],
+          "world_modifiers": {
+            "income_percent": 101,
+            "expense_percent": 101
+          }
+        },
+        "stats_after": {
+          "cash": 380,
+          "energy": 65,
+          "health": 90,
+          "stress": 13,
+          "education": 22,
+          "skill": 18
+        }
+      },
+      {
+        "id": "life-12",
+        "age": 12,
+        "year": 13,
+        "title": "还差的一点活动费",
+        "text": "周远接受了这次小额支持，并请你不要在班里提起。你们把这件事留在两个人之间。",
+        "kind": "choice",
+        "choice": "私下问他是否需要一点支持",
+        "choice_id": "private_offer",
+        "event_id": "child.class_fee",
+        "observations": [
+          {
+            "dimension": "care",
+            "behavior": "私下提供有限的物质帮助"
+          }
+        ],
+        "npc_ids": [
+          "friend"
+        ],
+        "gained_flags": {
+          "friend_support": true
+        },
+        "context": {
+          "available_choice_ids": [
+            "private_offer",
+            "cheaper_plan",
+            "respect"
+          ],
+          "locked_options": [],
+          "resources_before": {
+            "cash": 380,
+            "energy": 65,
+            "health": 90,
+            "stress": 13,
+            "education": 22,
+            "skill": 18
+          },
+          "cash_cost": 50,
+          "cash_cost_share": 0.13157894736842105,
+          "npc_knowledge": [
+            {
+              "id": "mother",
+              "name": "许岚",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "father",
+              "name": "林川",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "friend",
+              "name": "周远",
+              "alive": true,
+              "met": true
+            }
+          ],
+          "context_tags": [
+            "同伴",
+            "少年"
+          ],
+          "presented_text": "班里准备一次郊外活动，周远把缴费单折了两次，只说自己还没决定参加。你不知道他家的全部情况，也不确定他是否希望别人过问。",
+          "opportunity": true,
+          "world_context": [],
+          "world_modifiers": {
+            "income_percent": 101,
+            "expense_percent": 101
+          }
+        },
+        "stats_after": {
+          "cash": 330,
+          "energy": 65,
+          "health": 90,
+          "stress": 13,
+          "education": 22,
+          "skill": 18
+        }
+      },
+      {
+        "id": "life-13",
+        "age": 13,
+        "year": 14,
+        "title": "又长大了一岁",
+        "text": "家人承担日常生活开支。你得到 50 元零用钱，继续读书和成长。",
+        "kind": "annual",
+        "accounting": {
+          "income": 50,
+          "expenses": 0,
+          "cash_after": 380
+        },
+        "annual_plan": {
+          "job": "none",
+          "pace": "steady",
+          "pace_label": "在家人与学校支持下成长",
+          "income": 50,
+          "expenses": 0,
+          "energy_change": 2,
+          "stress_change": 0,
+          "health_change": 0,
+          "world_modifiers": {
+            "income_percent": 101,
+            "expense_percent": 101
+          },
+          "world_year": 14
+        },
+        "resource_changes": {
+          "cash": 50,
+          "energy": 2,
+          "health": 0,
+          "stress": 0,
+          "education": 2,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 380,
+          "energy": 67,
+          "health": 90,
+          "stress": 13,
+          "education": 24,
+          "skill": 19
+        }
+      },
+      {
+        "id": "life-14",
+        "age": 14,
+        "year": 15,
+        "title": "又长大了一岁",
+        "text": "家人承担日常生活开支。你得到 50 元零用钱，继续读书和成长。",
+        "kind": "annual",
+        "accounting": {
+          "income": 50,
+          "expenses": 0,
+          "cash_after": 430
+        },
+        "annual_plan": {
+          "job": "none",
+          "pace": "steady",
+          "pace_label": "在家人与学校支持下成长",
+          "income": 50,
+          "expenses": 0,
+          "energy_change": 2,
+          "stress_change": 0,
+          "health_change": 0,
+          "world_modifiers": {
+            "income_percent": 101,
+            "expense_percent": 101
+          },
+          "world_year": 15
+        },
+        "resource_changes": {
+          "cash": 50,
+          "energy": 2,
+          "health": 0,
+          "stress": 0,
+          "education": 2,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 430,
+          "energy": 69,
+          "health": 90,
+          "stress": 13,
+          "education": 26,
+          "skill": 20
+        }
+      },
+      {
+        "id": "life-15",
+        "age": 15,
+        "year": 16,
+        "title": "又长大了一岁",
+        "text": "家人承担日常生活开支。你得到 50 元零用钱，继续读书和成长。",
+        "kind": "annual",
+        "accounting": {
+          "income": 50,
+          "expenses": 0,
+          "cash_after": 480
+        },
+        "annual_plan": {
+          "job": "none",
+          "pace": "steady",
+          "pace_label": "在家人与学校支持下成长",
+          "income": 50,
+          "expenses": 0,
+          "energy_change": 1,
+          "stress_change": 0,
+          "health_change": 0,
+          "world_modifiers": {
+            "income_percent": 101,
+            "expense_percent": 101
+          },
+          "world_year": 16
+        },
+        "resource_changes": {
+          "cash": 50,
+          "energy": 1,
+          "health": 0,
+          "stress": 0,
+          "education": 2,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 480,
+          "energy": 70,
+          "health": 90,
+          "stress": 13,
+          "education": 28,
+          "skill": 21
+        }
+      },
+      {
+        "id": "life-16",
+        "age": 15,
+        "year": 16,
+        "title": "这次添置先放在哪里",
+        "text": "旧物又稳稳当当地用了起来。许岚递来抹布，你们收拾完桌面才发现已过了平常的休息时间。",
+        "kind": "choice",
+        "choice": "一起修补旧物，把愿望留到下次",
+        "choice_id": "repair",
+        "event_id": "society.economy.family",
+        "observations": [
+          {
+            "dimension": "persistence",
+            "behavior": "用修补延长旧物的使用"
+          }
+        ],
+        "npc_ids": [
+          "mother"
+        ],
+        "gained_flags": {
+          "society_economy_family_response": "repair"
+        },
+        "context": {
+          "available_choice_ids": [
+            "repair",
+            "ask_priority",
+            "shared_cost"
+          ],
+          "locked_options": [],
+          "resources_before": {
+            "cash": 480,
+            "energy": 70,
+            "health": 90,
+            "stress": 13,
+            "education": 28,
+            "skill": 21
+          },
+          "cash_cost": 0,
+          "cash_cost_share": 0.0,
+          "npc_knowledge": [
+            {
+              "id": "mother",
+              "name": "许岚",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "father",
+              "name": "林川",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "friend",
+              "name": "周远",
+              "alive": true,
+              "met": true
+            }
+          ],
+          "context_tags": [
+            "社会·家庭",
+            "少年"
+          ],
+          "presented_text": "许岚把家里想添置的东西写在旧纸背面。价格涨了，预算只能先解决一项，你们还要顾及她已经推迟很久的小愿望。",
+          "opportunity": true,
+          "world_context": [
+            {
+              "id": "world-7",
+              "title": "公共水管接到更远的街口",
+              "year": 15
+            },
+            {
+              "id": "world-6",
+              "title": "试验田不再只种一种作物",
+              "year": 13
+            },
+            {
+              "id": "world-4",
+              "title": "遮阴和通风成为公共改造项目",
+              "year": 9
+            }
+          ],
+          "world_modifiers": {
+            "income_percent": 101,
+            "expense_percent": 101
+          }
+        },
+        "stats_after": {
+          "cash": 480,
+          "energy": 62,
+          "health": 90,
+          "stress": 13,
+          "education": 28,
+          "skill": 24
+        }
+      },
+      {
+        "id": "life-17",
+        "age": 16,
+        "year": 17,
+        "title": "又长大了一岁",
+        "text": "家人承担日常生活开支。你得到 50 元零用钱，继续读书和成长。",
+        "kind": "annual",
+        "accounting": {
+          "income": 50,
+          "expenses": 0,
+          "cash_after": 530
+        },
+        "annual_plan": {
+          "job": "none",
+          "pace": "steady",
+          "pace_label": "在家人与学校支持下成长",
+          "income": 50,
+          "expenses": 0,
+          "energy_change": 3,
+          "stress_change": 0,
+          "health_change": 0,
+          "world_modifiers": {
+            "income_percent": 101,
+            "expense_percent": 102
+          },
+          "world_year": 17
+        },
+        "resource_changes": {
+          "cash": 50,
+          "energy": 3,
+          "health": 0,
+          "stress": 0,
+          "education": 2,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 530,
+          "energy": 65,
+          "health": 90,
+          "stress": 13,
+          "education": 30,
+          "skill": 25
+        }
+      },
+      {
+        "id": "life-18",
+        "age": 17,
+        "year": 18,
+        "title": "又长大了一岁",
+        "text": "家人承担日常生活开支。你得到 50 元零用钱，继续读书和成长。",
+        "kind": "annual",
+        "accounting": {
+          "income": 50,
+          "expenses": 0,
+          "cash_after": 580
+        },
+        "annual_plan": {
+          "job": "none",
+          "pace": "steady",
+          "pace_label": "在家人与学校支持下成长",
+          "income": 50,
+          "expenses": 0,
+          "energy_change": 2,
+          "stress_change": 0,
+          "health_change": 0,
+          "world_modifiers": {
+            "income_percent": 101,
+            "expense_percent": 102
+          },
+          "world_year": 18
+        },
+        "resource_changes": {
+          "cash": 50,
+          "energy": 2,
+          "health": 0,
+          "stress": 0,
+          "education": 2,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 580,
+          "energy": 67,
+          "health": 90,
+          "stress": 13,
+          "education": 32,
+          "skill": 26
+        }
+      },
+      {
+        "id": "life-19",
+        "age": 18,
+        "year": 19,
+        "title": "第一次独立的预算",
+        "text": "家人从积蓄中拿出 18000 元，作为你迈向成年生活的起步预算。",
+        "kind": "family",
+        "npc_ids": [
+          "mother",
+          "father"
+        ],
+        "stats_after": {
+          "cash": 18580,
+          "energy": 67,
+          "health": 90,
+          "stress": 13,
+          "education": 32,
+          "skill": 26
+        }
+      },
+      {
+        "id": "life-20",
+        "age": 18,
+        "year": 19,
+        "title": "这一年的生活账",
+        "text": "按稳健节奏安排，收入 10179 元，实际生活支出 17304 元，结余现金 11455 元。精力变化 +0，压力变化 +6。",
+        "kind": "annual",
+        "accounting": {
+          "income": 10179,
+          "expenses": 17304,
+          "planned_expenses": 17304,
+          "cash_after": 11455
+        },
+        "annual_plan": {
+          "job": "none",
+          "pace": "steady",
+          "pace_label": "稳健节奏",
+          "income": 10179,
+          "expenses": 17304,
+          "energy_change": 0,
+          "stress_change": 6,
+          "health_change": 0,
+          "world_modifiers": {
+            "income_percent": 102,
+            "expense_percent": 103
+          },
+          "world_year": 19
+        },
+        "resource_changes": {
+          "cash": 10875,
+          "energy": 0,
+          "health": 0,
+          "stress": 6,
+          "education": 0,
+          "skill": 0
+        },
+        "stats_after": {
+          "cash": 11455,
+          "energy": 67,
+          "health": 90,
+          "stress": 19,
+          "education": 32,
+          "skill": 26
+        }
+      },
+      {
+        "id": "life-21",
+        "age": 18,
+        "year": 19,
+        "title": "校门之外",
+        "text": "你从仍然吃力的部分开始补。暂时没有取得结业资格，但下一次申请有了更好的基础。",
+        "kind": "choice",
+        "choice": "报名较短的基础补课",
+        "choice_id": "bridge",
+        "event_id": "youth.school_exit",
+        "observations": [
+          {
+            "dimension": "help_seeking",
+            "behavior": "主动使用补充学习的入口"
+          }
+        ],
+        "npc_ids": [],
+        "gained_flags": {
+          "study_plan": true
+        },
+        "context": {
+          "available_choice_ids": [
+            "bridge",
+            "work_first"
+          ],
+          "locked_options": [
+            {
+              "id": "qualify",
+              "reason": "学识需要至少 35，目前为 32。"
+            }
+          ],
+          "resources_before": {
+            "cash": 11455,
+            "energy": 67,
+            "health": 90,
+            "stress": 19,
+            "education": 32,
+            "skill": 26
+          },
+          "cash_cost": 200,
+          "cash_cost_share": 0.017459624618070713,
+          "npc_knowledge": [
+            {
+              "id": "mother",
+              "name": "许岚",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "father",
+              "name": "林川",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "friend",
+              "name": "周远",
+              "alive": true,
+              "met": true
+            }
+          ],
+          "context_tags": [
+            "升学",
+            "青年"
+          ],
+          "presented_text": "校门口贴着继续学习和岗位培训的信息。过去的成绩与练习会影响能申请什么，但这次也有给基础尚不够的人准备的补课入口。",
+          "opportunity": true,
+          "world_context": [],
+          "world_modifiers": {
+            "income_percent": 102,
+            "expense_percent": 103
+          }
+        },
+        "stats_after": {
+          "cash": 11255,
+          "energy": 61,
+          "health": 90,
+          "stress": 19,
+          "education": 40,
+          "skill": 26
+        }
+      },
+      {
+        "id": "life-22",
+        "age": 18,
+        "year": 19,
+        "title": "作坊门口的招聘纸",
+        "text": "你领到一套常用工具，先学着把工作台收拾清楚。手艺要从一次次实际工作里长出来。",
+        "kind": "choice",
+        "choice": "从学徒做起",
+        "choice_id": "apprentice",
+        "event_id": "youth.apprentice",
+        "observations": [
+          {
+            "dimension": "persistence",
+            "behavior": "接受从基础开始的训练"
+          }
+        ],
+        "npc_ids": [],
+        "gained_flags": {
+          "training_completed": true
+        },
+        "context": {
+          "available_choice_ids": [
+            "apprentice",
+            "skilled",
+            "look_more"
+          ],
+          "locked_options": [],
+          "resources_before": {
+            "cash": 11255,
+            "energy": 61,
+            "health": 90,
+            "stress": 19,
+            "education": 40,
+            "skill": 26
+          },
+          "cash_cost": 0,
+          "cash_cost_share": 0.0,
+          "npc_knowledge": [
+            {
+              "id": "mother",
+              "name": "许岚",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "father",
+              "name": "林川",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "friend",
+              "name": "周远",
+              "alive": true,
+              "met": true
+            }
+          ],
+          "context_tags": [
+            "学徒",
+            "青年"
+          ],
+          "presented_text": "小作坊把招聘纸贴在玻璃门上，愿意接收从基础做起的人。师傅看重按约到场，也愿意听你说已经学过什么。",
+          "opportunity": true,
+          "world_context": [],
+          "world_modifiers": {
+            "income_percent": 102,
+            "expense_percent": 103
+          }
+        },
+        "stats_after": {
+          "cash": 11255,
+          "energy": 61,
+          "health": 90,
+          "stress": 19,
+          "education": 40,
+          "skill": 31
+        }
+      },
+      {
+        "id": "life-23",
+        "age": 19,
+        "year": 20,
+        "title": "这一年的生活账",
+        "text": "按稳健节奏安排，收入 20389 元，实际生活支出 17304 元，结余现金 14340 元。精力变化 +1，压力变化 +3。",
+        "kind": "annual",
+        "accounting": {
+          "income": 20389,
+          "expenses": 17304,
+          "planned_expenses": 17304,
+          "cash_after": 14340
+        },
+        "annual_plan": {
+          "job": "apprentice",
+          "pace": "steady",
+          "pace_label": "稳健节奏",
+          "income": 20389,
+          "expenses": 17304,
+          "energy_change": 1,
+          "stress_change": 3,
+          "health_change": 0,
+          "world_modifiers": {
+            "income_percent": 102,
+            "expense_percent": 103
+          },
+          "world_year": 20
+        },
+        "resource_changes": {
+          "cash": 3085,
+          "energy": 1,
+          "health": 0,
+          "stress": 3,
+          "education": 0,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 14340,
+          "energy": 62,
+          "health": 90,
+          "stress": 22,
+          "education": 40,
+          "skill": 32
+        }
+      },
+      {
+        "id": "life-24",
+        "age": 20,
+        "year": 21,
+        "title": "这一年的生活账",
+        "text": "按稳健节奏安排，收入 20682 元，实际生活支出 17304 元，结余现金 17718 元。精力变化 +1，压力变化 +2。",
+        "kind": "annual",
+        "accounting": {
+          "income": 20682,
+          "expenses": 17304,
+          "planned_expenses": 17304,
+          "cash_after": 17718
+        },
+        "annual_plan": {
+          "job": "apprentice",
+          "pace": "steady",
+          "pace_label": "稳健节奏",
+          "income": 20682,
+          "expenses": 17304,
+          "energy_change": 1,
+          "stress_change": 2,
+          "health_change": 0,
+          "world_modifiers": {
+            "income_percent": 103,
+            "expense_percent": 103
+          },
+          "world_year": 21
+        },
+        "resource_changes": {
+          "cash": 3378,
+          "energy": 1,
+          "health": 0,
+          "stress": 2,
+          "education": 0,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 17718,
+          "energy": 63,
+          "health": 90,
+          "stress": 24,
+          "education": 40,
+          "skill": 33
+        }
+      },
+      {
+        "id": "life-25",
+        "age": 20,
+        "year": 21,
+        "title": "给工作留多少力气",
+        "text": "你把常做的事情排进日程，给临时变化留下一点余地。接下来先照着这份安排走。",
+        "kind": "choice",
+        "choice": "按常规节奏工作",
+        "choice_id": "steady",
+        "event_id": "adult.work_pace",
+        "observations": [
+          {
+            "dimension": "risk_taking",
+            "behavior": "选择较为常规的工作与收入节奏"
+          }
+        ],
+        "npc_ids": [],
+        "gained_flags": {
+          "work_pace": "steady",
+          "work_pace_chosen": true
+        },
+        "context": {
+          "available_choice_ids": [
+            "steady",
+            "push",
+            "rest"
+          ],
+          "locked_options": [],
+          "resources_before": {
+            "cash": 17718,
+            "energy": 63,
+            "health": 90,
+            "stress": 24,
+            "education": 40,
+            "skill": 33
+          },
+          "cash_cost": 0,
+          "cash_cost_share": 0.0,
+          "npc_knowledge": [
+            {
+              "id": "mother",
+              "name": "许岚",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "father",
+              "name": "林川",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "friend",
+              "name": "周远",
+              "alive": true,
+              "met": true
+            }
+          ],
+          "context_tags": [
+            "工作节奏",
+            "青年"
+          ],
+          "presented_text": "工作渐渐有了固定的样子，你开始考虑往后的节奏。多接一些事情可能增加收入，也会挤占恢复的时间；怎样安排，需要你在自己的账和身体之间作取舍。",
+          "opportunity": true,
+          "world_context": [],
+          "world_modifiers": {
+            "income_percent": 103,
+            "expense_percent": 103
+          }
+        },
+        "stats_after": {
+          "cash": 17718,
+          "energy": 63,
+          "health": 90,
+          "stress": 24,
+          "education": 40,
+          "skill": 33
+        }
+      },
+      {
+        "id": "life-26",
+        "age": 21,
+        "year": 22,
+        "title": "这一年的生活账",
+        "text": "按稳健节奏安排，收入 20775 元，实际生活支出 17304 元，结余现金 21189 元。精力变化 +0，压力变化 +2。",
+        "kind": "annual",
+        "accounting": {
+          "income": 20775,
+          "expenses": 17304,
+          "planned_expenses": 17304,
+          "cash_after": 21189
+        },
+        "annual_plan": {
+          "job": "apprentice",
+          "pace": "steady",
+          "pace_label": "稳健节奏",
+          "income": 20775,
+          "expenses": 17304,
+          "energy_change": 0,
+          "stress_change": 2,
+          "health_change": 0,
+          "world_modifiers": {
+            "income_percent": 103,
+            "expense_percent": 103
+          },
+          "world_year": 22
+        },
+        "resource_changes": {
+          "cash": 3471,
+          "energy": 0,
+          "health": 0,
+          "stress": 2,
+          "education": 0,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 21189,
+          "energy": 63,
+          "health": 90,
+          "stress": 26,
+          "education": 40,
+          "skill": 34
+        }
+      },
+      {
+        "id": "life-27",
+        "age": 22,
+        "year": 23,
+        "title": "这一年的生活账",
+        "text": "按稳健节奏安排，收入 20867 元，实际生活支出 17640 元，结余现金 24416 元。精力变化 +0，压力变化 +1。",
+        "kind": "annual",
+        "accounting": {
+          "income": 20867,
+          "expenses": 17640,
+          "planned_expenses": 17640,
+          "cash_after": 24416
+        },
+        "annual_plan": {
+          "job": "apprentice",
+          "pace": "steady",
+          "pace_label": "稳健节奏",
+          "income": 20867,
+          "expenses": 17640,
+          "energy_change": 0,
+          "stress_change": 1,
+          "health_change": 0,
+          "world_modifiers": {
+            "income_percent": 103,
+            "expense_percent": 105
+          },
+          "world_year": 23
+        },
+        "resource_changes": {
+          "cash": 3227,
+          "energy": 0,
+          "health": 0,
+          "stress": 1,
+          "education": 0,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 24416,
+          "energy": 63,
+          "health": 90,
+          "stress": 27,
+          "education": 40,
+          "skill": 35
+        }
+      },
+      {
+        "id": "life-28",
+        "age": 23,
+        "year": 24,
+        "title": "这一年的生活账",
+        "text": "按稳健节奏安排，收入 20960 元，实际生活支出 17640 元，结余现金 27736 元。精力变化 +0，压力变化 +1。",
+        "kind": "annual",
+        "accounting": {
+          "income": 20960,
+          "expenses": 17640,
+          "planned_expenses": 17640,
+          "cash_after": 27736
+        },
+        "annual_plan": {
+          "job": "apprentice",
+          "pace": "steady",
+          "pace_label": "稳健节奏",
+          "income": 20960,
+          "expenses": 17640,
+          "energy_change": 0,
+          "stress_change": 1,
+          "health_change": 0,
+          "world_modifiers": {
+            "income_percent": 103,
+            "expense_percent": 105
+          },
+          "world_year": 24
+        },
+        "resource_changes": {
+          "cash": 3320,
+          "energy": 0,
+          "health": 0,
+          "stress": 1,
+          "education": 0,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 27736,
+          "energy": 63,
+          "health": 90,
+          "stress": 28,
+          "education": 40,
+          "skill": 36
+        }
+      },
+      {
+        "id": "life-29",
+        "age": 23,
+        "year": 24,
+        "title": "修伞摊旁的人",
+        "text": "陈安说起自己常走的那条路。你们交换了联系办法，往后是否再见仍要各自决定。",
+        "kind": "choice",
+        "choice": "聊聊彼此在镇里的生活",
+        "choice_id": "talk",
+        "event_id": "youth.partner_meet",
+        "observations": [
+          {
+            "dimension": "social_initiative",
+            "behavior": "主动延续一次偶遇的交谈"
+          }
+        ],
+        "npc_ids": [
+          "partner"
+        ],
+        "gained_flags": {
+          "partner_met": true
+        },
+        "context": {
+          "available_choice_ids": [
+            "talk",
+            "help",
+            "greet"
+          ],
+          "locked_options": [],
+          "resources_before": {
+            "cash": 27736,
+            "energy": 63,
+            "health": 90,
+            "stress": 28,
+            "education": 40,
+            "skill": 36
+          },
+          "cash_cost": 0,
+          "cash_cost_share": 0.0,
+          "npc_knowledge": [
+            {
+              "id": "mother",
+              "name": "许岚",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "father",
+              "name": "林川",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "friend",
+              "name": "周远",
+              "alive": true,
+              "met": true
+            }
+          ],
+          "context_tags": [
+            "相遇",
+            "青年"
+          ],
+          "presented_text": "一阵雨把街上的人留在屋檐下。陈安正帮摊主收起几把修好的伞，你们因一小段让路和道谢开始说话。",
+          "opportunity": true,
+          "world_context": [],
+          "world_modifiers": {
+            "income_percent": 103,
+            "expense_percent": 105
+          }
+        },
+        "stats_after": {
+          "cash": 27736,
+          "energy": 58,
+          "health": 90,
+          "stress": 28,
+          "education": 40,
+          "skill": 36
+        }
+      }
+    ],
+    "world": {
+      "version": "0.4.0",
+      "name": "澄川诸邦",
+      "calendar": "新历",
+      "source_seed": 307,
+      "seed": 2272345120806796,
+      "random_counter": 11,
+      "start_year": 1,
+      "year": 24,
+      "next_event_year": 25,
+      "metrics": {
+        "prosperity": 65,
+        "cost_pressure": 96,
+        "employment": 57,
+        "inequality": 59,
+        "public_services": 68,
+        "social_trust": 59,
+        "civil_liberties": 58,
+        "institutional_capacity": 68,
+        "international_tension": 33,
+        "trade_openness": 57,
+        "technology": 49,
+        "automation": 35,
+        "energy_security": 52,
+        "ecology": 66,
+        "climate_stress": 57,
+        "public_health": 62,
+        "knowledge_access": 67,
+        "demographic_pressure": 44,
+        "food_security": 61,
+        "infrastructure": 69
+      },
+      "modes": {
+        "energy": "mixed",
+        "governance": "negotiated",
+        "trade": "regional",
+        "technology": "open"
+      },
+      "flags": {
+        "service_accord_ready": true,
+        "audit_requested": false,
+        "apprenticeship_network_ready": true,
+        "wage_arrears_active": true,
+        "rotation_trials_ready": true,
+        "water_network_alive": true,
+        "shared_spaces_ready": true,
+        "credit_wave": true,
+        "regional_corridor_alive": true
+      },
+      "initial_metrics": {
+        "prosperity": 53,
+        "cost_pressure": 50,
+        "employment": 53,
+        "inequality": 49,
+        "public_services": 59,
+        "social_trust": 59,
+        "civil_liberties": 55,
+        "institutional_capacity": 58,
+        "international_tension": 33,
+        "trade_openness": 47,
+        "technology": 49,
+        "automation": 35,
+        "energy_security": 61,
+        "ecology": 67,
+        "climate_stress": 41,
+        "public_health": 61,
+        "knowledge_access": 60,
+        "demographic_pressure": 44,
+        "food_security": 60,
+        "infrastructure": 53
+      },
+      "initial_modes": {
+        "energy": "mixed",
+        "governance": "negotiated",
+        "trade": "regional",
+        "technology": "open"
+      },
+      "history": [
+        {
+          "id": "world-1",
+          "event_id": "climate.hot_seasons",
+          "year": 3,
+          "domain": "climate",
+          "domain_label": "气候与适应",
+          "scope": "planetary",
+          "title": "连续炎热季节拉长了用电高峰",
+          "text": "多个地区连续出现偏热季节，夜间降温变慢，照护和供电系统承受更久的高峰。户外劳动与农事被迫调整，原有建筑和排班方式暴露出新的弱点。",
+          "changes": [
+            "气候压力 +8",
+            "能源保障 -6",
+            "公共健康 -5",
+            "食物保障 -3",
+            "生活成本压力 +4"
+          ],
+          "causes": [],
+          "severity": 2,
+          "tags": [
+            "高温",
+            "复合压力"
+          ],
+          "contract": {
+            "requires": [
+              {
+                "path": "world.metrics.climate_stress",
+                "op": "gte",
+                "value": 32
+              }
+            ],
+            "effects": [
+              {
+                "op": "metric",
+                "key": "climate_stress",
+                "delta": 8
+              },
+              {
+                "op": "metric",
+                "key": "energy_security",
+                "delta": -6
+              },
+              {
+                "op": "metric",
+                "key": "public_health",
+                "delta": -5
+              },
+              {
+                "op": "metric",
+                "key": "food_security",
+                "delta": -3
+              },
+              {
+                "op": "metric",
+                "key": "cost_pressure",
+                "delta": 4
+              }
+            ],
+            "once": false,
+            "cooldown": 10
+          }
+        },
+        {
+          "id": "world-2",
+          "event_id": "governance.service_accord",
+          "year": 5,
+          "domain": "governance",
+          "domain_label": "治理与公共能力",
+          "scope": "national",
+          "title": "不同窗口约定互相接件",
+          "text": "面对反复转交的求助，各地服务机构核对争议记录后签下互认协议，共用一套转送与回访记录。协调和培训增加了开支，失去联络的服务点也开始接回网络。",
+          "changes": [
+            "治理方式：协商治理 → 协商治理",
+            "公共机构能力 +10",
+            "公共服务 +6",
+            "生活成本压力 +5"
+          ],
+          "causes": [],
+          "severity": 2,
+          "tags": [
+            "repair",
+            "coordination"
+          ],
+          "contract": {
+            "requires": [
+              {
+                "path": "world.metrics.institutional_capacity",
+                "op": "lte",
+                "value": 58
+              },
+              {
+                "path": "world.metrics.public_services",
+                "op": "lte",
+                "value": 65
+              }
+            ],
+            "effects": [
+              {
+                "op": "mode",
+                "key": "governance",
+                "value": "negotiated"
+              },
+              {
+                "op": "metric",
+                "key": "institutional_capacity",
+                "delta": 10
+              },
+              {
+                "op": "metric",
+                "key": "public_services",
+                "delta": 6
+              },
+              {
+                "op": "metric",
+                "key": "cost_pressure",
+                "delta": 5
+              },
+              {
+                "op": "flag",
+                "key": "service_accord_ready",
+                "value": true
+              },
+              {
+                "op": "flag",
+                "key": "audit_requested",
+                "value": false
+              }
+            ],
+            "once": true,
+            "cooldown": 8
+          }
+        },
+        {
+          "id": "world-3",
+          "event_id": "education.apprenticeship_network",
+          "year": 7,
+          "domain": "education",
+          "domain_label": "教育与知识",
+          "scope": "national",
+          "title": "学校与作坊接成训练网络",
+          "text": "学校、作坊和社区教室共用课程与练习设备，学习不再只有一条入口。岗位基础随之改善，公共经费要承担设备维护和带教时间。",
+          "changes": [
+            "知识可及性 +7",
+            "就业机会 +4",
+            "生活成本压力 +5"
+          ],
+          "causes": [
+            "world-2"
+          ],
+          "severity": 2,
+          "tags": [
+            "expansion"
+          ],
+          "contract": {
+            "requires": [
+              {
+                "path": "world.metrics.public_services",
+                "op": "gte",
+                "value": 43
+              },
+              {
+                "path": "world.metrics.knowledge_access",
+                "op": "gte",
+                "value": 43
+              }
+            ],
+            "effects": [
+              {
+                "op": "metric",
+                "key": "knowledge_access",
+                "delta": 7
+              },
+              {
+                "op": "metric",
+                "key": "employment",
+                "delta": 4
+              },
+              {
+                "op": "metric",
+                "key": "cost_pressure",
+                "delta": 5
+              },
+              {
+                "op": "flag",
+                "key": "apprenticeship_network_ready",
+                "value": true
+              }
+            ],
+            "once": true,
+            "cooldown": 8
+          }
+        },
+        {
+          "id": "world-4",
+          "event_id": "climate.passive_cooling",
+          "year": 9,
+          "domain": "climate",
+          "domain_label": "气候与适应",
+          "scope": "planetary",
+          "title": "遮阴和通风成为公共改造项目",
+          "text": "热季中的住处、教室和工作场所增设遮阴与通风设施，部分活动改到较凉时段。高温对日常健康的冲击减轻，改造材料与施工投入也占用了预算。",
+          "changes": [
+            "公共健康 +6",
+            "基础设施 +4",
+            "能源保障 +3",
+            "生活成本压力 +5"
+          ],
+          "causes": [
+            "world-1",
+            "world-2"
+          ],
+          "severity": 1,
+          "tags": [
+            "高温适应",
+            "建筑",
+            "照护"
+          ],
+          "contract": {
+            "requires": [
+              {
+                "path": "world.metrics.climate_stress",
+                "op": "gte",
+                "value": 45
+              },
+              {
+                "path": "world.metrics.public_services",
+                "op": "gte",
+                "value": 40
+              }
+            ],
+            "effects": [
+              {
+                "op": "metric",
+                "key": "public_health",
+                "delta": 6
+              },
+              {
+                "op": "metric",
+                "key": "infrastructure",
+                "delta": 4
+              },
+              {
+                "op": "metric",
+                "key": "energy_security",
+                "delta": 3
+              },
+              {
+                "op": "metric",
+                "key": "cost_pressure",
+                "delta": 5
+              }
+            ],
+            "once": false,
+            "cooldown": 14
+          }
+        },
+        {
+          "id": "world-5",
+          "event_id": "labor.wage_arrears",
+          "year": 11,
+          "domain": "labor",
+          "domain_label": "劳动与就业",
+          "scope": "national",
+          "title": "几条生产链出现拖欠",
+          "text": "原料和生活成本同时上行，一些承包单位延迟支付报酬。受影响的人联合登记欠款，形成新的申诉渠道，但眼前的就业与信任仍然受损。",
+          "changes": [
+            "就业机会 -4",
+            "社会信任 -7",
+            "个人自由 +3",
+            "资源差距 +5"
+          ],
+          "causes": [
+            "world-4"
+          ],
+          "severity": 2,
+          "tags": [
+            "risk",
+            "rights"
+          ],
+          "contract": {
+            "requires": [
+              {
+                "path": "world.metrics.cost_pressure",
+                "op": "gte",
+                "value": 62
+              },
+              {
+                "path": "world.flags.wage_arrears_active",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "effects": [
+              {
+                "op": "metric",
+                "key": "employment",
+                "delta": -4
+              },
+              {
+                "op": "metric",
+                "key": "social_trust",
+                "delta": -7
+              },
+              {
+                "op": "metric",
+                "key": "civil_liberties",
+                "delta": 3
+              },
+              {
+                "op": "metric",
+                "key": "inequality",
+                "delta": 5
+              },
+              {
+                "op": "flag",
+                "key": "wage_arrears_active",
+                "value": true
+              }
+            ],
+            "once": false,
+            "cooldown": 10
+          }
+        },
+        {
+          "id": "world-6",
+          "event_id": "food.crop_diversification",
+          "year": 13,
+          "domain": "food",
+          "domain_label": "食物与农业",
+          "scope": "planetary",
+          "title": "试验田不再只种一种作物",
+          "text": "农技人员与种植户轮换豆类、谷物和覆盖作物，分散单一收成失败的风险。土地逐渐恢复，收购与加工却要适应不同批次，头几季的投入比熟悉的老办法更高。",
+          "changes": [
+            "食物保障 +7",
+            "生态状况 +4",
+            "经济活力 -3",
+            "生活成本压力 +3"
+          ],
+          "causes": [
+            "world-3",
+            "world-1"
+          ],
+          "severity": 2,
+          "tags": [
+            "diversification",
+            "route"
+          ],
+          "contract": {
+            "requires": [
+              {
+                "path": "world.metrics.knowledge_access",
+                "op": "gte",
+                "value": 40
+              },
+              {
+                "path": "world.metrics.food_security",
+                "op": "gte",
+                "value": 35
+              }
+            ],
+            "effects": [
+              {
+                "op": "metric",
+                "key": "food_security",
+                "delta": 7
+              },
+              {
+                "op": "metric",
+                "key": "ecology",
+                "delta": 4
+              },
+              {
+                "op": "metric",
+                "key": "prosperity",
+                "delta": -3
+              },
+              {
+                "op": "metric",
+                "key": "cost_pressure",
+                "delta": 3
+              },
+              {
+                "op": "flag",
+                "key": "rotation_trials_ready",
+                "value": true
+              }
+            ],
+            "once": true,
+            "cooldown": 8
+          }
+        },
+        {
+          "id": "world-7",
+          "event_id": "infrastructure.water_network",
+          "year": 15,
+          "domain": "infrastructure",
+          "domain_label": "基础设施",
+          "scope": "national",
+          "title": "公共水管接到更远的街口",
+          "text": "供水管线、储水点与检修口向边缘居民区延伸，提水排队的人少了许多。更可靠的水源改善了日常卫生，开挖和维护却需要新的收费，也扰动了沿线水土。",
+          "changes": [
+            "基础设施 +12",
+            "公共健康 +5",
+            "生活成本压力 +6",
+            "生态状况 -2"
+          ],
+          "causes": [
+            "world-2",
+            "world-4"
+          ],
+          "severity": 2,
+          "tags": [
+            "water",
+            "expansion"
+          ],
+          "contract": {
+            "requires": [
+              {
+                "path": "world.metrics.institutional_capacity",
+                "op": "gte",
+                "value": 40
+              },
+              {
+                "path": "world.metrics.infrastructure",
+                "op": "gte",
+                "value": 35
+              }
+            ],
+            "effects": [
+              {
+                "op": "metric",
+                "key": "infrastructure",
+                "delta": 12
+              },
+              {
+                "op": "metric",
+                "key": "public_health",
+                "delta": 5
+              },
+              {
+                "op": "metric",
+                "key": "cost_pressure",
+                "delta": 6
+              },
+              {
+                "op": "metric",
+                "key": "ecology",
+                "delta": -2
+              },
+              {
+                "op": "flag",
+                "key": "water_network_alive",
+                "value": true
+              }
+            ],
+            "once": true,
+            "cooldown": 8
+          }
+        },
+        {
+          "id": "world-8",
+          "event_id": "culture.shared_spaces",
+          "year": 17,
+          "domain": "culture",
+          "domain_label": "文化与共同生活",
+          "scope": "national",
+          "title": "旧礼堂重新亮灯",
+          "text": "闲置礼堂被改成排练、修理与邻里聚会共用的场所，钥匙由几个轮值小组保管。热闹的灯光延续到夜里，维护和隔音的账单也按月到来。",
+          "changes": [
+            "社会信任 +7",
+            "公共服务 +3",
+            "生活成本压力 +4"
+          ],
+          "causes": [
+            "world-7",
+            "world-5"
+          ],
+          "severity": 2,
+          "tags": [
+            "commons",
+            "expansion"
+          ],
+          "contract": {
+            "requires": [
+              {
+                "path": "world.metrics.infrastructure",
+                "op": "gte",
+                "value": 40
+              },
+              {
+                "path": "world.metrics.social_trust",
+                "op": "gte",
+                "value": 40
+              }
+            ],
+            "effects": [
+              {
+                "op": "metric",
+                "key": "social_trust",
+                "delta": 7
+              },
+              {
+                "op": "metric",
+                "key": "public_services",
+                "delta": 3
+              },
+              {
+                "op": "metric",
+                "key": "cost_pressure",
+                "delta": 4
+              },
+              {
+                "op": "flag",
+                "key": "shared_spaces_ready",
+                "value": true
+              }
+            ],
+            "once": true,
+            "cooldown": 8
+          }
+        },
+        {
+          "id": "world-9",
+          "event_id": "economy.credit_expansion",
+          "year": 19,
+          "domain": "economy",
+          "domain_label": "经济与机会",
+          "scope": "national",
+          "title": "新项目的融资窗口放宽",
+          "text": "多家公共与民间出资机构放宽项目融资，工地和小厂同时增加订单。资金更容易流向有抵押物的人，地价与原料报价开始上行。",
+          "changes": [
+            "经济活力 +8",
+            "就业机会 +4",
+            "资源差距 +5",
+            "生活成本压力 +7"
+          ],
+          "causes": [
+            "world-2",
+            "world-6"
+          ],
+          "severity": 2,
+          "tags": [
+            "expansion",
+            "risk"
+          ],
+          "contract": {
+            "requires": [
+              {
+                "path": "world.metrics.institutional_capacity",
+                "op": "gte",
+                "value": 45
+              },
+              {
+                "path": "world.metrics.prosperity",
+                "op": "gte",
+                "value": 45
+              },
+              {
+                "path": "world.flags.credit_wave",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "effects": [
+              {
+                "op": "metric",
+                "key": "prosperity",
+                "delta": 8
+              },
+              {
+                "op": "metric",
+                "key": "employment",
+                "delta": 4
+              },
+              {
+                "op": "metric",
+                "key": "inequality",
+                "delta": 5
+              },
+              {
+                "op": "metric",
+                "key": "cost_pressure",
+                "delta": 7
+              },
+              {
+                "op": "flag",
+                "key": "credit_wave",
+                "value": true
+              }
+            ],
+            "once": false,
+            "cooldown": 12
+          }
+        },
+        {
+          "id": "world-10",
+          "event_id": "trade.regional_corridor",
+          "year": 21,
+          "domain": "trade",
+          "domain_label": "国际贸易与往来",
+          "scope": "international",
+          "title": "货车开始使用共同通行单",
+          "text": "几邦商定区域通行凭证和货站接驳，过去反复卸货的车队终于能一程到达。沿线生意增长，站场扩建与更多货运也带来投入和污染。",
+          "changes": [
+            "贸易结构：区域贸易 → 区域贸易",
+            "贸易开放 +10",
+            "经济活力 +7",
+            "生态状况 -3",
+            "生活成本压力 +3"
+          ],
+          "causes": [
+            "world-2",
+            "world-7"
+          ],
+          "severity": 2,
+          "tags": [
+            "corridor",
+            "expansion"
+          ],
+          "contract": {
+            "requires": [
+              {
+                "path": "world.metrics.institutional_capacity",
+                "op": "gte",
+                "value": 45
+              },
+              {
+                "path": "world.metrics.infrastructure",
+                "op": "gte",
+                "value": 45
+              },
+              {
+                "path": "world.metrics.international_tension",
+                "op": "lte",
+                "value": 55
+              },
+              {
+                "path": "world.flags.regional_corridor_alive",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "effects": [
+              {
+                "op": "mode",
+                "key": "trade",
+                "value": "regional"
+              },
+              {
+                "op": "metric",
+                "key": "trade_openness",
+                "delta": 10
+              },
+              {
+                "op": "metric",
+                "key": "prosperity",
+                "delta": 7
+              },
+              {
+                "op": "metric",
+                "key": "ecology",
+                "delta": -3
+              },
+              {
+                "op": "metric",
+                "key": "cost_pressure",
+                "delta": 3
+              },
+              {
+                "op": "flag",
+                "key": "regional_corridor_alive",
+                "value": true
+              }
+            ],
+            "once": false,
+            "cooldown": 14
+          }
+        },
+        {
+          "id": "world-11",
+          "event_id": "climate.hot_seasons",
+          "year": 23,
+          "domain": "climate",
+          "domain_label": "气候与适应",
+          "scope": "planetary",
+          "title": "连续炎热季节拉长了用电高峰",
+          "text": "多个地区连续出现偏热季节，夜间降温变慢，照护和供电系统承受更久的高峰。户外劳动与农事被迫调整，原有建筑和排班方式暴露出新的弱点。",
+          "changes": [
+            "气候压力 +8",
+            "能源保障 -6",
+            "公共健康 -5",
+            "食物保障 -3",
+            "生活成本压力 +4"
+          ],
+          "causes": [
+            "world-1"
+          ],
+          "severity": 2,
+          "tags": [
+            "高温",
+            "复合压力"
+          ],
+          "contract": {
+            "requires": [
+              {
+                "path": "world.metrics.climate_stress",
+                "op": "gte",
+                "value": 32
+              }
+            ],
+            "effects": [
+              {
+                "op": "metric",
+                "key": "climate_stress",
+                "delta": 8
+              },
+              {
+                "op": "metric",
+                "key": "energy_security",
+                "delta": -6
+              },
+              {
+                "op": "metric",
+                "key": "public_health",
+                "delta": -5
+              },
+              {
+                "op": "metric",
+                "key": "food_security",
+                "delta": -3
+              },
+              {
+                "op": "metric",
+                "key": "cost_pressure",
+                "delta": 4
+              }
+            ],
+            "once": false,
+            "cooldown": 10
+          }
+        }
+      ]
+    }
+  }
+}

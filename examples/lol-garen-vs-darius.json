@@ -1,0 +1,32 @@
+{
+  "player": {
+    "champion": "Garen",
+    "level": 1,
+    "skill_order": ["E", "Q", "W", "E", "E", "R"],
+    "items": ["1055"],
+    "rune": "conqueror",
+    "summoners": ["flash", "ignite"],
+    "policy": "short_trade",
+    "wave": "freeze",
+    "combo": ["Q", "AA", "E"]
+  },
+  "opponent": {
+    "champion": "Darius",
+    "level": 1,
+    "skill_order": ["Q", "W", "E", "Q", "Q", "R"],
+    "items": ["1055"],
+    "rune": "conqueror",
+    "summoners": ["flash", "ghost"],
+    "policy": "all_in",
+    "wave": "freeze",
+    "combo": ["Q", "AA", "W", "E"]
+  },
+  "duration": 180,
+  "start_time": 90,
+  "accuracy": 0.8,
+  "opponent_accuracy": 0.75,
+  "distance": 300,
+  "mode": "lane",
+  "seed": 42,
+  "starting_gold": 500
+}

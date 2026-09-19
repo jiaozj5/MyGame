@@ -1,0 +1,3585 @@
+{
+  "format_version": "0.1.0",
+  "ruleset_id": "smalltown-v0.1",
+  "runs": [
+    {
+      "title": "提供部分借款，随后整笔归还",
+      "initial_state": {
+        "schema_version": "0.1.0",
+        "ruleset_id": "smalltown-v0.1",
+        "setting_id": "smalltown",
+        "revision": 0,
+        "day": 0,
+        "player_id": "p",
+        "persons": {
+          "p": {
+            "id": "p",
+            "name": "林禾",
+            "birth_day": -8760,
+            "alive": true,
+            "death_day": null,
+            "location": "town",
+            "cash": 600,
+            "energy": 70,
+            "health": 80,
+            "stress": 35,
+            "housing_reserve": 500,
+            "knowledge": {
+              "shared_walk": -365
+            }
+          },
+          "f": {
+            "id": "f",
+            "name": "周远",
+            "birth_day": -8760,
+            "alive": true,
+            "death_day": null,
+            "location": "town",
+            "cash": 50,
+            "energy": 65,
+            "health": 75,
+            "stress": 60,
+            "housing_reserve": 450,
+            "repayment_willing": true,
+            "knowledge": {
+              "shared_walk": -365
+            }
+          },
+          "m": {
+            "id": "m",
+            "name": "许岚",
+            "birth_day": -17520,
+            "alive": true,
+            "death_day": null,
+            "location": "town",
+            "cash": 800,
+            "energy": 60,
+            "health": 70,
+            "stress": 30,
+            "housing_reserve": 500,
+            "knowledge": {}
+          }
+        },
+        "relationships": [
+          {
+            "from": "p",
+            "to": "f",
+            "kind": "friend",
+            "trust": 55,
+            "closeness": 65
+          },
+          {
+            "from": "f",
+            "to": "p",
+            "kind": "friend",
+            "trust": 60,
+            "closeness": 65
+          },
+          {
+            "from": "p",
+            "to": "m",
+            "kind": "parent",
+            "trust": 75,
+            "closeness": 80
+          },
+          {
+            "from": "m",
+            "to": "p",
+            "kind": "child",
+            "trust": 75,
+            "closeness": 80
+          }
+        ],
+        "facts": {
+          "friend_request_open": true,
+          "friend_request_person": "f",
+          "letter_handled": false,
+          "letter_read": false
+        },
+        "historical_facts": {
+          "shared_walk": {
+            "day": -365,
+            "summary": "林禾与周远曾一起沿河散步。",
+            "participants": [
+              "p",
+              "f"
+            ]
+          }
+        },
+        "artifacts": {
+          "letter_f": {
+            "author": "f",
+            "created_day": -1,
+            "fact_ids": [
+              "shared_walk"
+            ],
+            "text": "我还记得我们沿河散步的那个傍晚。谢谢你愿意听我说话。"
+          }
+        },
+        "loans": {},
+        "tasks": []
+      },
+      "catalog_hash": "b4ca80c8b999f17f59c591847f6b804a481d46c5fd765fccdcbf2965a78a4c2f",
+      "catalog_snapshot": {
+        "schema_version": "0.1.0",
+        "ruleset_id": "smalltown-v0.1",
+        "events": [
+          {
+            "id": "friend.loan_request",
+            "version": 1,
+            "title": "朋友的请求",
+            "setting_id": "smalltown",
+            "trigger": "ambient",
+            "age_range": [
+              18,
+              80
+            ],
+            "actors": {
+              "friend": {
+                "relation": "friend",
+                "alive": true,
+                "same_location": true
+              }
+            },
+            "preconditions": [
+              {
+                "path": "facts.friend_request_open",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "facts.friend_request_person",
+                "op": "eq",
+                "value": {
+                  "ref": "friend.id"
+                }
+              },
+              {
+                "path": "friend.cash",
+                "op": "lte",
+                "value": {
+                  "ref": "friend.housing_reserve"
+                }
+              }
+            ],
+            "description": "{friend.name}请求借400元周转。你现在有{player.cash}元，计划保留{player.housing_reserve}元用于住处；这只是本原型中的预算目标，尚未模拟实际租金支出。",
+            "context_tags": [
+              "adult",
+              "friend",
+              "financial_pressure"
+            ],
+            "choices": [
+              {
+                "id": "lend_full",
+                "label": "借出400元",
+                "requirements": [
+                  {
+                    "path": "player.cash",
+                    "op": "gte",
+                    "value": 400
+                  }
+                ],
+                "effects": [
+                  {
+                    "op": "transfer",
+                    "from": "player",
+                    "to": "friend",
+                    "amount": 400
+                  },
+                  {
+                    "op": "create_loan",
+                    "creditor": "player",
+                    "debtor": "friend",
+                    "amount": 400,
+                    "due_in_days": 30
+                  },
+                  {
+                    "op": "adjust_relation",
+                    "from": "friend",
+                    "to": "player",
+                    "field": "trust",
+                    "delta": 4
+                  },
+                  {
+                    "op": "set_fact",
+                    "key": "friend_request_open",
+                    "value": false
+                  }
+                ],
+                "evidence": [
+                  {
+                    "dimension_id": "care",
+                    "behavior": "material_support",
+                    "strength": "limited"
+                  },
+                  {
+                    "dimension_id": "risk_taking",
+                    "behavior": "accept_financial_exposure",
+                    "strength": "limited"
+                  }
+                ]
+              },
+              {
+                "id": "lend_partial",
+                "label": "借出100元，并说明自己的预算",
+                "requirements": [
+                  {
+                    "path": "player.cash",
+                    "op": "gte",
+                    "value": 100
+                  }
+                ],
+                "effects": [
+                  {
+                    "op": "transfer",
+                    "from": "player",
+                    "to": "friend",
+                    "amount": 100
+                  },
+                  {
+                    "op": "create_loan",
+                    "creditor": "player",
+                    "debtor": "friend",
+                    "amount": 100,
+                    "due_in_days": 30
+                  },
+                  {
+                    "op": "set_fact",
+                    "key": "friend_request_open",
+                    "value": false
+                  }
+                ],
+                "evidence": [
+                  {
+                    "dimension_id": "care",
+                    "behavior": "partial_material_support",
+                    "strength": "limited"
+                  },
+                  {
+                    "dimension_id": "risk_taking",
+                    "behavior": "limit_financial_exposure",
+                    "strength": "limited"
+                  }
+                ]
+              },
+              {
+                "id": "help_search",
+                "label": "花时间一起寻找其他办法",
+                "requirements": [
+                  {
+                    "path": "player.energy",
+                    "op": "gte",
+                    "value": 10
+                  }
+                ],
+                "effects": [
+                  {
+                    "op": "adjust",
+                    "actor": "player",
+                    "field": "energy",
+                    "delta": -10
+                  },
+                  {
+                    "op": "set_fact",
+                    "key": "alternative_help_attempted",
+                    "value": true
+                  },
+                  {
+                    "op": "set_fact",
+                    "key": "friend_request_open",
+                    "value": false
+                  }
+                ],
+                "evidence": [
+                  {
+                    "dimension_id": "care",
+                    "behavior": "practical_support_attempt",
+                    "strength": "limited"
+                  }
+                ]
+              },
+              {
+                "id": "decline",
+                "label": "说明目前无法借钱",
+                "requirements": [],
+                "effects": [
+                  {
+                    "op": "set_fact",
+                    "key": "friend_request_open",
+                    "value": false
+                  }
+                ],
+                "evidence": [
+                  {
+                    "dimension_id": "care",
+                    "behavior": "declined_this_request",
+                    "strength": "ambiguous"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "friend.loan_due",
+            "version": 1,
+            "title": "约定的还款日",
+            "setting_id": "smalltown",
+            "trigger": "scheduled",
+            "age_range": [
+              0,
+              120
+            ],
+            "actors": {
+              "friend": {
+                "relation": "friend",
+                "alive": true,
+                "same_location": false
+              }
+            },
+            "preconditions": [
+              {
+                "path": "loan.status",
+                "op": "eq",
+                "value": "outstanding"
+              }
+            ],
+            "description": "{friend.name}的{loan.amount}元借款已经到期。只有对方仍健在、愿意履约且拥有足够资金，按约还款才可执行；你也可以延长期限或暂时结束催促。",
+            "context_tags": [
+              "friend",
+              "existing_promise"
+            ],
+            "choices": [
+              {
+                "id": "accept_repayment",
+                "label": "接受对方按约还款",
+                "requirements": [
+                  {
+                    "path": "friend.repayment_willing",
+                    "op": "eq",
+                    "value": true
+                  },
+                  {
+                    "path": "friend.cash",
+                    "op": "gte",
+                    "value": {
+                      "ref": "loan.amount"
+                    }
+                  }
+                ],
+                "effects": [
+                  {
+                    "op": "settle_loan"
+                  }
+                ],
+                "evidence": []
+              },
+              {
+                "id": "extend",
+                "label": "同意再等7天",
+                "requirements": [],
+                "effects": [
+                  {
+                    "op": "reschedule_loan",
+                    "days": 7
+                  }
+                ],
+                "evidence": [
+                  {
+                    "dimension_id": "conflict_style",
+                    "behavior": "negotiated_extension",
+                    "strength": "limited"
+                  }
+                ]
+              },
+              {
+                "id": "leave_claim",
+                "label": "暂时结束催促，保留债权记录",
+                "requirements": [],
+                "effects": [],
+                "evidence": [
+                  {
+                    "dimension_id": "conflict_style",
+                    "behavior": "deferred_confrontation",
+                    "strength": "ambiguous"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "friend.old_letter",
+            "version": 1,
+            "title": "留下的信",
+            "setting_id": "smalltown",
+            "trigger": "ambient",
+            "age_range": [
+              0,
+              120
+            ],
+            "actors": {
+              "friend": {
+                "relation": "friend",
+                "alive": false,
+                "same_location": false
+              }
+            },
+            "preconditions": [
+              {
+                "path": "artifacts.letter_f.author",
+                "op": "eq",
+                "value": {
+                  "ref": "friend.id"
+                }
+              },
+              {
+                "path": "facts.letter_handled",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "description": "{friend.name}生前留下的信已经存在于世界记录中。信里只引用他写信时已知的一次共同经历。",
+            "context_tags": [
+              "friend",
+              "bereavement"
+            ],
+            "choices": [
+              {
+                "id": "read",
+                "label": "读完并收好这封信",
+                "requirements": [],
+                "effects": [
+                  {
+                    "op": "set_fact",
+                    "key": "letter_read",
+                    "value": true
+                  },
+                  {
+                    "op": "set_fact",
+                    "key": "letter_handled",
+                    "value": true
+                  }
+                ],
+                "evidence": []
+              },
+              {
+                "id": "keep",
+                "label": "先收好，暂时不读",
+                "requirements": [],
+                "effects": [
+                  {
+                    "op": "set_fact",
+                    "key": "letter_handled",
+                    "value": true
+                  }
+                ],
+                "evidence": []
+              }
+            ]
+          }
+        ]
+      },
+      "log": [
+        {
+          "sequence": 1,
+          "kind": "choice",
+          "day": 0,
+          "before_hash": "7f24de72542d1527ea2440e653f15944b933cfea3c0f78ec50eb8b6dc2acd06f",
+          "payload": {
+            "event_id": "friend.loan_request",
+            "event_version": 1,
+            "choice_id": "lend_partial",
+            "choice_label": "借出100元，并说明自己的预算",
+            "bindings": {
+              "player": "p",
+              "friend": "f"
+            },
+            "task_id": null,
+            "options": [
+              {
+                "id": "lend_full",
+                "label": "借出400元",
+                "available": true,
+                "locked_reason": null
+              },
+              {
+                "id": "lend_partial",
+                "label": "借出100元，并说明自己的预算",
+                "available": true,
+                "locked_reason": null
+              },
+              {
+                "id": "help_search",
+                "label": "花时间一起寻找其他办法",
+                "available": true,
+                "locked_reason": null
+              },
+              {
+                "id": "decline",
+                "label": "说明目前无法借钱",
+                "available": true,
+                "locked_reason": null
+              }
+            ],
+            "opportunity": true,
+            "context_tags": [
+              "adult",
+              "friend",
+              "financial_pressure"
+            ],
+            "age": 24,
+            "resources_before": {
+              "cash": 600,
+              "energy": 70,
+              "health": 80,
+              "stress": 35,
+              "housing_reserve": 500
+            },
+            "player_knowledge": {
+              "shared_walk": -365
+            },
+            "presented_facts": "周远请求借400元周转。你现在有600元，计划保留500元用于住处；这只是本原型中的预算目标，尚未模拟实际租金支出。",
+            "cash_cost": 100,
+            "cash_cost_share": 0.16666666666666666,
+            "below_housing_reserve_after": false,
+            "observations": [
+              {
+                "dimension_id": "care",
+                "behavior": "partial_material_support",
+                "strength": "limited"
+              },
+              {
+                "dimension_id": "risk_taking",
+                "behavior": "limit_financial_exposure",
+                "strength": "limited"
+              }
+            ]
+          },
+          "state_after": {
+            "schema_version": "0.1.0",
+            "ruleset_id": "smalltown-v0.1",
+            "setting_id": "smalltown",
+            "revision": 1,
+            "day": 0,
+            "player_id": "p",
+            "persons": {
+              "p": {
+                "id": "p",
+                "name": "林禾",
+                "birth_day": -8760,
+                "alive": true,
+                "death_day": null,
+                "location": "town",
+                "cash": 500,
+                "energy": 70,
+                "health": 80,
+                "stress": 35,
+                "housing_reserve": 500,
+                "knowledge": {
+                  "shared_walk": -365
+                }
+              },
+              "f": {
+                "id": "f",
+                "name": "周远",
+                "birth_day": -8760,
+                "alive": true,
+                "death_day": null,
+                "location": "town",
+                "cash": 150,
+                "energy": 65,
+                "health": 75,
+                "stress": 60,
+                "housing_reserve": 450,
+                "repayment_willing": true,
+                "knowledge": {
+                  "shared_walk": -365
+                }
+              },
+              "m": {
+                "id": "m",
+                "name": "许岚",
+                "birth_day": -17520,
+                "alive": true,
+                "death_day": null,
+                "location": "town",
+                "cash": 800,
+                "energy": 60,
+                "health": 70,
+                "stress": 30,
+                "housing_reserve": 500,
+                "knowledge": {}
+              }
+            },
+            "relationships": [
+              {
+                "from": "p",
+                "to": "f",
+                "kind": "friend",
+                "trust": 55,
+                "closeness": 65
+              },
+              {
+                "from": "f",
+                "to": "p",
+                "kind": "friend",
+                "trust": 60,
+                "closeness": 65
+              },
+              {
+                "from": "p",
+                "to": "m",
+                "kind": "parent",
+                "trust": 75,
+                "closeness": 80
+              },
+              {
+                "from": "m",
+                "to": "p",
+                "kind": "child",
+                "trust": 75,
+                "closeness": 80
+              }
+            ],
+            "facts": {
+              "friend_request_open": false,
+              "friend_request_person": "f",
+              "letter_handled": false,
+              "letter_read": false
+            },
+            "historical_facts": {
+              "shared_walk": {
+                "day": -365,
+                "summary": "林禾与周远曾一起沿河散步。",
+                "participants": [
+                  "p",
+                  "f"
+                ]
+              }
+            },
+            "artifacts": {
+              "letter_f": {
+                "author": "f",
+                "created_day": -1,
+                "fact_ids": [
+                  "shared_walk"
+                ],
+                "text": "我还记得我们沿河散步的那个傍晚。谢谢你愿意听我说话。"
+              }
+            },
+            "loans": {
+              "loan-1-1": {
+                "id": "loan-1-1",
+                "creditor": "p",
+                "debtor": "f",
+                "amount": 100,
+                "created_day": 0,
+                "due_day": 30,
+                "status": "outstanding"
+              }
+            },
+            "tasks": [
+              {
+                "id": "task-loan-1-1",
+                "event_id": "friend.loan_due",
+                "loan_id": "loan-1-1",
+                "due_day": 30,
+                "bindings": {
+                  "player": "p",
+                  "friend": "f"
+                },
+                "requires_alive": [
+                  "p",
+                  "f"
+                ],
+                "status": "pending",
+                "cancellation_reason": null
+              }
+            ]
+          },
+          "after_hash": "05ab95155f0faf04e46ff71fd0bbe23bda421103cd3f5508fcd4718e4fdb7017",
+          "previous_entry_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "entry_hash": "df3f31d61289507d9d9d2c7ba0f9794a595c15cea79a7fbff9baeba4915fd0dd"
+        },
+        {
+          "sequence": 2,
+          "kind": "time_advanced",
+          "day": 30,
+          "before_hash": "05ab95155f0faf04e46ff71fd0bbe23bda421103cd3f5508fcd4718e4fdb7017",
+          "payload": {
+            "requested_days": 60,
+            "elapsed_days": 30,
+            "cancelled_tasks": []
+          },
+          "state_after": {
+            "schema_version": "0.1.0",
+            "ruleset_id": "smalltown-v0.1",
+            "setting_id": "smalltown",
+            "revision": 2,
+            "day": 30,
+            "player_id": "p",
+            "persons": {
+              "p": {
+                "id": "p",
+                "name": "林禾",
+                "birth_day": -8760,
+                "alive": true,
+                "death_day": null,
+                "location": "town",
+                "cash": 500,
+                "energy": 70,
+                "health": 80,
+                "stress": 35,
+                "housing_reserve": 500,
+                "knowledge": {
+                  "shared_walk": -365
+                }
+              },
+              "f": {
+                "id": "f",
+                "name": "周远",
+                "birth_day": -8760,
+                "alive": true,
+                "death_day": null,
+                "location": "town",
+                "cash": 150,
+                "energy": 65,
+                "health": 75,
+                "stress": 60,
+                "housing_reserve": 450,
+                "repayment_willing": true,
+                "knowledge": {
+                  "shared_walk": -365
+                }
+              },
+              "m": {
+                "id": "m",
+                "name": "许岚",
+                "birth_day": -17520,
+                "alive": true,
+                "death_day": null,
+                "location": "town",
+                "cash": 800,
+                "energy": 60,
+                "health": 70,
+                "stress": 30,
+                "housing_reserve": 500,
+                "knowledge": {}
+              }
+            },
+            "relationships": [
+              {
+                "from": "p",
+                "to": "f",
+                "kind": "friend",
+                "trust": 55,
+                "closeness": 65
+              },
+              {
+                "from": "f",
+                "to": "p",
+                "kind": "friend",
+                "trust": 60,
+                "closeness": 65
+              },
+              {
+                "from": "p",
+                "to": "m",
+                "kind": "parent",
+                "trust": 75,
+                "closeness": 80
+              },
+              {
+                "from": "m",
+                "to": "p",
+                "kind": "child",
+                "trust": 75,
+                "closeness": 80
+              }
+            ],
+            "facts": {
+              "friend_request_open": false,
+              "friend_request_person": "f",
+              "letter_handled": false,
+              "letter_read": false
+            },
+            "historical_facts": {
+              "shared_walk": {
+                "day": -365,
+                "summary": "林禾与周远曾一起沿河散步。",
+                "participants": [
+                  "p",
+                  "f"
+                ]
+              }
+            },
+            "artifacts": {
+              "letter_f": {
+                "author": "f",
+                "created_day": -1,
+                "fact_ids": [
+                  "shared_walk"
+                ],
+                "text": "我还记得我们沿河散步的那个傍晚。谢谢你愿意听我说话。"
+              }
+            },
+            "loans": {
+              "loan-1-1": {
+                "id": "loan-1-1",
+                "creditor": "p",
+                "debtor": "f",
+                "amount": 100,
+                "created_day": 0,
+                "due_day": 30,
+                "status": "outstanding"
+              }
+            },
+            "tasks": [
+              {
+                "id": "task-loan-1-1",
+                "event_id": "friend.loan_due",
+                "loan_id": "loan-1-1",
+                "due_day": 30,
+                "bindings": {
+                  "player": "p",
+                  "friend": "f"
+                },
+                "requires_alive": [
+                  "p",
+                  "f"
+                ],
+                "status": "pending",
+                "cancellation_reason": null
+              }
+            ]
+          },
+          "after_hash": "4aace6a9ac4f5dc960cdcf7b5fdf61b50c405cf3dd414ac9171bc9d95a9f45fa",
+          "previous_entry_hash": "df3f31d61289507d9d9d2c7ba0f9794a595c15cea79a7fbff9baeba4915fd0dd",
+          "entry_hash": "7e190f2149b03fce84284fc2350fbc50887a7542462eda62b057e67bd2e3419a"
+        },
+        {
+          "sequence": 3,
+          "kind": "choice",
+          "day": 30,
+          "before_hash": "4aace6a9ac4f5dc960cdcf7b5fdf61b50c405cf3dd414ac9171bc9d95a9f45fa",
+          "payload": {
+            "event_id": "friend.loan_due",
+            "event_version": 1,
+            "choice_id": "accept_repayment",
+            "choice_label": "接受对方按约还款",
+            "bindings": {
+              "player": "p",
+              "friend": "f"
+            },
+            "task_id": "task-loan-1-1",
+            "options": [
+              {
+                "id": "accept_repayment",
+                "label": "接受对方按约还款",
+                "available": true,
+                "locked_reason": null
+              },
+              {
+                "id": "extend",
+                "label": "同意再等7天",
+                "available": true,
+                "locked_reason": null
+              },
+              {
+                "id": "leave_claim",
+                "label": "暂时结束催促，保留债权记录",
+                "available": true,
+                "locked_reason": null
+              }
+            ],
+            "opportunity": true,
+            "context_tags": [
+              "friend",
+              "existing_promise"
+            ],
+            "age": 24,
+            "resources_before": {
+              "cash": 500,
+              "energy": 70,
+              "health": 80,
+              "stress": 35,
+              "housing_reserve": 500
+            },
+            "player_knowledge": {
+              "shared_walk": -365
+            },
+            "presented_facts": "周远的100元借款已经到期。只有对方仍健在、愿意履约且拥有足够资金，按约还款才可执行；你也可以延长期限或暂时结束催促。",
+            "cash_cost": 0,
+            "cash_cost_share": 0.0,
+            "below_housing_reserve_after": false,
+            "observations": []
+          },
+          "state_after": {
+            "schema_version": "0.1.0",
+            "ruleset_id": "smalltown-v0.1",
+            "setting_id": "smalltown",
+            "revision": 3,
+            "day": 30,
+            "player_id": "p",
+            "persons": {
+              "p": {
+                "id": "p",
+                "name": "林禾",
+                "birth_day": -8760,
+                "alive": true,
+                "death_day": null,
+                "location": "town",
+                "cash": 600,
+                "energy": 70,
+                "health": 80,
+                "stress": 35,
+                "housing_reserve": 500,
+                "knowledge": {
+                  "shared_walk": -365
+                }
+              },
+              "f": {
+                "id": "f",
+                "name": "周远",
+                "birth_day": -8760,
+                "alive": true,
+                "death_day": null,
+                "location": "town",
+                "cash": 50,
+                "energy": 65,
+                "health": 75,
+                "stress": 60,
+                "housing_reserve": 450,
+                "repayment_willing": true,
+                "knowledge": {
+                  "shared_walk": -365
+                }
+              },
+              "m": {
+                "id": "m",
+                "name": "许岚",
+                "birth_day": -17520,
+                "alive": true,
+                "death_day": null,
+                "location": "town",
+                "cash": 800,
+                "energy": 60,
+                "health": 70,
+                "stress": 30,
+                "housing_reserve": 500,
+                "knowledge": {}
+              }
+            },
+            "relationships": [
+              {
+                "from": "p",
+                "to": "f",
+                "kind": "friend",
+                "trust": 55,
+                "closeness": 65
+              },
+              {
+                "from": "f",
+                "to": "p",
+                "kind": "friend",
+                "trust": 60,
+                "closeness": 65
+              },
+              {
+                "from": "p",
+                "to": "m",
+                "kind": "parent",
+                "trust": 75,
+                "closeness": 80
+              },
+              {
+                "from": "m",
+                "to": "p",
+                "kind": "child",
+                "trust": 75,
+                "closeness": 80
+              }
+            ],
+            "facts": {
+              "friend_request_open": false,
+              "friend_request_person": "f",
+              "letter_handled": false,
+              "letter_read": false
+            },
+            "historical_facts": {
+              "shared_walk": {
+                "day": -365,
+                "summary": "林禾与周远曾一起沿河散步。",
+                "participants": [
+                  "p",
+                  "f"
+                ]
+              }
+            },
+            "artifacts": {
+              "letter_f": {
+                "author": "f",
+                "created_day": -1,
+                "fact_ids": [
+                  "shared_walk"
+                ],
+                "text": "我还记得我们沿河散步的那个傍晚。谢谢你愿意听我说话。"
+              }
+            },
+            "loans": {
+              "loan-1-1": {
+                "id": "loan-1-1",
+                "creditor": "p",
+                "debtor": "f",
+                "amount": 100,
+                "created_day": 0,
+                "due_day": 30,
+                "status": "repaid"
+              }
+            },
+            "tasks": [
+              {
+                "id": "task-loan-1-1",
+                "event_id": "friend.loan_due",
+                "loan_id": "loan-1-1",
+                "due_day": 30,
+                "bindings": {
+                  "player": "p",
+                  "friend": "f"
+                },
+                "requires_alive": [
+                  "p",
+                  "f"
+                ],
+                "status": "resolved",
+                "cancellation_reason": null
+              }
+            ]
+          },
+          "after_hash": "59807d2d484988af8ab2e8102e54c081c2df8ab2c0878bce296945645985e8b7",
+          "previous_entry_hash": "7e190f2149b03fce84284fc2350fbc50887a7542462eda62b057e67bd2e3419a",
+          "entry_hash": "88d8c879093fba65b4714f49167c83f2e10bb8f8024c0aa6a896c3cee2d070aa"
+        }
+      ],
+      "final_state": {
+        "schema_version": "0.1.0",
+        "ruleset_id": "smalltown-v0.1",
+        "setting_id": "smalltown",
+        "revision": 3,
+        "day": 30,
+        "player_id": "p",
+        "persons": {
+          "p": {
+            "id": "p",
+            "name": "林禾",
+            "birth_day": -8760,
+            "alive": true,
+            "death_day": null,
+            "location": "town",
+            "cash": 600,
+            "energy": 70,
+            "health": 80,
+            "stress": 35,
+            "housing_reserve": 500,
+            "knowledge": {
+              "shared_walk": -365
+            }
+          },
+          "f": {
+            "id": "f",
+            "name": "周远",
+            "birth_day": -8760,
+            "alive": true,
+            "death_day": null,
+            "location": "town",
+            "cash": 50,
+            "energy": 65,
+            "health": 75,
+            "stress": 60,
+            "housing_reserve": 450,
+            "repayment_willing": true,
+            "knowledge": {
+              "shared_walk": -365
+            }
+          },
+          "m": {
+            "id": "m",
+            "name": "许岚",
+            "birth_day": -17520,
+            "alive": true,
+            "death_day": null,
+            "location": "town",
+            "cash": 800,
+            "energy": 60,
+            "health": 70,
+            "stress": 30,
+            "housing_reserve": 500,
+            "knowledge": {}
+          }
+        },
+        "relationships": [
+          {
+            "from": "p",
+            "to": "f",
+            "kind": "friend",
+            "trust": 55,
+            "closeness": 65
+          },
+          {
+            "from": "f",
+            "to": "p",
+            "kind": "friend",
+            "trust": 60,
+            "closeness": 65
+          },
+          {
+            "from": "p",
+            "to": "m",
+            "kind": "parent",
+            "trust": 75,
+            "closeness": 80
+          },
+          {
+            "from": "m",
+            "to": "p",
+            "kind": "child",
+            "trust": 75,
+            "closeness": 80
+          }
+        ],
+        "facts": {
+          "friend_request_open": false,
+          "friend_request_person": "f",
+          "letter_handled": false,
+          "letter_read": false
+        },
+        "historical_facts": {
+          "shared_walk": {
+            "day": -365,
+            "summary": "林禾与周远曾一起沿河散步。",
+            "participants": [
+              "p",
+              "f"
+            ]
+          }
+        },
+        "artifacts": {
+          "letter_f": {
+            "author": "f",
+            "created_day": -1,
+            "fact_ids": [
+              "shared_walk"
+            ],
+            "text": "我还记得我们沿河散步的那个傍晚。谢谢你愿意听我说话。"
+          }
+        },
+        "loans": {
+          "loan-1-1": {
+            "id": "loan-1-1",
+            "creditor": "p",
+            "debtor": "f",
+            "amount": 100,
+            "created_day": 0,
+            "due_day": 30,
+            "status": "repaid"
+          }
+        },
+        "tasks": [
+          {
+            "id": "task-loan-1-1",
+            "event_id": "friend.loan_due",
+            "loan_id": "loan-1-1",
+            "due_day": 30,
+            "bindings": {
+              "player": "p",
+              "friend": "f"
+            },
+            "requires_alive": [
+              "p",
+              "f"
+            ],
+            "status": "resolved",
+            "cancellation_reason": null
+          }
+        ]
+      },
+      "observations": [
+        {
+          "dimension_id": "care",
+          "behavior": "partial_material_support",
+          "strength": "limited",
+          "evidence_id": "decision-1",
+          "event_id": "friend.loan_request",
+          "context_tags": [
+            "adult",
+            "friend",
+            "financial_pressure"
+          ],
+          "resources_before": {
+            "cash": 600,
+            "energy": 70,
+            "health": 80,
+            "stress": 35,
+            "housing_reserve": 500
+          },
+          "cash_cost": 100,
+          "locked_options": []
+        },
+        {
+          "dimension_id": "risk_taking",
+          "behavior": "limit_financial_exposure",
+          "strength": "limited",
+          "evidence_id": "decision-1",
+          "event_id": "friend.loan_request",
+          "context_tags": [
+            "adult",
+            "friend",
+            "financial_pressure"
+          ],
+          "resources_before": {
+            "cash": 600,
+            "energy": 70,
+            "health": 80,
+            "stress": 35,
+            "housing_reserve": 500
+          },
+          "cash_cost": 100,
+          "locked_options": []
+        }
+      ]
+    },
+    {
+      "title": "借款后朋友去世，原还款计划取消",
+      "initial_state": {
+        "schema_version": "0.1.0",
+        "ruleset_id": "smalltown-v0.1",
+        "setting_id": "smalltown",
+        "revision": 0,
+        "day": 0,
+        "player_id": "p",
+        "persons": {
+          "p": {
+            "id": "p",
+            "name": "林禾",
+            "birth_day": -8760,
+            "alive": true,
+            "death_day": null,
+            "location": "town",
+            "cash": 600,
+            "energy": 70,
+            "health": 80,
+            "stress": 35,
+            "housing_reserve": 500,
+            "knowledge": {
+              "shared_walk": -365
+            }
+          },
+          "f": {
+            "id": "f",
+            "name": "周远",
+            "birth_day": -8760,
+            "alive": true,
+            "death_day": null,
+            "location": "town",
+            "cash": 50,
+            "energy": 65,
+            "health": 75,
+            "stress": 60,
+            "housing_reserve": 450,
+            "repayment_willing": true,
+            "knowledge": {
+              "shared_walk": -365
+            }
+          },
+          "m": {
+            "id": "m",
+            "name": "许岚",
+            "birth_day": -17520,
+            "alive": true,
+            "death_day": null,
+            "location": "town",
+            "cash": 800,
+            "energy": 60,
+            "health": 70,
+            "stress": 30,
+            "housing_reserve": 500,
+            "knowledge": {}
+          }
+        },
+        "relationships": [
+          {
+            "from": "p",
+            "to": "f",
+            "kind": "friend",
+            "trust": 55,
+            "closeness": 65
+          },
+          {
+            "from": "f",
+            "to": "p",
+            "kind": "friend",
+            "trust": 60,
+            "closeness": 65
+          },
+          {
+            "from": "p",
+            "to": "m",
+            "kind": "parent",
+            "trust": 75,
+            "closeness": 80
+          },
+          {
+            "from": "m",
+            "to": "p",
+            "kind": "child",
+            "trust": 75,
+            "closeness": 80
+          }
+        ],
+        "facts": {
+          "friend_request_open": true,
+          "friend_request_person": "f",
+          "letter_handled": false,
+          "letter_read": false
+        },
+        "historical_facts": {
+          "shared_walk": {
+            "day": -365,
+            "summary": "林禾与周远曾一起沿河散步。",
+            "participants": [
+              "p",
+              "f"
+            ]
+          }
+        },
+        "artifacts": {
+          "letter_f": {
+            "author": "f",
+            "created_day": -1,
+            "fact_ids": [
+              "shared_walk"
+            ],
+            "text": "我还记得我们沿河散步的那个傍晚。谢谢你愿意听我说话。"
+          }
+        },
+        "loans": {},
+        "tasks": []
+      },
+      "catalog_hash": "b4ca80c8b999f17f59c591847f6b804a481d46c5fd765fccdcbf2965a78a4c2f",
+      "catalog_snapshot": {
+        "schema_version": "0.1.0",
+        "ruleset_id": "smalltown-v0.1",
+        "events": [
+          {
+            "id": "friend.loan_request",
+            "version": 1,
+            "title": "朋友的请求",
+            "setting_id": "smalltown",
+            "trigger": "ambient",
+            "age_range": [
+              18,
+              80
+            ],
+            "actors": {
+              "friend": {
+                "relation": "friend",
+                "alive": true,
+                "same_location": true
+              }
+            },
+            "preconditions": [
+              {
+                "path": "facts.friend_request_open",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "facts.friend_request_person",
+                "op": "eq",
+                "value": {
+                  "ref": "friend.id"
+                }
+              },
+              {
+                "path": "friend.cash",
+                "op": "lte",
+                "value": {
+                  "ref": "friend.housing_reserve"
+                }
+              }
+            ],
+            "description": "{friend.name}请求借400元周转。你现在有{player.cash}元，计划保留{player.housing_reserve}元用于住处；这只是本原型中的预算目标，尚未模拟实际租金支出。",
+            "context_tags": [
+              "adult",
+              "friend",
+              "financial_pressure"
+            ],
+            "choices": [
+              {
+                "id": "lend_full",
+                "label": "借出400元",
+                "requirements": [
+                  {
+                    "path": "player.cash",
+                    "op": "gte",
+                    "value": 400
+                  }
+                ],
+                "effects": [
+                  {
+                    "op": "transfer",
+                    "from": "player",
+                    "to": "friend",
+                    "amount": 400
+                  },
+                  {
+                    "op": "create_loan",
+                    "creditor": "player",
+                    "debtor": "friend",
+                    "amount": 400,
+                    "due_in_days": 30
+                  },
+                  {
+                    "op": "adjust_relation",
+                    "from": "friend",
+                    "to": "player",
+                    "field": "trust",
+                    "delta": 4
+                  },
+                  {
+                    "op": "set_fact",
+                    "key": "friend_request_open",
+                    "value": false
+                  }
+                ],
+                "evidence": [
+                  {
+                    "dimension_id": "care",
+                    "behavior": "material_support",
+                    "strength": "limited"
+                  },
+                  {
+                    "dimension_id": "risk_taking",
+                    "behavior": "accept_financial_exposure",
+                    "strength": "limited"
+                  }
+                ]
+              },
+              {
+                "id": "lend_partial",
+                "label": "借出100元，并说明自己的预算",
+                "requirements": [
+                  {
+                    "path": "player.cash",
+                    "op": "gte",
+                    "value": 100
+                  }
+                ],
+                "effects": [
+                  {
+                    "op": "transfer",
+                    "from": "player",
+                    "to": "friend",
+                    "amount": 100
+                  },
+                  {
+                    "op": "create_loan",
+                    "creditor": "player",
+                    "debtor": "friend",
+                    "amount": 100,
+                    "due_in_days": 30
+                  },
+                  {
+                    "op": "set_fact",
+                    "key": "friend_request_open",
+                    "value": false
+                  }
+                ],
+                "evidence": [
+                  {
+                    "dimension_id": "care",
+                    "behavior": "partial_material_support",
+                    "strength": "limited"
+                  },
+                  {
+                    "dimension_id": "risk_taking",
+                    "behavior": "limit_financial_exposure",
+                    "strength": "limited"
+                  }
+                ]
+              },
+              {
+                "id": "help_search",
+                "label": "花时间一起寻找其他办法",
+                "requirements": [
+                  {
+                    "path": "player.energy",
+                    "op": "gte",
+                    "value": 10
+                  }
+                ],
+                "effects": [
+                  {
+                    "op": "adjust",
+                    "actor": "player",
+                    "field": "energy",
+                    "delta": -10
+                  },
+                  {
+                    "op": "set_fact",
+                    "key": "alternative_help_attempted",
+                    "value": true
+                  },
+                  {
+                    "op": "set_fact",
+                    "key": "friend_request_open",
+                    "value": false
+                  }
+                ],
+                "evidence": [
+                  {
+                    "dimension_id": "care",
+                    "behavior": "practical_support_attempt",
+                    "strength": "limited"
+                  }
+                ]
+              },
+              {
+                "id": "decline",
+                "label": "说明目前无法借钱",
+                "requirements": [],
+                "effects": [
+                  {
+                    "op": "set_fact",
+                    "key": "friend_request_open",
+                    "value": false
+                  }
+                ],
+                "evidence": [
+                  {
+                    "dimension_id": "care",
+                    "behavior": "declined_this_request",
+                    "strength": "ambiguous"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "friend.loan_due",
+            "version": 1,
+            "title": "约定的还款日",
+            "setting_id": "smalltown",
+            "trigger": "scheduled",
+            "age_range": [
+              0,
+              120
+            ],
+            "actors": {
+              "friend": {
+                "relation": "friend",
+                "alive": true,
+                "same_location": false
+              }
+            },
+            "preconditions": [
+              {
+                "path": "loan.status",
+                "op": "eq",
+                "value": "outstanding"
+              }
+            ],
+            "description": "{friend.name}的{loan.amount}元借款已经到期。只有对方仍健在、愿意履约且拥有足够资金，按约还款才可执行；你也可以延长期限或暂时结束催促。",
+            "context_tags": [
+              "friend",
+              "existing_promise"
+            ],
+            "choices": [
+              {
+                "id": "accept_repayment",
+                "label": "接受对方按约还款",
+                "requirements": [
+                  {
+                    "path": "friend.repayment_willing",
+                    "op": "eq",
+                    "value": true
+                  },
+                  {
+                    "path": "friend.cash",
+                    "op": "gte",
+                    "value": {
+                      "ref": "loan.amount"
+                    }
+                  }
+                ],
+                "effects": [
+                  {
+                    "op": "settle_loan"
+                  }
+                ],
+                "evidence": []
+              },
+              {
+                "id": "extend",
+                "label": "同意再等7天",
+                "requirements": [],
+                "effects": [
+                  {
+                    "op": "reschedule_loan",
+                    "days": 7
+                  }
+                ],
+                "evidence": [
+                  {
+                    "dimension_id": "conflict_style",
+                    "behavior": "negotiated_extension",
+                    "strength": "limited"
+                  }
+                ]
+              },
+              {
+                "id": "leave_claim",
+                "label": "暂时结束催促，保留债权记录",
+                "requirements": [],
+                "effects": [],
+                "evidence": [
+                  {
+                    "dimension_id": "conflict_style",
+                    "behavior": "deferred_confrontation",
+                    "strength": "ambiguous"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "friend.old_letter",
+            "version": 1,
+            "title": "留下的信",
+            "setting_id": "smalltown",
+            "trigger": "ambient",
+            "age_range": [
+              0,
+              120
+            ],
+            "actors": {
+              "friend": {
+                "relation": "friend",
+                "alive": false,
+                "same_location": false
+              }
+            },
+            "preconditions": [
+              {
+                "path": "artifacts.letter_f.author",
+                "op": "eq",
+                "value": {
+                  "ref": "friend.id"
+                }
+              },
+              {
+                "path": "facts.letter_handled",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "description": "{friend.name}生前留下的信已经存在于世界记录中。信里只引用他写信时已知的一次共同经历。",
+            "context_tags": [
+              "friend",
+              "bereavement"
+            ],
+            "choices": [
+              {
+                "id": "read",
+                "label": "读完并收好这封信",
+                "requirements": [],
+                "effects": [
+                  {
+                    "op": "set_fact",
+                    "key": "letter_read",
+                    "value": true
+                  },
+                  {
+                    "op": "set_fact",
+                    "key": "letter_handled",
+                    "value": true
+                  }
+                ],
+                "evidence": []
+              },
+              {
+                "id": "keep",
+                "label": "先收好，暂时不读",
+                "requirements": [],
+                "effects": [
+                  {
+                    "op": "set_fact",
+                    "key": "letter_handled",
+                    "value": true
+                  }
+                ],
+                "evidence": []
+              }
+            ]
+          }
+        ]
+      },
+      "log": [
+        {
+          "sequence": 1,
+          "kind": "choice",
+          "day": 0,
+          "before_hash": "7f24de72542d1527ea2440e653f15944b933cfea3c0f78ec50eb8b6dc2acd06f",
+          "payload": {
+            "event_id": "friend.loan_request",
+            "event_version": 1,
+            "choice_id": "lend_full",
+            "choice_label": "借出400元",
+            "bindings": {
+              "player": "p",
+              "friend": "f"
+            },
+            "task_id": null,
+            "options": [
+              {
+                "id": "lend_full",
+                "label": "借出400元",
+                "available": true,
+                "locked_reason": null
+              },
+              {
+                "id": "lend_partial",
+                "label": "借出100元，并说明自己的预算",
+                "available": true,
+                "locked_reason": null
+              },
+              {
+                "id": "help_search",
+                "label": "花时间一起寻找其他办法",
+                "available": true,
+                "locked_reason": null
+              },
+              {
+                "id": "decline",
+                "label": "说明目前无法借钱",
+                "available": true,
+                "locked_reason": null
+              }
+            ],
+            "opportunity": true,
+            "context_tags": [
+              "adult",
+              "friend",
+              "financial_pressure"
+            ],
+            "age": 24,
+            "resources_before": {
+              "cash": 600,
+              "energy": 70,
+              "health": 80,
+              "stress": 35,
+              "housing_reserve": 500
+            },
+            "player_knowledge": {
+              "shared_walk": -365
+            },
+            "presented_facts": "周远请求借400元周转。你现在有600元，计划保留500元用于住处；这只是本原型中的预算目标，尚未模拟实际租金支出。",
+            "cash_cost": 400,
+            "cash_cost_share": 0.6666666666666666,
+            "below_housing_reserve_after": true,
+            "observations": [
+              {
+                "dimension_id": "care",
+                "behavior": "material_support",
+                "strength": "limited"
+              },
+              {
+                "dimension_id": "risk_taking",
+                "behavior": "accept_financial_exposure",
+                "strength": "limited"
+              }
+            ]
+          },
+          "state_after": {
+            "schema_version": "0.1.0",
+            "ruleset_id": "smalltown-v0.1",
+            "setting_id": "smalltown",
+            "revision": 1,
+            "day": 0,
+            "player_id": "p",
+            "persons": {
+              "p": {
+                "id": "p",
+                "name": "林禾",
+                "birth_day": -8760,
+                "alive": true,
+                "death_day": null,
+                "location": "town",
+                "cash": 200,
+                "energy": 70,
+                "health": 80,
+                "stress": 35,
+                "housing_reserve": 500,
+                "knowledge": {
+                  "shared_walk": -365
+                }
+              },
+              "f": {
+                "id": "f",
+                "name": "周远",
+                "birth_day": -8760,
+                "alive": true,
+                "death_day": null,
+                "location": "town",
+                "cash": 450,
+                "energy": 65,
+                "health": 75,
+                "stress": 60,
+                "housing_reserve": 450,
+                "repayment_willing": true,
+                "knowledge": {
+                  "shared_walk": -365
+                }
+              },
+              "m": {
+                "id": "m",
+                "name": "许岚",
+                "birth_day": -17520,
+                "alive": true,
+                "death_day": null,
+                "location": "town",
+                "cash": 800,
+                "energy": 60,
+                "health": 70,
+                "stress": 30,
+                "housing_reserve": 500,
+                "knowledge": {}
+              }
+            },
+            "relationships": [
+              {
+                "from": "p",
+                "to": "f",
+                "kind": "friend",
+                "trust": 55,
+                "closeness": 65
+              },
+              {
+                "from": "f",
+                "to": "p",
+                "kind": "friend",
+                "trust": 64,
+                "closeness": 65
+              },
+              {
+                "from": "p",
+                "to": "m",
+                "kind": "parent",
+                "trust": 75,
+                "closeness": 80
+              },
+              {
+                "from": "m",
+                "to": "p",
+                "kind": "child",
+                "trust": 75,
+                "closeness": 80
+              }
+            ],
+            "facts": {
+              "friend_request_open": false,
+              "friend_request_person": "f",
+              "letter_handled": false,
+              "letter_read": false
+            },
+            "historical_facts": {
+              "shared_walk": {
+                "day": -365,
+                "summary": "林禾与周远曾一起沿河散步。",
+                "participants": [
+                  "p",
+                  "f"
+                ]
+              }
+            },
+            "artifacts": {
+              "letter_f": {
+                "author": "f",
+                "created_day": -1,
+                "fact_ids": [
+                  "shared_walk"
+                ],
+                "text": "我还记得我们沿河散步的那个傍晚。谢谢你愿意听我说话。"
+              }
+            },
+            "loans": {
+              "loan-1-1": {
+                "id": "loan-1-1",
+                "creditor": "p",
+                "debtor": "f",
+                "amount": 400,
+                "created_day": 0,
+                "due_day": 30,
+                "status": "outstanding"
+              }
+            },
+            "tasks": [
+              {
+                "id": "task-loan-1-1",
+                "event_id": "friend.loan_due",
+                "loan_id": "loan-1-1",
+                "due_day": 30,
+                "bindings": {
+                  "player": "p",
+                  "friend": "f"
+                },
+                "requires_alive": [
+                  "p",
+                  "f"
+                ],
+                "status": "pending",
+                "cancellation_reason": null
+              }
+            ]
+          },
+          "after_hash": "00165e003a880c54844ce18288e91a6b158404283bc7240a1d7f0e2049955bb8",
+          "previous_entry_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "entry_hash": "9498458efa787160f08b79f41a7e6daf2716f221763036a015dee3ccea1f9a6b"
+        },
+        {
+          "sequence": 2,
+          "kind": "time_advanced",
+          "day": 5,
+          "before_hash": "00165e003a880c54844ce18288e91a6b158404283bc7240a1d7f0e2049955bb8",
+          "payload": {
+            "requested_days": 5,
+            "elapsed_days": 5,
+            "cancelled_tasks": []
+          },
+          "state_after": {
+            "schema_version": "0.1.0",
+            "ruleset_id": "smalltown-v0.1",
+            "setting_id": "smalltown",
+            "revision": 2,
+            "day": 5,
+            "player_id": "p",
+            "persons": {
+              "p": {
+                "id": "p",
+                "name": "林禾",
+                "birth_day": -8760,
+                "alive": true,
+                "death_day": null,
+                "location": "town",
+                "cash": 200,
+                "energy": 70,
+                "health": 80,
+                "stress": 35,
+                "housing_reserve": 500,
+                "knowledge": {
+                  "shared_walk": -365
+                }
+              },
+              "f": {
+                "id": "f",
+                "name": "周远",
+                "birth_day": -8760,
+                "alive": true,
+                "death_day": null,
+                "location": "town",
+                "cash": 450,
+                "energy": 65,
+                "health": 75,
+                "stress": 60,
+                "housing_reserve": 450,
+                "repayment_willing": true,
+                "knowledge": {
+                  "shared_walk": -365
+                }
+              },
+              "m": {
+                "id": "m",
+                "name": "许岚",
+                "birth_day": -17520,
+                "alive": true,
+                "death_day": null,
+                "location": "town",
+                "cash": 800,
+                "energy": 60,
+                "health": 70,
+                "stress": 30,
+                "housing_reserve": 500,
+                "knowledge": {}
+              }
+            },
+            "relationships": [
+              {
+                "from": "p",
+                "to": "f",
+                "kind": "friend",
+                "trust": 55,
+                "closeness": 65
+              },
+              {
+                "from": "f",
+                "to": "p",
+                "kind": "friend",
+                "trust": 64,
+                "closeness": 65
+              },
+              {
+                "from": "p",
+                "to": "m",
+                "kind": "parent",
+                "trust": 75,
+                "closeness": 80
+              },
+              {
+                "from": "m",
+                "to": "p",
+                "kind": "child",
+                "trust": 75,
+                "closeness": 80
+              }
+            ],
+            "facts": {
+              "friend_request_open": false,
+              "friend_request_person": "f",
+              "letter_handled": false,
+              "letter_read": false
+            },
+            "historical_facts": {
+              "shared_walk": {
+                "day": -365,
+                "summary": "林禾与周远曾一起沿河散步。",
+                "participants": [
+                  "p",
+                  "f"
+                ]
+              }
+            },
+            "artifacts": {
+              "letter_f": {
+                "author": "f",
+                "created_day": -1,
+                "fact_ids": [
+                  "shared_walk"
+                ],
+                "text": "我还记得我们沿河散步的那个傍晚。谢谢你愿意听我说话。"
+              }
+            },
+            "loans": {
+              "loan-1-1": {
+                "id": "loan-1-1",
+                "creditor": "p",
+                "debtor": "f",
+                "amount": 400,
+                "created_day": 0,
+                "due_day": 30,
+                "status": "outstanding"
+              }
+            },
+            "tasks": [
+              {
+                "id": "task-loan-1-1",
+                "event_id": "friend.loan_due",
+                "loan_id": "loan-1-1",
+                "due_day": 30,
+                "bindings": {
+                  "player": "p",
+                  "friend": "f"
+                },
+                "requires_alive": [
+                  "p",
+                  "f"
+                ],
+                "status": "pending",
+                "cancellation_reason": null
+              }
+            ]
+          },
+          "after_hash": "130708aa8300d4f88b8c75cdacecc11b0ce2410975fc38da4fc840967134a506",
+          "previous_entry_hash": "9498458efa787160f08b79f41a7e6daf2716f221763036a015dee3ccea1f9a6b",
+          "entry_hash": "a931a34f1aad18cbeaad8ec45995c66d47090dfe5b41abff965298287eb28f36"
+        },
+        {
+          "sequence": 3,
+          "kind": "person_died",
+          "day": 5,
+          "before_hash": "130708aa8300d4f88b8c75cdacecc11b0ce2410975fc38da4fc840967134a506",
+          "payload": {
+            "person_id": "f",
+            "cause": "独立于借款选择的演示系统事件；用于检查死亡边界"
+          },
+          "state_after": {
+            "schema_version": "0.1.0",
+            "ruleset_id": "smalltown-v0.1",
+            "setting_id": "smalltown",
+            "revision": 3,
+            "day": 5,
+            "player_id": "p",
+            "persons": {
+              "p": {
+                "id": "p",
+                "name": "林禾",
+                "birth_day": -8760,
+                "alive": true,
+                "death_day": null,
+                "location": "town",
+                "cash": 200,
+                "energy": 70,
+                "health": 80,
+                "stress": 35,
+                "housing_reserve": 500,
+                "knowledge": {
+                  "shared_walk": -365
+                }
+              },
+              "f": {
+                "id": "f",
+                "name": "周远",
+                "birth_day": -8760,
+                "alive": false,
+                "death_day": 5,
+                "location": "town",
+                "cash": 450,
+                "energy": 65,
+                "health": 0,
+                "stress": 60,
+                "housing_reserve": 450,
+                "repayment_willing": true,
+                "knowledge": {
+                  "shared_walk": -365
+                }
+              },
+              "m": {
+                "id": "m",
+                "name": "许岚",
+                "birth_day": -17520,
+                "alive": true,
+                "death_day": null,
+                "location": "town",
+                "cash": 800,
+                "energy": 60,
+                "health": 70,
+                "stress": 30,
+                "housing_reserve": 500,
+                "knowledge": {}
+              }
+            },
+            "relationships": [
+              {
+                "from": "p",
+                "to": "f",
+                "kind": "friend",
+                "trust": 55,
+                "closeness": 65
+              },
+              {
+                "from": "f",
+                "to": "p",
+                "kind": "friend",
+                "trust": 64,
+                "closeness": 65
+              },
+              {
+                "from": "p",
+                "to": "m",
+                "kind": "parent",
+                "trust": 75,
+                "closeness": 80
+              },
+              {
+                "from": "m",
+                "to": "p",
+                "kind": "child",
+                "trust": 75,
+                "closeness": 80
+              }
+            ],
+            "facts": {
+              "friend_request_open": false,
+              "friend_request_person": "f",
+              "letter_handled": false,
+              "letter_read": false
+            },
+            "historical_facts": {
+              "shared_walk": {
+                "day": -365,
+                "summary": "林禾与周远曾一起沿河散步。",
+                "participants": [
+                  "p",
+                  "f"
+                ]
+              }
+            },
+            "artifacts": {
+              "letter_f": {
+                "author": "f",
+                "created_day": -1,
+                "fact_ids": [
+                  "shared_walk"
+                ],
+                "text": "我还记得我们沿河散步的那个傍晚。谢谢你愿意听我说话。"
+              }
+            },
+            "loans": {
+              "loan-1-1": {
+                "id": "loan-1-1",
+                "creditor": "p",
+                "debtor": "f",
+                "amount": 400,
+                "created_day": 0,
+                "due_day": 30,
+                "status": "deceased_pending"
+              }
+            },
+            "tasks": [
+              {
+                "id": "task-loan-1-1",
+                "event_id": "friend.loan_due",
+                "loan_id": "loan-1-1",
+                "due_day": 30,
+                "bindings": {
+                  "player": "p",
+                  "friend": "f"
+                },
+                "requires_alive": [
+                  "p",
+                  "f"
+                ],
+                "status": "cancelled",
+                "cancellation_reason": "required_actor_died:f"
+              }
+            ]
+          },
+          "after_hash": "22ceec0abf8b73eef1bfc3755bf916a054e19ad9dce0972015834a2d33827597",
+          "previous_entry_hash": "a931a34f1aad18cbeaad8ec45995c66d47090dfe5b41abff965298287eb28f36",
+          "entry_hash": "e1b0b2d69575e5754df9d75b607685627aa5638a1008a8a508dbdbdda8c9e687"
+        },
+        {
+          "sequence": 4,
+          "kind": "choice",
+          "day": 5,
+          "before_hash": "22ceec0abf8b73eef1bfc3755bf916a054e19ad9dce0972015834a2d33827597",
+          "payload": {
+            "event_id": "friend.old_letter",
+            "event_version": 1,
+            "choice_id": "read",
+            "choice_label": "读完并收好这封信",
+            "bindings": {
+              "player": "p",
+              "friend": "f"
+            },
+            "task_id": null,
+            "options": [
+              {
+                "id": "read",
+                "label": "读完并收好这封信",
+                "available": true,
+                "locked_reason": null
+              },
+              {
+                "id": "keep",
+                "label": "先收好，暂时不读",
+                "available": true,
+                "locked_reason": null
+              }
+            ],
+            "opportunity": true,
+            "context_tags": [
+              "friend",
+              "bereavement"
+            ],
+            "age": 24,
+            "resources_before": {
+              "cash": 200,
+              "energy": 70,
+              "health": 80,
+              "stress": 35,
+              "housing_reserve": 500
+            },
+            "player_knowledge": {
+              "shared_walk": -365
+            },
+            "presented_facts": "周远生前留下的信已经存在于世界记录中。信里只引用他写信时已知的一次共同经历。",
+            "cash_cost": 0,
+            "cash_cost_share": 0.0,
+            "below_housing_reserve_after": true,
+            "observations": []
+          },
+          "state_after": {
+            "schema_version": "0.1.0",
+            "ruleset_id": "smalltown-v0.1",
+            "setting_id": "smalltown",
+            "revision": 4,
+            "day": 5,
+            "player_id": "p",
+            "persons": {
+              "p": {
+                "id": "p",
+                "name": "林禾",
+                "birth_day": -8760,
+                "alive": true,
+                "death_day": null,
+                "location": "town",
+                "cash": 200,
+                "energy": 70,
+                "health": 80,
+                "stress": 35,
+                "housing_reserve": 500,
+                "knowledge": {
+                  "shared_walk": -365
+                }
+              },
+              "f": {
+                "id": "f",
+                "name": "周远",
+                "birth_day": -8760,
+                "alive": false,
+                "death_day": 5,
+                "location": "town",
+                "cash": 450,
+                "energy": 65,
+                "health": 0,
+                "stress": 60,
+                "housing_reserve": 450,
+                "repayment_willing": true,
+                "knowledge": {
+                  "shared_walk": -365
+                }
+              },
+              "m": {
+                "id": "m",
+                "name": "许岚",
+                "birth_day": -17520,
+                "alive": true,
+                "death_day": null,
+                "location": "town",
+                "cash": 800,
+                "energy": 60,
+                "health": 70,
+                "stress": 30,
+                "housing_reserve": 500,
+                "knowledge": {}
+              }
+            },
+            "relationships": [
+              {
+                "from": "p",
+                "to": "f",
+                "kind": "friend",
+                "trust": 55,
+                "closeness": 65
+              },
+              {
+                "from": "f",
+                "to": "p",
+                "kind": "friend",
+                "trust": 64,
+                "closeness": 65
+              },
+              {
+                "from": "p",
+                "to": "m",
+                "kind": "parent",
+                "trust": 75,
+                "closeness": 80
+              },
+              {
+                "from": "m",
+                "to": "p",
+                "kind": "child",
+                "trust": 75,
+                "closeness": 80
+              }
+            ],
+            "facts": {
+              "friend_request_open": false,
+              "friend_request_person": "f",
+              "letter_handled": true,
+              "letter_read": true
+            },
+            "historical_facts": {
+              "shared_walk": {
+                "day": -365,
+                "summary": "林禾与周远曾一起沿河散步。",
+                "participants": [
+                  "p",
+                  "f"
+                ]
+              }
+            },
+            "artifacts": {
+              "letter_f": {
+                "author": "f",
+                "created_day": -1,
+                "fact_ids": [
+                  "shared_walk"
+                ],
+                "text": "我还记得我们沿河散步的那个傍晚。谢谢你愿意听我说话。"
+              }
+            },
+            "loans": {
+              "loan-1-1": {
+                "id": "loan-1-1",
+                "creditor": "p",
+                "debtor": "f",
+                "amount": 400,
+                "created_day": 0,
+                "due_day": 30,
+                "status": "deceased_pending"
+              }
+            },
+            "tasks": [
+              {
+                "id": "task-loan-1-1",
+                "event_id": "friend.loan_due",
+                "loan_id": "loan-1-1",
+                "due_day": 30,
+                "bindings": {
+                  "player": "p",
+                  "friend": "f"
+                },
+                "requires_alive": [
+                  "p",
+                  "f"
+                ],
+                "status": "cancelled",
+                "cancellation_reason": "required_actor_died:f"
+              }
+            ]
+          },
+          "after_hash": "c38c71d3e346f154cf1758a9d1932754ccda6c4446841d343faf1c4379cda918",
+          "previous_entry_hash": "e1b0b2d69575e5754df9d75b607685627aa5638a1008a8a508dbdbdda8c9e687",
+          "entry_hash": "ad7f57141b5c8e15d739283772fd1d45e9485155a952ba4e5810d1c9918338d5"
+        },
+        {
+          "sequence": 5,
+          "kind": "time_advanced",
+          "day": 65,
+          "before_hash": "c38c71d3e346f154cf1758a9d1932754ccda6c4446841d343faf1c4379cda918",
+          "payload": {
+            "requested_days": 60,
+            "elapsed_days": 60,
+            "cancelled_tasks": []
+          },
+          "state_after": {
+            "schema_version": "0.1.0",
+            "ruleset_id": "smalltown-v0.1",
+            "setting_id": "smalltown",
+            "revision": 5,
+            "day": 65,
+            "player_id": "p",
+            "persons": {
+              "p": {
+                "id": "p",
+                "name": "林禾",
+                "birth_day": -8760,
+                "alive": true,
+                "death_day": null,
+                "location": "town",
+                "cash": 200,
+                "energy": 70,
+                "health": 80,
+                "stress": 35,
+                "housing_reserve": 500,
+                "knowledge": {
+                  "shared_walk": -365
+                }
+              },
+              "f": {
+                "id": "f",
+                "name": "周远",
+                "birth_day": -8760,
+                "alive": false,
+                "death_day": 5,
+                "location": "town",
+                "cash": 450,
+                "energy": 65,
+                "health": 0,
+                "stress": 60,
+                "housing_reserve": 450,
+                "repayment_willing": true,
+                "knowledge": {
+                  "shared_walk": -365
+                }
+              },
+              "m": {
+                "id": "m",
+                "name": "许岚",
+                "birth_day": -17520,
+                "alive": true,
+                "death_day": null,
+                "location": "town",
+                "cash": 800,
+                "energy": 60,
+                "health": 70,
+                "stress": 30,
+                "housing_reserve": 500,
+                "knowledge": {}
+              }
+            },
+            "relationships": [
+              {
+                "from": "p",
+                "to": "f",
+                "kind": "friend",
+                "trust": 55,
+                "closeness": 65
+              },
+              {
+                "from": "f",
+                "to": "p",
+                "kind": "friend",
+                "trust": 64,
+                "closeness": 65
+              },
+              {
+                "from": "p",
+                "to": "m",
+                "kind": "parent",
+                "trust": 75,
+                "closeness": 80
+              },
+              {
+                "from": "m",
+                "to": "p",
+                "kind": "child",
+                "trust": 75,
+                "closeness": 80
+              }
+            ],
+            "facts": {
+              "friend_request_open": false,
+              "friend_request_person": "f",
+              "letter_handled": true,
+              "letter_read": true
+            },
+            "historical_facts": {
+              "shared_walk": {
+                "day": -365,
+                "summary": "林禾与周远曾一起沿河散步。",
+                "participants": [
+                  "p",
+                  "f"
+                ]
+              }
+            },
+            "artifacts": {
+              "letter_f": {
+                "author": "f",
+                "created_day": -1,
+                "fact_ids": [
+                  "shared_walk"
+                ],
+                "text": "我还记得我们沿河散步的那个傍晚。谢谢你愿意听我说话。"
+              }
+            },
+            "loans": {
+              "loan-1-1": {
+                "id": "loan-1-1",
+                "creditor": "p",
+                "debtor": "f",
+                "amount": 400,
+                "created_day": 0,
+                "due_day": 30,
+                "status": "deceased_pending"
+              }
+            },
+            "tasks": [
+              {
+                "id": "task-loan-1-1",
+                "event_id": "friend.loan_due",
+                "loan_id": "loan-1-1",
+                "due_day": 30,
+                "bindings": {
+                  "player": "p",
+                  "friend": "f"
+                },
+                "requires_alive": [
+                  "p",
+                  "f"
+                ],
+                "status": "cancelled",
+                "cancellation_reason": "required_actor_died:f"
+              }
+            ]
+          },
+          "after_hash": "c5fef287b80663feaa69663639113171ab74c347b158237cf832a20938e25b65",
+          "previous_entry_hash": "ad7f57141b5c8e15d739283772fd1d45e9485155a952ba4e5810d1c9918338d5",
+          "entry_hash": "ad5444b4e556be1339d74692c6cab17a7a07ce326fd0b80e77db86bea7050d2b"
+        }
+      ],
+      "final_state": {
+        "schema_version": "0.1.0",
+        "ruleset_id": "smalltown-v0.1",
+        "setting_id": "smalltown",
+        "revision": 5,
+        "day": 65,
+        "player_id": "p",
+        "persons": {
+          "p": {
+            "id": "p",
+            "name": "林禾",
+            "birth_day": -8760,
+            "alive": true,
+            "death_day": null,
+            "location": "town",
+            "cash": 200,
+            "energy": 70,
+            "health": 80,
+            "stress": 35,
+            "housing_reserve": 500,
+            "knowledge": {
+              "shared_walk": -365
+            }
+          },
+          "f": {
+            "id": "f",
+            "name": "周远",
+            "birth_day": -8760,
+            "alive": false,
+            "death_day": 5,
+            "location": "town",
+            "cash": 450,
+            "energy": 65,
+            "health": 0,
+            "stress": 60,
+            "housing_reserve": 450,
+            "repayment_willing": true,
+            "knowledge": {
+              "shared_walk": -365
+            }
+          },
+          "m": {
+            "id": "m",
+            "name": "许岚",
+            "birth_day": -17520,
+            "alive": true,
+            "death_day": null,
+            "location": "town",
+            "cash": 800,
+            "energy": 60,
+            "health": 70,
+            "stress": 30,
+            "housing_reserve": 500,
+            "knowledge": {}
+          }
+        },
+        "relationships": [
+          {
+            "from": "p",
+            "to": "f",
+            "kind": "friend",
+            "trust": 55,
+            "closeness": 65
+          },
+          {
+            "from": "f",
+            "to": "p",
+            "kind": "friend",
+            "trust": 64,
+            "closeness": 65
+          },
+          {
+            "from": "p",
+            "to": "m",
+            "kind": "parent",
+            "trust": 75,
+            "closeness": 80
+          },
+          {
+            "from": "m",
+            "to": "p",
+            "kind": "child",
+            "trust": 75,
+            "closeness": 80
+          }
+        ],
+        "facts": {
+          "friend_request_open": false,
+          "friend_request_person": "f",
+          "letter_handled": true,
+          "letter_read": true
+        },
+        "historical_facts": {
+          "shared_walk": {
+            "day": -365,
+            "summary": "林禾与周远曾一起沿河散步。",
+            "participants": [
+              "p",
+              "f"
+            ]
+          }
+        },
+        "artifacts": {
+          "letter_f": {
+            "author": "f",
+            "created_day": -1,
+            "fact_ids": [
+              "shared_walk"
+            ],
+            "text": "我还记得我们沿河散步的那个傍晚。谢谢你愿意听我说话。"
+          }
+        },
+        "loans": {
+          "loan-1-1": {
+            "id": "loan-1-1",
+            "creditor": "p",
+            "debtor": "f",
+            "amount": 400,
+            "created_day": 0,
+            "due_day": 30,
+            "status": "deceased_pending"
+          }
+        },
+        "tasks": [
+          {
+            "id": "task-loan-1-1",
+            "event_id": "friend.loan_due",
+            "loan_id": "loan-1-1",
+            "due_day": 30,
+            "bindings": {
+              "player": "p",
+              "friend": "f"
+            },
+            "requires_alive": [
+              "p",
+              "f"
+            ],
+            "status": "cancelled",
+            "cancellation_reason": "required_actor_died:f"
+          }
+        ]
+      },
+      "observations": [
+        {
+          "dimension_id": "care",
+          "behavior": "material_support",
+          "strength": "limited",
+          "evidence_id": "decision-1",
+          "event_id": "friend.loan_request",
+          "context_tags": [
+            "adult",
+            "friend",
+            "financial_pressure"
+          ],
+          "resources_before": {
+            "cash": 600,
+            "energy": 70,
+            "health": 80,
+            "stress": 35,
+            "housing_reserve": 500
+          },
+          "cash_cost": 400,
+          "locked_options": []
+        },
+        {
+          "dimension_id": "risk_taking",
+          "behavior": "accept_financial_exposure",
+          "strength": "limited",
+          "evidence_id": "decision-1",
+          "event_id": "friend.loan_request",
+          "context_tags": [
+            "adult",
+            "friend",
+            "financial_pressure"
+          ],
+          "resources_before": {
+            "cash": 600,
+            "energy": 70,
+            "health": 80,
+            "stress": 35,
+            "housing_reserve": 500
+          },
+          "cash_cost": 400,
+          "locked_options": []
+        }
+      ]
+    },
+    {
+      "title": "资金与精力不足，只剩一个可行选项",
+      "initial_state": {
+        "schema_version": "0.1.0",
+        "ruleset_id": "smalltown-v0.1",
+        "setting_id": "smalltown",
+        "revision": 0,
+        "day": 0,
+        "player_id": "p",
+        "persons": {
+          "p": {
+            "id": "p",
+            "name": "林禾",
+            "birth_day": -8760,
+            "alive": true,
+            "death_day": null,
+            "location": "town",
+            "cash": 0,
+            "energy": 0,
+            "health": 80,
+            "stress": 35,
+            "housing_reserve": 500,
+            "knowledge": {
+              "shared_walk": -365
+            }
+          },
+          "f": {
+            "id": "f",
+            "name": "周远",
+            "birth_day": -8760,
+            "alive": true,
+            "death_day": null,
+            "location": "town",
+            "cash": 50,
+            "energy": 65,
+            "health": 75,
+            "stress": 60,
+            "housing_reserve": 450,
+            "repayment_willing": true,
+            "knowledge": {
+              "shared_walk": -365
+            }
+          },
+          "m": {
+            "id": "m",
+            "name": "许岚",
+            "birth_day": -17520,
+            "alive": true,
+            "death_day": null,
+            "location": "town",
+            "cash": 800,
+            "energy": 60,
+            "health": 70,
+            "stress": 30,
+            "housing_reserve": 500,
+            "knowledge": {}
+          }
+        },
+        "relationships": [
+          {
+            "from": "p",
+            "to": "f",
+            "kind": "friend",
+            "trust": 55,
+            "closeness": 65
+          },
+          {
+            "from": "f",
+            "to": "p",
+            "kind": "friend",
+            "trust": 60,
+            "closeness": 65
+          },
+          {
+            "from": "p",
+            "to": "m",
+            "kind": "parent",
+            "trust": 75,
+            "closeness": 80
+          },
+          {
+            "from": "m",
+            "to": "p",
+            "kind": "child",
+            "trust": 75,
+            "closeness": 80
+          }
+        ],
+        "facts": {
+          "friend_request_open": true,
+          "friend_request_person": "f",
+          "letter_handled": false,
+          "letter_read": false
+        },
+        "historical_facts": {
+          "shared_walk": {
+            "day": -365,
+            "summary": "林禾与周远曾一起沿河散步。",
+            "participants": [
+              "p",
+              "f"
+            ]
+          }
+        },
+        "artifacts": {
+          "letter_f": {
+            "author": "f",
+            "created_day": -1,
+            "fact_ids": [
+              "shared_walk"
+            ],
+            "text": "我还记得我们沿河散步的那个傍晚。谢谢你愿意听我说话。"
+          }
+        },
+        "loans": {},
+        "tasks": []
+      },
+      "catalog_hash": "b4ca80c8b999f17f59c591847f6b804a481d46c5fd765fccdcbf2965a78a4c2f",
+      "catalog_snapshot": {
+        "schema_version": "0.1.0",
+        "ruleset_id": "smalltown-v0.1",
+        "events": [
+          {
+            "id": "friend.loan_request",
+            "version": 1,
+            "title": "朋友的请求",
+            "setting_id": "smalltown",
+            "trigger": "ambient",
+            "age_range": [
+              18,
+              80
+            ],
+            "actors": {
+              "friend": {
+                "relation": "friend",
+                "alive": true,
+                "same_location": true
+              }
+            },
+            "preconditions": [
+              {
+                "path": "facts.friend_request_open",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "path": "facts.friend_request_person",
+                "op": "eq",
+                "value": {
+                  "ref": "friend.id"
+                }
+              },
+              {
+                "path": "friend.cash",
+                "op": "lte",
+                "value": {
+                  "ref": "friend.housing_reserve"
+                }
+              }
+            ],
+            "description": "{friend.name}请求借400元周转。你现在有{player.cash}元，计划保留{player.housing_reserve}元用于住处；这只是本原型中的预算目标，尚未模拟实际租金支出。",
+            "context_tags": [
+              "adult",
+              "friend",
+              "financial_pressure"
+            ],
+            "choices": [
+              {
+                "id": "lend_full",
+                "label": "借出400元",
+                "requirements": [
+                  {
+                    "path": "player.cash",
+                    "op": "gte",
+                    "value": 400
+                  }
+                ],
+                "effects": [
+                  {
+                    "op": "transfer",
+                    "from": "player",
+                    "to": "friend",
+                    "amount": 400
+                  },
+                  {
+                    "op": "create_loan",
+                    "creditor": "player",
+                    "debtor": "friend",
+                    "amount": 400,
+                    "due_in_days": 30
+                  },
+                  {
+                    "op": "adjust_relation",
+                    "from": "friend",
+                    "to": "player",
+                    "field": "trust",
+                    "delta": 4
+                  },
+                  {
+                    "op": "set_fact",
+                    "key": "friend_request_open",
+                    "value": false
+                  }
+                ],
+                "evidence": [
+                  {
+                    "dimension_id": "care",
+                    "behavior": "material_support",
+                    "strength": "limited"
+                  },
+                  {
+                    "dimension_id": "risk_taking",
+                    "behavior": "accept_financial_exposure",
+                    "strength": "limited"
+                  }
+                ]
+              },
+              {
+                "id": "lend_partial",
+                "label": "借出100元，并说明自己的预算",
+                "requirements": [
+                  {
+                    "path": "player.cash",
+                    "op": "gte",
+                    "value": 100
+                  }
+                ],
+                "effects": [
+                  {
+                    "op": "transfer",
+                    "from": "player",
+                    "to": "friend",
+                    "amount": 100
+                  },
+                  {
+                    "op": "create_loan",
+                    "creditor": "player",
+                    "debtor": "friend",
+                    "amount": 100,
+                    "due_in_days": 30
+                  },
+                  {
+                    "op": "set_fact",
+                    "key": "friend_request_open",
+                    "value": false
+                  }
+                ],
+                "evidence": [
+                  {
+                    "dimension_id": "care",
+                    "behavior": "partial_material_support",
+                    "strength": "limited"
+                  },
+                  {
+                    "dimension_id": "risk_taking",
+                    "behavior": "limit_financial_exposure",
+                    "strength": "limited"
+                  }
+                ]
+              },
+              {
+                "id": "help_search",
+                "label": "花时间一起寻找其他办法",
+                "requirements": [
+                  {
+                    "path": "player.energy",
+                    "op": "gte",
+                    "value": 10
+                  }
+                ],
+                "effects": [
+                  {
+                    "op": "adjust",
+                    "actor": "player",
+                    "field": "energy",
+                    "delta": -10
+                  },
+                  {
+                    "op": "set_fact",
+                    "key": "alternative_help_attempted",
+                    "value": true
+                  },
+                  {
+                    "op": "set_fact",
+                    "key": "friend_request_open",
+                    "value": false
+                  }
+                ],
+                "evidence": [
+                  {
+                    "dimension_id": "care",
+                    "behavior": "practical_support_attempt",
+                    "strength": "limited"
+                  }
+                ]
+              },
+              {
+                "id": "decline",
+                "label": "说明目前无法借钱",
+                "requirements": [],
+                "effects": [
+                  {
+                    "op": "set_fact",
+                    "key": "friend_request_open",
+                    "value": false
+                  }
+                ],
+                "evidence": [
+                  {
+                    "dimension_id": "care",
+                    "behavior": "declined_this_request",
+                    "strength": "ambiguous"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "friend.loan_due",
+            "version": 1,
+            "title": "约定的还款日",
+            "setting_id": "smalltown",
+            "trigger": "scheduled",
+            "age_range": [
+              0,
+              120
+            ],
+            "actors": {
+              "friend": {
+                "relation": "friend",
+                "alive": true,
+                "same_location": false
+              }
+            },
+            "preconditions": [
+              {
+                "path": "loan.status",
+                "op": "eq",
+                "value": "outstanding"
+              }
+            ],
+            "description": "{friend.name}的{loan.amount}元借款已经到期。只有对方仍健在、愿意履约且拥有足够资金，按约还款才可执行；你也可以延长期限或暂时结束催促。",
+            "context_tags": [
+              "friend",
+              "existing_promise"
+            ],
+            "choices": [
+              {
+                "id": "accept_repayment",
+                "label": "接受对方按约还款",
+                "requirements": [
+                  {
+                    "path": "friend.repayment_willing",
+                    "op": "eq",
+                    "value": true
+                  },
+                  {
+                    "path": "friend.cash",
+                    "op": "gte",
+                    "value": {
+                      "ref": "loan.amount"
+                    }
+                  }
+                ],
+                "effects": [
+                  {
+                    "op": "settle_loan"
+                  }
+                ],
+                "evidence": []
+              },
+              {
+                "id": "extend",
+                "label": "同意再等7天",
+                "requirements": [],
+                "effects": [
+                  {
+                    "op": "reschedule_loan",
+                    "days": 7
+                  }
+                ],
+                "evidence": [
+                  {
+                    "dimension_id": "conflict_style",
+                    "behavior": "negotiated_extension",
+                    "strength": "limited"
+                  }
+                ]
+              },
+              {
+                "id": "leave_claim",
+                "label": "暂时结束催促，保留债权记录",
+                "requirements": [],
+                "effects": [],
+                "evidence": [
+                  {
+                    "dimension_id": "conflict_style",
+                    "behavior": "deferred_confrontation",
+                    "strength": "ambiguous"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "friend.old_letter",
+            "version": 1,
+            "title": "留下的信",
+            "setting_id": "smalltown",
+            "trigger": "ambient",
+            "age_range": [
+              0,
+              120
+            ],
+            "actors": {
+              "friend": {
+                "relation": "friend",
+                "alive": false,
+                "same_location": false
+              }
+            },
+            "preconditions": [
+              {
+                "path": "artifacts.letter_f.author",
+                "op": "eq",
+                "value": {
+                  "ref": "friend.id"
+                }
+              },
+              {
+                "path": "facts.letter_handled",
+                "op": "eq",
+                "value": false
+              }
+            ],
+            "description": "{friend.name}生前留下的信已经存在于世界记录中。信里只引用他写信时已知的一次共同经历。",
+            "context_tags": [
+              "friend",
+              "bereavement"
+            ],
+            "choices": [
+              {
+                "id": "read",
+                "label": "读完并收好这封信",
+                "requirements": [],
+                "effects": [
+                  {
+                    "op": "set_fact",
+                    "key": "letter_read",
+                    "value": true
+                  },
+                  {
+                    "op": "set_fact",
+                    "key": "letter_handled",
+                    "value": true
+                  }
+                ],
+                "evidence": []
+              },
+              {
+                "id": "keep",
+                "label": "先收好，暂时不读",
+                "requirements": [],
+                "effects": [
+                  {
+                    "op": "set_fact",
+                    "key": "letter_handled",
+                    "value": true
+                  }
+                ],
+                "evidence": []
+              }
+            ]
+          }
+        ]
+      },
+      "log": [
+        {
+          "sequence": 1,
+          "kind": "choice",
+          "day": 0,
+          "before_hash": "6410c012b0224231614d53c9922e5fddf3a1e3b1e872d85128a65addc94fa926",
+          "payload": {
+            "event_id": "friend.loan_request",
+            "event_version": 1,
+            "choice_id": "decline",
+            "choice_label": "说明目前无法借钱",
+            "bindings": {
+              "player": "p",
+              "friend": "f"
+            },
+            "task_id": null,
+            "options": [
+              {
+                "id": "lend_full",
+                "label": "借出400元",
+                "available": false,
+                "locked_reason": "player.cash gte 400（当前：0）"
+              },
+              {
+                "id": "lend_partial",
+                "label": "借出100元，并说明自己的预算",
+                "available": false,
+                "locked_reason": "player.cash gte 100（当前：0）"
+              },
+              {
+                "id": "help_search",
+                "label": "花时间一起寻找其他办法",
+                "available": false,
+                "locked_reason": "player.energy gte 10（当前：0）"
+              },
+              {
+                "id": "decline",
+                "label": "说明目前无法借钱",
+                "available": true,
+                "locked_reason": null
+              }
+            ],
+            "opportunity": false,
+            "context_tags": [
+              "adult",
+              "friend",
+              "financial_pressure"
+            ],
+            "age": 24,
+            "resources_before": {
+              "cash": 0,
+              "energy": 0,
+              "health": 80,
+              "stress": 35,
+              "housing_reserve": 500
+            },
+            "player_knowledge": {
+              "shared_walk": -365
+            },
+            "presented_facts": "周远请求借400元周转。你现在有0元，计划保留500元用于住处；这只是本原型中的预算目标，尚未模拟实际租金支出。",
+            "cash_cost": 0,
+            "cash_cost_share": null,
+            "below_housing_reserve_after": true,
+            "observations": [
+              {
+                "dimension_id": "care",
+                "behavior": "declined_this_request",
+                "strength": "ambiguous"
+              }
+            ]
+          },
+          "state_after": {
+            "schema_version": "0.1.0",
+            "ruleset_id": "smalltown-v0.1",
+            "setting_id": "smalltown",
+            "revision": 1,
+            "day": 0,
+            "player_id": "p",
+            "persons": {
+              "p": {
+                "id": "p",
+                "name": "林禾",
+                "birth_day": -8760,
+                "alive": true,
+                "death_day": null,
+                "location": "town",
+                "cash": 0,
+                "energy": 0,
+                "health": 80,
+                "stress": 35,
+                "housing_reserve": 500,
+                "knowledge": {
+                  "shared_walk": -365
+                }
+              },
+              "f": {
+                "id": "f",
+                "name": "周远",
+                "birth_day": -8760,
+                "alive": true,
+                "death_day": null,
+                "location": "town",
+                "cash": 50,
+                "energy": 65,
+                "health": 75,
+                "stress": 60,
+                "housing_reserve": 450,
+                "repayment_willing": true,
+                "knowledge": {
+                  "shared_walk": -365
+                }
+              },
+              "m": {
+                "id": "m",
+                "name": "许岚",
+                "birth_day": -17520,
+                "alive": true,
+                "death_day": null,
+                "location": "town",
+                "cash": 800,
+                "energy": 60,
+                "health": 70,
+                "stress": 30,
+                "housing_reserve": 500,
+                "knowledge": {}
+              }
+            },
+            "relationships": [
+              {
+                "from": "p",
+                "to": "f",
+                "kind": "friend",
+                "trust": 55,
+                "closeness": 65
+              },
+              {
+                "from": "f",
+                "to": "p",
+                "kind": "friend",
+                "trust": 60,
+                "closeness": 65
+              },
+              {
+                "from": "p",
+                "to": "m",
+                "kind": "parent",
+                "trust": 75,
+                "closeness": 80
+              },
+              {
+                "from": "m",
+                "to": "p",
+                "kind": "child",
+                "trust": 75,
+                "closeness": 80
+              }
+            ],
+            "facts": {
+              "friend_request_open": false,
+              "friend_request_person": "f",
+              "letter_handled": false,
+              "letter_read": false
+            },
+            "historical_facts": {
+              "shared_walk": {
+                "day": -365,
+                "summary": "林禾与周远曾一起沿河散步。",
+                "participants": [
+                  "p",
+                  "f"
+                ]
+              }
+            },
+            "artifacts": {
+              "letter_f": {
+                "author": "f",
+                "created_day": -1,
+                "fact_ids": [
+                  "shared_walk"
+                ],
+                "text": "我还记得我们沿河散步的那个傍晚。谢谢你愿意听我说话。"
+              }
+            },
+            "loans": {},
+            "tasks": []
+          },
+          "after_hash": "056bf7d080c7ece671680d9231af5b3307791ab233195fe1d05c10ba3aac16d1",
+          "previous_entry_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "entry_hash": "5362e7f65a832d852f365ab6ef426f91cf36bc3ed2e5325311735a28616efb36"
+        }
+      ],
+      "final_state": {
+        "schema_version": "0.1.0",
+        "ruleset_id": "smalltown-v0.1",
+        "setting_id": "smalltown",
+        "revision": 1,
+        "day": 0,
+        "player_id": "p",
+        "persons": {
+          "p": {
+            "id": "p",
+            "name": "林禾",
+            "birth_day": -8760,
+            "alive": true,
+            "death_day": null,
+            "location": "town",
+            "cash": 0,
+            "energy": 0,
+            "health": 80,
+            "stress": 35,
+            "housing_reserve": 500,
+            "knowledge": {
+              "shared_walk": -365
+            }
+          },
+          "f": {
+            "id": "f",
+            "name": "周远",
+            "birth_day": -8760,
+            "alive": true,
+            "death_day": null,
+            "location": "town",
+            "cash": 50,
+            "energy": 65,
+            "health": 75,
+            "stress": 60,
+            "housing_reserve": 450,
+            "repayment_willing": true,
+            "knowledge": {
+              "shared_walk": -365
+            }
+          },
+          "m": {
+            "id": "m",
+            "name": "许岚",
+            "birth_day": -17520,
+            "alive": true,
+            "death_day": null,
+            "location": "town",
+            "cash": 800,
+            "energy": 60,
+            "health": 70,
+            "stress": 30,
+            "housing_reserve": 500,
+            "knowledge": {}
+          }
+        },
+        "relationships": [
+          {
+            "from": "p",
+            "to": "f",
+            "kind": "friend",
+            "trust": 55,
+            "closeness": 65
+          },
+          {
+            "from": "f",
+            "to": "p",
+            "kind": "friend",
+            "trust": 60,
+            "closeness": 65
+          },
+          {
+            "from": "p",
+            "to": "m",
+            "kind": "parent",
+            "trust": 75,
+            "closeness": 80
+          },
+          {
+            "from": "m",
+            "to": "p",
+            "kind": "child",
+            "trust": 75,
+            "closeness": 80
+          }
+        ],
+        "facts": {
+          "friend_request_open": false,
+          "friend_request_person": "f",
+          "letter_handled": false,
+          "letter_read": false
+        },
+        "historical_facts": {
+          "shared_walk": {
+            "day": -365,
+            "summary": "林禾与周远曾一起沿河散步。",
+            "participants": [
+              "p",
+              "f"
+            ]
+          }
+        },
+        "artifacts": {
+          "letter_f": {
+            "author": "f",
+            "created_day": -1,
+            "fact_ids": [
+              "shared_walk"
+            ],
+            "text": "我还记得我们沿河散步的那个傍晚。谢谢你愿意听我说话。"
+          }
+        },
+        "loans": {},
+        "tasks": []
+      },
+      "observations": []
+    }
+  ]
+}

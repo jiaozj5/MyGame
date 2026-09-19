@@ -1,0 +1,150 @@
+test_batch_has_comparable_groups_and_correct_rate_denominators (test_balance.BalanceTests.test_batch_has_comparable_groups_and_correct_rate_denominators) ... ok
+test_loop_guard_fails_instead_of_fabricating_a_result (test_balance.BalanceTests.test_loop_guard_fails_instead_of_fabricating_a_result) ... ok
+test_policy_cannot_take_locked_reward_and_respects_pace_preference (test_balance.BalanceTests.test_policy_cannot_take_locked_reward_and_respects_pace_preference) ... ok
+test_same_seed_has_identical_complete_trace (test_balance.BalanceTests.test_same_seed_has_identical_complete_trace) ... ok
+test_deceased_required_actors_cannot_participate (test_causal_chains.CausalContentContractTests.test_deceased_required_actors_cannot_participate) ... ok
+test_missing_predecessors_block_fifteen_followups (test_causal_chains.CausalContentContractTests.test_missing_predecessors_block_fifteen_followups) ... ok
+test_sufficient_local_resources_allow_all_forty_eight_choices (test_causal_chains.CausalContentContractTests.test_sufficient_local_resources_allow_all_forty_eight_choices) ... ok
+test_the_authored_subset_has_sixteen_events_and_forty_eight_choices (test_causal_chains.CausalContentContractTests.test_the_authored_subset_has_sixteen_events_and_forty_eight_choices) ... ok
+test_zero_cash_and_energy_still_leave_an_executable_option (test_causal_chains.CausalContentContractTests.test_zero_cash_and_energy_still_leave_an_executable_option) ... ok
+test_content_flag_producers_are_discovered_and_late_producer_is_only_warning (test_content_check.ContentCheckTests.test_content_flag_producers_are_discovered_and_late_producer_is_only_warning) ... ok
+test_dead_person_can_be_remembered_but_cannot_act_or_receive_active_effects (test_content_check.ContentCheckTests.test_dead_person_can_be_remembered_but_cannot_act_or_receive_active_effects) ... ok
+test_duplicate_ids_are_errors_while_implicit_absence_can_be_a_warning (test_content_check.ContentCheckTests.test_duplicate_ids_are_errors_while_implicit_absence_can_be_a_warning) ... ok
+test_unknown_fields_wrong_types_templates_and_dimensions_are_errors (test_content_check.ContentCheckTests.test_unknown_fields_wrong_types_templates_and_dimensions_are_errors) ... ok
+test_world_conditions_reject_typos_invalid_modes_and_thresholds (test_content_check.ContentCheckTests.test_world_conditions_reject_typos_invalid_modes_and_thresholds) ... ok
+test_world_response_requires_known_domain_and_actual_world_gate (test_content_check.ContentCheckTests.test_world_response_requires_known_domain_and_actual_world_gate) ... ok
+test_300_seeded_paths_preserve_invariants_and_replay (test_engine.EngineTests.test_300_seeded_paths_preserve_invariants_and_replay) ... ok
+test_catalog_observations_have_documented_adapter (test_engine.EngineTests.test_catalog_observations_have_documented_adapter) ... ok
+test_death_invalidates_cached_offer_and_cancels_plan (test_engine.EngineTests.test_death_invalidates_cached_offer_and_cancels_plan) ... ok
+test_evidence_measures_actual_dynamic_transfer_cost (test_engine.EngineTests.test_evidence_measures_actual_dynamic_transfer_cost) ... ok
+test_expired_age_condition_cancels_due_plan_without_erasing_debt (test_engine.EngineTests.test_expired_age_condition_cancels_due_plan_without_erasing_debt) ... ok
+test_failed_later_effect_rolls_back_whole_transaction (test_engine.EngineTests.test_failed_later_effect_rolls_back_whole_transaction) ... ok
+test_incorrect_life_dependency_is_rejected_when_loading (test_engine.EngineTests.test_incorrect_life_dependency_is_rejected_when_loading) ... ok
+test_insufficient_money_locks_only_unaffordable_options (test_engine.EngineTests.test_insufficient_money_locks_only_unaffordable_options) ... ok
+test_keeping_letter_does_not_mark_it_read (test_engine.EngineTests.test_keeping_letter_does_not_mark_it_read) ... ok
+test_letter_cannot_contain_knowledge_acquired_after_writing (test_engine.EngineTests.test_letter_cannot_contain_knowledge_acquired_after_writing) ... ok
+test_loaded_overdue_invalid_task_does_not_deadlock (test_engine.EngineTests.test_loaded_overdue_invalid_task_does_not_deadlock) ... ok
+test_missing_followup_dependency_is_rejected (test_engine.EngineTests.test_missing_followup_dependency_is_rejected) ... ok
+test_no_arbitrary_code_action_in_catalog (test_engine.EngineTests.test_no_arbitrary_code_action_in_catalog) ... ok
+test_only_one_feasible_choice_is_not_personality_evidence (test_engine.EngineTests.test_only_one_feasible_choice_is_not_personality_evidence) ... ok
+test_relationships_have_inverse_edges_not_equal_trust (test_engine.EngineTests.test_relationships_have_inverse_edges_not_equal_trust) ... ok
+test_repaid_loan_stays_repaid_after_death (test_engine.EngineTests.test_repaid_loan_stays_repaid_after_death) ... ok
+test_repayment_respects_npc_willingness (test_engine.EngineTests.test_repayment_respects_npc_willingness) ... ok
+test_repeated_submit_cannot_charge_twice (test_engine.EngineTests.test_repeated_submit_cannot_charge_twice) ... ok
+test_replay_exactly_restores_and_detects_payload_change (test_engine.EngineTests.test_replay_exactly_restores_and_detects_payload_change) ... ok
+test_reward_cannot_finance_earlier_unaffordable_energy_cost (test_engine.EngineTests.test_reward_cannot_finance_earlier_unaffordable_energy_cost) ... ok
+test_scheduled_event_cannot_run_early_or_skip_due_date (test_engine.EngineTests.test_scheduled_event_cannot_run_early_or_skip_due_date) ... ok
+test_template_resolves_bound_name_and_current_resources (test_engine.EngineTests.test_template_resolves_bound_name_and_current_resources) ... ok
+test_transfer_creates_debt_and_preserves_total_cash (test_engine.EngineTests.test_transfer_creates_debt_and_preserves_total_cash) ... ok
+test_cash_gate_cannot_be_forced_and_logged_constraint_is_not_preference (test_life_game.LifeGameIntegrationTests.test_cash_gate_cannot_be_forced_and_logged_constraint_is_not_preference) ... ok
+test_deceased_debtor_keeps_claim_and_cannot_execute_cached_repayment (test_life_game.LifeGameIntegrationTests.test_deceased_debtor_keeps_claim_and_cannot_execute_cached_repayment) ... ok
+test_multiple_seeds_and_origins_finish_without_dead_actors_or_negative_resources (test_life_game.LifeGameIntegrationTests.test_multiple_seeds_and_origins_finish_without_dead_actors_or_negative_resources) ... ok
+test_save_roundtrip_preserves_pending_loan_random_progress_and_continuation (test_life_game.LifeGameIntegrationTests.test_save_roundtrip_preserves_pending_loan_random_progress_and_continuation) ... ok
+test_stale_revision_is_rejected_before_any_state_change (test_life_game.LifeGameIntegrationTests.test_stale_revision_is_rejected_before_any_state_change) ... ok
+test_all_thirty_two_authored_local_interactions_execute (test_npc_content.NpcContentContractTests.test_all_thirty_two_authored_local_interactions_execute) ... ok
+test_dictionary_shape_and_occupations_do_not_supply_moral_defaults (test_npc_content.NpcContentContractTests.test_dictionary_shape_and_occupations_do_not_supply_moral_defaults) ... ok
+test_every_interaction_rejects_a_dead_target_without_mutation (test_npc_content.NpcContentContractTests.test_every_interaction_rejects_a_dead_target_without_mutation) ... ok
+test_initial_traits_do_not_change_when_occupation_assignment_changes (test_npc_content.NpcContentContractTests.test_initial_traits_do_not_change_when_occupation_assignment_changes) ... ok
+test_twelve_directed_predecessors_reject_removal_role_reversal_and_another_target (test_npc_content.NpcContentContractTests.test_twelve_directed_predecessors_reject_removal_role_reversal_and_another_target) ... ok
+test_anchor_authority_and_posthumous_occupation_are_stable (test_population.PopulationTests.test_anchor_authority_and_posthumous_occupation_are_stable) ... ok
+test_batch_step_and_json_continuation_have_same_real_history (test_population.PopulationTests.test_batch_step_and_json_continuation_have_same_real_history) ... ok
+test_capacity_hidden_births_and_safe_integer_roundtrip (test_population.PopulationTests.test_capacity_hidden_births_and_safe_integer_roundtrip) ... ok
+test_children_cannot_participate_in_crime_or_exploitation (test_population.PopulationTests.test_children_cannot_participate_in_crime_or_exploitation) ... ok
+test_copy_on_write_does_not_clone_or_mutate_untouched_people (test_population.PopulationTests.test_copy_on_write_does_not_clone_or_mutate_untouched_people) ... ok
+test_detention_expires_with_record_and_dead_people_cannot_return (test_population.PopulationTests.test_detention_expires_with_record_and_dead_people_cannot_return) ... ok
+test_new_birth_appears_only_at_actual_year_and_large_migration_is_bounded (test_population.PopulationTests.test_new_birth_appears_only_at_actual_year_and_large_migration_is_bounded) ... ok
+test_pending_case_belongs_to_its_directed_pair_and_is_atomic (test_population.PopulationTests.test_pending_case_belongs_to_its_directed_pair_and_is_atomic) ... ok
+test_private_facts_and_unknown_identity_cannot_be_searched (test_population.PopulationTests.test_private_facts_and_unknown_identity_cannot_be_searched) ... ok
+test_retained_history_grows_and_promotion_does_not_invent_past (test_population.PopulationTests.test_retained_history_grows_and_promotion_does_not_invent_past) ... ok
+test_annual_contact_limit_cannot_be_avoided_with_many_different_people (test_population_integration.PopulationIntegrationTests.test_annual_contact_limit_cannot_be_avoided_with_many_different_people) ... ok
+test_cached_contact_cannot_execute_after_death_detention_or_departure (test_population_integration.PopulationIntegrationTests.test_cached_contact_cannot_execute_after_death_detention_or_departure) ... ok
+test_contact_pays_visible_cost_and_commits_once_without_advancing_the_life_slot (test_population_integration.PopulationIntegrationTests.test_contact_pays_visible_cost_and_commits_once_without_advancing_the_life_slot) ... ok
+test_finished_life_cannot_submit_contacts_or_change_future_plans (test_population_integration.PopulationIntegrationTests.test_finished_life_cannot_submit_contacts_or_change_future_plans) ... ok
+test_legacy_anchor_interaction_cannot_create_a_second_relationship_authority (test_population_integration.PopulationIntegrationTests.test_legacy_anchor_interaction_cannot_create_a_second_relationship_authority) ... ok
+test_old_save_migration_starts_population_now_and_preserves_the_old_life (test_population_integration.PopulationIntegrationTests.test_old_save_migration_starts_population_now_and_preserves_the_old_life) ... ok
+test_population_keeps_four_legacy_identities_without_inventing_acquaintances (test_population_integration.PopulationIntegrationTests.test_population_keeps_four_legacy_identities_without_inventing_acquaintances) ... ok
+test_save_cannot_mix_the_life_with_a_different_seed_population (test_population_integration.PopulationIntegrationTests.test_save_cannot_mix_the_life_with_a_different_seed_population) ... ok
+test_save_roundtrip_preserves_social_progress_and_next_choice (test_population_integration.PopulationIntegrationTests.test_save_roundtrip_preserves_social_progress_and_next_choice) ... ok
+test_social_plan_is_recorded_and_cannot_be_replayed_with_old_revision (test_population_integration.PopulationIntegrationTests.test_social_plan_is_recorded_and_cannot_be_replayed_with_old_revision) ... ok
+test_stale_contact_and_insufficient_energy_are_atomic (test_population_integration.PopulationIntegrationTests.test_stale_contact_and_insufficient_energy_are_atomic) ... ok
+test_unknown_identity_and_private_records_are_not_exposed_by_public_queries (test_population_integration.PopulationIntegrationTests.test_unknown_identity_and_private_records_are_not_exposed_by_public_queries) ... ok
+test_former_closeness_is_kept_without_counting_a_deceased_person_as_a_current_close_contact (test_population_integration.PopulationReportCountingTests.test_former_closeness_is_kept_without_counting_a_deceased_person_as_a_current_close_contact) ... ok
+test_simulation_detail_and_tracking_do_not_create_friendships (test_population_integration.PopulationReportCountingTests.test_simulation_detail_and_tracking_do_not_create_friendships) ... ok
+test_visibility_counts_preserve_unknown_truth_and_deduplicate_retained_records (test_population_integration.PopulationReportCountingTests.test_visibility_counts_preserve_unknown_truth_and_deduplicate_retained_records) ... ok
+test_all_references_resolve_and_different_actions_remain_visible (test_portrait.PortraitTests.test_all_references_resolve_and_different_actions_remain_visible) ... ok
+test_chapters_select_turning_points_without_erasing_the_complete_timeline (test_portrait.PortraitTests.test_chapters_select_turning_points_without_erasing_the_complete_timeline) ... ok
+test_deceased_debtor_and_surviving_claim_do_not_imply_repayment (test_portrait.PortraitTests.test_deceased_debtor_and_surviving_claim_do_not_imply_repayment) ... ok
+test_empty_partial_life_reports_absence_without_filling_in_traits (test_portrait.PortraitTests.test_empty_partial_life_reports_absence_without_filling_in_traits) ... ok
+test_invalid_or_unresolvable_records_are_rejected_instead_of_repaired (test_portrait.PortraitTests.test_invalid_or_unresolvable_records_are_rejected_instead_of_repaired) ... ok
+test_locked_loan_and_only_feasible_action_are_not_personality_evidence (test_portrait.PortraitTests.test_locked_loan_and_only_feasible_action_are_not_personality_evidence) ... ok
+test_missing_choice_conditions_are_not_silently_treated_as_free_choice (test_portrait.PortraitTests.test_missing_choice_conditions_are_not_silently_treated_as_free_choice) ... ok
+test_patterns_are_short_behavior_based_and_hide_internal_identifiers (test_portrait.PortraitTests.test_patterns_are_short_behavior_based_and_hide_internal_identifiers) ... ok
+test_relationship_highlights_keep_actual_settlement_and_death (test_portrait.PortraitTests.test_relationship_highlights_keep_actual_settlement_and_death) ... ok
+test_stage_boundaries_and_unlived_years_do_not_invent_later_life (test_portrait.PortraitTests.test_stage_boundaries_and_unlived_years_do_not_invent_later_life) ... ok
+test_bad_save_does_not_replace_active_game (test_server.ServerTests.test_bad_save_does_not_replace_active_game) ... 127.0.0.1 - - [16/Sep/2026 20:40:21] "POST /api/new HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 20:40:21] "POST /api/resume HTTP/1.1" 400 -
+ok
+test_cross_origin_command_is_rejected (test_server.ServerTests.test_cross_origin_command_is_rejected) ... 127.0.0.1 - - [16/Sep/2026 20:40:21] "POST /api/new HTTP/1.1" 403 -
+ok
+test_health_reports_the_running_game_version (test_server.ServerTests.test_health_reports_the_running_game_version) ... 127.0.0.1 - - [16/Sep/2026 20:40:21] "GET /api/health HTTP/1.1" 200 -
+ok
+test_legacy_resume_preserves_history_and_exposes_current_forecast (test_server.ServerTests.test_legacy_resume_preserves_history_and_exposes_current_forecast) ... 127.0.0.1 - - [16/Sep/2026 20:40:21] "POST /api/resume HTTP/1.1" 200 -
+ok
+test_new_choice_stale_command_and_resume (test_server.ServerTests.test_new_choice_stale_command_and_resume) ... 127.0.0.1 - - [16/Sep/2026 20:40:22] "POST /api/new HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 20:40:22] "POST /api/choose HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 20:40:22] "POST /api/choose HTTP/1.1" 400 -
+127.0.0.1 - - [16/Sep/2026 20:40:22] "POST /api/resume HTTP/1.1" 200 -
+ok
+test_population_reads_and_social_commands_preserve_revision_contract (test_server.ServerTests.test_population_reads_and_social_commands_preserve_revision_contract) ... 127.0.0.1 - - [16/Sep/2026 20:40:22] "POST /api/new HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 20:40:22] "POST /api/people HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 20:40:22] "POST /api/person HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 20:40:23] "POST /api/social HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 20:40:23] "POST /api/social HTTP/1.1" 400 -
+127.0.0.1 - - [16/Sep/2026 20:40:23] "POST /api/social-plan HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 20:40:23] "POST /api/people HTTP/1.1" 400 -
+ok
+test_static_root_exposes_only_game_files (test_server.ServerTests.test_static_root_exposes_only_game_files) ... 127.0.0.1 - - [16/Sep/2026 20:40:23] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 20:40:23] code 404, message File not found
+127.0.0.1 - - [16/Sep/2026 20:40:23] "GET /game/engine.py HTTP/1.1" 404 -
+127.0.0.1 - - [16/Sep/2026 20:40:23] code 404, message File not found
+127.0.0.1 - - [16/Sep/2026 20:40:23] "GET /content/life-events.json HTTP/1.1" 404 -
+ok
+test_world_birth_and_previous_version_resume_do_not_invent_history (test_server.ServerTests.test_world_birth_and_previous_version_resume_do_not_invent_history) ... 127.0.0.1 - - [16/Sep/2026 20:40:23] "POST /api/new HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 20:40:24] "POST /api/resume HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 20:40:24] "POST /api/resume HTTP/1.1" 200 -
+ok
+test_each_event_has_an_executable_zero_cash_zero_energy_response (test_society_content.SocietyContentTests.test_each_event_has_an_executable_zero_cash_zero_energy_response) ... ok
+test_named_npcs_require_life_and_acquaintance_and_cannot_act_after_death (test_society_content.SocietyContentTests.test_named_npcs_require_life_and_acquaintance_and_cannot_act_after_death) ... ok
+test_twenty_domains_have_three_scopes_and_valid_personal_contracts (test_society_content.SocietyContentTests.test_twenty_domains_have_three_scopes_and_valid_personal_contracts) ... ok
+test_world_threshold_is_a_real_gate_and_not_a_fixed_year (test_society_content.SocietyContentTests.test_world_threshold_is_a_real_gate_and_not_a_fixed_year) ... ok
+test_causal_links_only_use_recorded_flag_effects (test_survival_v03.SurvivalV03Tests.test_causal_links_only_use_recorded_flag_effects) ... ok
+test_danger_interrupts_between_slots_and_zero_cash_recovery_resumes (test_survival_v03.SurvivalV03Tests.test_danger_interrupts_between_slots_and_zero_cash_recovery_resumes) ... ok
+test_ignoring_a_recovery_opportunity_can_end_life_early (test_survival_v03.SurvivalV03Tests.test_ignoring_a_recovery_opportunity_can_end_life_early) ... ok
+test_paces_have_real_income_recovery_and_strain_tradeoffs (test_survival_v03.SurvivalV03Tests.test_paces_have_real_income_recovery_and_strain_tradeoffs) ... ok
+test_push_history_records_completed_years_not_intentions (test_survival_v03.SurvivalV03Tests.test_push_history_records_completed_years_not_intentions) ... ok
+test_real_v02_save_migration_preserves_history_offer_and_random_progress (test_survival_v03.SurvivalV03Tests.test_real_v02_save_migration_preserves_history_offer_and_random_progress) ... ok
+test_steady_budget_and_resources_do_not_automatically_saturate (test_survival_v03.SurvivalV03Tests.test_steady_budget_and_resources_do_not_automatically_saturate) ... ok
+test_unsupported_versions_and_invalid_paces_are_rejected (test_survival_v03.SurvivalV03Tests.test_unsupported_versions_and_invalid_paces_are_rejected) ... ok
+test_actual_different_lives_share_world_prefix (test_world.WorldLifeTests.test_actual_different_lives_share_world_prefix) ... ok
+test_annual_settlement_uses_current_macro_forecast_function (test_world.WorldLifeTests.test_annual_settlement_uses_current_macro_forecast_function) ... ok
+test_browser_number_roundtrip_can_resume_and_continue (test_world.WorldLifeTests.test_browser_number_roundtrip_can_resume_and_continue) ... ok
+test_every_third_slot_prefers_society_but_preserves_first_job (test_world.WorldLifeTests.test_every_third_slot_prefers_society_but_preserves_first_job) ... ok
+test_new_calendar_relative_npcs_and_readonly_view (test_world.WorldLifeTests.test_new_calendar_relative_npcs_and_readonly_view) ... ok
+test_old_real_saves_keep_history_current_choice_and_rng (test_world.WorldLifeTests.test_old_real_saves_keep_history_current_choice_and_rng) ... ok
+test_player_random_calls_do_not_change_macro_history (test_world.WorldLifeTests.test_player_random_calls_do_not_change_macro_history) ... ok
+test_world_conditions_and_player_write_boundary (test_world.WorldLifeTests.test_world_conditions_and_player_write_boundary) ... ok
+test_world_context_contains_related_facts_but_never_future (test_world.WorldLifeTests.test_world_context_contains_related_facts_but_never_future) ... ok
+test_batched_stepped_and_json_resumed_worlds_match (test_world.WorldRuleTests.test_batched_stepped_and_json_resumed_worlds_match) ... ok
+test_cooldown_once_and_rechecked_facility_state (test_world.WorldRuleTests.test_cooldown_once_and_rechecked_facility_state) ... ok
+test_derived_seeds_are_safe_javascript_integers (test_world.WorldRuleTests.test_derived_seeds_are_safe_javascript_integers) ... ok
+test_invalid_catalog_and_world_rejected_without_mutation (test_world.WorldRuleTests.test_invalid_catalog_and_world_rejected_without_mutation) ... ok
+test_metrics_clip_actual_change_and_modes_remain_exclusive (test_world.WorldRuleTests.test_metrics_clip_actual_change_and_modes_remain_exclusive) ... ok
+test_modifiers_bounded_and_view_has_only_past (test_world.WorldRuleTests.test_modifiers_bounded_and_view_has_only_past) ... ok
+test_orbital_failure_blocks_forecasts_until_repair_and_reconnection (test_world_content.WorldContentLifecycleTests.test_orbital_failure_blocks_forecasts_until_repair_and_reconnection) ... ok
+test_outpost_construction_reserves_energy_before_withdrawal_risk (test_world_content.WorldContentLifecycleTests.test_outpost_construction_reserves_energy_before_withdrawal_risk) ... ok
+test_second_algorithm_incident_can_be_audited_and_repaired_again (test_world_content.WorldContentLifecycleTests.test_second_algorithm_incident_can_be_audited_and_repaired_again) ... ok
+
+----------------------------------------------------------------------
+Ran 121 tests in 251.966s
+
+OK

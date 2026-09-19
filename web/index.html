@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f1e8">
+  <title>浮生 · 青溪镇的人生记事</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='4' fill='%23435340'/%3E%3Cpath d='M12 44h40v8H12zM20 28h24v8H20zM28 12h8v36h-8z' fill='%23f4f1e8'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="浮生首页"><span class="brand-mark" aria-hidden="true">生</span><span class="brand-name">浮生<span class="brand-caption">青溪镇的人生记事</span></span></a>
+      <nav id="navigation" class="navigation" aria-label="游戏导航" hidden>
+        <button data-tab="life" class="nav-button active">这一刻</button>
+        <button data-tab="people" class="nav-button">人间来往</button>
+        <button data-tab="world" class="nav-button">时代纪事</button>
+        <button data-tab="timeline" class="nav-button">人生年表</button>
+        <button data-tab="biography" class="nav-button">人物志</button>
+      </nav>
+      <div class="header-actions"><span id="save-status" class="save-status">一座小城，许多种人生</span><button id="menu-button" class="icon-button" title="存档与设置" aria-label="存档与设置" hidden></button></div>
+    </header>
+    <main id="app" tabindex="-1"><div class="loading"><span class="pixel-loader"></span><p>小城正在醒来。</p></div></main>
+    <footer class="footer"><span><i class="tiny-square"></i> 青溪镇 · 慢慢走过这一生</span><span id="footer-right">选择会留下回声</span></footer>
+  </div>
+  <div id="toast" role="status" aria-live="polite" hidden></div>
+  <dialog id="settings-dialog" class="dialog"><div class="dialog-top"><span class="eyebrow">人生的行囊</span><button class="icon-button close-dialog" aria-label="关闭设置">×</button></div><h2>把这一程，收好。</h2><p class="muted">每次选择后会自动保存在当前浏览器。你也可以带走一份存档，下次从这里继续。</p><div class="dialog-actions"><button id="export-save" class="button primary">导出当前存档 <span>↓</span></button><button id="import-save" class="button secondary">读取存档 <span>↑</span></button><button id="export-backup" class="button secondary" hidden>导出升级前备份 <span>↓</span></button><button id="restart" class="button text-button">开始另一段人生 <span>↗</span></button></div><p class="small muted">读取或开始另一段人生会替换当前自动存档。</p></dialog>
+  <dialog id="new-dialog" class="dialog"><div class="dialog-top"><span class="eyebrow">再启一页</span><button class="icon-button close-dialog" aria-label="取消新人生">×</button></div><h2>新的人生，从名字开始。</h2><div id="new-form-container"></div></dialog>
+  <input id="save-file" type="file" accept="application/json,.json" hidden>
+</body>
+</html>

@@ -1,0 +1,6873 @@
+{
+  "version": "0.4.0",
+  "domains": [
+    {
+      "id": "economy",
+      "label": "经济与机会",
+      "scope": "national",
+      "description": "生产、投资与分配如何改变机会和日常成本。"
+    },
+    {
+      "id": "labor",
+      "label": "劳动与就业",
+      "scope": "national",
+      "description": "岗位、劳动组织与技术使用之间的取舍。"
+    },
+    {
+      "id": "housing",
+      "label": "住房与城市",
+      "scope": "national",
+      "description": "住处、土地与城市配套的扩展、空置及调整。"
+    },
+    {
+      "id": "education",
+      "label": "教育与知识",
+      "scope": "national",
+      "description": "不同人能否学习，以及知识怎样积累和流通。"
+    },
+    {
+      "id": "health",
+      "label": "公共卫生与照护",
+      "scope": "national",
+      "description": "公共健康、照护网络与服务可及性的变化。"
+    },
+    {
+      "id": "population",
+      "label": "人口与迁移",
+      "scope": "national",
+      "description": "人口结构、迁入迁出和共同生活的承载能力。"
+    },
+    {
+      "id": "culture",
+      "label": "文化与共同生活",
+      "scope": "national",
+      "description": "语言、记忆、公共空间和文化表达的不同道路。"
+    },
+    {
+      "id": "information",
+      "label": "信息与传播",
+      "scope": "national",
+      "description": "查询、新闻、平台传播和核实信息的条件。"
+    },
+    {
+      "id": "governance",
+      "label": "治理与公共能力",
+      "scope": "national",
+      "description": "协商、集中和分散治理怎样影响公共事务。"
+    },
+    {
+      "id": "rights",
+      "label": "权利与公民生活",
+      "scope": "national",
+      "description": "申诉、隐私、通行与公共参与的制度变化。"
+    },
+    {
+      "id": "trade",
+      "label": "国际贸易与往来",
+      "scope": "international",
+      "description": "各邦之间的交换、封锁、替代路线与共同标准。"
+    },
+    {
+      "id": "conflict",
+      "label": "战争与和平",
+      "scope": "international",
+      "description": "对峙、冲突、停火与监督如何改变外部风险。"
+    },
+    {
+      "id": "energy",
+      "label": "能源转型",
+      "scope": "planetary",
+      "description": "供能结构、可靠性及先进能源验证的成败。"
+    },
+    {
+      "id": "food",
+      "label": "食物与农业",
+      "scope": "planetary",
+      "description": "种植、保藏、粮食分配和对外部投入的依赖。"
+    },
+    {
+      "id": "infrastructure",
+      "label": "基础设施",
+      "scope": "national",
+      "description": "供水、供电、交通与防护设施的建设和失效。"
+    },
+    {
+      "id": "ecology",
+      "label": "生态与资源",
+      "scope": "planetary",
+      "description": "流域、土壤、湿地和资源使用的长期负担。"
+    },
+    {
+      "id": "climate",
+      "label": "气候与适应",
+      "scope": "planetary",
+      "description": "气候压力、共同监测及适应路线。"
+    },
+    {
+      "id": "disaster",
+      "label": "自然灾害与修复",
+      "scope": "planetary",
+      "description": "地震、洪水和风暴如何考验已经存在的防护。"
+    },
+    {
+      "id": "technology",
+      "label": "技术与人工智能",
+      "scope": "frontier",
+      "description": "开放研究、平台、自动化验证和失败后的修订。"
+    },
+    {
+      "id": "space",
+      "label": "太空与前沿",
+      "scope": "frontier",
+      "description": "具备地面基础之后的轨道设施和有限定居尝试。"
+    }
+  ],
+  "events": [
+    {
+      "id": "economy.parts_cluster",
+      "domain": "economy",
+      "scope": "national",
+      "title": "沿线零件作坊形成协作圈",
+      "text": "通商走廊沿线的作坊开始共用检验和运输服务，受过训练的工人能接到更稳定的订单。集中生产也增加了河岸的用地和排放负担。",
+      "requires": [
+        {
+          "path": "world.flags.regional_corridor_alive",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.qualified_workforce",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": 10
+        },
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": 7
+        },
+        {
+          "op": "metric",
+          "key": "ecology",
+          "delta": -4
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 3
+        },
+        {
+          "op": "flag",
+          "key": "export_cluster_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "expansion",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "economy.credit_expansion",
+      "domain": "economy",
+      "scope": "national",
+      "title": "新项目的融资窗口放宽",
+      "text": "多家公共与民间出资机构放宽项目融资，工地和小厂同时增加订单。资金更容易流向有抵押物的人，地价与原料报价开始上行。",
+      "requires": [
+        {
+          "path": "world.metrics.institutional_capacity",
+          "op": "gte",
+          "value": 45
+        },
+        {
+          "path": "world.metrics.prosperity",
+          "op": "gte",
+          "value": 45
+        },
+        {
+          "path": "world.flags.credit_wave",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 4,
+      "cooldown": 12,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": 8
+        },
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "inequality",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 7
+        },
+        {
+          "op": "flag",
+          "key": "credit_wave",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "expansion",
+        "risk"
+      ]
+    },
+    {
+      "id": "economy.credit_correction",
+      "domain": "economy",
+      "scope": "national",
+      "title": "扩张中的账目开始收缩",
+      "text": "成本上涨后，一批项目无法按原计划回款，出资机构收紧续贷。订单和岗位减少，原料抢购带来的价格压力也逐渐退去。",
+      "requires": [
+        {
+          "path": "world.flags.credit_wave",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.cost_pressure",
+          "op": "gte",
+          "value": 60
+        }
+      ],
+      "weight": 3,
+      "cooldown": 10,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -9
+        },
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": -5
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": -6
+        },
+        {
+          "op": "metric",
+          "key": "inequality",
+          "delta": 3
+        },
+        {
+          "op": "flag",
+          "key": "credit_wave",
+          "value": false
+        },
+        {
+          "op": "flag",
+          "key": "capital_audit_needed",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "risk",
+        "adjustment"
+      ]
+    },
+    {
+      "id": "economy.maintenance_shift",
+      "domain": "economy",
+      "scope": "national",
+      "title": "预算转向修旧而非新建",
+      "text": "各地把一批新建项目推迟，先修复老市场、设备和供用设施。维修岗位增加了，但短期产出和可用于其他计划的预算受到挤压。",
+      "requires": [
+        {
+          "path": "world.metrics.infrastructure",
+          "op": "lte",
+          "value": 52
+        }
+      ],
+      "weight": 3,
+      "cooldown": 10,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "infrastructure",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "repair",
+        "alternative"
+      ]
+    },
+    {
+      "id": "economy.local_exchange",
+      "domain": "economy",
+      "scope": "national",
+      "title": "合作社建立就近交换网络",
+      "text": "劳动合作社把仓储和结算接在一起，更多日常用品在附近周转。运输成本下降，外地供货者进入这套网络却变得更难。",
+      "requires": [
+        {
+          "path": "world.flags.labor_coops_ready",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": -3
+        },
+        {
+          "op": "metric",
+          "key": "trade_openness",
+          "delta": -3
+        },
+        {
+          "op": "flag",
+          "key": "local_exchange_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "alternative",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "economy.shared_services_levy",
+      "domain": "economy",
+      "scope": "national",
+      "title": "公开账本后的公共分担方案",
+      "text": "公开账本引出一次关于差距的讨论，各地同意把更多收入用于共同服务。较富裕的机构承担更多费用，一些扩张计划因此放缓。",
+      "requires": [
+        {
+          "path": "world.flags.public_ledger_ready",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.inequality",
+          "op": "gte",
+          "value": 58
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "inequality",
+          "delta": -8
+        },
+        {
+          "op": "metric",
+          "key": "public_services",
+          "delta": 7
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 2
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "repair",
+        "distribution",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "labor.training_compacts",
+      "domain": "labor",
+      "scope": "national",
+      "title": "训练网络接上实际岗位",
+      "text": "已有的学徒课程与用工单位签下带薪实习安排，结业者能带着作品应聘。训练与监督需要持续经费，单位也不能再把全部成本转给新人。",
+      "requires": [
+        {
+          "path": "world.flags.apprenticeship_network_ready",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": 8
+        },
+        {
+          "op": "metric",
+          "key": "technology",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "inequality",
+          "delta": -3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 3
+        },
+        {
+          "op": "flag",
+          "key": "qualified_workforce",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "expansion",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "labor.automation_shift",
+      "domain": "labor",
+      "scope": "national",
+      "title": "自动化先改变了重复岗位",
+      "text": "已经运行的自动化服务被用于排单、分拣和基础文书，产出增加，部分商品的成本下降。重复性岗位缩减，收益更多集中在持有系统的机构。",
+      "requires": [
+        {
+          "path": "world.flags.automation_services_alive",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": -8
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": 7
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": -2
+        },
+        {
+          "op": "metric",
+          "key": "inequality",
+          "delta": 6
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "risk",
+        "alternative",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "labor.worktime_compacts",
+      "domain": "labor",
+      "scope": "national",
+      "title": "协商缩短连续劳动时段",
+      "text": "用工方与劳动团体商定拆分过长的班次，并增加轮换岗位。恢复时间改善了健康与就业机会，单位成本上升，短期产出略有回落。",
+      "requires": [
+        {
+          "path": "world.modes.governance",
+          "op": "eq",
+          "value": "negotiated"
+        },
+        {
+          "path": "world.metrics.social_trust",
+          "op": "gte",
+          "value": 48
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "alternative",
+        "repair"
+      ]
+    },
+    {
+      "id": "labor.wage_arrears",
+      "domain": "labor",
+      "scope": "national",
+      "title": "几条生产链出现拖欠",
+      "text": "原料和生活成本同时上行，一些承包单位延迟支付报酬。受影响的人联合登记欠款，形成新的申诉渠道，但眼前的就业与信任仍然受损。",
+      "requires": [
+        {
+          "path": "world.metrics.cost_pressure",
+          "op": "gte",
+          "value": 62
+        },
+        {
+          "path": "world.flags.wage_arrears_active",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 3,
+      "cooldown": 10,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": -4
+        },
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": -7
+        },
+        {
+          "op": "metric",
+          "key": "civil_liberties",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "inequality",
+          "delta": 5
+        },
+        {
+          "op": "flag",
+          "key": "wage_arrears_active",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "risk",
+        "rights"
+      ]
+    },
+    {
+      "id": "labor.arrears_settlement",
+      "domain": "labor",
+      "scope": "national",
+      "title": "拖欠清单进入公开清偿",
+      "text": "登记过的欠款借助公开账目逐笔核对，部分劳动者先拿回了应得报酬。清偿挤占机构的周转和新投资，换来较稳定的岗位与较小的收入差距。",
+      "requires": [
+        {
+          "path": "world.flags.wage_arrears_active",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.public_ledger_ready",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "inequality",
+          "delta": -6
+        },
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 3
+        },
+        {
+          "op": "flag",
+          "key": "wage_arrears_active",
+          "value": false
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "repair",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "labor.cooperative_route",
+      "domain": "labor",
+      "scope": "national",
+      "title": "公共小屋里长出劳动合作社",
+      "text": "常在共同活动空间见面的人，把采购、接活和分配办法写成合作约定。岗位与收入分配更分散，开会、培训和共同设备也增加了经营成本。",
+      "requires": [
+        {
+          "path": "world.flags.shared_spaces_ready",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.social_trust",
+          "op": "gte",
+          "value": 50
+        },
+        {
+          "path": "world.modes.governance",
+          "op": "eq",
+          "value": "negotiated"
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "inequality",
+          "delta": -5
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        },
+        {
+          "op": "flag",
+          "key": "labor_coops_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "alternative",
+        "expansion",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "housing.rent_compacts",
+      "domain": "housing",
+      "scope": "national",
+      "title": "合作租住把维修费摊开",
+      "text": "劳动合作社与住户共同管理一批租住空间，租期与维修清单开始公开。日常费用下降，但筹办占用资金，也给公共协调人员增加了工作。",
+      "requires": [
+        {
+          "path": "world.flags.labor_coops_ready",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": -7
+        },
+        {
+          "op": "metric",
+          "key": "infrastructure",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -3
+        },
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": -2
+        },
+        {
+          "op": "flag",
+          "key": "rent_compacts_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "alternative",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "housing.edge_expansion",
+      "domain": "housing",
+      "scope": "national",
+      "title": "城市边缘成片动工",
+      "text": "融资窗口宽松后，新住区和连接道路向城市边缘延伸，建筑岗位增加。土地与配套费用攀升，一部分原有生境被压缩。",
+      "requires": [
+        {
+          "path": "world.flags.credit_wave",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "infrastructure",
+          "delta": 8
+        },
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "demographic_pressure",
+          "delta": -3
+        },
+        {
+          "op": "metric",
+          "key": "ecology",
+          "delta": -7
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        },
+        {
+          "op": "flag",
+          "key": "new_district_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "expansion",
+        "risk",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "housing.vacancy_hollowing",
+      "domain": "housing",
+      "scope": "national",
+      "title": "新住区亮灯的窗户变少",
+      "text": "新住区的岗位承诺没有兑现，部分房间空置，沿街服务难以维持。租金开始回落，配套设施和住户之间的信任却在流失。",
+      "requires": [
+        {
+          "path": "world.flags.new_district_ready",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.employment",
+          "op": "lte",
+          "value": 47
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "infrastructure",
+          "delta": -5
+        },
+        {
+          "op": "metric",
+          "key": "public_services",
+          "delta": -4
+        },
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": -6
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": -6
+        },
+        {
+          "op": "flag",
+          "key": "vacancy_problem",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "risk",
+        "failure"
+      ]
+    },
+    {
+      "id": "housing.safe_relocation",
+      "domain": "housing",
+      "scope": "national",
+      "title": "受损住户迁入较安全地段",
+      "text": "受灾或被划入高风险区的住户，分批迁入已有防护与服务的地段。健康风险减轻，但接收地区的用房、配套和生活成本承受了额外压力。",
+      "requires": [
+        {
+          "path": "world.flags.housing_displaced",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "infrastructure",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "demographic_pressure",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 6
+        },
+        {
+          "op": "flag",
+          "key": "housing_displaced",
+          "value": false
+        },
+        {
+          "op": "flag",
+          "key": "safe_housing_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "repair",
+        "adaptation",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "housing.accessible_stock",
+      "domain": "housing",
+      "scope": "national",
+      "title": "照护网络推动住处改造",
+      "text": "照护网络把居民日常出行的难处列成清单，旧住处逐步增设适合行动不便者的设施。服务和健康改善了，改造费用与占用的施工资源也十分具体。",
+      "requires": [
+        {
+          "path": "world.flags.care_network_ready",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "public_services",
+          "delta": 7
+        },
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -2
+        },
+        {
+          "op": "flag",
+          "key": "accessible_districts_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "adaptation",
+        "expansion",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "housing.shared_land_rule",
+      "domain": "housing",
+      "scope": "national",
+      "title": "土地使用改走共同协商",
+      "text": "一些地区把居住用地的使用和收益安排交给公开协商，降低短期转手带来的压力。差距与住房费用有所缓和，开发速度和投资回收则变慢。",
+      "requires": [
+        {
+          "path": "world.modes.governance",
+          "op": "eq",
+          "value": "negotiated"
+        },
+        {
+          "path": "world.metrics.social_trust",
+          "op": "gte",
+          "value": 53
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "inequality",
+          "delta": -4
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": -4
+        },
+        {
+          "op": "metric",
+          "key": "infrastructure",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -3
+        },
+        {
+          "op": "flag",
+          "key": "land_compact_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "alternative",
+        "repair"
+      ]
+    },
+    {
+      "id": "education.apprenticeship_network",
+      "domain": "education",
+      "scope": "national",
+      "title": "学校与作坊接成训练网络",
+      "text": "学校、作坊和社区教室共用课程与练习设备，学习不再只有一条入口。岗位基础随之改善，公共经费要承担设备维护和带教时间。",
+      "requires": [
+        {
+          "path": "world.metrics.public_services",
+          "op": "gte",
+          "value": 43
+        },
+        {
+          "path": "world.metrics.knowledge_access",
+          "op": "gte",
+          "value": 43
+        }
+      ],
+      "weight": 5,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 7
+        },
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 5
+        },
+        {
+          "op": "flag",
+          "key": "apprenticeship_network_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "expansion"
+      ]
+    },
+    {
+      "id": "education.open_science",
+      "domain": "education",
+      "scope": "national",
+      "title": "跨地区课堂共享研究资料",
+      "text": "一批教学与研究机构开放资料和可重复的练习，让较小的学校也能参与合作。知识与技术积累加快，资料维护和协调占用资金与人员。",
+      "requires": [
+        {
+          "path": "world.metrics.technology",
+          "op": "gte",
+          "value": 42
+        },
+        {
+          "path": "world.metrics.social_trust",
+          "op": "gte",
+          "value": 45
+        },
+        {
+          "path": "world.modes.technology",
+          "op": "ne",
+          "value": "restricted"
+        }
+      ],
+      "weight": 4,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 9
+        },
+        {
+          "op": "metric",
+          "key": "technology",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": -2
+        },
+        {
+          "op": "flag",
+          "key": "research_network_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "expansion",
+        "alternative"
+      ]
+    },
+    {
+      "id": "education.local_curriculum",
+      "domain": "education",
+      "scope": "national",
+      "title": "被保存的语言回到课堂",
+      "text": "文化档案中保存的地方语言和生活知识，被整理成可选择的课程。更多家庭能理解课堂内容，教师培训与教材编写需要持续投入。",
+      "requires": [
+        {
+          "path": "world.flags.language_archive_ready",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 3
+        },
+        {
+          "op": "flag",
+          "key": "local_curriculum_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "adaptation",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "education.closed_campus",
+      "domain": "education",
+      "scope": "national",
+      "title": "紧张局势压缩学术往来",
+      "text": "邦际紧张下，一些跨境课程和访问计划被暂停，有限人员集中维持本地重点项目。协调能力暂时提高，知识流通、自由讨论和技术互补受到损失。",
+      "requires": [
+        {
+          "path": "world.metrics.international_tension",
+          "op": "gte",
+          "value": 65
+        }
+      ],
+      "weight": 3,
+      "cooldown": 12,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": -8
+        },
+        {
+          "op": "metric",
+          "key": "civil_liberties",
+          "delta": -3
+        },
+        {
+          "op": "metric",
+          "key": "technology",
+          "delta": -4
+        },
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": 4
+        },
+        {
+          "op": "flag",
+          "key": "campus_exchange_limited",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "risk",
+        "restricted_route"
+      ]
+    },
+    {
+      "id": "education.traveling_classrooms",
+      "domain": "education",
+      "scope": "national",
+      "title": "临时教室追上迁入的人口",
+      "text": "新迁入地区出现移动教室和共享课表，孩子与成年人都能补上中断的学习。服务扩展挤占其他设施和预算，师资仍需要慢慢补齐。",
+      "requires": [
+        {
+          "path": "world.flags.new_arrivals",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.knowledge_access",
+          "op": "lte",
+          "value": 67
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "public_services",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "infrastructure",
+          "delta": -2
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        },
+        {
+          "op": "flag",
+          "key": "learning_bridge_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "repair",
+        "adaptation",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "education.tuition_split",
+      "domain": "education",
+      "scope": "national",
+      "title": "昂贵课程和普通课堂拉开距离",
+      "text": "部分机构用高额费用换取先进设备，少数学生接触到更前沿的训练。技术能力增长的同时，能进入这些课程的人越来越集中。",
+      "requires": [
+        {
+          "path": "world.metrics.inequality",
+          "op": "gte",
+          "value": 58
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "technology",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": -6
+        },
+        {
+          "op": "metric",
+          "key": "inequality",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 3
+        },
+        {
+          "op": "flag",
+          "key": "tuition_gap_active",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "risk",
+        "unequal_route"
+      ]
+    },
+    {
+      "id": "health.clinic_network",
+      "domain": "health",
+      "scope": "national",
+      "title": "供水改善后基层照护扩展",
+      "text": "稳定供水覆盖的新片区增设基层照护点，清洁条件和可获得的日常支持一起改善。人员与运营支出增加，不能只靠建成一间屋子维持服务。",
+      "requires": [
+        {
+          "path": "world.flags.water_network_alive",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": 10
+        },
+        {
+          "op": "metric",
+          "key": "public_services",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 5
+        },
+        {
+          "op": "flag",
+          "key": "clinic_network_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "expansion",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "health.infection_wave",
+      "domain": "health",
+      "scope": "national",
+      "title": "拥挤地区出现公共健康警报",
+      "text": "配套跟不上人口的地区出现集中健康风险，许多工作与公共活动被迫调整。调查人员公开监测资料，外界更了解薄弱环节，但眼前损失尚未恢复。",
+      "requires": [
+        {
+          "path": "world.metrics.demographic_pressure",
+          "op": "gte",
+          "value": 57
+        },
+        {
+          "path": "world.metrics.infrastructure",
+          "op": "lte",
+          "value": 60
+        },
+        {
+          "path": "world.flags.health_alert_active",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 3,
+      "cooldown": 10,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": -10
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -5
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 4
+        },
+        {
+          "op": "flag",
+          "key": "health_alert_active",
+          "value": true
+        }
+      ],
+      "severity": 3,
+      "tags": [
+        "risk",
+        "failure"
+      ]
+    },
+    {
+      "id": "health.mobile_care",
+      "domain": "health",
+      "scope": "national",
+      "title": "协作协议把照护送到缺口处",
+      "text": "公共服务协作协议调来流动照护人员，优先覆盖已经发出警报的地区。健康与服务逐渐恢复，其他窗口暂时分出了人手，经费负担仍在。",
+      "requires": [
+        {
+          "path": "world.flags.health_alert_active",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.service_accord_ready",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": 8
+        },
+        {
+          "op": "metric",
+          "key": "public_services",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": -2
+        },
+        {
+          "op": "flag",
+          "key": "health_alert_active",
+          "value": false
+        },
+        {
+          "op": "flag",
+          "key": "mobile_care_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "repair",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "health.longterm_care",
+      "domain": "health",
+      "scope": "national",
+      "title": "长期照护从家里延伸到社区",
+      "text": "照护需求增加后，社区开始共用轮班人员和日间支持设施。公共健康与服务得到改善，照护岗位增加，也需要稳定筹措费用。",
+      "requires": [
+        {
+          "path": "world.metrics.demographic_pressure",
+          "op": "gte",
+          "value": 52
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": 7
+        },
+        {
+          "op": "metric",
+          "key": "public_services",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 6
+        },
+        {
+          "op": "flag",
+          "key": "longterm_care_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "expansion",
+        "adaptation"
+      ]
+    },
+    {
+      "id": "health.access_gap",
+      "domain": "health",
+      "scope": "national",
+      "title": "设备更新快于服务覆盖",
+      "text": "资源集中的机构引进新设备，较偏远地区的日常服务却继续缺人。技术水平有所提高，公共健康和费用负担的差距更加明显。",
+      "requires": [
+        {
+          "path": "world.metrics.inequality",
+          "op": "gte",
+          "value": 61
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "technology",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": -7
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "inequality",
+          "delta": 3
+        },
+        {
+          "op": "flag",
+          "key": "care_access_gap",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "risk",
+        "unequal_route"
+      ]
+    },
+    {
+      "id": "health.shared_procurement",
+      "domain": "health",
+      "scope": "national",
+      "title": "区域共同采购缓解照护费用",
+      "text": "区域内的服务机构集中采购常用设备与用品，把一部分节省留给覆盖不足的地区。服务更可及，但采购体系更依赖少数区域供应者。",
+      "requires": [
+        {
+          "path": "world.flags.care_access_gap",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.modes.trade",
+          "op": "eq",
+          "value": "regional"
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "public_services",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": -5
+        },
+        {
+          "op": "metric",
+          "key": "trade_openness",
+          "delta": -3
+        },
+        {
+          "op": "flag",
+          "key": "care_access_gap",
+          "value": false
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "repair",
+        "alternative",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "population.arrival_wave",
+      "domain": "population",
+      "scope": "national",
+      "title": "新的口音来到车站",
+      "text": "区域货运走廊通车后，招工告示贴到了更远的城镇。新到的人带来手艺和生意，合租房、识字班与公共窗口却一下子排起长队。",
+      "requires": [
+        {
+          "path": "world.flags.regional_corridor_alive",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.employment",
+          "op": "gte",
+          "value": 55
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "demographic_pressure",
+          "delta": 8
+        },
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": -3
+        },
+        {
+          "op": "flag",
+          "key": "new_arrivals",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "migration",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "population.aging_transition",
+      "domain": "population",
+      "scope": "national",
+      "title": "一批熟练工同时退休",
+      "text": "几个行业的老师傅接连到了退休年纪，护理站和岗位接班都显得吃紧。有人把多出来的白天用在邻里值班室，门口又摆起了修伞和代读信的小桌。",
+      "requires": [
+        {
+          "path": "world.metrics.public_health",
+          "op": "gte",
+          "value": 60
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "demographic_pressure",
+          "delta": 8
+        },
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": -4
+        },
+        {
+          "op": "metric",
+          "key": "public_services",
+          "delta": -3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": 3
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "aging",
+        "adaptation"
+      ]
+    },
+    {
+      "id": "population.return_resettlement",
+      "domain": "population",
+      "scope": "international",
+      "title": "带着旧门牌回来",
+      "text": "停火后的身份凭证开始通用，离乡的人沿着恢复的车次寻找亲友。闲置铺面重新开门，安置住房和供水管线却还跟不上归来的人数。",
+      "requires": [
+        {
+          "path": "world.flags.ceasefire_active",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.return_documents_ready",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "demographic_pressure",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "infrastructure",
+          "delta": -4
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 3
+        },
+        {
+          "op": "flag",
+          "key": "new_arrivals",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "return",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "population.care_sharing",
+      "domain": "population",
+      "scope": "national",
+      "title": "照护站排出轮值表",
+      "text": "长期照护网络把家属、付薪照护员和邻里值班接在了一起，独自照护的人终于能喘口气。轮班仍占用不少工作时间，培训与补贴也需要持续出资。",
+      "requires": [
+        {
+          "path": "world.flags.longterm_care_ready",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "demographic_pressure",
+          "delta": -6
+        },
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": -3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 5
+        },
+        {
+          "op": "flag",
+          "key": "care_network_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "care",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "population.mobility_barrier",
+      "domain": "population",
+      "scope": "international",
+      "title": "边界上的新检查站",
+      "text": "紧张局势下，集中管理机构收紧了跨区流动，登记册比从前厚了许多。本地窗口短暂缓解了接待压力，异地求职和探亲的人却常在关卡折返。",
+      "requires": [
+        {
+          "path": "world.modes.governance",
+          "op": "eq",
+          "value": "centralized"
+        },
+        {
+          "path": "world.metrics.international_tension",
+          "op": "gte",
+          "value": 60
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "demographic_pressure",
+          "delta": -5
+        },
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": -7
+        },
+        {
+          "op": "metric",
+          "key": "civil_liberties",
+          "delta": -6
+        },
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": 3
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "restriction",
+        "route"
+      ]
+    },
+    {
+      "id": "population.settlement_compact",
+      "domain": "population",
+      "scope": "national",
+      "title": "安置楼有了邻里议事桌",
+      "text": "搬入安全住房的新来居民与老住户一起商量托管、清洁和公共空间的使用。误会慢慢减少，新增的服务岗与翻修仍需要大家分担费用。",
+      "requires": [
+        {
+          "path": "world.flags.new_arrivals",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.safe_housing_ready",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "demographic_pressure",
+          "delta": -5
+        },
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "public_services",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 5
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "settlement",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "culture.language_archive",
+      "domain": "culture",
+      "scope": "national",
+      "title": "把不同的乡音录下来",
+      "text": "图书馆与民间社团整理方言、歌谣和迁徙故事，录音箱里既有节庆唱段，也有菜市场的喊价声。资料向公众开放，整理和翻译却占用了馆舍与经费。",
+      "requires": [
+        {
+          "path": "world.metrics.technology",
+          "op": "gte",
+          "value": 40
+        },
+        {
+          "path": "world.metrics.knowledge_access",
+          "op": "gte",
+          "value": 40
+        }
+      ],
+      "weight": 4,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 3
+        },
+        {
+          "op": "flag",
+          "key": "language_archive_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "memory",
+        "expansion"
+      ]
+    },
+    {
+      "id": "culture.shared_spaces",
+      "domain": "culture",
+      "scope": "national",
+      "title": "旧礼堂重新亮灯",
+      "text": "闲置礼堂被改成排练、修理与邻里聚会共用的场所，钥匙由几个轮值小组保管。热闹的灯光延续到夜里，维护和隔音的账单也按月到来。",
+      "requires": [
+        {
+          "path": "world.metrics.infrastructure",
+          "op": "gte",
+          "value": 40
+        },
+        {
+          "path": "world.metrics.social_trust",
+          "op": "gte",
+          "value": 40
+        }
+      ],
+      "weight": 4,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": 7
+        },
+        {
+          "op": "metric",
+          "key": "public_services",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        },
+        {
+          "op": "flag",
+          "key": "shared_spaces_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "commons",
+        "expansion"
+      ]
+    },
+    {
+      "id": "culture.heritage_dispute",
+      "domain": "culture",
+      "scope": "national",
+      "title": "新区边缘的一排老屋",
+      "text": "新区道路规划穿过旧街，住户、施工队与记忆档案馆各拿出一张不同的地图。公开讨论让旧街的故事被更多人知道，工程停顿与争执也消耗了彼此的耐心。",
+      "requires": [
+        {
+          "path": "world.flags.new_district_ready",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": -6
+        },
+        {
+          "op": "metric",
+          "key": "infrastructure",
+          "delta": -3
+        },
+        {
+          "op": "metric",
+          "key": "civil_liberties",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 3
+        },
+        {
+          "op": "flag",
+          "key": "heritage_forum_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "conflict",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "culture.festival_routes",
+      "domain": "culture",
+      "scope": "international",
+      "title": "沿海路巡回的节庆",
+      "text": "开放的航路把剧团、手工艺人与观众带到不同港口，街边小店的座位坐得满满当当。交通和临时舞台带来收入，也留下了更高的能耗与清运负担。",
+      "requires": [
+        {
+          "path": "world.modes.trade",
+          "op": "eq",
+          "value": "open"
+        },
+        {
+          "path": "world.metrics.energy_security",
+          "op": "gte",
+          "value": 50
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "ecology",
+          "delta": -4
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 2
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "exchange",
+        "route"
+      ]
+    },
+    {
+      "id": "culture.cultural_closure",
+      "domain": "culture",
+      "scope": "national",
+      "title": "只剩一套演出目录",
+      "text": "文化机构被并入统一的管理网络，经费和场地安排变得迅速。许多地方剧目和独立出版物却失去了公开的位置，讲述自身经历的声音少了下来。",
+      "requires": [
+        {
+          "path": "world.modes.governance",
+          "op": "eq",
+          "value": "centralized"
+        },
+        {
+          "path": "world.metrics.civil_liberties",
+          "op": "lte",
+          "value": 45
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": -7
+        },
+        {
+          "op": "metric",
+          "key": "civil_liberties",
+          "delta": -6
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "restriction",
+        "failure"
+      ]
+    },
+    {
+      "id": "culture.community_restoration",
+      "domain": "culture",
+      "scope": "national",
+      "title": "修回能继续生活的老街",
+      "text": "围绕旧街的争执最终转为逐户协商，方案保留了几间作坊，也为住户补上水电。修复比整片推倒更慢、更贵，一些原定商业项目缩小了规模。",
+      "requires": [
+        {
+          "path": "world.flags.heritage_forum_ready",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.modes.governance",
+          "op": "eq",
+          "value": "negotiated"
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "infrastructure",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": 8
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -2
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "repair",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "information.access_portal",
+      "domain": "information",
+      "scope": "national",
+      "title": "窗口旁多了一台查询机",
+      "text": "公开账本延伸成可检索的服务目录，远处居民也能查询办事材料和经费去向。纸质窗口仍需保留，机器维护、资料校对与值班培训添了新的开销。",
+      "requires": [
+        {
+          "path": "world.flags.public_ledger_ready",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 9
+        },
+        {
+          "op": "metric",
+          "key": "public_services",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        },
+        {
+          "op": "flag",
+          "key": "information_portal_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "access",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "information.local_media",
+      "domain": "information",
+      "scope": "national",
+      "title": "地方采编站重新招人",
+      "text": "几个城镇合办小型采编站，派人追踪水费、学校与车站的日常变化。报道能核对到具体窗口，采访、印刷和不依赖单一广告商的经费也要慢慢筹措。",
+      "requires": [
+        {
+          "path": "world.modes.governance",
+          "op": "eq",
+          "value": "negotiated"
+        },
+        {
+          "path": "world.metrics.social_trust",
+          "op": "gte",
+          "value": 35
+        }
+      ],
+      "weight": 4,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 7
+        },
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 3
+        },
+        {
+          "op": "flag",
+          "key": "local_media_alive",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "media",
+        "expansion"
+      ]
+    },
+    {
+      "id": "information.network_outage",
+      "domain": "information",
+      "scope": "national",
+      "title": "查询屏停在同一页",
+      "text": "老旧线路使公共查询网连续中断，远程办事与部分交易都被迫暂停。几个窗口重新启用纸质编号互相核对，排队虽然更慢，跨部门联络却留下了一套备用办法。",
+      "requires": [
+        {
+          "path": "world.flags.information_portal_ready",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.infrastructure",
+          "op": "lte",
+          "value": 45
+        }
+      ],
+      "weight": 3,
+      "cooldown": 12,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": -10
+        },
+        {
+          "op": "metric",
+          "key": "trade_openness",
+          "delta": -4
+        },
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": -4
+        },
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "outage",
+        "adaptation"
+      ]
+    },
+    {
+      "id": "information.rumor_wave",
+      "domain": "information",
+      "scope": "national",
+      "title": "转发比核实更快",
+      "text": "平台把几段未经核实的短讯推到许多人眼前，囤货与误会很快蔓延。有人开始整理原始记录，但补正的消息往往赶不上先前的流传。",
+      "requires": [
+        {
+          "path": "world.modes.technology",
+          "op": "eq",
+          "value": "platform"
+        },
+        {
+          "path": "world.flags.rumor_wave_active",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 3,
+      "cooldown": 10,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": -10
+        },
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 2
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 3
+        },
+        {
+          "op": "flag",
+          "key": "rumor_wave_active",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "misinformation",
+        "risk"
+      ]
+    },
+    {
+      "id": "information.verification_network",
+      "domain": "information",
+      "scope": "national",
+      "title": "把更正也送到街头",
+      "text": "地方采编站、图书馆和商铺把可核对的记录贴到各自门口，并持续追踪先前的传闻。信任一点点回来，采证与更正所需的人手远多于一次转发。",
+      "requires": [
+        {
+          "path": "world.flags.rumor_wave_active",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.local_media_alive",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 10
+        },
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": 7
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        },
+        {
+          "op": "flag",
+          "key": "rumor_wave_active",
+          "value": false
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "repair",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "information.platform_paywalls",
+      "domain": "information",
+      "scope": "national",
+      "title": "检索结果多了付费门",
+      "text": "平台把专业档案、课程与部分公共资料打包收费，订阅业务很快扩大。付得起费用的人查找更省时，学校和小店却不得不删去一些常用入口。",
+      "requires": [
+        {
+          "path": "world.modes.technology",
+          "op": "eq",
+          "value": "platform"
+        },
+        {
+          "path": "world.metrics.knowledge_access",
+          "op": "gte",
+          "value": 40
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": -8
+        },
+        {
+          "op": "metric",
+          "key": "inequality",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": 4
+        },
+        {
+          "op": "flag",
+          "key": "knowledge_fragmented",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "paywall",
+        "route"
+      ]
+    },
+    {
+      "id": "governance.public_ledger",
+      "domain": "governance",
+      "scope": "national",
+      "title": "公共账本摆上桌面",
+      "text": "公共机构开始逐项公布采购和维护账目，并安排窗口接受查询。问题更容易被看见，抄录、核验和答复也挤占了一部分原有办事人手。",
+      "requires": [
+        {
+          "path": "world.metrics.institutional_capacity",
+          "op": "gte",
+          "value": 40
+        },
+        {
+          "path": "world.modes.governance",
+          "op": "eq",
+          "value": "negotiated"
+        }
+      ],
+      "weight": 5,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": -2
+        },
+        {
+          "op": "flag",
+          "key": "public_ledger_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "transparency",
+        "expansion"
+      ]
+    },
+    {
+      "id": "governance.central_dispatch",
+      "domain": "governance",
+      "scope": "national",
+      "title": "几张调度表并成一张",
+      "text": "接连的服务积压促使各地把调度集中到同一个办公室，物资分配终于快了一些。地方议事空间随之缩小，未经统一安排的请求更难得到回应。",
+      "requires": [
+        {
+          "path": "world.metrics.institutional_capacity",
+          "op": "lte",
+          "value": 48
+        },
+        {
+          "path": "world.modes.governance",
+          "op": "ne",
+          "value": "centralized"
+        }
+      ],
+      "weight": 3,
+      "cooldown": 14,
+      "once": false,
+      "effects": [
+        {
+          "op": "mode",
+          "key": "governance",
+          "value": "centralized"
+        },
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": 10
+        },
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": -3
+        },
+        {
+          "op": "metric",
+          "key": "civil_liberties",
+          "delta": -6
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": -3
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "centralization",
+        "route"
+      ]
+    },
+    {
+      "id": "governance.regional_fragmentation",
+      "domain": "governance",
+      "scope": "national",
+      "title": "各地开始各排各的队",
+      "text": "采购审计的争议久未解决，原本就吃紧的跨区协调陷入互不承认单据的僵局。地方组织转而自行筹款和排定服务，居民对本地事务的发言变多，共用网络和边界两侧的待遇却进一步分裂。",
+      "requires": [
+        {
+          "path": "world.flags.audit_requested",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.institutional_capacity",
+          "op": "lte",
+          "value": 55
+        },
+        {
+          "path": "world.metrics.social_trust",
+          "op": "lte",
+          "value": 55
+        },
+        {
+          "path": "world.modes.governance",
+          "op": "ne",
+          "value": "fragmented"
+        }
+      ],
+      "weight": 3,
+      "cooldown": 14,
+      "once": false,
+      "effects": [
+        {
+          "op": "mode",
+          "key": "governance",
+          "value": "fragmented"
+        },
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": -8
+        },
+        {
+          "op": "metric",
+          "key": "public_services",
+          "delta": -5
+        },
+        {
+          "op": "metric",
+          "key": "civil_liberties",
+          "delta": 4
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "fragmentation",
+        "failure"
+      ]
+    },
+    {
+      "id": "governance.participatory_compact",
+      "domain": "governance",
+      "scope": "national",
+      "title": "把争议写进共同章程",
+      "text": "公开账本积累的议题被带进代表会议，各地完成争议账目的交叉核验，重新约定预算、复核与紧急调度的边界。协商多花了时间和经费，也让先前互不承认的请求有了共同入口。",
+      "requires": [
+        {
+          "path": "world.flags.public_ledger_ready",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.social_trust",
+          "op": "gte",
+          "value": 45
+        }
+      ],
+      "weight": 3,
+      "cooldown": 18,
+      "once": false,
+      "effects": [
+        {
+          "op": "mode",
+          "key": "governance",
+          "value": "negotiated"
+        },
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": 7
+        },
+        {
+          "op": "metric",
+          "key": "civil_liberties",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        },
+        {
+          "op": "flag",
+          "key": "audit_requested",
+          "value": false
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "negotiation",
+        "route"
+      ]
+    },
+    {
+      "id": "governance.procurement_scandal",
+      "domain": "governance",
+      "scope": "national",
+      "title": "两张单据上的同一批材料",
+      "text": "查询公共账目的人发现材料被重复记账，承包项目随即接受复核。调查公布了更多细节，停工和失望却先一步影响了街上的生意。",
+      "requires": [
+        {
+          "path": "world.flags.public_ledger_ready",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": -8
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -3
+        },
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 5
+        },
+        {
+          "op": "flag",
+          "key": "audit_requested",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "accountability",
+        "risk"
+      ]
+    },
+    {
+      "id": "governance.service_accord",
+      "domain": "governance",
+      "scope": "national",
+      "title": "不同窗口约定互相接件",
+      "text": "面对反复转交的求助，各地服务机构核对争议记录后签下互认协议，共用一套转送与回访记录。协调和培训增加了开支，失去联络的服务点也开始接回网络。",
+      "requires": [
+        {
+          "path": "world.metrics.institutional_capacity",
+          "op": "lte",
+          "value": 58
+        },
+        {
+          "path": "world.metrics.public_services",
+          "op": "lte",
+          "value": 65
+        }
+      ],
+      "weight": 4,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "mode",
+          "key": "governance",
+          "value": "negotiated"
+        },
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": 10
+        },
+        {
+          "op": "metric",
+          "key": "public_services",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 5
+        },
+        {
+          "op": "flag",
+          "key": "service_accord_ready",
+          "value": true
+        },
+        {
+          "op": "flag",
+          "key": "audit_requested",
+          "value": false
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "repair",
+        "coordination"
+      ]
+    },
+    {
+      "id": "rights.appeal_tribunals",
+      "domain": "rights",
+      "scope": "national",
+      "title": "申诉不再只剩一扇门",
+      "text": "公共账本公布后，独立复核窗口开始接受服务分配与收费争议。更多人能说明自己的处境，受理和核查却使机构短期内更忙，新的窗口也需要经费。",
+      "requires": [
+        {
+          "path": "world.flags.public_ledger_ready",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "civil_liberties",
+          "delta": 10
+        },
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": -3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": 4
+        },
+        {
+          "op": "flag",
+          "key": "appeals_access_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "appeal",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "rights.emergency_restrictions",
+      "domain": "rights",
+      "scope": "national",
+      "title": "临时限制留在告示栏上",
+      "text": "邦际紧张升级，紧急通告限制了集会、流动和部分通信，统一调度因此更容易推行。人们担心临时安排会一直延续，对公共承诺的信任也开始动摇。",
+      "requires": [
+        {
+          "path": "world.metrics.international_tension",
+          "op": "gte",
+          "value": 60
+        },
+        {
+          "path": "world.flags.rights_emergency_active",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 3,
+      "cooldown": 14,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "civil_liberties",
+          "delta": -10
+        },
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": -4
+        },
+        {
+          "op": "flag",
+          "key": "rights_emergency_active",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "emergency",
+        "risk"
+      ]
+    },
+    {
+      "id": "rights.sunset_review",
+      "domain": "rights",
+      "scope": "national",
+      "title": "逐条撤下临时告示",
+      "text": "协商会议逐项审查仍在施行的紧急限制，撤销了缺少继续依据的条款。恢复的空间让人愿意重新参与公共生活，复核工作也暂时占用了办事资源。",
+      "requires": [
+        {
+          "path": "world.flags.rights_emergency_active",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.modes.governance",
+          "op": "eq",
+          "value": "negotiated"
+        }
+      ],
+      "weight": 3,
+      "cooldown": 12,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "civil_liberties",
+          "delta": 9
+        },
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": -2
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 3
+        },
+        {
+          "op": "flag",
+          "key": "rights_emergency_active",
+          "value": false
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "review",
+        "repair"
+      ]
+    },
+    {
+      "id": "rights.algorithm_appeals",
+      "domain": "rights",
+      "scope": "national",
+      "title": "被系统拒绝的人带来凭证",
+      "text": "自动审核事故后，受影响的人获准要求人工复核，审查小组也开始核对模型与使用记录。部分岗位和服务资格得以恢复，处理积案与公开审计需要额外的人手。",
+      "requires": [
+        {
+          "path": "world.flags.algorithm_incident_active",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "civil_liberties",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": -2
+        },
+        {
+          "op": "flag",
+          "key": "algorithm_audit_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "audit",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "rights.return_documents",
+      "domain": "rights",
+      "scope": "international",
+      "title": "旧证件得到重新承认",
+      "text": "停火各方开设联合窗口，核验失散家庭的旧住址、工作记录与亲属证明。归来的人能够重新领取服务凭证，安置设施与接待人手也面临新的压力。",
+      "requires": [
+        {
+          "path": "world.flags.ceasefire_active",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "demographic_pressure",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "civil_liberties",
+          "delta": 7
+        },
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "infrastructure",
+          "delta": -2
+        },
+        {
+          "op": "flag",
+          "key": "return_documents_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "documentation",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "rights.data_protection",
+      "domain": "rights",
+      "scope": "national",
+      "title": "查询目录学会少留一点信息",
+      "text": "公共查询系统增加了用途说明、记录删除与异议入口，个人资料不再无限留存。改造让使用者更安心，也提高了运营成本，部分跨区数据交换需要重新确认。",
+      "requires": [
+        {
+          "path": "world.flags.information_portal_ready",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "civil_liberties",
+          "delta": 8
+        },
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "trade_openness",
+          "delta": -2
+        },
+        {
+          "op": "flag",
+          "key": "privacy_rules_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "privacy",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "trade.regional_corridor",
+      "domain": "trade",
+      "scope": "international",
+      "title": "货车开始使用共同通行单",
+      "text": "几邦商定区域通行凭证和货站接驳，过去反复卸货的车队终于能一程到达。沿线生意增长，站场扩建与更多货运也带来投入和污染。",
+      "requires": [
+        {
+          "path": "world.metrics.institutional_capacity",
+          "op": "gte",
+          "value": 45
+        },
+        {
+          "path": "world.metrics.infrastructure",
+          "op": "gte",
+          "value": 45
+        },
+        {
+          "path": "world.metrics.international_tension",
+          "op": "lte",
+          "value": 55
+        },
+        {
+          "path": "world.flags.regional_corridor_alive",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 5,
+      "cooldown": 14,
+      "once": false,
+      "effects": [
+        {
+          "op": "mode",
+          "key": "trade",
+          "value": "regional"
+        },
+        {
+          "op": "metric",
+          "key": "trade_openness",
+          "delta": 10
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": 7
+        },
+        {
+          "op": "metric",
+          "key": "ecology",
+          "delta": -3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 3
+        },
+        {
+          "op": "flag",
+          "key": "regional_corridor_alive",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "corridor",
+        "expansion"
+      ]
+    },
+    {
+      "id": "trade.open_shipping",
+      "domain": "trade",
+      "scope": "international",
+      "title": "港口接进更远的航线",
+      "text": "区域走廊运转稳定后，港口开放给更多远方商船，货架上的原料和商品明显丰富起来。价格竞争加剧，靠近大港的商家获益更多，航运排放也随之增加。",
+      "requires": [
+        {
+          "path": "world.flags.regional_corridor_alive",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.international_tension",
+          "op": "lte",
+          "value": 40
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "mode",
+          "key": "trade",
+          "value": "open"
+        },
+        {
+          "op": "metric",
+          "key": "trade_openness",
+          "delta": 12
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": 8
+        },
+        {
+          "op": "metric",
+          "key": "inequality",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "ecology",
+          "delta": -4
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": -2
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "openness",
+        "route"
+      ]
+    },
+    {
+      "id": "trade.export_barriers",
+      "domain": "trade",
+      "scope": "international",
+      "title": "装好的货停在边检外",
+      "text": "紧张局势促使几邦提高检查与出口限制，已经装箱的订单也要重新审查。本地替代生产招了一批人，原料短缺与失去的外部订单却推高了经营成本。",
+      "requires": [
+        {
+          "path": "world.metrics.international_tension",
+          "op": "gte",
+          "value": 60
+        },
+        {
+          "path": "world.flags.barriers_active",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 3,
+      "cooldown": 12,
+      "once": false,
+      "effects": [
+        {
+          "op": "mode",
+          "key": "trade",
+          "value": "restricted"
+        },
+        {
+          "op": "metric",
+          "key": "trade_openness",
+          "delta": -12
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -6
+        },
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 8
+        },
+        {
+          "op": "flag",
+          "key": "barriers_active",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "barrier",
+        "risk"
+      ]
+    },
+    {
+      "id": "trade.reroute_pacts",
+      "domain": "trade",
+      "scope": "international",
+      "title": "绕远路的区域协议",
+      "text": "受阻的商路促使邻近几邦重谈运输与结算办法，货物改走距离更长的线路。通行重新恢复，增设的转运站和燃料账单却让获利空间缩小。",
+      "requires": [
+        {
+          "path": "world.flags.barriers_active",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.energy_security",
+          "op": "gte",
+          "value": 45
+        },
+        {
+          "path": "world.metrics.international_tension",
+          "op": "lte",
+          "value": 65
+        }
+      ],
+      "weight": 3,
+      "cooldown": 10,
+      "once": false,
+      "effects": [
+        {
+          "op": "mode",
+          "key": "trade",
+          "value": "regional"
+        },
+        {
+          "op": "metric",
+          "key": "trade_openness",
+          "delta": 7
+        },
+        {
+          "op": "metric",
+          "key": "infrastructure",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -2
+        },
+        {
+          "op": "flag",
+          "key": "barriers_active",
+          "value": false
+        },
+        {
+          "op": "flag",
+          "key": "regional_corridor_alive",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "rerouting",
+        "repair"
+      ]
+    },
+    {
+      "id": "trade.port_disruption",
+      "domain": "trade",
+      "scope": "international",
+      "title": "区域航线暂停接单",
+      "text": "航道冲突持续，经营共同走廊的港口宣布停航与陆路限行，仓库里堆起等候改道的货物。应急联络被集中起来，失去订单和运价上涨的影响却传到了内陆。",
+      "requires": [
+        {
+          "path": "world.flags.regional_corridor_alive",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.shipping_threat_active",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 10,
+      "once": false,
+      "effects": [
+        {
+          "op": "mode",
+          "key": "trade",
+          "value": "restricted"
+        },
+        {
+          "op": "metric",
+          "key": "trade_openness",
+          "delta": -10
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -6
+        },
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 6
+        },
+        {
+          "op": "flag",
+          "key": "regional_corridor_alive",
+          "value": false
+        },
+        {
+          "op": "flag",
+          "key": "barriers_active",
+          "value": true
+        }
+      ],
+      "severity": 3,
+      "tags": [
+        "closure",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "trade.shared_standards",
+      "domain": "trade",
+      "scope": "international",
+      "title": "跨邦凭证开始互认",
+      "text": "公开采购记录与个人资料保护办法让几邦有了共同的核验基础，重复检测和重复填表逐渐减少。新的标准有助于往来，换证、培训与申诉衔接仍是一笔开支。",
+      "requires": [
+        {
+          "path": "world.flags.privacy_rules_ready",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.public_ledger_ready",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "trade_openness",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": -2
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "standards",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "conflict.border_standoff",
+      "domain": "conflict",
+      "scope": "international",
+      "title": "边境哨所多了一层灯",
+      "text": "围绕通道使用权的争执迟迟没有结果，几邦开始增派边境力量，夜间哨灯连成一线。集中调度变得迅速，货运放慢，日常物资和公共预算都承受新的压力。",
+      "requires": [
+        {
+          "path": "world.metrics.international_tension",
+          "op": "gte",
+          "value": 30
+        },
+        {
+          "path": "world.flags.armed_standoff_active",
+          "op": "eq",
+          "value": false
+        },
+        {
+          "path": "world.flags.ceasefire_active",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 3,
+      "cooldown": 16,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "international_tension",
+          "delta": 16
+        },
+        {
+          "op": "metric",
+          "key": "trade_openness",
+          "delta": -5
+        },
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 5
+        },
+        {
+          "op": "flag",
+          "key": "armed_standoff_active",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "standoff",
+        "risk"
+      ]
+    },
+    {
+      "id": "conflict.shipping_incident",
+      "domain": "conflict",
+      "scope": "international",
+      "title": "护航船在狭窄水道相撞",
+      "text": "边境对峙波及共同航路，两支护航队发生交火与碰撞，附近港口连夜救治伤员。各方加强了指挥联络，商船却开始取消航次，海面的紧张继续加深。",
+      "requires": [
+        {
+          "path": "world.flags.armed_standoff_active",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.regional_corridor_alive",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.shipping_threat_active",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 3,
+      "cooldown": 12,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "international_tension",
+          "delta": 12
+        },
+        {
+          "op": "metric",
+          "key": "trade_openness",
+          "delta": -8
+        },
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": -3
+        },
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": 4
+        },
+        {
+          "op": "flag",
+          "key": "shipping_threat_active",
+          "value": true
+        }
+      ],
+      "severity": 3,
+      "tags": [
+        "armed_incident",
+        "escalation"
+      ]
+    },
+    {
+      "id": "conflict.resource_truce",
+      "domain": "conflict",
+      "scope": "international",
+      "title": "围着供能表达成的短暂停火",
+      "text": "能源紧缺让对峙双方不得不坐到同一张桌前，先约定保护供能线和基本物资运输。紧张暂时缓和，紧急调运与互相监督的费用却高于平时，其他争议仍留在桌上。",
+      "requires": [
+        {
+          "path": "world.metrics.energy_security",
+          "op": "lte",
+          "value": 45
+        },
+        {
+          "path": "world.metrics.international_tension",
+          "op": "gte",
+          "value": 50
+        }
+      ],
+      "weight": 3,
+      "cooldown": 12,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "international_tension",
+          "delta": -12
+        },
+        {
+          "op": "metric",
+          "key": "energy_security",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "trade_openness",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 5
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "truce",
+        "adaptation"
+      ]
+    },
+    {
+      "id": "conflict.ceasefire_panel",
+      "domain": "conflict",
+      "scope": "international",
+      "title": "停火条款一条条签下",
+      "text": "持续的边境对峙后，各方同意停火、救助伤者并建立联合联络组。前线安静下来，执行条款、核实报告和恢复基本服务仍需要长期的人手与投入。",
+      "requires": [
+        {
+          "path": "world.flags.armed_standoff_active",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.international_tension",
+          "op": "gte",
+          "value": 50
+        },
+        {
+          "path": "world.modes.governance",
+          "op": "ne",
+          "value": "fragmented"
+        }
+      ],
+      "weight": 3,
+      "cooldown": 12,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "international_tension",
+          "delta": -16
+        },
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": -4
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 6
+        },
+        {
+          "op": "flag",
+          "key": "ceasefire_active",
+          "value": true
+        },
+        {
+          "op": "flag",
+          "key": "armed_standoff_active",
+          "value": false
+        },
+        {
+          "op": "flag",
+          "key": "shipping_threat_active",
+          "value": false
+        }
+      ],
+      "severity": 3,
+      "tags": [
+        "ceasefire",
+        "repair"
+      ]
+    },
+    {
+      "id": "conflict.monitoring_mission",
+      "domain": "conflict",
+      "scope": "international",
+      "title": "观察员走进停火地带",
+      "text": "停火联络组邀请观察员驻点，争议消息有了可以反复核对的记录。沿线居民更敢恢复日常往来，驻点保障与人员抽调也占去了原本紧张的资源。",
+      "requires": [
+        {
+          "path": "world.flags.ceasefire_active",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.monitors_present",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "international_tension",
+          "delta": -9
+        },
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": -2
+        },
+        {
+          "op": "flag",
+          "key": "monitors_present",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "monitoring",
+        "peace"
+      ]
+    },
+    {
+      "id": "conflict.truce_breakdown",
+      "domain": "conflict",
+      "scope": "international",
+      "title": "粮车在停火线上被扣下",
+      "text": "缺粮地区的一队运输车在停火线上被扣留，尚未进驻的观察员来不及核对双方说法。交火重新出现，居民留下的现场记录陆续公开，伤员和撤离的人却已挤满道路。",
+      "requires": [
+        {
+          "path": "world.flags.ceasefire_active",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.monitors_present",
+          "op": "eq",
+          "value": false
+        },
+        {
+          "path": "world.metrics.food_security",
+          "op": "lte",
+          "value": 52
+        }
+      ],
+      "weight": 3,
+      "cooldown": 12,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "international_tension",
+          "delta": 14
+        },
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": -4
+        },
+        {
+          "op": "metric",
+          "key": "trade_openness",
+          "delta": -7
+        },
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 3
+        },
+        {
+          "op": "flag",
+          "key": "ceasefire_active",
+          "value": false
+        },
+        {
+          "op": "flag",
+          "key": "armed_standoff_active",
+          "value": true
+        },
+        {
+          "op": "flag",
+          "key": "shipping_threat_active",
+          "value": true
+        }
+      ],
+      "severity": 3,
+      "tags": [
+        "relapse",
+        "failure"
+      ]
+    },
+    {
+      "id": "energy.distributed_market",
+      "domain": "energy",
+      "scope": "planetary",
+      "title": "屋顶电站接入共同电网",
+      "text": "依托仍在运行的共同电网，分散的发电点与区域储能站通过验收，开始互相补足用电高峰。供电更稳，结算、调度和设备维护却需要比从前更细的协调。",
+      "requires": [
+        {
+          "path": "world.flags.shared_grid_alive",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.institutional_capacity",
+          "op": "gte",
+          "value": 50
+        },
+        {
+          "path": "world.flags.local_storage_alive",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 3,
+      "cooldown": 10,
+      "once": false,
+      "effects": [
+        {
+          "op": "mode",
+          "key": "energy",
+          "value": "distributed"
+        },
+        {
+          "op": "metric",
+          "key": "energy_security",
+          "delta": 12
+        },
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": -2
+        },
+        {
+          "op": "flag",
+          "key": "local_storage_alive",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "distributed",
+        "route"
+      ]
+    },
+    {
+      "id": "energy.centralized_dispatch",
+      "domain": "energy",
+      "scope": "planetary",
+      "title": "大电站接管高峰供能",
+      "text": "几个大型电站和主干线路被纳入统一调度，工业与居民区的停电时段明显缩短。集中供能减少了临时协调，扩建的厂区与输送走廊也占用了更多土地和资金。",
+      "requires": [
+        {
+          "path": "world.metrics.infrastructure",
+          "op": "gte",
+          "value": 55
+        },
+        {
+          "path": "world.metrics.institutional_capacity",
+          "op": "gte",
+          "value": 55
+        },
+        {
+          "path": "world.modes.energy",
+          "op": "ne",
+          "value": "centralized"
+        }
+      ],
+      "weight": 3,
+      "cooldown": 16,
+      "once": false,
+      "effects": [
+        {
+          "op": "mode",
+          "key": "energy",
+          "value": "centralized"
+        },
+        {
+          "op": "metric",
+          "key": "energy_security",
+          "delta": 12
+        },
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "ecology",
+          "delta": -6
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 3
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "centralized",
+        "route"
+      ]
+    },
+    {
+      "id": "energy.storage_failure",
+      "domain": "energy",
+      "scope": "planetary",
+      "title": "储能站停机检查",
+      "text": "一座区域储能站在连续高负荷后发生故障，运营方关闭整组设备并公布检测记录。供能缺口需要临时采购弥补，公开的故障资料也让其他站点开始改进巡检。",
+      "requires": [
+        {
+          "path": "world.flags.local_storage_alive",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 12,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "energy_security",
+          "delta": -8
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 4
+        },
+        {
+          "op": "flag",
+          "key": "local_storage_alive",
+          "value": false
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "storage",
+        "failure"
+      ]
+    },
+    {
+      "id": "energy.advanced_trial",
+      "domain": "energy",
+      "scope": "frontier",
+      "title": "封闭试验场第一次点亮",
+      "text": "开放研究网络积累的成果进入一座先进供能试验场，研究员开始测量设备在连续运行中的损耗。新的数据逐步公开，试验还不能稳定供给日常用能，却已占用可观的建设资金。",
+      "requires": [
+        {
+          "path": "world.flags.open_research_ready",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.technology",
+          "op": "gte",
+          "value": 72
+        },
+        {
+          "path": "world.metrics.institutional_capacity",
+          "op": "gte",
+          "value": 60
+        },
+        {
+          "path": "world.metrics.prosperity",
+          "op": "gte",
+          "value": 60
+        },
+        {
+          "path": "world.metrics.energy_security",
+          "op": "gte",
+          "value": 50
+        },
+        {
+          "path": "world.flags.advanced_trial_active",
+          "op": "eq",
+          "value": false
+        },
+        {
+          "path": "world.flags.advanced_energy_verified",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 2,
+      "cooldown": 12,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "technology",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 8
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -5
+        },
+        {
+          "op": "flag",
+          "key": "advanced_trial_active",
+          "value": true
+        },
+        {
+          "op": "flag",
+          "key": "advanced_energy_site_alive",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "experimental",
+        "frontier"
+      ]
+    },
+    {
+      "id": "energy.trial_success",
+      "domain": "energy",
+      "scope": "frontier",
+      "title": "试验供能通过持续运行考验",
+      "text": "先进供能试验场经过多轮检验后，开始向附近设施提供一小部分稳定能源。材料回收与旧设备替换带来环境收益，昂贵的维护也说明它离普遍使用还有距离。",
+      "requires": [
+        {
+          "path": "world.flags.advanced_trial_active",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.advanced_energy_site_alive",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.technology",
+          "op": "gte",
+          "value": 80
+        },
+        {
+          "path": "world.metrics.institutional_capacity",
+          "op": "gte",
+          "value": 68
+        },
+        {
+          "path": "world.metrics.public_services",
+          "op": "gte",
+          "value": 50
+        }
+      ],
+      "weight": 2,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "energy_security",
+          "delta": 14
+        },
+        {
+          "op": "metric",
+          "key": "ecology",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "technology",
+          "delta": 4
+        },
+        {
+          "op": "flag",
+          "key": "advanced_trial_active",
+          "value": false
+        },
+        {
+          "op": "flag",
+          "key": "advanced_energy_verified",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "verification",
+        "branch"
+      ]
+    },
+    {
+      "id": "energy.trial_failure",
+      "domain": "energy",
+      "scope": "frontier",
+      "title": "试验场停止连续运行",
+      "text": "试验设备始终无法在预算内维持稳定输出，运营方封存了现场并终止连续运行。失败记录被纳入研究档案，已经投入的资金无法收回，周边居民也开始追问当初的承诺。",
+      "requires": [
+        {
+          "path": "world.flags.advanced_trial_active",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.advanced_energy_site_alive",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.cost_pressure",
+          "op": "gte",
+          "value": 55
+        }
+      ],
+      "weight": 3,
+      "cooldown": 12,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -6
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": -2
+        },
+        {
+          "op": "flag",
+          "key": "advanced_trial_active",
+          "value": false
+        },
+        {
+          "op": "flag",
+          "key": "advanced_energy_site_alive",
+          "value": false
+        },
+        {
+          "op": "flag",
+          "key": "advanced_energy_verified",
+          "value": false
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "failure",
+        "branch"
+      ]
+    },
+    {
+      "id": "food.crop_diversification",
+      "domain": "food",
+      "scope": "planetary",
+      "title": "试验田不再只种一种作物",
+      "text": "农技人员与种植户轮换豆类、谷物和覆盖作物，分散单一收成失败的风险。土地逐渐恢复，收购与加工却要适应不同批次，头几季的投入比熟悉的老办法更高。",
+      "requires": [
+        {
+          "path": "world.metrics.knowledge_access",
+          "op": "gte",
+          "value": 40
+        },
+        {
+          "path": "world.metrics.food_security",
+          "op": "gte",
+          "value": 35
+        }
+      ],
+      "weight": 4,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "food_security",
+          "delta": 7
+        },
+        {
+          "op": "metric",
+          "key": "ecology",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 3
+        },
+        {
+          "op": "flag",
+          "key": "rotation_trials_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "diversification",
+        "route"
+      ]
+    },
+    {
+      "id": "food.fertilizer_dependence",
+      "domain": "food",
+      "scope": "planetary",
+      "title": "产量跃上新的台阶",
+      "text": "稳定的原料进口和加工设备让种植带扩大了高投入生产，粮价一度回落。化肥、燃料与灌溉的消耗同时上升，河道和土壤开始承受更重的负担。",
+      "requires": [
+        {
+          "path": "world.metrics.technology",
+          "op": "gte",
+          "value": 45
+        },
+        {
+          "path": "world.metrics.trade_openness",
+          "op": "gte",
+          "value": 55
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "food_security",
+          "delta": 10
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": -3
+        },
+        {
+          "op": "metric",
+          "key": "ecology",
+          "delta": -8
+        },
+        {
+          "op": "metric",
+          "key": "energy_security",
+          "delta": -4
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "intensification",
+        "route"
+      ]
+    },
+    {
+      "id": "food.drought_harvest",
+      "domain": "food",
+      "scope": "planetary",
+      "title": "粮仓里的空位多了起来",
+      "text": "旱情预警之后的收获季仍未等来足够降水，一些地块只收回种子般多的谷粒。食品涨价、季节性用工减少，农户联合公布的田间记录也让损失不再只留在口述里。",
+      "requires": [
+        {
+          "path": "world.flags.drought_watch_active",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 14,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "food_security",
+          "delta": -12
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 9
+        },
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": -4
+        },
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 3
+        }
+      ],
+      "severity": 3,
+      "tags": [
+        "drought",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "food.seed_bank_network",
+      "domain": "food",
+      "scope": "planetary",
+      "title": "把下一季的种子留住",
+      "text": "食物供应吃紧后，几地共同筹建带备用储存点的种子库，修复可用的样本并整理借种记录。种源更有保障，恒温保管与分发核验仍会占用资金和人手。",
+      "requires": [
+        {
+          "path": "world.metrics.food_security",
+          "op": "lte",
+          "value": 55
+        },
+        {
+          "path": "world.flags.seed_bank_alive",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "food_security",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": -2
+        },
+        {
+          "op": "flag",
+          "key": "seed_bank_alive",
+          "value": true
+        },
+        {
+          "op": "flag",
+          "key": "seed_bank_ever_built",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "seed_bank",
+        "adaptation"
+      ]
+    },
+    {
+      "id": "food.lowwater_trials",
+      "domain": "food",
+      "scope": "planetary",
+      "title": "较少的水也收回一季粮",
+      "text": "恢复中的土壤配合种子库提供的品种，让一些农场试着减少灌溉。试种的收成更稳、耗水更低，重新配置设备和选择收购品种却压缩了当年的收益。",
+      "requires": [
+        {
+          "path": "world.flags.soil_recovery_ready",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.seed_bank_alive",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "food_security",
+          "delta": 8
+        },
+        {
+          "op": "metric",
+          "key": "ecology",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -2
+        },
+        {
+          "op": "flag",
+          "key": "resilient_crops_ready",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "adaptation",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "food.grain_coops",
+      "domain": "food",
+      "scope": "planetary",
+      "title": "合作粮仓改签长期收购单",
+      "text": "劳动合作网络与区域粮商约定共同储存、透明称重和长期收购，弱势小农得到更稳定的销路。区域供应更有保障，管理费用增加，部分对外订单也让位给了本地储备。",
+      "requires": [
+        {
+          "path": "world.flags.labor_coops_ready",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.modes.trade",
+          "op": "eq",
+          "value": "regional"
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "food_security",
+          "delta": 7
+        },
+        {
+          "op": "metric",
+          "key": "inequality",
+          "delta": -4
+        },
+        {
+          "op": "metric",
+          "key": "trade_openness",
+          "delta": -3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 2
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -1
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "cooperative",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "infrastructure.shared_grid",
+      "domain": "infrastructure",
+      "scope": "national",
+      "title": "分开的线路连成一张网",
+      "text": "几地共同铺设主干线路和备用调度节点，旧变电站第一次能从邻区借到电。供能与交通建设被一起带动，工程占用了土地，建设和维护费用也进入了日常账单。",
+      "requires": [
+        {
+          "path": "world.metrics.prosperity",
+          "op": "gte",
+          "value": 40
+        },
+        {
+          "path": "world.metrics.institutional_capacity",
+          "op": "gte",
+          "value": 45
+        },
+        {
+          "path": "world.flags.shared_grid_ever_built",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 5,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "infrastructure",
+          "delta": 12
+        },
+        {
+          "op": "metric",
+          "key": "energy_security",
+          "delta": 8
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "ecology",
+          "delta": -3
+        },
+        {
+          "op": "flag",
+          "key": "shared_grid_alive",
+          "value": true
+        },
+        {
+          "op": "flag",
+          "key": "shared_grid_ever_built",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "grid",
+        "expansion"
+      ]
+    },
+    {
+      "id": "infrastructure.water_network",
+      "domain": "infrastructure",
+      "scope": "national",
+      "title": "公共水管接到更远的街口",
+      "text": "供水管线、储水点与检修口向边缘居民区延伸，提水排队的人少了许多。更可靠的水源改善了日常卫生，开挖和维护却需要新的收费，也扰动了沿线水土。",
+      "requires": [
+        {
+          "path": "world.metrics.institutional_capacity",
+          "op": "gte",
+          "value": 40
+        },
+        {
+          "path": "world.metrics.infrastructure",
+          "op": "gte",
+          "value": 35
+        }
+      ],
+      "weight": 5,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "infrastructure",
+          "delta": 12
+        },
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "ecology",
+          "delta": -2
+        },
+        {
+          "op": "flag",
+          "key": "water_network_alive",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "water",
+        "expansion"
+      ]
+    },
+    {
+      "id": "infrastructure.regional_rail",
+      "domain": "infrastructure",
+      "scope": "national",
+      "title": "慢车驶过新的联络桥",
+      "text": "跨区铁路与货站完成联调，通勤和小批量货运有了更稳定的时刻表。工程带来岗位和生意，桥梁、站场与后续养护则留下了长期账单和土地占用。",
+      "requires": [
+        {
+          "path": "world.metrics.institutional_capacity",
+          "op": "gte",
+          "value": 55
+        },
+        {
+          "path": "world.metrics.employment",
+          "op": "gte",
+          "value": 50
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "infrastructure",
+          "delta": 12
+        },
+        {
+          "op": "metric",
+          "key": "trade_openness",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 7
+        },
+        {
+          "op": "metric",
+          "key": "ecology",
+          "delta": -3
+        },
+        {
+          "op": "flag",
+          "key": "rail_link_alive",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "rail",
+        "expansion"
+      ]
+    },
+    {
+      "id": "infrastructure.flood_channels",
+      "domain": "infrastructure",
+      "scope": "national",
+      "title": "泄洪闸旁建起值班屋",
+      "text": "更频繁的高水位促使城镇建设分流渠和泄洪闸，值班员按新的水位表轮岗。低洼街区多了一层保护，施工改变了部分河岸生境，后续养护也不能停。",
+      "requires": [
+        {
+          "path": "world.metrics.climate_stress",
+          "op": "gte",
+          "value": 50
+        },
+        {
+          "path": "world.metrics.institutional_capacity",
+          "op": "gte",
+          "value": 45
+        },
+        {
+          "path": "world.flags.floodworks_alive",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "infrastructure",
+          "delta": 8
+        },
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": 2
+        },
+        {
+          "op": "metric",
+          "key": "ecology",
+          "delta": -3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 7
+        },
+        {
+          "op": "flag",
+          "key": "floodworks_alive",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "floodworks",
+        "adaptation"
+      ]
+    },
+    {
+      "id": "infrastructure.grid_repair",
+      "domain": "infrastructure",
+      "scope": "national",
+      "title": "停电的主干线重新合闸",
+      "text": "抢修队更换受损节点，并把现场发现的问题写进巡检表，原先停运的共同电网逐段恢复。灯光回来了，临时抽调的技术员和追加材料仍挤占着其他项目的资源。",
+      "requires": [
+        {
+          "path": "world.flags.shared_grid_ever_built",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.shared_grid_alive",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": false,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "infrastructure",
+          "delta": 8
+        },
+        {
+          "op": "metric",
+          "key": "energy_security",
+          "delta": 10
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": -2
+        },
+        {
+          "op": "flag",
+          "key": "shared_grid_alive",
+          "value": true
+        },
+        {
+          "op": "flag",
+          "key": "grid_damaged",
+          "value": false
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "repair",
+        "cross_domain"
+      ]
+    },
+    {
+      "id": "infrastructure.rail_maintenance_failure",
+      "domain": "infrastructure",
+      "scope": "national",
+      "title": "桥检报告让列车停下来",
+      "text": "维护经费不断承压，一次桥检发现了不能继续搁置的问题，区域联络线随即停运。抢修招聘吸收了一批工人，货物改道和额外材料却让运营费用继续上升。",
+      "requires": [
+        {
+          "path": "world.flags.rail_link_alive",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.cost_pressure",
+          "op": "gte",
+          "value": 62
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "once": true,
+      "effects": [
+        {
+          "op": "metric",
+          "key": "infrastructure",
+          "delta": -8
+        },
+        {
+          "op": "metric",
+          "key": "trade_openness",
+          "delta": -5
+        },
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        },
+        {
+          "op": "flag",
+          "key": "rail_link_alive",
+          "value": false
+        },
+        {
+          "op": "flag",
+          "key": "rail_damage_active",
+          "value": true
+        }
+      ],
+      "severity": 2,
+      "tags": [
+        "maintenance",
+        "failure"
+      ]
+    },
+    {
+      "id": "ecology.watershed_damage",
+      "domain": "ecology",
+      "scope": "planetary",
+      "title": "出口走廊下游出现浑水",
+      "text": "产业协作圈扩张后，下游监测发现河岸植被和水质持续受损。沿岸社区公开采样结果，要求用地和排放安排重新协商；停工检查也使眼前的产出减少。",
+      "requires": [
+        {
+          "path": "world.flags.export_cluster_ready",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.ecology",
+          "op": "lte",
+          "value": 62
+        },
+        {
+          "path": "world.flags.watershed_damage_active",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 5,
+      "cooldown": 12,
+      "once": false,
+      "severity": 2,
+      "tags": [
+        "流域",
+        "工业外部成本",
+        "跨域"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "ecology",
+          "delta": -9
+        },
+        {
+          "op": "metric",
+          "key": "food_security",
+          "delta": -4
+        },
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": -4
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -3
+        },
+        {
+          "op": "flag",
+          "key": "watershed_damage_active",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "ecology.river_restoration",
+      "domain": "ecology",
+      "scope": "planetary",
+      "title": "上下游共担河岸修复",
+      "text": "受损流域的各地同意按用水与排放情况分担费用，河岸缓冲带逐步恢复。水质改善开始惠及居民和农田，修复占用土地，部分工厂需要缩减生产。",
+      "requires": [
+        {
+          "path": "world.flags.watershed_damage_active",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.institutional_capacity",
+          "op": "gte",
+          "value": 42
+        }
+      ],
+      "weight": 5,
+      "cooldown": 10,
+      "once": false,
+      "severity": 2,
+      "tags": [
+        "流域",
+        "修复",
+        "协作"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "ecology",
+          "delta": 10
+        },
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "food_security",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -3
+        },
+        {
+          "op": "flag",
+          "key": "watershed_damage_active",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": "ecology.soil_recovery",
+      "domain": "ecology",
+      "scope": "planetary",
+      "title": "轮作试验留下更厚的土层",
+      "text": "完成多轮对照的轮作地块，逐渐减少表土流失。合作社把有用的做法推广到愿意调整种植安排的农户，恢复中的土地暂时减少产出，后续收成的稳定性有所提高。",
+      "requires": [
+        {
+          "path": "world.flags.rotation_trials_ready",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.labor_coops_ready",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.soil_recovery_ready",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 5,
+      "cooldown": 14,
+      "once": false,
+      "severity": 1,
+      "tags": [
+        "土壤",
+        "农业",
+        "跨域"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "ecology",
+          "delta": 8
+        },
+        {
+          "op": "metric",
+          "key": "food_security",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -2
+        },
+        {
+          "op": "flag",
+          "key": "soil_recovery_ready",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "ecology.habitat_corridors",
+      "domain": "ecology",
+      "scope": "planetary",
+      "title": "零散生境之间留出通道",
+      "text": "几个地区把零散保护地连接起来，给迁徙和繁殖保留通道。新的边界减少了可立即开发的土地，受影响住户获得协商补偿；生态恢复缓慢，却开始越过单一保护区的边界。",
+      "requires": [
+        {
+          "path": "world.metrics.ecology",
+          "op": "lte",
+          "value": 65
+        },
+        {
+          "path": "world.metrics.social_trust",
+          "op": "gte",
+          "value": 48
+        },
+        {
+          "path": "world.modes.governance",
+          "op": "eq",
+          "value": "negotiated"
+        }
+      ],
+      "weight": 4,
+      "cooldown": 16,
+      "once": false,
+      "severity": 1,
+      "tags": [
+        "生境",
+        "多样性",
+        "土地取舍"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "ecology",
+          "delta": 9
+        },
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -3
+        }
+      ]
+    },
+    {
+      "id": "ecology.extraction_frontier",
+      "domain": "ecology",
+      "scope": "planetary",
+      "title": "新的矿区带来能源与伤口",
+      "text": "供能紧张促使多个地区扩大矿产开采。原料和就业暂时增加，采掘道路切开生境，水土治理费用被留到了后面。各地开始争论这份短期缓解是否值得继续扩大。",
+      "requires": [
+        {
+          "path": "world.metrics.energy_security",
+          "op": "lte",
+          "value": 52
+        },
+        {
+          "path": "world.metrics.ecology",
+          "op": "gte",
+          "value": 20
+        }
+      ],
+      "weight": 6,
+      "cooldown": 12,
+      "once": false,
+      "severity": 2,
+      "tags": [
+        "资源",
+        "开采",
+        "能源取舍"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "energy_security",
+          "delta": 9
+        },
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "ecology",
+          "delta": -12
+        },
+        {
+          "op": "metric",
+          "key": "climate_stress",
+          "delta": 4
+        }
+      ]
+    },
+    {
+      "id": "ecology.reuse_network",
+      "domain": "ecology",
+      "scope": "planetary",
+      "title": "维修与回收接上生产网络",
+      "text": "合作社建立分拣、维修和可追溯的材料回用流程，一部分废弃物重新成为原料。新增工序需要设备和培训，短期成本上升，对新采原料的依赖则开始减轻。",
+      "requires": [
+        {
+          "path": "world.flags.labor_coops_ready",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.technology",
+          "op": "gte",
+          "value": 45
+        },
+        {
+          "path": "world.metrics.infrastructure",
+          "op": "gte",
+          "value": 40
+        }
+      ],
+      "weight": 4,
+      "cooldown": 14,
+      "once": false,
+      "severity": 1,
+      "tags": [
+        "循环利用",
+        "维修",
+        "就业"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "ecology",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "energy_security",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        }
+      ]
+    },
+    {
+      "id": "climate.hot_seasons",
+      "domain": "climate",
+      "scope": "planetary",
+      "title": "连续炎热季节拉长了用电高峰",
+      "text": "多个地区连续出现偏热季节，夜间降温变慢，照护和供电系统承受更久的高峰。户外劳动与农事被迫调整，原有建筑和排班方式暴露出新的弱点。",
+      "requires": [
+        {
+          "path": "world.metrics.climate_stress",
+          "op": "gte",
+          "value": 32
+        }
+      ],
+      "weight": 6,
+      "cooldown": 10,
+      "once": false,
+      "severity": 2,
+      "tags": [
+        "高温",
+        "复合压力"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "climate_stress",
+          "delta": 8
+        },
+        {
+          "op": "metric",
+          "key": "energy_security",
+          "delta": -6
+        },
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": -5
+        },
+        {
+          "op": "metric",
+          "key": "food_security",
+          "delta": -3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        }
+      ]
+    },
+    {
+      "id": "climate.drought_watch",
+      "domain": "climate",
+      "scope": "planetary",
+      "title": "几个流域同时进入缺水观察期",
+      "text": "河流来水和土壤水分连续偏低，几个流域同时缩减非必要取水。储粮和储水尚能缓冲一部分影响，种植、供电和居民用水之间的分配已经变得紧张。",
+      "requires": [
+        {
+          "path": "world.metrics.climate_stress",
+          "op": "gte",
+          "value": 50
+        },
+        {
+          "path": "world.flags.drought_watch_active",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 6,
+      "cooldown": 12,
+      "once": false,
+      "severity": 2,
+      "tags": [
+        "干旱",
+        "水资源",
+        "粮食链"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "food_security",
+          "delta": -8
+        },
+        {
+          "op": "metric",
+          "key": "energy_security",
+          "delta": -4
+        },
+        {
+          "op": "metric",
+          "key": "ecology",
+          "delta": -5
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 6
+        },
+        {
+          "op": "flag",
+          "key": "drought_watch_active",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "climate.water_compact",
+      "domain": "climate",
+      "scope": "planetary",
+      "title": "缺水地区重新商定取水顺序",
+      "text": "处在缺水观察期的地区共享水量记录，削减部分高耗水生产，并优先修补漏损。用水保障逐渐回稳，生产仍受限制；这份适应安排没有消除长期气候压力。",
+      "requires": [
+        {
+          "path": "world.flags.drought_watch_active",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.institutional_capacity",
+          "op": "gte",
+          "value": 40
+        }
+      ],
+      "weight": 6,
+      "cooldown": 10,
+      "once": false,
+      "severity": 2,
+      "tags": [
+        "缺水适应",
+        "修复",
+        "协商"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "food_security",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "infrastructure",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "ecology",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -4
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 3
+        },
+        {
+          "op": "flag",
+          "key": "drought_watch_active",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": "climate.passive_cooling",
+      "domain": "climate",
+      "scope": "planetary",
+      "title": "遮阴和通风成为公共改造项目",
+      "text": "热季中的住处、教室和工作场所增设遮阴与通风设施，部分活动改到较凉时段。高温对日常健康的冲击减轻，改造材料与施工投入也占用了预算。",
+      "requires": [
+        {
+          "path": "world.metrics.climate_stress",
+          "op": "gte",
+          "value": 45
+        },
+        {
+          "path": "world.metrics.public_services",
+          "op": "gte",
+          "value": 40
+        }
+      ],
+      "weight": 5,
+      "cooldown": 14,
+      "once": false,
+      "severity": 1,
+      "tags": [
+        "高温适应",
+        "建筑",
+        "照护"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "infrastructure",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "energy_security",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 5
+        }
+      ]
+    },
+    {
+      "id": "climate.shared_forecasts",
+      "domain": "climate",
+      "scope": "planetary",
+      "title": "轨道与地面观测接上地方预警",
+      "text": "运行中的轨道观测站与地面记录联合校准，把预测结果转成地方能用的预警。工作人员练习如何转达不确定性并安排响应，维护系统和训练人员需要持续投入。",
+      "requires": [
+        {
+          "path": "world.flags.orbital_station_alive",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.institutional_capacity",
+          "op": "gte",
+          "value": 45
+        },
+        {
+          "path": "world.flags.shared_alerts_ready",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 5,
+      "cooldown": 12,
+      "once": false,
+      "severity": 1,
+      "tags": [
+        "预警",
+        "轨道服务",
+        "跨域"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "public_services",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        },
+        {
+          "op": "flag",
+          "key": "shared_alerts_ready",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "climate.lower_emissions",
+      "domain": "climate",
+      "scope": "planetary",
+      "title": "低排放供能开始替代旧设备",
+      "text": "分布式供能已有稳定余量，一批高排放设备逐步退出，低能耗工艺开始扩展。新的排放压力有所减轻，既有的积累仍在；替换设备和安置岗位需要花费多年。",
+      "requires": [
+        {
+          "path": "world.modes.energy",
+          "op": "eq",
+          "value": "distributed"
+        },
+        {
+          "path": "world.metrics.energy_security",
+          "op": "gte",
+          "value": 60
+        },
+        {
+          "path": "world.metrics.technology",
+          "op": "gte",
+          "value": 55
+        }
+      ],
+      "weight": 4,
+      "cooldown": 18,
+      "once": false,
+      "severity": 2,
+      "tags": [
+        "减排",
+        "慢变量",
+        "能源转型"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "climate_stress",
+          "delta": -4
+        },
+        {
+          "op": "metric",
+          "key": "ecology",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "employment",
+          "delta": -2
+        }
+      ]
+    },
+    {
+      "id": "disaster.major_flood",
+      "domain": "disaster",
+      "scope": "planetary",
+      "title": "洪水越过了几处旧防线",
+      "text": "一轮持续强降雨使多个流域的旧防护设施失效，部分住区和粮食储存点受损。抢险力量先保障人员转移，复建还需要核查地基、设备和水质。",
+      "requires": [
+        {
+          "path": "world.metrics.climate_stress",
+          "op": "gte",
+          "value": 48
+        },
+        {
+          "path": "world.flags.flood_disruption_active",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 5,
+      "cooldown": 18,
+      "once": false,
+      "severity": 3,
+      "tags": [
+        "洪水",
+        "迁移",
+        "设施失效"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "infrastructure",
+          "delta": -13
+        },
+        {
+          "op": "metric",
+          "key": "food_security",
+          "delta": -8
+        },
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": -6
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 8
+        },
+        {
+          "op": "flag",
+          "key": "flood_disruption_active",
+          "value": true
+        },
+        {
+          "op": "flag",
+          "key": "housing_displaced",
+          "value": true
+        },
+        {
+          "op": "flag",
+          "key": "floodworks_alive",
+          "value": false
+        },
+        {
+          "op": "flag",
+          "key": "seed_bank_alive",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": "disaster.tectonic_shock",
+      "domain": "disaster",
+      "scope": "planetary",
+      "title": "一次地震打断了区域联络",
+      "text": "断裂带附近发生地震，道路、输电节点和一些住区受损。周边地区派出支援，救援与停工同时压低产出；风险评估后，部分住户需要离开原来的地段。",
+      "requires": [
+        {
+          "path": "world.flags.quake_disruption_active",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 2,
+      "cooldown": 24,
+      "once": false,
+      "severity": 3,
+      "tags": [
+        "地震",
+        "外生灾害",
+        "基础设施"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "infrastructure",
+          "delta": -14
+        },
+        {
+          "op": "metric",
+          "key": "energy_security",
+          "delta": -9
+        },
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": -5
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -6
+        },
+        {
+          "op": "flag",
+          "key": "quake_disruption_active",
+          "value": true
+        },
+        {
+          "op": "flag",
+          "key": "housing_displaced",
+          "value": true
+        },
+        {
+          "op": "flag",
+          "key": "shared_grid_alive",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": "disaster.reconstruction_audit",
+      "domain": "disaster",
+      "scope": "national",
+      "title": "震后复建从检查清单重新开始",
+      "text": "震后各地先核查可恢复的道路和公共场所，再分段安排施工。交通和日常服务逐步恢复，不能修复的住处仍要等待安置；生产资源暂时让位于复建。",
+      "requires": [
+        {
+          "path": "world.flags.quake_disruption_active",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.institutional_capacity",
+          "op": "gte",
+          "value": 38
+        }
+      ],
+      "weight": 6,
+      "cooldown": 10,
+      "once": false,
+      "severity": 2,
+      "tags": [
+        "震后复建",
+        "核查",
+        "恢复"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "infrastructure",
+          "delta": 10
+        },
+        {
+          "op": "metric",
+          "key": "public_services",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -3
+        },
+        {
+          "op": "flag",
+          "key": "quake_disruption_active",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": "disaster.warning_evacuation",
+      "domain": "disaster",
+      "scope": "planetary",
+      "title": "预警给洪水中的撤离多留了时间",
+      "text": "洪灾仍在影响低洼地区，联合预警系统提前提示下一轮来水。接收点按计划接纳居民，减少了人员暴露；淹过的道路仍待清理，损坏的闸门也还在等待检修。",
+      "requires": [
+        {
+          "path": "world.flags.flood_disruption_active",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.shared_alerts_ready",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.orbital_station_alive",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 5,
+      "cooldown": 10,
+      "once": false,
+      "severity": 2,
+      "tags": [
+        "预警撤离",
+        "风险缓解",
+        "跨域"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "demographic_pressure",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        },
+        {
+          "op": "flag",
+          "key": "housing_displaced",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "disaster.flood_recovery",
+      "domain": "disaster",
+      "scope": "planetary",
+      "title": "退水之后重新校核防护标准",
+      "text": "洪水退去后，修复人员清理受影响场所、检查饮水和通行条件，新的防护段通过验收。部分土地改作滞洪空间，复建支出增加，转移住户的安置仍分别办理。",
+      "requires": [
+        {
+          "path": "world.flags.flood_disruption_active",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.institutional_capacity",
+          "op": "gte",
+          "value": 40
+        }
+      ],
+      "weight": 6,
+      "cooldown": 10,
+      "once": false,
+      "severity": 2,
+      "tags": [
+        "洪灾修复",
+        "防护",
+        "用地"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "infrastructure",
+          "delta": 10
+        },
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "food_security",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 6
+        },
+        {
+          "op": "flag",
+          "key": "flood_disruption_active",
+          "value": false
+        },
+        {
+          "op": "flag",
+          "key": "floodworks_alive",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "disaster.wildfire_season",
+      "domain": "disaster",
+      "scope": "planetary",
+      "title": "干热中的山火逼近居民点",
+      "text": "处在缺水观察期的林地发生持续山火，烟尘和封路影响周边居民。消防与居民转移降低了进一步暴露，受损植被和水土需要长时间恢复。",
+      "requires": [
+        {
+          "path": "world.flags.drought_watch_active",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.climate_stress",
+          "op": "gte",
+          "value": 55
+        },
+        {
+          "path": "world.metrics.ecology",
+          "op": "gte",
+          "value": 15
+        }
+      ],
+      "weight": 4,
+      "cooldown": 18,
+      "once": false,
+      "severity": 3,
+      "tags": [
+        "山火",
+        "干旱复合灾害",
+        "迁移"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "ecology",
+          "delta": -10
+        },
+        {
+          "op": "metric",
+          "key": "public_health",
+          "delta": -6
+        },
+        {
+          "op": "metric",
+          "key": "infrastructure",
+          "delta": -5
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 5
+        },
+        {
+          "op": "flag",
+          "key": "housing_displaced",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "technology.open_research",
+      "domain": "technology",
+      "scope": "international",
+      "title": "开放实验网络建立可复查的成果库",
+      "text": "已有研究网络统一实验记录和设备接口，跨地区团队开始复查彼此的成果。知识与技术积累加快，公开维护、计算和实验材料需要稳定经费。",
+      "requires": [
+        {
+          "path": "world.flags.research_network_ready",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.technology",
+          "op": "gte",
+          "value": 45
+        },
+        {
+          "path": "world.metrics.energy_security",
+          "op": "gte",
+          "value": 45
+        },
+        {
+          "path": "world.modes.technology",
+          "op": "ne",
+          "value": "restricted"
+        },
+        {
+          "path": "world.flags.open_research_ready",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 6,
+      "cooldown": 12,
+      "once": false,
+      "severity": 2,
+      "tags": [
+        "研究",
+        "开放路线",
+        "验证"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "technology",
+          "delta": 8
+        },
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        },
+        {
+          "op": "flag",
+          "key": "open_research_ready",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "technology.platform_rollout",
+      "domain": "technology",
+      "scope": "international",
+      "title": "平台把自动化服务推向更多行业",
+      "text": "成熟的计算与供能条件让大型平台能承担更广的排程、识别和文书服务。效率提高，一些基础服务变便宜，掌握数据和系统的机构也取得更多议价权。",
+      "requires": [
+        {
+          "path": "world.metrics.technology",
+          "op": "gte",
+          "value": 52
+        },
+        {
+          "path": "world.metrics.energy_security",
+          "op": "gte",
+          "value": 50
+        },
+        {
+          "path": "world.flags.automation_services_alive",
+          "op": "eq",
+          "value": false
+        },
+        {
+          "path": "world.flags.algorithm_incident_active",
+          "op": "eq",
+          "value": false
+        },
+        {
+          "path": "world.modes.technology",
+          "op": "ne",
+          "value": "restricted"
+        }
+      ],
+      "weight": 6,
+      "cooldown": 14,
+      "once": false,
+      "severity": 2,
+      "tags": [
+        "人工智能",
+        "平台路线",
+        "分配"
+      ],
+      "effects": [
+        {
+          "op": "mode",
+          "key": "technology",
+          "value": "platform"
+        },
+        {
+          "op": "metric",
+          "key": "automation",
+          "delta": 14
+        },
+        {
+          "op": "metric",
+          "key": "technology",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "inequality",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": -3
+        },
+        {
+          "op": "flag",
+          "key": "automation_services_alive",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "technology.algorithm_incident",
+      "domain": "technology",
+      "scope": "national",
+      "title": "自动化分配被发现系统性漏掉一些人",
+      "text": "申诉与抽查发现，正在使用的自动化服务在某些地区持续分错资源。运营方暂停相关部署，重新人工核查，服务速度变慢；受影响的人要求了解错误怎样发生。",
+      "requires": [
+        {
+          "path": "world.flags.automation_services_alive",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.algorithm_incident_active",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 5,
+      "cooldown": 16,
+      "once": false,
+      "severity": 2,
+      "tags": [
+        "人工智能失误",
+        "暂停",
+        "申诉链"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": -7
+        },
+        {
+          "op": "metric",
+          "key": "public_services",
+          "delta": -5
+        },
+        {
+          "op": "metric",
+          "key": "inequality",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 3
+        },
+        {
+          "op": "flag",
+          "key": "algorithm_incident_active",
+          "value": true
+        },
+        {
+          "op": "flag",
+          "key": "automation_services_alive",
+          "value": false
+        },
+        {
+          "op": "flag",
+          "key": "algorithm_audit_ready",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": "technology.audited_restart",
+      "domain": "technology",
+      "scope": "national",
+      "title": "通过复查的自动化服务有限重启",
+      "text": "经过申诉核对和独立复查，部分自动化流程在保留人工复核的条件下重启。已确认的错误得到修正，服务恢复了一部分能力，持续审核占用预算和人手。",
+      "requires": [
+        {
+          "path": "world.flags.algorithm_incident_active",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.algorithm_audit_ready",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 6,
+      "cooldown": 12,
+      "once": false,
+      "severity": 2,
+      "tags": [
+        "审计修复",
+        "人工复核",
+        "跨域"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "public_services",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "social_trust",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 3
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        },
+        {
+          "op": "flag",
+          "key": "algorithm_incident_active",
+          "value": false
+        },
+        {
+          "op": "flag",
+          "key": "automation_services_alive",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "technology.restricted_stack",
+      "domain": "technology",
+      "scope": "international",
+      "title": "紧张局势使关键技术转向封闭维护",
+      "text": "邦际紧张使设备和技术往来受限，各地优先维护本地可控的系统。机构能集中安排有限资源，开放实验合作却被中断，重复建设和更新迟缓开始增加成本。",
+      "requires": [
+        {
+          "path": "world.metrics.international_tension",
+          "op": "gte",
+          "value": 60
+        },
+        {
+          "path": "world.metrics.technology",
+          "op": "gte",
+          "value": 45
+        },
+        {
+          "path": "world.modes.technology",
+          "op": "ne",
+          "value": "restricted"
+        }
+      ],
+      "weight": 5,
+      "cooldown": 16,
+      "once": false,
+      "severity": 2,
+      "tags": [
+        "封闭路线",
+        "技术停滞",
+        "邦际紧张"
+      ],
+      "effects": [
+        {
+          "op": "mode",
+          "key": "technology",
+          "value": "restricted"
+        },
+        {
+          "op": "metric",
+          "key": "technology",
+          "delta": -5
+        },
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": -8
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "institutional_capacity",
+          "delta": 4
+        },
+        {
+          "op": "flag",
+          "key": "open_research_ready",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": "technology.shared_tools",
+      "domain": "technology",
+      "scope": "international",
+      "title": "共同维护的工具重新打开技术接口",
+      "text": "紧张缓和后，研究与教学机构把一批经过复查的工具交给共同维护。较小机构能够自行适配，知识流通恢复；这条路线需要持续培训，无法省掉所有维护成本。",
+      "requires": [
+        {
+          "path": "world.flags.research_network_ready",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.international_tension",
+          "op": "lte",
+          "value": 50
+        },
+        {
+          "path": "world.metrics.knowledge_access",
+          "op": "gte",
+          "value": 50
+        },
+        {
+          "path": "world.modes.technology",
+          "op": "ne",
+          "value": "open"
+        }
+      ],
+      "weight": 5,
+      "cooldown": 16,
+      "once": false,
+      "severity": 2,
+      "tags": [
+        "开放路线",
+        "去集中化",
+        "可逆分支"
+      ],
+      "effects": [
+        {
+          "op": "mode",
+          "key": "technology",
+          "value": "open"
+        },
+        {
+          "op": "metric",
+          "key": "technology",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 7
+        },
+        {
+          "op": "metric",
+          "key": "inequality",
+          "delta": -4
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 5
+        },
+        {
+          "op": "flag",
+          "key": "open_research_ready",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "space.orbital_observatory",
+      "domain": "space",
+      "scope": "frontier",
+      "title": "联合轨道观测站完成在轨调试",
+      "text": "长期研究和地面试验之后，联合轨道观测站完成部署与调试，开始提供地表和天空的连续观测。发射、地面链路和维护占用大量资源，下一步用途仍取决于各地能否接上这些资料。",
+      "requires": [
+        {
+          "path": "world.flags.open_research_ready",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.technology",
+          "op": "gte",
+          "value": 65
+        },
+        {
+          "path": "world.metrics.energy_security",
+          "op": "gte",
+          "value": 55
+        },
+        {
+          "path": "world.metrics.infrastructure",
+          "op": "gte",
+          "value": 50
+        },
+        {
+          "path": "world.flags.orbital_station_ever_built",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 4,
+      "cooldown": 20,
+      "once": true,
+      "severity": 2,
+      "tags": [
+        "轨道观测",
+        "前置验证",
+        "前沿成本"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 7
+        },
+        {
+          "op": "metric",
+          "key": "technology",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -4
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "energy_security",
+          "delta": -3
+        },
+        {
+          "op": "flag",
+          "key": "orbital_station_alive",
+          "value": true
+        },
+        {
+          "op": "flag",
+          "key": "orbital_station_ever_built",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "space.orbital_service_failure",
+      "domain": "space",
+      "scope": "frontier",
+      "title": "轨道服务因故障停止连续观测",
+      "text": "观测站的关键组件失效，地面团队停止依赖这条连续数据链。观测资料的覆盖与更新速度暂时下降，相关研究不得不延后；重新部署需要先弄清故障原因。",
+      "requires": [
+        {
+          "path": "world.flags.orbital_station_alive",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 3,
+      "cooldown": 16,
+      "once": false,
+      "severity": 2,
+      "tags": [
+        "前沿失败",
+        "设施生命周期",
+        "观测中断"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": -5
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 4
+        },
+        {
+          "op": "flag",
+          "key": "orbital_station_alive",
+          "value": false
+        },
+        {
+          "op": "flag",
+          "key": "shared_alerts_ready",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": "space.orbital_service_rebuild",
+      "domain": "space",
+      "scope": "frontier",
+      "title": "替换组件通过复查，轨道观测恢复",
+      "text": "此前中断的观测项目完成故障复查，替换组件与地面链路通过测试。数据逐步恢复，地方仍需重新校准服务；这次复建挤占了其他研究项目的经费。",
+      "requires": [
+        {
+          "path": "world.flags.orbital_station_ever_built",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.orbital_station_alive",
+          "op": "eq",
+          "value": false
+        },
+        {
+          "path": "world.metrics.technology",
+          "op": "gte",
+          "value": 60
+        },
+        {
+          "path": "world.metrics.energy_security",
+          "op": "gte",
+          "value": 50
+        },
+        {
+          "path": "world.metrics.institutional_capacity",
+          "op": "gte",
+          "value": 40
+        }
+      ],
+      "weight": 5,
+      "cooldown": 14,
+      "once": false,
+      "severity": 2,
+      "tags": [
+        "前沿修复",
+        "重新验证",
+        "预算取舍"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "technology",
+          "delta": 2
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -4
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 5
+        },
+        {
+          "op": "flag",
+          "key": "orbital_station_alive",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "space.closed_loop_trial",
+      "domain": "space",
+      "scope": "frontier",
+      "title": "地面封闭循环舱完成长期试验",
+      "text": "联合团队在地面完成一轮长期封闭循环试验，核对食物、水、空气和设备维修的相互依赖。试验提供了可用数据，也暴露出仍需外部补给的环节，消耗的能源和预算十分可观。",
+      "requires": [
+        {
+          "path": "world.flags.orbital_station_alive",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.advanced_energy_verified",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.advanced_energy_site_alive",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.technology",
+          "op": "gte",
+          "value": 75
+        },
+        {
+          "path": "world.metrics.food_security",
+          "op": "gte",
+          "value": 65
+        },
+        {
+          "path": "world.flags.closed_loop_tested",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 3,
+      "cooldown": 20,
+      "once": true,
+      "severity": 2,
+      "tags": [
+        "封闭循环",
+        "地面验证",
+        "远期前提"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "technology",
+          "delta": 6
+        },
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 4
+        },
+        {
+          "op": "metric",
+          "key": "energy_security",
+          "delta": -5
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -5
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 5
+        },
+        {
+          "op": "flag",
+          "key": "closed_loop_tested",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "space.research_outpost",
+      "domain": "space",
+      "scope": "frontier",
+      "title": "小型域外研究驻点进入轮换运行",
+      "text": "经过运输、生命支持和撤离演练，小型研究驻点开始人员轮换。它依靠持续补给，远未成为自给城市；研究合作扩大了知识边界，地面资源长期投入也引发了分配争论。",
+      "requires": [
+        {
+          "path": "world.flags.closed_loop_tested",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.orbital_station_alive",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.advanced_energy_verified",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.flags.advanced_energy_site_alive",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.technology",
+          "op": "gte",
+          "value": 82
+        },
+        {
+          "path": "world.metrics.energy_security",
+          "op": "gte",
+          "value": 80
+        },
+        {
+          "path": "world.metrics.food_security",
+          "op": "gte",
+          "value": 70
+        },
+        {
+          "path": "world.metrics.prosperity",
+          "op": "gte",
+          "value": 65
+        },
+        {
+          "path": "world.metrics.international_tension",
+          "op": "lte",
+          "value": 40
+        },
+        {
+          "path": "world.flags.research_outpost_alive",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 2,
+      "cooldown": 24,
+      "once": false,
+      "severity": 3,
+      "tags": [
+        "长期前沿",
+        "非自给驻点",
+        "稀有分支"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "knowledge_access",
+          "delta": 8
+        },
+        {
+          "op": "metric",
+          "key": "technology",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "prosperity",
+          "delta": -8
+        },
+        {
+          "op": "metric",
+          "key": "energy_security",
+          "delta": -7
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": 8
+        },
+        {
+          "op": "flag",
+          "key": "research_outpost_alive",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "space.outpost_withdrawal",
+      "domain": "space",
+      "scope": "frontier",
+      "title": "补给压力迫使研究驻点结束轮换",
+      "text": "供能余量下降后，持续补给的压力超过计划，驻点停止新的人员轮换并按既有程序撤回团队。地面负担减轻，现场研究暂停；已经获得的记录仍留在档案中。",
+      "requires": [
+        {
+          "path": "world.flags.research_outpost_alive",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.energy_security",
+          "op": "lte",
+          "value": 68
+        }
+      ],
+      "weight": 6,
+      "cooldown": 16,
+      "once": false,
+      "severity": 2,
+      "tags": [
+        "前沿收缩",
+        "撤回",
+        "可逆未来"
+      ],
+      "effects": [
+        {
+          "op": "metric",
+          "key": "energy_security",
+          "delta": 5
+        },
+        {
+          "op": "metric",
+          "key": "cost_pressure",
+          "delta": -4
+        },
+        {
+          "op": "metric",
+          "key": "technology",
+          "delta": -3
+        },
+        {
+          "op": "flag",
+          "key": "research_outpost_alive",
+          "value": false
+        }
+      ]
+    }
+  ]
+}

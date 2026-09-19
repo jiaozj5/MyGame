@@ -1,0 +1,28 @@
+127.0.0.1 - - [16/Sep/2026 20:43:54] "POST /api/new HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 20:43:54] "POST /api/resume HTTP/1.1" 400 -
+127.0.0.1 - - [16/Sep/2026 20:43:54] "POST /api/new HTTP/1.1" 403 -
+127.0.0.1 - - [16/Sep/2026 20:43:54] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 20:43:54] "POST /api/resume HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 20:43:55] "POST /api/new HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 20:43:55] "POST /api/choose HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 20:43:55] "POST /api/choose HTTP/1.1" 400 -
+127.0.0.1 - - [16/Sep/2026 20:43:55] "POST /api/resume HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 20:43:55] "POST /api/new HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 20:43:55] "POST /api/people HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 20:43:55] "POST /api/person HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 20:43:56] "POST /api/social HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 20:43:56] "POST /api/social HTTP/1.1" 400 -
+127.0.0.1 - - [16/Sep/2026 20:43:56] "POST /api/social-plan HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 20:43:56] "POST /api/people HTTP/1.1" 400 -
+127.0.0.1 - - [16/Sep/2026 20:43:56] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 20:43:56] code 404, message File not found
+127.0.0.1 - - [16/Sep/2026 20:43:56] "GET /game/engine.py HTTP/1.1" 404 -
+127.0.0.1 - - [16/Sep/2026 20:43:56] code 404, message File not found
+127.0.0.1 - - [16/Sep/2026 20:43:56] "GET /content/life-events.json HTTP/1.1" 404 -
+127.0.0.1 - - [16/Sep/2026 20:43:56] "POST /api/new HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 20:43:56] "POST /api/resume HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 20:43:57] "POST /api/resume HTTP/1.1" 200 -
+----------------------------------------------------------------------
+Ran 42 tests in 11.098s
+
+OK

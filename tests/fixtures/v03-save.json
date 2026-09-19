@@ -1,0 +1,1743 @@
+{
+  "schema_version": "1.1.0",
+  "state": {
+    "version": "1.1.0",
+    "content_version": "0.3.0",
+    "name": "时代升级回归",
+    "origin": "ordinary",
+    "born_year": 1988,
+    "age": 23,
+    "year": 2011,
+    "revision": 10,
+    "finished": false,
+    "death_reason": null,
+    "stats": {
+      "cash": 30480,
+      "energy": 58,
+      "health": 90,
+      "stress": 28,
+      "education": 41,
+      "skill": 40
+    },
+    "status": {
+      "job": "apprentice",
+      "job_label": "学徒",
+      "income": 20830,
+      "expenses": 16800
+    },
+    "npcs": {
+      "mother": {
+        "id": "mother",
+        "name": "许岚",
+        "role": "母亲",
+        "birth_year": 1964,
+        "age": 47,
+        "alive": true,
+        "met": true,
+        "closeness": 80,
+        "cash": 29200,
+        "death_year": null,
+        "death_age": null,
+        "description": ""
+      },
+      "father": {
+        "id": "father",
+        "name": "林川",
+        "role": "父亲",
+        "birth_year": 1961,
+        "age": 50,
+        "alive": true,
+        "met": true,
+        "closeness": 73,
+        "cash": 47200,
+        "death_year": null,
+        "death_age": null,
+        "description": ""
+      },
+      "friend": {
+        "id": "friend",
+        "name": "周远",
+        "role": "朋友",
+        "birth_year": 1988,
+        "age": 23,
+        "alive": true,
+        "met": true,
+        "closeness": 57,
+        "cash": 9650,
+        "death_year": null,
+        "death_age": null,
+        "description": ""
+      },
+      "partner": {
+        "id": "partner",
+        "name": "陈安",
+        "role": "相识的人",
+        "birth_year": 1989,
+        "age": 22,
+        "alive": true,
+        "met": true,
+        "closeness": 35,
+        "cash": 8050,
+        "death_year": null,
+        "death_age": null,
+        "description": ""
+      }
+    },
+    "flags": {
+      "partner_met": true,
+      "partnered": false,
+      "has_child": false,
+      "work_pace": "steady",
+      "work_push_years": 0,
+      "work_push_seen": false,
+      "loan_mother_open": false,
+      "loan_mother_due": false,
+      "loan_father_open": false,
+      "loan_father_due": false,
+      "loan_friend_open": false,
+      "loan_friend_due": false,
+      "loan_partner_open": false,
+      "loan_partner_due": false,
+      "school_interest": true,
+      "friend_support": true,
+      "home_goal": true,
+      "repair_interest": true,
+      "repair_project_completed": true,
+      "study_plan": true,
+      "training_completed": true,
+      "work_pace_chosen": true
+    },
+    "loans": [],
+    "last_outcome": {
+      "title": "修伞摊旁的人",
+      "text": "陈安说起自己常走的那条路。你们交换了联系办法，往后是否再见仍要各自决定。",
+      "changes": [
+        "精力 -5",
+        "与陈安的亲近 +20"
+      ]
+    },
+    "current_event": {
+      "id": "adult.repair_referral",
+      "title": "从一张木凳开始的介绍",
+      "category": "职业",
+      "scene": "work",
+      "age_min": 23,
+      "age_max": 46,
+      "once": true,
+      "requires": [
+        {
+          "path": "flags.repair_project_completed",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "stats.skill",
+          "op": "gte",
+          "value": 25
+        }
+      ],
+      "actors": [],
+      "text": "你曾参与修整的那批木凳用得不错。镇里一家作坊辗转问到你，愿意让你试做一段正式工作；你也可以借这次见面谈谈零散接活的可能。",
+      "choices": [
+        {
+          "id": "regular_job",
+          "label": "试做后接受作坊的正式岗位",
+          "description": "花精力完成试做，改为技术工人的收支节奏。",
+          "requires": [
+            {
+              "path": "stats.energy",
+              "op": "gte",
+              "value": 8
+            }
+          ],
+          "effects": [
+            {
+              "op": "stat",
+              "key": "energy",
+              "delta": -8
+            },
+            {
+              "op": "job",
+              "value": "worker"
+            },
+            {
+              "op": "stat",
+              "key": "skill",
+              "delta": 3
+            },
+            {
+              "op": "flag",
+              "key": "craft_regular_work",
+              "value": true
+            }
+          ],
+          "observations": [
+            {
+              "dimension": "persistence",
+              "behavior": "让已完成的实践延伸为稳定工作"
+            }
+          ],
+          "outcome": "试做通过后，你和作坊谈清了到场时间。以前练过的那点手艺，现在成了每天要认真做的工作。"
+        },
+        {
+          "id": "independent",
+          "label": "谈妥零散业务，独立安排接活",
+          "description": "需要更多技能和周转金，自行承担收入变化。",
+          "requires": [
+            {
+              "path": "stats.skill",
+              "op": "gte",
+              "value": 40
+            },
+            {
+              "path": "stats.cash",
+              "op": "gte",
+              "value": 4000
+            },
+            {
+              "path": "stats.energy",
+              "op": "gte",
+              "value": 8
+            }
+          ],
+          "effects": [
+            {
+              "op": "stat",
+              "key": "cash",
+              "delta": -4000
+            },
+            {
+              "op": "stat",
+              "key": "energy",
+              "delta": -8
+            },
+            {
+              "op": "job",
+              "value": "freelancer"
+            },
+            {
+              "op": "flag",
+              "key": "craft_regular_work",
+              "value": true
+            },
+            {
+              "op": "flag",
+              "key": "career_change",
+              "value": true
+            }
+          ],
+          "observations": [
+            {
+              "dimension": "risk_taking",
+              "behavior": "通过旧项目积累开始独立谋生"
+            },
+            {
+              "dimension": "social_initiative",
+              "behavior": "主动协商新的业务关系"
+            }
+          ],
+          "outcome": "你备好常用材料，把能接的工期写清楚。作坊成了一个业务来源，却不是全年收入的保证。"
+        },
+        {
+          "id": "keep_current",
+          "label": "感谢介绍，保留当前安排",
+          "description": "不更换职业，也不承诺新的订单。",
+          "requires": [],
+          "effects": [],
+          "observations": [],
+          "outcome": "你把联系方式收好，说明眼下已有自己的安排。那几张木凳带来的认可仍让你心里踏实。"
+        }
+      ],
+      "_kind": "slot"
+    },
+    "seed": 307,
+    "random_counter": 11,
+    "slot_index": 10,
+    "used_events": [
+      "child.first_day",
+      "child.river_friend",
+      "child.mother_ledger",
+      "child.father_tools",
+      "child.class_fee",
+      "teen.repair_request",
+      "youth.school_exit",
+      "youth.apprentice",
+      "adult.work_pace",
+      "youth.partner_meet"
+    ],
+    "aid_remaining": 12000,
+    "family_grant_given": true,
+    "sequence": 29,
+    "child_birth_year": null,
+    "migration_note": null,
+    "survival": {
+      "cooldown_until": 1988,
+      "adjustment_count": 0,
+      "consecutive_push_years": 0
+    },
+    "timeline": [
+      {
+        "id": "life-1",
+        "age": 0,
+        "year": 1988,
+        "title": "来到青溪镇",
+        "text": "1988 年，时代升级回归出生在虚构的青溪镇。",
+        "kind": "birth"
+      },
+      {
+        "id": "life-2",
+        "age": 6,
+        "year": 1994,
+        "title": "窗边的第一张课桌",
+        "text": "你讲得有点磕巴，但有人追问那条河在哪里。石头留在了课桌角。",
+        "kind": "choice",
+        "choice": "举起石头，讲讲河边的发现",
+        "choice_id": "show_stone",
+        "event_id": "child.first_day",
+        "observations": [
+          {
+            "dimension": "social_initiative",
+            "behavior": "主动分享自己的发现"
+          },
+          {
+            "dimension": "exploration",
+            "behavior": "把日常发现带进课堂"
+          }
+        ],
+        "npc_ids": [],
+        "gained_flags": {
+          "school_interest": true
+        },
+        "context": {
+          "available_choice_ids": [
+            "show_stone",
+            "listen_first",
+            "stay_quiet"
+          ],
+          "locked_options": [],
+          "resources_before": {
+            "cash": 80,
+            "energy": 80,
+            "health": 90,
+            "stress": 10,
+            "education": 5,
+            "skill": 3
+          },
+          "cash_cost": 0,
+          "cash_cost_share": 0.0,
+          "npc_knowledge": [
+            {
+              "id": "mother",
+              "name": "许岚",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "father",
+              "name": "林川",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "friend",
+              "name": "周远",
+              "alive": true,
+              "met": true
+            }
+          ],
+          "context_tags": [
+            "入学",
+            "童年"
+          ],
+          "presented_text": "青溪镇的小学校里，粉笔灰落在窗台上。老师让每个人介绍一样自己喜欢的东西，你把带来的小石头攥在手里。",
+          "opportunity": true
+        },
+        "stats_after": {
+          "cash": 80,
+          "energy": 75,
+          "health": 90,
+          "stress": 10,
+          "education": 8,
+          "skill": 3
+        }
+      },
+      {
+        "id": "life-3",
+        "age": 6,
+        "year": 1994,
+        "title": "河边的纸船",
+        "text": "你们给船底多折了一道边。它绕过石头，漂到了柳树影子下。",
+        "kind": "choice",
+        "choice": "一起改折法，再试一次",
+        "choice_id": "try_together",
+        "event_id": "child.river_friend",
+        "observations": [
+          {
+            "dimension": "persistence",
+            "behavior": "在失败后继续一起尝试"
+          },
+          {
+            "dimension": "care",
+            "behavior": "把时间用于同伴的困难"
+          }
+        ],
+        "npc_ids": [
+          "friend"
+        ],
+        "gained_flags": {
+          "friend_support": true
+        },
+        "context": {
+          "available_choice_ids": [
+            "try_together",
+            "ask_boat",
+            "watch"
+          ],
+          "locked_options": [],
+          "resources_before": {
+            "cash": 80,
+            "energy": 75,
+            "health": 90,
+            "stress": 10,
+            "education": 8,
+            "skill": 3
+          },
+          "cash_cost": 0,
+          "cash_cost_share": 0.0,
+          "npc_knowledge": [
+            {
+              "id": "mother",
+              "name": "许岚",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "father",
+              "name": "林川",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "friend",
+              "name": "周远",
+              "alive": true,
+              "met": true
+            }
+          ],
+          "context_tags": [
+            "友谊",
+            "童年"
+          ],
+          "presented_text": "周远把折歪的纸船放进浅水里，船很快靠上了岸。他问你要不要一起想办法，让船多走一段。",
+          "opportunity": true
+        },
+        "stats_after": {
+          "cash": 80,
+          "energy": 70,
+          "health": 90,
+          "stress": 10,
+          "education": 8,
+          "skill": 6
+        }
+      },
+      {
+        "id": "life-4",
+        "age": 7,
+        "year": 1995,
+        "title": "又长大了一岁",
+        "text": "家人承担日常生活开支。你得到 50 元零用钱，继续读书和成长。",
+        "kind": "annual",
+        "accounting": {
+          "income": 50,
+          "expenses": 0,
+          "cash_after": 130
+        },
+        "annual_plan": {
+          "job": "none",
+          "pace": "steady",
+          "pace_label": "在家人与学校支持下成长",
+          "income": 50,
+          "expenses": 0,
+          "energy_change": 1,
+          "stress_change": 1,
+          "health_change": 0
+        },
+        "resource_changes": {
+          "cash": 50,
+          "energy": 1,
+          "health": 0,
+          "stress": 1,
+          "education": 2,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 130,
+          "energy": 71,
+          "health": 90,
+          "stress": 11,
+          "education": 10,
+          "skill": 7
+        }
+      },
+      {
+        "id": "life-5",
+        "age": 8,
+        "year": 1996,
+        "title": "又长大了一岁",
+        "text": "家人承担日常生活开支。你得到 50 元零用钱，继续读书和成长。",
+        "kind": "annual",
+        "accounting": {
+          "income": 50,
+          "expenses": 0,
+          "cash_after": 180
+        },
+        "annual_plan": {
+          "job": "none",
+          "pace": "steady",
+          "pace_label": "在家人与学校支持下成长",
+          "income": 50,
+          "expenses": 0,
+          "energy_change": 1,
+          "stress_change": 1,
+          "health_change": 0
+        },
+        "resource_changes": {
+          "cash": 50,
+          "energy": 1,
+          "health": 0,
+          "stress": 1,
+          "education": 2,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 180,
+          "energy": 72,
+          "health": 90,
+          "stress": 12,
+          "education": 12,
+          "skill": 8
+        }
+      },
+      {
+        "id": "life-6",
+        "age": 9,
+        "year": 1997,
+        "title": "又长大了一岁",
+        "text": "家人承担日常生活开支。你得到 50 元零用钱，继续读书和成长。",
+        "kind": "annual",
+        "accounting": {
+          "income": 50,
+          "expenses": 0,
+          "cash_after": 230
+        },
+        "annual_plan": {
+          "job": "none",
+          "pace": "steady",
+          "pace_label": "在家人与学校支持下成长",
+          "income": 50,
+          "expenses": 0,
+          "energy_change": 1,
+          "stress_change": 1,
+          "health_change": 0
+        },
+        "resource_changes": {
+          "cash": 50,
+          "energy": 1,
+          "health": 0,
+          "stress": 1,
+          "education": 2,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 230,
+          "energy": 73,
+          "health": 90,
+          "stress": 13,
+          "education": 14,
+          "skill": 9
+        }
+      },
+      {
+        "id": "life-7",
+        "age": 9,
+        "year": 1997,
+        "title": "桌上的小账本",
+        "text": "你发现有两张纸条记的是同一笔。母亲重新热了面，也给你盛了一小碗。",
+        "kind": "choice",
+        "choice": "整理纸条，核对简单数字",
+        "choice_id": "sort",
+        "event_id": "child.mother_ledger",
+        "observations": [
+          {
+            "dimension": "care",
+            "behavior": "承担家中一段具体事务"
+          },
+          {
+            "dimension": "persistence",
+            "behavior": "认真完成细碎核对"
+          }
+        ],
+        "npc_ids": [
+          "mother"
+        ],
+        "gained_flags": {
+          "home_goal": true
+        },
+        "context": {
+          "available_choice_ids": [
+            "sort",
+            "plan_weekend",
+            "decline"
+          ],
+          "locked_options": [],
+          "resources_before": {
+            "cash": 230,
+            "energy": 73,
+            "health": 90,
+            "stress": 13,
+            "education": 14,
+            "skill": 9
+          },
+          "cash_cost": 0,
+          "cash_cost_share": 0.0,
+          "npc_knowledge": [
+            {
+              "id": "mother",
+              "name": "许岚",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "father",
+              "name": "林川",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "friend",
+              "name": "周远",
+              "alive": true,
+              "met": true
+            }
+          ],
+          "context_tags": [
+            "家庭",
+            "童年"
+          ],
+          "presented_text": "母亲许岚把一叠零散纸条抄进账本，旁边是一碗已经放凉的面。她正在核对家里的日常开销，问你能否帮忙把纸条按日期排好。",
+          "opportunity": true
+        },
+        "stats_after": {
+          "cash": 230,
+          "energy": 68,
+          "health": 90,
+          "stress": 13,
+          "education": 17,
+          "skill": 9
+        }
+      },
+      {
+        "id": "life-8",
+        "age": 10,
+        "year": 1998,
+        "title": "又长大了一岁",
+        "text": "家人承担日常生活开支。你得到 50 元零用钱，继续读书和成长。",
+        "kind": "annual",
+        "accounting": {
+          "income": 50,
+          "expenses": 0,
+          "cash_after": 280
+        },
+        "annual_plan": {
+          "job": "none",
+          "pace": "steady",
+          "pace_label": "在家人与学校支持下成长",
+          "income": 50,
+          "expenses": 0,
+          "energy_change": 2,
+          "stress_change": 0,
+          "health_change": 0
+        },
+        "resource_changes": {
+          "cash": 50,
+          "energy": 2,
+          "health": 0,
+          "stress": 0,
+          "education": 2,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 280,
+          "energy": 70,
+          "health": 90,
+          "stress": 13,
+          "education": 19,
+          "skill": 10
+        }
+      },
+      {
+        "id": "life-9",
+        "age": 11,
+        "year": 1999,
+        "title": "又长大了一岁",
+        "text": "家人承担日常生活开支。你得到 50 元零用钱，继续读书和成长。",
+        "kind": "annual",
+        "accounting": {
+          "income": 50,
+          "expenses": 0,
+          "cash_after": 330
+        },
+        "annual_plan": {
+          "job": "none",
+          "pace": "steady",
+          "pace_label": "在家人与学校支持下成长",
+          "income": 50,
+          "expenses": 0,
+          "energy_change": 1,
+          "stress_change": 0,
+          "health_change": 0
+        },
+        "resource_changes": {
+          "cash": 50,
+          "energy": 1,
+          "health": 0,
+          "stress": 0,
+          "education": 2,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 330,
+          "energy": 71,
+          "health": 90,
+          "stress": 13,
+          "education": 21,
+          "skill": 11
+        }
+      },
+      {
+        "id": "life-10",
+        "age": 12,
+        "year": 2000,
+        "title": "又长大了一岁",
+        "text": "家人承担日常生活开支。你得到 50 元零用钱，继续读书和成长。",
+        "kind": "annual",
+        "accounting": {
+          "income": 50,
+          "expenses": 0,
+          "cash_after": 380
+        },
+        "annual_plan": {
+          "job": "none",
+          "pace": "steady",
+          "pace_label": "在家人与学校支持下成长",
+          "income": 50,
+          "expenses": 0,
+          "energy_change": 1,
+          "stress_change": 0,
+          "health_change": 0
+        },
+        "resource_changes": {
+          "cash": 50,
+          "energy": 1,
+          "health": 0,
+          "stress": 0,
+          "education": 2,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 380,
+          "energy": 72,
+          "health": 90,
+          "stress": 13,
+          "education": 23,
+          "skill": 12
+        }
+      },
+      {
+        "id": "life-11",
+        "age": 12,
+        "year": 2000,
+        "title": "父亲的旧工具盒",
+        "text": "你把最后一角磨平，父亲让你在凳底写下名字。后来你仍记得木头的气味。",
+        "kind": "choice",
+        "choice": "跟着完成一小段打磨",
+        "choice_id": "learn",
+        "event_id": "child.father_tools",
+        "observations": [
+          {
+            "dimension": "exploration",
+            "behavior": "学习陌生的手工方法"
+          },
+          {
+            "dimension": "persistence",
+            "behavior": "完成一段重复练习"
+          }
+        ],
+        "npc_ids": [
+          "father"
+        ],
+        "gained_flags": {
+          "repair_interest": true
+        },
+        "context": {
+          "available_choice_ids": [
+            "learn",
+            "ask_story",
+            "leave"
+          ],
+          "locked_options": [],
+          "resources_before": {
+            "cash": 380,
+            "energy": 72,
+            "health": 90,
+            "stress": 13,
+            "education": 23,
+            "skill": 12
+          },
+          "cash_cost": 0,
+          "cash_cost_share": 0.0,
+          "npc_knowledge": [
+            {
+              "id": "mother",
+              "name": "许岚",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "father",
+              "name": "林川",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "friend",
+              "name": "周远",
+              "alive": true,
+              "met": true
+            }
+          ],
+          "context_tags": [
+            "手艺",
+            "少年"
+          ],
+          "presented_text": "父亲林川把一张摇晃的小凳子翻过来，工具盒里整齐排着钳子和砂纸。他问你愿不愿意在旁边学一学简单的整理和打磨。",
+          "opportunity": true
+        },
+        "stats_after": {
+          "cash": 380,
+          "energy": 66,
+          "health": 90,
+          "stress": 13,
+          "education": 23,
+          "skill": 18
+        }
+      },
+      {
+        "id": "life-12",
+        "age": 12,
+        "year": 2000,
+        "title": "还差的一点活动费",
+        "text": "周远接受了这次小额支持，并请你不要在班里提起。你们把这件事留在两个人之间。",
+        "kind": "choice",
+        "choice": "私下问他是否需要一点支持",
+        "choice_id": "private_offer",
+        "event_id": "child.class_fee",
+        "observations": [
+          {
+            "dimension": "care",
+            "behavior": "私下提供有限的物质帮助"
+          }
+        ],
+        "npc_ids": [
+          "friend"
+        ],
+        "gained_flags": {
+          "friend_support": true
+        },
+        "context": {
+          "available_choice_ids": [
+            "private_offer",
+            "cheaper_plan",
+            "respect"
+          ],
+          "locked_options": [],
+          "resources_before": {
+            "cash": 380,
+            "energy": 66,
+            "health": 90,
+            "stress": 13,
+            "education": 23,
+            "skill": 18
+          },
+          "cash_cost": 50,
+          "cash_cost_share": 0.13157894736842105,
+          "npc_knowledge": [
+            {
+              "id": "mother",
+              "name": "许岚",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "father",
+              "name": "林川",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "friend",
+              "name": "周远",
+              "alive": true,
+              "met": true
+            }
+          ],
+          "context_tags": [
+            "同伴",
+            "少年"
+          ],
+          "presented_text": "班里准备一次郊外活动，周远把缴费单折了两次，只说自己还没决定参加。你不知道他家的全部情况，也不确定他是否希望别人过问。",
+          "opportunity": true
+        },
+        "stats_after": {
+          "cash": 330,
+          "energy": 66,
+          "health": 90,
+          "stress": 13,
+          "education": 23,
+          "skill": 18
+        }
+      },
+      {
+        "id": "life-13",
+        "age": 13,
+        "year": 2001,
+        "title": "又长大了一岁",
+        "text": "家人承担日常生活开支。你得到 50 元零用钱，继续读书和成长。",
+        "kind": "annual",
+        "accounting": {
+          "income": 50,
+          "expenses": 0,
+          "cash_after": 380
+        },
+        "annual_plan": {
+          "job": "none",
+          "pace": "steady",
+          "pace_label": "在家人与学校支持下成长",
+          "income": 50,
+          "expenses": 0,
+          "energy_change": 2,
+          "stress_change": 0,
+          "health_change": 0
+        },
+        "resource_changes": {
+          "cash": 50,
+          "energy": 2,
+          "health": 0,
+          "stress": 0,
+          "education": 2,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 380,
+          "energy": 68,
+          "health": 90,
+          "stress": 13,
+          "education": 25,
+          "skill": 19
+        }
+      },
+      {
+        "id": "life-14",
+        "age": 14,
+        "year": 2002,
+        "title": "又长大了一岁",
+        "text": "家人承担日常生活开支。你得到 50 元零用钱，继续读书和成长。",
+        "kind": "annual",
+        "accounting": {
+          "income": 50,
+          "expenses": 0,
+          "cash_after": 430
+        },
+        "annual_plan": {
+          "job": "none",
+          "pace": "steady",
+          "pace_label": "在家人与学校支持下成长",
+          "income": 50,
+          "expenses": 0,
+          "energy_change": 2,
+          "stress_change": 0,
+          "health_change": 0
+        },
+        "resource_changes": {
+          "cash": 50,
+          "energy": 2,
+          "health": 0,
+          "stress": 0,
+          "education": 2,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 430,
+          "energy": 70,
+          "health": 90,
+          "stress": 13,
+          "education": 27,
+          "skill": 20
+        }
+      },
+      {
+        "id": "life-15",
+        "age": 15,
+        "year": 2003,
+        "title": "又长大了一岁",
+        "text": "家人承担日常生活开支。你得到 50 元零用钱，继续读书和成长。",
+        "kind": "annual",
+        "accounting": {
+          "income": 50,
+          "expenses": 0,
+          "cash_after": 480
+        },
+        "annual_plan": {
+          "job": "none",
+          "pace": "steady",
+          "pace_label": "在家人与学校支持下成长",
+          "income": 50,
+          "expenses": 0,
+          "energy_change": 1,
+          "stress_change": 0,
+          "health_change": 0
+        },
+        "resource_changes": {
+          "cash": 50,
+          "energy": 1,
+          "health": 0,
+          "stress": 0,
+          "education": 2,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 480,
+          "energy": 71,
+          "health": 90,
+          "stress": 13,
+          "education": 29,
+          "skill": 21
+        }
+      },
+      {
+        "id": "life-16",
+        "age": 15,
+        "year": 2003,
+        "title": "有人看见你会修东西",
+        "text": "你把修好的木凳一张张摆稳，给还需另找人处理的地方做了记号。有人问起你的名字，想把你介绍给镇里的作坊。",
+        "kind": "choice",
+        "choice": "接下自己能胜任的部分",
+        "choice_id": "take_project",
+        "event_id": "teen.repair_request",
+        "observations": [
+          {
+            "dimension": "persistence",
+            "behavior": "把早期兴趣做成一个完成的项目"
+          },
+          {
+            "dimension": "conflict_style",
+            "behavior": "在接活前说明能力范围"
+          }
+        ],
+        "npc_ids": [],
+        "gained_flags": {
+          "repair_project_completed": true
+        },
+        "context": {
+          "available_choice_ids": [
+            "take_project",
+            "assist",
+            "decline"
+          ],
+          "locked_options": [],
+          "resources_before": {
+            "cash": 480,
+            "energy": 71,
+            "health": 90,
+            "stress": 13,
+            "education": 29,
+            "skill": 21
+          },
+          "cash_cost": 0,
+          "cash_cost_share": 0.0,
+          "npc_knowledge": [
+            {
+              "id": "mother",
+              "name": "许岚",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "father",
+              "name": "林川",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "friend",
+              "name": "周远",
+              "alive": true,
+              "met": true
+            }
+          ],
+          "context_tags": [
+            "手艺",
+            "少年"
+          ],
+          "presented_text": "听说你学过一些修理，活动室的人请你看看几张松动的木凳。他们愿意出材料费，也希望先听清楚哪些是你能做的。",
+          "opportunity": true
+        },
+        "stats_after": {
+          "cash": 480,
+          "energy": 61,
+          "health": 90,
+          "stress": 13,
+          "education": 29,
+          "skill": 28
+        }
+      },
+      {
+        "id": "life-17",
+        "age": 16,
+        "year": 2004,
+        "title": "又长大了一岁",
+        "text": "家人承担日常生活开支。你得到 50 元零用钱，继续读书和成长。",
+        "kind": "annual",
+        "accounting": {
+          "income": 50,
+          "expenses": 0,
+          "cash_after": 530
+        },
+        "annual_plan": {
+          "job": "none",
+          "pace": "steady",
+          "pace_label": "在家人与学校支持下成长",
+          "income": 50,
+          "expenses": 0,
+          "energy_change": 3,
+          "stress_change": 0,
+          "health_change": 0
+        },
+        "resource_changes": {
+          "cash": 50,
+          "energy": 3,
+          "health": 0,
+          "stress": 0,
+          "education": 2,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 530,
+          "energy": 64,
+          "health": 90,
+          "stress": 13,
+          "education": 31,
+          "skill": 29
+        }
+      },
+      {
+        "id": "life-18",
+        "age": 17,
+        "year": 2005,
+        "title": "又长大了一岁",
+        "text": "家人承担日常生活开支。你得到 50 元零用钱，继续读书和成长。",
+        "kind": "annual",
+        "accounting": {
+          "income": 50,
+          "expenses": 0,
+          "cash_after": 580
+        },
+        "annual_plan": {
+          "job": "none",
+          "pace": "steady",
+          "pace_label": "在家人与学校支持下成长",
+          "income": 50,
+          "expenses": 0,
+          "energy_change": 3,
+          "stress_change": 0,
+          "health_change": 0
+        },
+        "resource_changes": {
+          "cash": 50,
+          "energy": 3,
+          "health": 0,
+          "stress": 0,
+          "education": 2,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 580,
+          "energy": 67,
+          "health": 90,
+          "stress": 13,
+          "education": 33,
+          "skill": 30
+        }
+      },
+      {
+        "id": "life-19",
+        "age": 18,
+        "year": 2006,
+        "title": "第一次独立的预算",
+        "text": "家人从积蓄中拿出 18000 元，作为你迈向成年生活的起步预算。",
+        "kind": "family",
+        "npc_ids": [
+          "mother",
+          "father"
+        ],
+        "stats_after": {
+          "cash": 18580,
+          "energy": 67,
+          "health": 90,
+          "stress": 13,
+          "education": 33,
+          "skill": 30
+        }
+      },
+      {
+        "id": "life-20",
+        "age": 18,
+        "year": 2006,
+        "title": "这一年的生活账",
+        "text": "按稳健节奏安排，收入 10100 元，实际生活支出 16800 元，结余现金 11880 元。精力变化 +0，压力变化 +6。",
+        "kind": "annual",
+        "accounting": {
+          "income": 10100,
+          "expenses": 16800,
+          "planned_expenses": 16800,
+          "cash_after": 11880
+        },
+        "annual_plan": {
+          "job": "none",
+          "pace": "steady",
+          "pace_label": "稳健节奏",
+          "income": 10100,
+          "expenses": 16800,
+          "energy_change": 0,
+          "stress_change": 6,
+          "health_change": 0
+        },
+        "resource_changes": {
+          "cash": 11300,
+          "energy": 0,
+          "health": 0,
+          "stress": 6,
+          "education": 0,
+          "skill": 0
+        },
+        "stats_after": {
+          "cash": 11880,
+          "energy": 67,
+          "health": 90,
+          "stress": 19,
+          "education": 33,
+          "skill": 30
+        }
+      },
+      {
+        "id": "life-21",
+        "age": 18,
+        "year": 2006,
+        "title": "校门之外",
+        "text": "你从仍然吃力的部分开始补。暂时没有取得结业资格，但下一次申请有了更好的基础。",
+        "kind": "choice",
+        "choice": "报名较短的基础补课",
+        "choice_id": "bridge",
+        "event_id": "youth.school_exit",
+        "observations": [
+          {
+            "dimension": "help_seeking",
+            "behavior": "主动使用补充学习的入口"
+          }
+        ],
+        "npc_ids": [],
+        "gained_flags": {
+          "study_plan": true
+        },
+        "context": {
+          "available_choice_ids": [
+            "bridge",
+            "work_first"
+          ],
+          "locked_options": [
+            {
+              "id": "qualify",
+              "reason": "学识需要至少 35，目前为 33。"
+            }
+          ],
+          "resources_before": {
+            "cash": 11880,
+            "energy": 67,
+            "health": 90,
+            "stress": 19,
+            "education": 33,
+            "skill": 30
+          },
+          "cash_cost": 200,
+          "cash_cost_share": 0.016835016835016835,
+          "npc_knowledge": [
+            {
+              "id": "mother",
+              "name": "许岚",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "father",
+              "name": "林川",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "friend",
+              "name": "周远",
+              "alive": true,
+              "met": true
+            }
+          ],
+          "context_tags": [
+            "升学",
+            "青年"
+          ],
+          "presented_text": "校门口贴着继续学习和岗位培训的信息。过去的成绩与练习会影响能申请什么，但这次也有给基础尚不够的人准备的补课入口。",
+          "opportunity": true
+        },
+        "stats_after": {
+          "cash": 11680,
+          "energy": 61,
+          "health": 90,
+          "stress": 19,
+          "education": 41,
+          "skill": 30
+        }
+      },
+      {
+        "id": "life-22",
+        "age": 18,
+        "year": 2006,
+        "title": "作坊门口的招聘纸",
+        "text": "你领到一套常用工具，先学着把工作台收拾清楚。手艺要从一次次实际工作里长出来。",
+        "kind": "choice",
+        "choice": "从学徒做起",
+        "choice_id": "apprentice",
+        "event_id": "youth.apprentice",
+        "observations": [
+          {
+            "dimension": "persistence",
+            "behavior": "接受从基础开始的训练"
+          }
+        ],
+        "npc_ids": [],
+        "gained_flags": {
+          "training_completed": true
+        },
+        "context": {
+          "available_choice_ids": [
+            "apprentice",
+            "skilled",
+            "look_more"
+          ],
+          "locked_options": [],
+          "resources_before": {
+            "cash": 11680,
+            "energy": 61,
+            "health": 90,
+            "stress": 19,
+            "education": 41,
+            "skill": 30
+          },
+          "cash_cost": 0,
+          "cash_cost_share": 0.0,
+          "npc_knowledge": [
+            {
+              "id": "mother",
+              "name": "许岚",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "father",
+              "name": "林川",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "friend",
+              "name": "周远",
+              "alive": true,
+              "met": true
+            }
+          ],
+          "context_tags": [
+            "学徒",
+            "青年"
+          ],
+          "presented_text": "小作坊把招聘纸贴在玻璃门上，愿意接收从基础做起的人。师傅看重按约到场，也愿意听你说已经学过什么。",
+          "opportunity": true
+        },
+        "stats_after": {
+          "cash": 11680,
+          "energy": 61,
+          "health": 90,
+          "stress": 19,
+          "education": 41,
+          "skill": 35
+        }
+      },
+      {
+        "id": "life-23",
+        "age": 19,
+        "year": 2007,
+        "title": "这一年的生活账",
+        "text": "按稳健节奏安排，收入 20380 元，实际生活支出 16800 元，结余现金 15260 元。精力变化 +1，压力变化 +3。",
+        "kind": "annual",
+        "accounting": {
+          "income": 20380,
+          "expenses": 16800,
+          "planned_expenses": 16800,
+          "cash_after": 15260
+        },
+        "annual_plan": {
+          "job": "apprentice",
+          "pace": "steady",
+          "pace_label": "稳健节奏",
+          "income": 20380,
+          "expenses": 16800,
+          "energy_change": 1,
+          "stress_change": 3,
+          "health_change": 0
+        },
+        "resource_changes": {
+          "cash": 3580,
+          "energy": 1,
+          "health": 0,
+          "stress": 3,
+          "education": 0,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 15260,
+          "energy": 62,
+          "health": 90,
+          "stress": 22,
+          "education": 41,
+          "skill": 36
+        }
+      },
+      {
+        "id": "life-24",
+        "age": 20,
+        "year": 2008,
+        "title": "这一年的生活账",
+        "text": "按稳健节奏安排，收入 20470 元，实际生活支出 16800 元，结余现金 18930 元。精力变化 +1，压力变化 +2。",
+        "kind": "annual",
+        "accounting": {
+          "income": 20470,
+          "expenses": 16800,
+          "planned_expenses": 16800,
+          "cash_after": 18930
+        },
+        "annual_plan": {
+          "job": "apprentice",
+          "pace": "steady",
+          "pace_label": "稳健节奏",
+          "income": 20470,
+          "expenses": 16800,
+          "energy_change": 1,
+          "stress_change": 2,
+          "health_change": 0
+        },
+        "resource_changes": {
+          "cash": 3670,
+          "energy": 1,
+          "health": 0,
+          "stress": 2,
+          "education": 0,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 18930,
+          "energy": 63,
+          "health": 90,
+          "stress": 24,
+          "education": 41,
+          "skill": 37
+        }
+      },
+      {
+        "id": "life-25",
+        "age": 20,
+        "year": 2008,
+        "title": "给工作留多少力气",
+        "text": "你把常做的事情排进日程，给临时变化留下一点余地。接下来先照着这份安排走。",
+        "kind": "choice",
+        "choice": "按常规节奏工作",
+        "choice_id": "steady",
+        "event_id": "adult.work_pace",
+        "observations": [
+          {
+            "dimension": "risk_taking",
+            "behavior": "选择较为常规的工作与收入节奏"
+          }
+        ],
+        "npc_ids": [],
+        "gained_flags": {
+          "work_pace": "steady",
+          "work_pace_chosen": true
+        },
+        "context": {
+          "available_choice_ids": [
+            "steady",
+            "push",
+            "rest"
+          ],
+          "locked_options": [],
+          "resources_before": {
+            "cash": 18930,
+            "energy": 63,
+            "health": 90,
+            "stress": 24,
+            "education": 41,
+            "skill": 37
+          },
+          "cash_cost": 0,
+          "cash_cost_share": 0.0,
+          "npc_knowledge": [
+            {
+              "id": "mother",
+              "name": "许岚",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "father",
+              "name": "林川",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "friend",
+              "name": "周远",
+              "alive": true,
+              "met": true
+            }
+          ],
+          "context_tags": [
+            "工作节奏",
+            "青年"
+          ],
+          "presented_text": "工作渐渐有了固定的样子，你开始考虑往后的节奏。多接一些事情可能增加收入，也会挤占恢复的时间；怎样安排，需要你在自己的账和身体之间作取舍。",
+          "opportunity": true
+        },
+        "stats_after": {
+          "cash": 18930,
+          "energy": 63,
+          "health": 90,
+          "stress": 24,
+          "education": 41,
+          "skill": 37
+        }
+      },
+      {
+        "id": "life-26",
+        "age": 21,
+        "year": 2009,
+        "title": "这一年的生活账",
+        "text": "按稳健节奏安排，收入 20560 元，实际生活支出 16800 元，结余现金 22690 元。精力变化 +0，压力变化 +2。",
+        "kind": "annual",
+        "accounting": {
+          "income": 20560,
+          "expenses": 16800,
+          "planned_expenses": 16800,
+          "cash_after": 22690
+        },
+        "annual_plan": {
+          "job": "apprentice",
+          "pace": "steady",
+          "pace_label": "稳健节奏",
+          "income": 20560,
+          "expenses": 16800,
+          "energy_change": 0,
+          "stress_change": 2,
+          "health_change": 0
+        },
+        "resource_changes": {
+          "cash": 3760,
+          "energy": 0,
+          "health": 0,
+          "stress": 2,
+          "education": 0,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 22690,
+          "energy": 63,
+          "health": 90,
+          "stress": 26,
+          "education": 41,
+          "skill": 38
+        }
+      },
+      {
+        "id": "life-27",
+        "age": 22,
+        "year": 2010,
+        "title": "这一年的生活账",
+        "text": "按稳健节奏安排，收入 20650 元，实际生活支出 16800 元，结余现金 26540 元。精力变化 +0，压力变化 +1。",
+        "kind": "annual",
+        "accounting": {
+          "income": 20650,
+          "expenses": 16800,
+          "planned_expenses": 16800,
+          "cash_after": 26540
+        },
+        "annual_plan": {
+          "job": "apprentice",
+          "pace": "steady",
+          "pace_label": "稳健节奏",
+          "income": 20650,
+          "expenses": 16800,
+          "energy_change": 0,
+          "stress_change": 1,
+          "health_change": 0
+        },
+        "resource_changes": {
+          "cash": 3850,
+          "energy": 0,
+          "health": 0,
+          "stress": 1,
+          "education": 0,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 26540,
+          "energy": 63,
+          "health": 90,
+          "stress": 27,
+          "education": 41,
+          "skill": 39
+        }
+      },
+      {
+        "id": "life-28",
+        "age": 23,
+        "year": 2011,
+        "title": "这一年的生活账",
+        "text": "按稳健节奏安排，收入 20740 元，实际生活支出 16800 元，结余现金 30480 元。精力变化 +0，压力变化 +1。",
+        "kind": "annual",
+        "accounting": {
+          "income": 20740,
+          "expenses": 16800,
+          "planned_expenses": 16800,
+          "cash_after": 30480
+        },
+        "annual_plan": {
+          "job": "apprentice",
+          "pace": "steady",
+          "pace_label": "稳健节奏",
+          "income": 20740,
+          "expenses": 16800,
+          "energy_change": 0,
+          "stress_change": 1,
+          "health_change": 0
+        },
+        "resource_changes": {
+          "cash": 3940,
+          "energy": 0,
+          "health": 0,
+          "stress": 1,
+          "education": 0,
+          "skill": 1
+        },
+        "stats_after": {
+          "cash": 30480,
+          "energy": 63,
+          "health": 90,
+          "stress": 28,
+          "education": 41,
+          "skill": 40
+        }
+      },
+      {
+        "id": "life-29",
+        "age": 23,
+        "year": 2011,
+        "title": "修伞摊旁的人",
+        "text": "陈安说起自己常走的那条路。你们交换了联系办法，往后是否再见仍要各自决定。",
+        "kind": "choice",
+        "choice": "聊聊彼此在镇里的生活",
+        "choice_id": "talk",
+        "event_id": "youth.partner_meet",
+        "observations": [
+          {
+            "dimension": "social_initiative",
+            "behavior": "主动延续一次偶遇的交谈"
+          }
+        ],
+        "npc_ids": [
+          "partner"
+        ],
+        "gained_flags": {
+          "partner_met": true
+        },
+        "context": {
+          "available_choice_ids": [
+            "talk",
+            "help",
+            "greet"
+          ],
+          "locked_options": [],
+          "resources_before": {
+            "cash": 30480,
+            "energy": 63,
+            "health": 90,
+            "stress": 28,
+            "education": 41,
+            "skill": 40
+          },
+          "cash_cost": 0,
+          "cash_cost_share": 0.0,
+          "npc_knowledge": [
+            {
+              "id": "mother",
+              "name": "许岚",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "father",
+              "name": "林川",
+              "alive": true,
+              "met": true
+            },
+            {
+              "id": "friend",
+              "name": "周远",
+              "alive": true,
+              "met": true
+            }
+          ],
+          "context_tags": [
+            "相遇",
+            "青年"
+          ],
+          "presented_text": "一阵雨把街上的人留在屋檐下。陈安正帮摊主收起几把修好的伞，你们因一小段让路和道谢开始说话。",
+          "opportunity": true
+        },
+        "stats_after": {
+          "cash": 30480,
+          "energy": 58,
+          "health": 90,
+          "stress": 28,
+          "education": 41,
+          "skill": 40
+        }
+      }
+    ]
+  }
+}

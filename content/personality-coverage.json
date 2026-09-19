@@ -1,0 +1,23 @@
+{
+  "version": "0.1.0",
+  "dimensions": [
+    "care", "conflict_style", "exploration", "fairness",
+    "help_seeking", "persistence", "risk_taking", "social_initiative"
+  ],
+  "contexts": [
+    {"id":"early_low_pressure","age":"child_or_teen","pressure":"low","relationship":"community","scale":"personal","information":"known","horizon":"short","events":["child.first_day","child.library"]},
+    {"id":"early_high_pressure","age":"child_or_teen","pressure":"high","relationship":"family","scale":"family","information":"partial","horizon":"immediate","events":["child.mother_ledger","child.class_fee"]},
+    {"id":"adult_transition","age":"adult","pressure":"moderate","relationship":"work_or_partner","scale":"personal","information":"partial","horizon":"long","events":["adult.work_offer","adult.partner_invite"]},
+    {"id":"later_support","age":"later_life","pressure":"moderate","relationship":"friend_or_community","scale":"community","information":"uncertain","horizon":"short","events":["later.friend_visit","later.community_bench"]}
+  ],
+  "matrix": {
+    "care":["child.mother_ledger","adult.mother_support","adult.returned_support","later.friend_visit"],
+    "conflict_style":["teen.repair_request","adult.friend_boundary","adult.partner_no","later.friend_visit"],
+    "exploration":["child.library","teen.reading_circle","adult.night_class","later.own_day"],
+    "fairness":["child.class_fee","adult.community_workshop","society.governance.personal","later.river_notebook"],
+    "help_seeking":["child.first_day","teen.repair_request","adult.returned_support","later.neighbor_checkin"],
+    "persistence":["child.river_friend","teen.study_plan","adult.work_pace","later.river_notebook"],
+    "risk_taking":["society.information.personal","youth.career_entry","adult.small_business","later.quiet_accounts"],
+    "social_initiative":["child.first_day","child.class_fee","adult.partner_invite","later.community_bench"]
+  }
+}

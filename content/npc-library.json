@@ -1,0 +1,3823 @@
+{
+  "version": "0.5.0",
+  "occupations": [
+    {
+      "id": "child_early",
+      "label": "学龄前儿童",
+      "sector": "生活状态",
+      "min_age": 0,
+      "max_age": 5,
+      "description": "主要生活围绕照看、游戏与早期学习。",
+      "income": 0,
+      "retirable": false
+    },
+    {
+      "id": "student",
+      "label": "在校学生",
+      "sector": "生活状态",
+      "min_age": 6,
+      "max_age": 30,
+      "description": "以课程、同伴活动和学习安排为主要日常。",
+      "income": 0,
+      "retirable": false
+    },
+    {
+      "id": "apprentice",
+      "label": "学徒",
+      "sector": "生活状态",
+      "min_age": 16,
+      "max_age": 40,
+      "description": "在指导与实际练习中学习一门工作技能。",
+      "income": 10000,
+      "retirable": true
+    },
+    {
+      "id": "job_seeker",
+      "label": "待业求职者",
+      "sector": "生活状态",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "正在寻找工作，收入与日程可能不稳定。",
+      "income": 6000,
+      "retirable": false
+    },
+    {
+      "id": "unpaid_caregiver",
+      "label": "家庭照护者",
+      "sector": "生活状态",
+      "min_age": 18,
+      "max_age": 90,
+      "description": "主要时间用于照料亲近的人，照护不必带来工资。",
+      "income": 0,
+      "retirable": false
+    },
+    {
+      "id": "homemaker",
+      "label": "家务管理者",
+      "sector": "生活状态",
+      "min_age": 18,
+      "max_age": 90,
+      "description": "组织家中采购、清洁与日常事务。",
+      "income": 0,
+      "retirable": false
+    },
+    {
+      "id": "recovering",
+      "label": "休养者",
+      "sector": "生活状态",
+      "min_age": 0,
+      "max_age": 100,
+      "description": "暂时减少通常活动，把精力留给恢复与生活安排。",
+      "income": 0,
+      "retirable": false
+    },
+    {
+      "id": "retired",
+      "label": "退休者",
+      "sector": "生活状态",
+      "min_age": 55,
+      "max_age": 110,
+      "description": "已退出主要职业，仍可参与学习、照护或社区活动。",
+      "income": 12000,
+      "retirable": false
+    },
+    {
+      "id": "grain_farmer",
+      "label": "粮食种植户",
+      "sector": "农业",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "安排播种、田间管理和收获。",
+      "income": 21000,
+      "retirable": true
+    },
+    {
+      "id": "vegetable_grower",
+      "label": "蔬菜种植户",
+      "sector": "农业",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "照料菜畦并与收购点或市集衔接。",
+      "income": 22000,
+      "retirable": true
+    },
+    {
+      "id": "orchard_keeper",
+      "label": "果园管理者",
+      "sector": "农业",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "处理果树养护、季节采收与储运。",
+      "income": 24000,
+      "retirable": true
+    },
+    {
+      "id": "livestock_keeper",
+      "label": "畜养工",
+      "sector": "农业",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "照料牲畜并维护饲养设施。",
+      "income": 23000,
+      "retirable": true
+    },
+    {
+      "id": "aquaculture_worker",
+      "label": "水产养殖工",
+      "sector": "农业",
+      "min_age": 18,
+      "max_age": 75,
+      "description": "维护养殖水域、设备与收获安排。",
+      "income": 24000,
+      "retirable": true
+    },
+    {
+      "id": "forestry_worker",
+      "label": "林业工",
+      "sector": "农业",
+      "min_age": 18,
+      "max_age": 75,
+      "description": "参与林地巡护、育苗和养护。",
+      "income": 22000,
+      "retirable": true
+    },
+    {
+      "id": "seed_keeper",
+      "label": "种子保管员",
+      "sector": "农业",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "整理种源、保管样本并记录出入库。",
+      "income": 25000,
+      "retirable": true
+    },
+    {
+      "id": "water_irrigator",
+      "label": "灌溉管护员",
+      "sector": "农业",
+      "min_age": 18,
+      "max_age": 75,
+      "description": "巡查水渠、阀门和用水安排。",
+      "income": 24000,
+      "retirable": true
+    },
+    {
+      "id": "carpenter",
+      "label": "木工",
+      "sector": "制造维修",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "制作和修理木制结构及家具。",
+      "income": 28000,
+      "retirable": true
+    },
+    {
+      "id": "mason",
+      "label": "泥瓦工",
+      "sector": "制造维修",
+      "min_age": 18,
+      "max_age": 75,
+      "description": "承担砌筑、铺设与建筑修缮。",
+      "income": 27000,
+      "retirable": true
+    },
+    {
+      "id": "electrician",
+      "label": "电工",
+      "sector": "制造维修",
+      "min_age": 18,
+      "max_age": 75,
+      "description": "安装和维护用电设备与线路。",
+      "income": 32000,
+      "retirable": true
+    },
+    {
+      "id": "mechanic",
+      "label": "机械维修工",
+      "sector": "制造维修",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "检查机械故障并更换磨损部件。",
+      "income": 30000,
+      "retirable": true
+    },
+    {
+      "id": "metalworker",
+      "label": "金属加工工",
+      "sector": "制造维修",
+      "min_age": 18,
+      "max_age": 75,
+      "description": "按工序加工金属构件。",
+      "income": 28000,
+      "retirable": true
+    },
+    {
+      "id": "textile_worker",
+      "label": "纺织工",
+      "sector": "制造维修",
+      "min_age": 18,
+      "max_age": 75,
+      "description": "操作或维护纺织与缝制工序。",
+      "income": 22000,
+      "retirable": true
+    },
+    {
+      "id": "baker",
+      "label": "烘焙师",
+      "sector": "制造维修",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "安排发酵、烘烤与每日出品。",
+      "income": 25000,
+      "retirable": true
+    },
+    {
+      "id": "food_processor",
+      "label": "食品加工工",
+      "sector": "制造维修",
+      "min_age": 18,
+      "max_age": 75,
+      "description": "参与分拣、加工和包装。",
+      "income": 21000,
+      "retirable": true
+    },
+    {
+      "id": "repair_worker",
+      "label": "日用品修理工",
+      "sector": "制造维修",
+      "min_age": 18,
+      "max_age": 90,
+      "description": "修理旧物并寻找可用零件。",
+      "income": 24000,
+      "retirable": true
+    },
+    {
+      "id": "recycling_worker",
+      "label": "回收分拣工",
+      "sector": "制造维修",
+      "min_age": 18,
+      "max_age": 75,
+      "description": "分类、搬运与整理可回用材料。",
+      "income": 20000,
+      "retirable": true
+    },
+    {
+      "id": "shopkeeper",
+      "label": "店主",
+      "sector": "商贸服务",
+      "min_age": 18,
+      "max_age": 90,
+      "description": "安排小店进货、营业与账目。",
+      "income": 28000,
+      "retirable": true
+    },
+    {
+      "id": "market_vendor",
+      "label": "集市摊主",
+      "sector": "商贸服务",
+      "min_age": 18,
+      "max_age": 90,
+      "description": "在市集售卖货品并承担进货波动。",
+      "income": 22000,
+      "retirable": true
+    },
+    {
+      "id": "cook",
+      "label": "厨师",
+      "sector": "商贸服务",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "安排备料与出餐。",
+      "income": 28000,
+      "retirable": true
+    },
+    {
+      "id": "server",
+      "label": "餐饮服务员",
+      "sector": "商贸服务",
+      "min_age": 18,
+      "max_age": 75,
+      "description": "接待客人并衔接前厅与后厨。",
+      "income": 19000,
+      "retirable": true
+    },
+    {
+      "id": "housekeeper",
+      "label": "家政服务员",
+      "sector": "商贸服务",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "按约定提供家务与日常整理服务。",
+      "income": 20000,
+      "retirable": true
+    },
+    {
+      "id": "hairdresser",
+      "label": "理发师",
+      "sector": "商贸服务",
+      "min_age": 18,
+      "max_age": 85,
+      "description": "提供理发服务并维护熟客往来。",
+      "income": 25000,
+      "retirable": true
+    },
+    {
+      "id": "delivery_worker",
+      "label": "配送员",
+      "sector": "运输仓储",
+      "min_age": 18,
+      "max_age": 75,
+      "description": "按线路递送货物并核对交接。",
+      "income": 22000,
+      "retirable": true
+    },
+    {
+      "id": "driver",
+      "label": "运输司机",
+      "sector": "运输仓储",
+      "min_age": 18,
+      "max_age": 75,
+      "description": "驾驶运输车辆并安排出车与休息。",
+      "income": 27000,
+      "retirable": true
+    },
+    {
+      "id": "warehouse_worker",
+      "label": "仓库管理员",
+      "sector": "运输仓储",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "核对库存、存放位置和出入库记录。",
+      "income": 24000,
+      "retirable": true
+    },
+    {
+      "id": "freight_dispatcher",
+      "label": "货运调度员",
+      "sector": "运输仓储",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "协调货单、车辆与交付时段。",
+      "income": 28000,
+      "retirable": true
+    },
+    {
+      "id": "teacher",
+      "label": "教师",
+      "sector": "教育文化",
+      "min_age": 18,
+      "max_age": 85,
+      "description": "备课、授课并跟进学生学习。",
+      "income": 29000,
+      "retirable": true
+    },
+    {
+      "id": "librarian",
+      "label": "图书管理员",
+      "sector": "教育文化",
+      "min_age": 18,
+      "max_age": 90,
+      "description": "整理书目、借阅与资料查询。",
+      "income": 25000,
+      "retirable": true
+    },
+    {
+      "id": "translator",
+      "label": "翻译者",
+      "sector": "教育文化",
+      "min_age": 18,
+      "max_age": 90,
+      "description": "在不同语言或表达习惯之间传递信息。",
+      "income": 28000,
+      "retirable": true
+    },
+    {
+      "id": "journalist",
+      "label": "记者",
+      "sector": "教育文化",
+      "min_age": 18,
+      "max_age": 85,
+      "description": "采访、核实与整理可公开的报道。",
+      "income": 30000,
+      "retirable": true
+    },
+    {
+      "id": "artist",
+      "label": "视觉创作者",
+      "sector": "教育文化",
+      "min_age": 18,
+      "max_age": 95,
+      "description": "创作图像或实物作品并寻找展示机会。",
+      "income": 24000,
+      "retirable": true
+    },
+    {
+      "id": "musician",
+      "label": "乐师",
+      "sector": "教育文化",
+      "min_age": 18,
+      "max_age": 95,
+      "description": "练习、演出或教授音乐。",
+      "income": 24000,
+      "retirable": true
+    },
+    {
+      "id": "researcher",
+      "label": "研究员",
+      "sector": "研究技术",
+      "min_age": 21,
+      "max_age": 90,
+      "description": "提出问题、开展研究并记录结果。",
+      "income": 38000,
+      "retirable": true
+    },
+    {
+      "id": "lab_technician",
+      "label": "实验技术员",
+      "sector": "研究技术",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "维护实验器材并执行规范化测量。",
+      "income": 30000,
+      "retirable": true
+    },
+    {
+      "id": "software_developer",
+      "label": "软件开发者",
+      "sector": "研究技术",
+      "min_age": 18,
+      "max_age": 85,
+      "description": "编写、测试与维护软件。",
+      "income": 38000,
+      "retirable": true
+    },
+    {
+      "id": "data_analyst",
+      "label": "数据分析员",
+      "sector": "研究技术",
+      "min_age": 18,
+      "max_age": 85,
+      "description": "整理数据并说明分析的适用范围。",
+      "income": 34000,
+      "retirable": true
+    },
+    {
+      "id": "nurse",
+      "label": "护理人员",
+      "sector": "照护公共服务",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "在照护机构承担日常护理协作。",
+      "income": 31000,
+      "retirable": true
+    },
+    {
+      "id": "care_worker",
+      "label": "照护员",
+      "sector": "照护公共服务",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "帮助有需要的人完成日常生活活动。",
+      "income": 24000,
+      "retirable": true
+    },
+    {
+      "id": "community_worker",
+      "label": "社区工作者",
+      "sector": "照护公共服务",
+      "min_age": 18,
+      "max_age": 90,
+      "description": "连接居民需求、服务窗口与共同事务。",
+      "income": 26000,
+      "retirable": true
+    },
+    {
+      "id": "counselor",
+      "label": "心理支持工作者",
+      "sector": "照护公共服务",
+      "min_age": 21,
+      "max_age": 85,
+      "description": "提供倾听与支持，并在职责范围内衔接资源。",
+      "income": 32000,
+      "retirable": true
+    },
+    {
+      "id": "public_clerk",
+      "label": "公共事务职员",
+      "sector": "照护公共服务",
+      "min_age": 18,
+      "max_age": 85,
+      "description": "受理材料并办理公共服务事务。",
+      "income": 28000,
+      "retirable": true
+    },
+    {
+      "id": "inspector",
+      "label": "检验员",
+      "sector": "照护公共服务",
+      "min_age": 18,
+      "max_age": 85,
+      "description": "按工作范围检查质量、设施或记录。",
+      "income": 30000,
+      "retirable": true
+    },
+    {
+      "id": "legal_aide",
+      "label": "事务援助员",
+      "sector": "照护公共服务",
+      "min_age": 21,
+      "max_age": 90,
+      "description": "帮助人们梳理争议材料并寻找合适的援助窗口。",
+      "income": 30000,
+      "retirable": true
+    },
+    {
+      "id": "mediator",
+      "label": "调解员",
+      "sector": "照护公共服务",
+      "min_age": 21,
+      "max_age": 90,
+      "description": "协助争议双方表达诉求并寻找可接受的安排。",
+      "income": 28000,
+      "retirable": true
+    },
+    {
+      "id": "emergency_worker",
+      "label": "应急救援员",
+      "sector": "照护公共服务",
+      "min_age": 18,
+      "max_age": 65,
+      "description": "参与应急响应、训练与物资准备。",
+      "income": 30000,
+      "retirable": true
+    },
+    {
+      "id": "sanitation_worker",
+      "label": "环境清洁工",
+      "sector": "照护公共服务",
+      "min_age": 18,
+      "max_age": 75,
+      "description": "维护道路与公共空间的清洁。",
+      "income": 22000,
+      "retirable": true
+    },
+    {
+      "id": "bookkeeper",
+      "label": "记账员",
+      "sector": "组织经营",
+      "min_age": 18,
+      "max_age": 90,
+      "description": "核对收支、凭证与账目。",
+      "income": 28000,
+      "retirable": true
+    },
+    {
+      "id": "project_coordinator",
+      "label": "项目协调员",
+      "sector": "组织经营",
+      "min_age": 18,
+      "max_age": 85,
+      "description": "协调进度、人员与资源安排。",
+      "income": 32000,
+      "retirable": true
+    },
+    {
+      "id": "business_owner",
+      "label": "企业经营者",
+      "sector": "组织经营",
+      "min_age": 18,
+      "max_age": 95,
+      "description": "承担经营决策、合同与用工安排。",
+      "income": 42000,
+      "retirable": true
+    },
+    {
+      "id": "cooperative_member",
+      "label": "合作社成员",
+      "sector": "组织经营",
+      "min_age": 18,
+      "max_age": 95,
+      "description": "参与共同经营并承担约定的工作与责任。",
+      "income": 26000,
+      "retirable": true
+    },
+    {
+      "id": "energy_technician",
+      "label": "能源设备技术员",
+      "sector": "研究技术",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "巡查并维护供能与储能设备。",
+      "income": 34000,
+      "retirable": true
+    },
+    {
+      "id": "transit_controller",
+      "label": "交通调度员",
+      "sector": "运输仓储",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "协调班次、站点和异常情况。",
+      "income": 31000,
+      "retirable": true
+    },
+    {
+      "id": "systems_reviewer",
+      "label": "系统审核员",
+      "sector": "研究技术",
+      "min_age": 18,
+      "max_age": 85,
+      "description": "核对系统输出与申诉材料，记录差错。",
+      "income": 33000,
+      "retirable": true
+    },
+    {
+      "id": "surveyor",
+      "label": "测绘员",
+      "sector": "研究技术",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "开展地面测量并整理图件与位置记录。",
+      "income": 31000,
+      "retirable": true
+    },
+    {
+      "id": "physician",
+      "label": "临床医师",
+      "sector": "医学临床",
+      "min_age": 24,
+      "max_age": 85,
+      "description": "在诊疗团队中评估病情、记录判断并协作照护。",
+      "income": 46000,
+      "retirable": true
+    },
+    {
+      "id": "dentist",
+      "label": "口腔医师",
+      "sector": "医学临床",
+      "min_age": 24,
+      "max_age": 85,
+      "description": "处理口腔诊疗与随访事务。",
+      "income": 43000,
+      "retirable": true
+    },
+    {
+      "id": "pharmacist",
+      "label": "药师",
+      "sector": "医学临床",
+      "min_age": 22,
+      "max_age": 85,
+      "description": "核对药品供应、配发与用药信息。",
+      "income": 35000,
+      "retirable": true
+    },
+    {
+      "id": "rehabilitation_therapist",
+      "label": "康复治疗师",
+      "sector": "医学临床",
+      "min_age": 22,
+      "max_age": 80,
+      "description": "在专业协作中支持功能恢复与日常活动适应。",
+      "income": 34000,
+      "retirable": true
+    },
+    {
+      "id": "midwife",
+      "label": "助产人员",
+      "sector": "医学临床",
+      "min_age": 22,
+      "max_age": 80,
+      "description": "在生育照护团队中承担孕产支持与协作。",
+      "income": 34000,
+      "retirable": true
+    },
+    {
+      "id": "paramedic",
+      "label": "急救人员",
+      "sector": "医学临床",
+      "min_age": 20,
+      "max_age": 65,
+      "description": "承担急救响应、转运与交接。",
+      "income": 34000,
+      "retirable": true
+    },
+    {
+      "id": "medical_imaging_technician",
+      "label": "医学影像技术员",
+      "sector": "医学临床",
+      "min_age": 22,
+      "max_age": 80,
+      "description": "操作影像设备并整理检查资料。",
+      "income": 35000,
+      "retirable": true
+    },
+    {
+      "id": "public_health_practitioner",
+      "label": "公共卫生人员",
+      "sector": "医学临床",
+      "min_age": 22,
+      "max_age": 85,
+      "description": "整理人群健康资料并参与预防和服务安排。",
+      "income": 34000,
+      "retirable": true
+    },
+    {
+      "id": "lawyer",
+      "label": "律师",
+      "sector": "法律司法",
+      "min_age": 23,
+      "max_age": 90,
+      "description": "在约定职责范围内提供法律事务支持与代理。",
+      "income": 41000,
+      "retirable": true
+    },
+    {
+      "id": "judge",
+      "label": "审判人员",
+      "sector": "法律司法",
+      "min_age": 28,
+      "max_age": 85,
+      "description": "在程序约束下审理争议并说明裁断理由。",
+      "income": 42000,
+      "retirable": true
+    },
+    {
+      "id": "prosecutor",
+      "label": "检察人员",
+      "sector": "法律司法",
+      "min_age": 25,
+      "max_age": 80,
+      "description": "审查案件材料并承担相应程序职责。",
+      "income": 39000,
+      "retirable": true
+    },
+    {
+      "id": "police_officer",
+      "label": "警务人员",
+      "sector": "法律司法",
+      "min_age": 20,
+      "max_age": 65,
+      "description": "在职责与程序约束下受理求助、调查和维护秩序。",
+      "income": 33000,
+      "retirable": true
+    },
+    {
+      "id": "court_clerk",
+      "label": "司法书记员",
+      "sector": "法律司法",
+      "min_age": 20,
+      "max_age": 80,
+      "description": "整理庭务、案卷与程序记录。",
+      "income": 28000,
+      "retirable": true
+    },
+    {
+      "id": "corrections_worker",
+      "label": "矫正工作人员",
+      "sector": "法律司法",
+      "min_age": 20,
+      "max_age": 70,
+      "description": "承担约束期间的日常管理、支持与交接。",
+      "income": 30000,
+      "retirable": true
+    },
+    {
+      "id": "forensic_examiner",
+      "label": "检验鉴定人员",
+      "sector": "法律司法",
+      "min_age": 24,
+      "max_age": 80,
+      "description": "检验材料并说明证据的范围与局限。",
+      "income": 38000,
+      "retirable": true
+    },
+    {
+      "id": "rights_advocate",
+      "label": "权益倡导者",
+      "sector": "法律司法",
+      "min_age": 18,
+      "max_age": 90,
+      "description": "整理群体诉求并协助寻找申诉和参与渠道。",
+      "income": 26000,
+      "retirable": true
+    },
+    {
+      "id": "soldier",
+      "label": "军人",
+      "sector": "军事安全",
+      "min_age": 18,
+      "max_age": 60,
+      "description": "参与编制内训练、后勤保障与按职责分配的任务。",
+      "income": 30000,
+      "retirable": true
+    },
+    {
+      "id": "military_logistics",
+      "label": "军事后勤人员",
+      "sector": "军事安全",
+      "min_age": 18,
+      "max_age": 65,
+      "description": "管理部队所需运输、仓储与供给。",
+      "income": 30000,
+      "retirable": true
+    },
+    {
+      "id": "military_medic",
+      "label": "军队医疗人员",
+      "sector": "军事安全",
+      "min_age": 22,
+      "max_age": 65,
+      "description": "在军队医疗体系中承担照护与转运协作。",
+      "income": 35000,
+      "retirable": true
+    },
+    {
+      "id": "firefighter",
+      "label": "消防员",
+      "sector": "军事安全",
+      "min_age": 18,
+      "max_age": 60,
+      "description": "参与防火检查、训练和消防救援。",
+      "income": 33000,
+      "retirable": true
+    },
+    {
+      "id": "security_guard",
+      "label": "安保人员",
+      "sector": "军事安全",
+      "min_age": 18,
+      "max_age": 70,
+      "description": "按约定范围值守、巡查并报告异常。",
+      "income": 23000,
+      "retirable": true
+    },
+    {
+      "id": "disaster_planner",
+      "label": "应急规划员",
+      "sector": "军事安全",
+      "min_age": 22,
+      "max_age": 80,
+      "description": "整理风险资料并协调预案与演练。",
+      "income": 32000,
+      "retirable": true
+    },
+    {
+      "id": "safety_engineer",
+      "label": "安全工程师",
+      "sector": "军事安全",
+      "min_age": 23,
+      "max_age": 80,
+      "description": "检查工作场所和设备风险并提出改进意见。",
+      "income": 38000,
+      "retirable": true
+    },
+    {
+      "id": "coast_guard",
+      "label": "水域巡护人员",
+      "sector": "军事安全",
+      "min_age": 18,
+      "max_age": 65,
+      "description": "承担水域巡查、遇险响应与相关秩序事务。",
+      "income": 32000,
+      "retirable": true
+    },
+    {
+      "id": "policy_analyst",
+      "label": "政策研究员",
+      "sector": "公共管理",
+      "min_age": 22,
+      "max_age": 85,
+      "description": "比较公共安排的影响并整理证据和意见。",
+      "income": 35000,
+      "retirable": true
+    },
+    {
+      "id": "municipal_manager",
+      "label": "市政管理人员",
+      "sector": "公共管理",
+      "min_age": 25,
+      "max_age": 80,
+      "description": "协调地方公共设施、服务与部门日程。",
+      "income": 37000,
+      "retirable": true
+    },
+    {
+      "id": "public_budget_officer",
+      "label": "公共预算人员",
+      "sector": "公共管理",
+      "min_age": 22,
+      "max_age": 80,
+      "description": "编排公共收支并记录预算执行。",
+      "income": 33000,
+      "retirable": true
+    },
+    {
+      "id": "procurement_officer",
+      "label": "公共采购人员",
+      "sector": "公共管理",
+      "min_age": 22,
+      "max_age": 80,
+      "description": "核对公共采购需求、程序、合同与交付。",
+      "income": 32000,
+      "retirable": true
+    },
+    {
+      "id": "urban_planner",
+      "label": "城乡规划师",
+      "sector": "公共管理",
+      "min_age": 23,
+      "max_age": 85,
+      "description": "整理土地、交通与公共空间方案并参与协商。",
+      "income": 38000,
+      "retirable": true
+    },
+    {
+      "id": "social_insurance_clerk",
+      "label": "社会保障事务员",
+      "sector": "公共管理",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "受理保障事务材料并衔接服务窗口。",
+      "income": 29000,
+      "retirable": true
+    },
+    {
+      "id": "diplomatic_officer",
+      "label": "邦际事务人员",
+      "sector": "公共管理",
+      "min_age": 23,
+      "max_age": 80,
+      "description": "参与跨邦沟通、资料整理与协定执行。",
+      "income": 39000,
+      "retirable": true
+    },
+    {
+      "id": "elected_representative",
+      "label": "公共事务代表",
+      "sector": "公共管理",
+      "min_age": 21,
+      "max_age": 90,
+      "description": "表达委托群体的诉求并参与公共议事。",
+      "income": 34000,
+      "retirable": true
+    },
+    {
+      "id": "bank_teller",
+      "label": "银行柜员",
+      "sector": "金融保险",
+      "min_age": 18,
+      "max_age": 75,
+      "description": "核对日常账户业务与凭证。",
+      "income": 29000,
+      "retirable": true
+    },
+    {
+      "id": "loan_officer",
+      "label": "信贷事务员",
+      "sector": "金融保险",
+      "min_age": 21,
+      "max_age": 80,
+      "description": "整理融资申请、偿付资料与后续联络。",
+      "income": 33000,
+      "retirable": true
+    },
+    {
+      "id": "insurance_agent",
+      "label": "保险业务员",
+      "sector": "金融保险",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "说明保障条款并办理约定的保险事务。",
+      "income": 30000,
+      "retirable": true
+    },
+    {
+      "id": "claims_adjuster",
+      "label": "理赔核查员",
+      "sector": "金融保险",
+      "min_age": 21,
+      "max_age": 80,
+      "description": "核对理赔材料并说明受理结论的依据。",
+      "income": 33000,
+      "retirable": true
+    },
+    {
+      "id": "securities_researcher",
+      "label": "证券研究员",
+      "sector": "金融保险",
+      "min_age": 22,
+      "max_age": 80,
+      "description": "研究证券相关公开资料并说明分析的不确定性。",
+      "income": 42000,
+      "retirable": true
+    },
+    {
+      "id": "investment_manager",
+      "label": "投资管理人员",
+      "sector": "金融保险",
+      "min_age": 24,
+      "max_age": 85,
+      "description": "按受托范围安排资产管理与风险沟通。",
+      "income": 48000,
+      "retirable": true
+    },
+    {
+      "id": "accountant",
+      "label": "会计人员",
+      "sector": "金融保险",
+      "min_age": 20,
+      "max_age": 90,
+      "description": "编制、核对财务记录与报告。",
+      "income": 34000,
+      "retirable": true
+    },
+    {
+      "id": "auditor",
+      "label": "审计人员",
+      "sector": "金融保险",
+      "min_age": 23,
+      "max_age": 85,
+      "description": "独立核对账目和流程并报告发现的问题。",
+      "income": 38000,
+      "retirable": true
+    },
+    {
+      "id": "civil_engineer",
+      "label": "土木工程师",
+      "sector": "工程设计",
+      "min_age": 23,
+      "max_age": 80,
+      "description": "计算与协调土木工程的设计、施工和维护。",
+      "income": 38000,
+      "retirable": true
+    },
+    {
+      "id": "architect",
+      "label": "建筑师",
+      "sector": "工程设计",
+      "min_age": 24,
+      "max_age": 85,
+      "description": "设计建筑空间并协调使用需求与工程条件。",
+      "income": 40000,
+      "retirable": true
+    },
+    {
+      "id": "structural_engineer",
+      "label": "结构工程师",
+      "sector": "工程设计",
+      "min_age": 23,
+      "max_age": 80,
+      "description": "核对承载结构与相应工程方案。",
+      "income": 40000,
+      "retirable": true
+    },
+    {
+      "id": "mechanical_engineer",
+      "label": "机械工程师",
+      "sector": "工程设计",
+      "min_age": 22,
+      "max_age": 80,
+      "description": "设计、测试和改进机械系统。",
+      "income": 38000,
+      "retirable": true
+    },
+    {
+      "id": "chemical_engineer",
+      "label": "化工工程师",
+      "sector": "工程设计",
+      "min_age": 23,
+      "max_age": 80,
+      "description": "研究和维护材料加工流程及其运行条件。",
+      "income": 40000,
+      "retirable": true
+    },
+    {
+      "id": "environmental_engineer",
+      "label": "环境工程师",
+      "sector": "工程设计",
+      "min_age": 22,
+      "max_age": 85,
+      "description": "评估排放、资源使用与治理设施。",
+      "income": 37000,
+      "retirable": true
+    },
+    {
+      "id": "electrical_engineer",
+      "label": "电气工程师",
+      "sector": "工程设计",
+      "min_age": 23,
+      "max_age": 80,
+      "description": "设计与测试电力、控制和相关设备系统。",
+      "income": 39000,
+      "retirable": true
+    },
+    {
+      "id": "product_designer",
+      "label": "产品设计师",
+      "sector": "工程设计",
+      "min_age": 20,
+      "max_age": 85,
+      "description": "把使用需求转为产品形态并反复验证。",
+      "income": 34000,
+      "retirable": true
+    },
+    {
+      "id": "editor",
+      "label": "编辑",
+      "sector": "数字传媒",
+      "min_age": 18,
+      "max_age": 90,
+      "description": "整理选题、文字或音像内容并核对表达。",
+      "income": 28000,
+      "retirable": true
+    },
+    {
+      "id": "camera_operator",
+      "label": "摄影摄像师",
+      "sector": "数字传媒",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "拍摄、整理影像并维护器材。",
+      "income": 29000,
+      "retirable": true
+    },
+    {
+      "id": "broadcast_presenter",
+      "label": "播音主持人",
+      "sector": "数字传媒",
+      "min_age": 18,
+      "max_age": 85,
+      "description": "为节目组织表达、访谈与现场衔接。",
+      "income": 32000,
+      "retirable": true
+    },
+    {
+      "id": "film_worker",
+      "label": "影视制作人员",
+      "sector": "数字传媒",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "参与拍摄、剪辑或其他制作协作。",
+      "income": 30000,
+      "retirable": true
+    },
+    {
+      "id": "community_moderator",
+      "label": "平台社区管理人员",
+      "sector": "数字传媒",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "受理内容反馈、维护讨论规则并记录处理过程。",
+      "income": 27000,
+      "retirable": true
+    },
+    {
+      "id": "online_store_operator",
+      "label": "电商经营者",
+      "sector": "数字传媒",
+      "min_age": 18,
+      "max_age": 85,
+      "description": "安排线上商品、订单、售后与库存衔接。",
+      "income": 32000,
+      "retirable": true
+    },
+    {
+      "id": "platform_operations",
+      "label": "数字平台运营人员",
+      "sector": "数字传媒",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "维护平台服务、活动与用户支持流程。",
+      "income": 34000,
+      "retirable": true
+    },
+    {
+      "id": "cybersecurity_analyst",
+      "label": "网络安全分析员",
+      "sector": "数字传媒",
+      "min_age": 21,
+      "max_age": 80,
+      "description": "评估系统风险、处理防护记录并参与授权的安全工作。",
+      "income": 42000,
+      "retirable": true
+    },
+    {
+      "id": "athlete",
+      "label": "运动员",
+      "sector": "体育与生活服务",
+      "min_age": 18,
+      "max_age": 50,
+      "description": "参与专项训练、比赛和恢复安排。",
+      "income": 30000,
+      "retirable": true
+    },
+    {
+      "id": "sports_coach",
+      "label": "体育教练",
+      "sector": "体育与生活服务",
+      "min_age": 20,
+      "max_age": 80,
+      "description": "组织训练并根据参与者条件调整练习安排。",
+      "income": 30000,
+      "retirable": true
+    },
+    {
+      "id": "fitness_trainer",
+      "label": "健身指导员",
+      "sector": "体育与生活服务",
+      "min_age": 18,
+      "max_age": 75,
+      "description": "在职责范围内指导身体活动并记录训练情况。",
+      "income": 28000,
+      "retirable": true
+    },
+    {
+      "id": "sports_referee",
+      "label": "体育裁判员",
+      "sector": "体育与生活服务",
+      "min_age": 18,
+      "max_age": 75,
+      "description": "按项目规则执裁比赛并记录争议。",
+      "income": 27000,
+      "retirable": true
+    },
+    {
+      "id": "religious_service_worker",
+      "label": "宗教事务服务者",
+      "sector": "体育与生活服务",
+      "min_age": 18,
+      "max_age": 95,
+      "description": "为自愿参与者组织仪式、场所事务与日常支持。",
+      "income": 23000,
+      "retirable": true
+    },
+    {
+      "id": "funeral_worker",
+      "label": "殡葬服务人员",
+      "sector": "体育与生活服务",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "协助家属安排告别、手续与相关服务。",
+      "income": 28000,
+      "retirable": true
+    },
+    {
+      "id": "travel_guide",
+      "label": "旅游向导",
+      "sector": "体育与生活服务",
+      "min_age": 18,
+      "max_age": 80,
+      "description": "引导旅途活动并说明目的地情况。",
+      "income": 26000,
+      "retirable": true
+    },
+    {
+      "id": "hotel_manager",
+      "label": "住宿经营管理者",
+      "sector": "体育与生活服务",
+      "min_age": 21,
+      "max_age": 85,
+      "description": "协调住宿服务、员工日程与住客需求。",
+      "income": 33000,
+      "retirable": true
+    }
+  ],
+  "identities": [
+    {
+      "id": "local_roots",
+      "label": "本地长居",
+      "exclusive_group": "settlement",
+      "min_age": 0,
+      "max_age": 110,
+      "description": "长期在当前地区生活，熟悉一些地方惯例。"
+    },
+    {
+      "id": "newcomer",
+      "label": "近期迁入",
+      "exclusive_group": "settlement",
+      "min_age": 0,
+      "max_age": 110,
+      "description": "刚迁入当前地区，生活关系仍在建立。"
+    },
+    {
+      "id": "returning_resident",
+      "label": "返乡定居",
+      "exclusive_group": "settlement",
+      "min_age": 18,
+      "max_age": 110,
+      "description": "离开一段时间后回到曾生活的地区。"
+    },
+    {
+      "id": "rural_origin",
+      "label": "乡村成长",
+      "exclusive_group": "upbringing",
+      "min_age": 0,
+      "max_age": 110,
+      "description": "成长经历主要来自乡村环境。"
+    },
+    {
+      "id": "urban_origin",
+      "label": "城镇成长",
+      "exclusive_group": "upbringing",
+      "min_age": 0,
+      "max_age": 110,
+      "description": "成长经历主要来自城镇环境。"
+    },
+    {
+      "id": "lives_alone",
+      "label": "独自居住",
+      "exclusive_group": "household",
+      "min_age": 18,
+      "max_age": 110,
+      "description": "当前住处主要由自己使用和照料。"
+    },
+    {
+      "id": "shared_household",
+      "label": "与他人合住",
+      "exclusive_group": "household",
+      "min_age": 16,
+      "max_age": 110,
+      "description": "与亲友或合住者共同使用住处。"
+    },
+    {
+      "id": "multigenerational_household",
+      "label": "多代同住",
+      "exclusive_group": "household",
+      "min_age": 0,
+      "max_age": 110,
+      "description": "当前家庭有不同代际成员共同生活。"
+    },
+    {
+      "id": "homeowner",
+      "label": "自有住处",
+      "exclusive_group": "housing",
+      "min_age": 18,
+      "max_age": 110,
+      "description": "当前主要住处由本人或家庭持有。"
+    },
+    {
+      "id": "tenant",
+      "label": "长期租住",
+      "exclusive_group": "housing",
+      "min_age": 0,
+      "max_age": 110,
+      "description": "当前主要住处通过较稳定的租住安排获得。"
+    },
+    {
+      "id": "temporary_lodging",
+      "label": "暂住过渡",
+      "exclusive_group": "housing",
+      "min_age": 0,
+      "max_age": 110,
+      "description": "当前住处只是过渡安排，之后还要重新安顿。"
+    },
+    {
+      "id": "housing_insecure",
+      "label": "住处不稳",
+      "exclusive_group": "housing",
+      "min_age": 0,
+      "max_age": 110,
+      "description": "当前难以确定接下来能否继续居住。"
+    },
+    {
+      "id": "displaced",
+      "label": "迁居安置中",
+      "exclusive_group": null,
+      "min_age": 0,
+      "max_age": 110,
+      "description": "因住处受损或无法继续居住而重新安顿。"
+    },
+    {
+      "id": "financially_secure",
+      "label": "手头宽裕",
+      "exclusive_group": "resources",
+      "min_age": 18,
+      "max_age": 110,
+      "description": "当前有可用于应对日常波动的资源余量。"
+    },
+    {
+      "id": "low_income",
+      "label": "可用资金偏少",
+      "exclusive_group": "resources",
+      "min_age": 18,
+      "max_age": 110,
+      "description": "当前可动用的资金较少，额外开支容易打乱原有安排。"
+    },
+    {
+      "id": "indebted",
+      "label": "承担债务",
+      "exclusive_group": null,
+      "min_age": 18,
+      "max_age": 110,
+      "description": "有尚未履行完的偿付义务，不表示失信。"
+    },
+    {
+      "id": "seasonal_income",
+      "label": "收入随季节波动",
+      "exclusive_group": null,
+      "min_age": 18,
+      "max_age": 110,
+      "description": "收入集中在特定季节或阶段。"
+    },
+    {
+      "id": "primary_carer",
+      "label": "承担较多照护",
+      "exclusive_group": null,
+      "min_age": 18,
+      "max_age": 110,
+      "description": "在照护亲近之人的安排中承担较多时间。"
+    },
+    {
+      "id": "care_recipient",
+      "label": "日常需要协助",
+      "exclusive_group": null,
+      "min_age": 0,
+      "max_age": 110,
+      "description": "部分日常活动需要他人或辅助安排支持。"
+    },
+    {
+      "id": "chronic_health_demands",
+      "label": "长期健康管理",
+      "exclusive_group": null,
+      "min_age": 0,
+      "max_age": 110,
+      "description": "需要为长期健康需要持续安排时间与资源。"
+    },
+    {
+      "id": "limited_mobility",
+      "label": "行动便利需求",
+      "exclusive_group": null,
+      "min_age": 0,
+      "max_age": 110,
+      "description": "使用空间和交通时需要适合自身行动条件的安排。"
+    },
+    {
+      "id": "sensory_access_needs",
+      "label": "信息无障碍需求",
+      "exclusive_group": null,
+      "min_age": 0,
+      "max_age": 110,
+      "description": "获取信息时需要适合自身感知条件的形式。"
+    },
+    {
+      "id": "minority_language",
+      "label": "使用较少通行的语言",
+      "exclusive_group": null,
+      "min_age": 0,
+      "max_age": 110,
+      "description": "习惯的语言在当前地区较少使用，部分沟通需要转换。"
+    },
+    {
+      "id": "recently_bereaved",
+      "label": "近期经历丧失",
+      "exclusive_group": null,
+      "min_age": 0,
+      "max_age": 110,
+      "description": "近期失去重要的人，日常安排正在变化。"
+    },
+    {
+      "id": "family_distance",
+      "label": "与亲属联系较少",
+      "exclusive_group": "family_contact",
+      "min_age": 16,
+      "max_age": 110,
+      "description": "与亲属往来较少，原因与个人边界可能各不相同。"
+    },
+    {
+      "id": "family_support",
+      "label": "有稳定亲友支持",
+      "exclusive_group": "family_contact",
+      "min_age": 0,
+      "max_age": 110,
+      "description": "有能在需要时提供一定支持的亲友联系。"
+    },
+    {
+      "id": "first_generation_learner",
+      "label": "家中较早继续深造者",
+      "exclusive_group": null,
+      "min_age": 16,
+      "max_age": 110,
+      "description": "正在探索家中较少有人熟悉的后续学习路径。"
+    },
+    {
+      "id": "returning_learner",
+      "label": "重返学习",
+      "exclusive_group": null,
+      "min_age": 18,
+      "max_age": 110,
+      "description": "离开系统学习一段时间后重新安排课程或训练。"
+    },
+    {
+      "id": "career_changer",
+      "label": "职业转换中",
+      "exclusive_group": null,
+      "min_age": 18,
+      "max_age": 110,
+      "description": "正在从一类工作转向另一类工作。"
+    },
+    {
+      "id": "long_commute",
+      "label": "往返路途较长",
+      "exclusive_group": null,
+      "min_age": 6,
+      "max_age": 110,
+      "description": "日常学习、工作或办事需要较长往返时间。"
+    },
+    {
+      "id": "public_responsibility",
+      "label": "承担公共事务",
+      "exclusive_group": null,
+      "min_age": 18,
+      "max_age": 110,
+      "description": "受托处理一部分共同事务，职责需要具体记录。"
+    },
+    {
+      "id": "retired_worker",
+      "label": "结束主要职业",
+      "exclusive_group": null,
+      "min_age": 55,
+      "max_age": 110,
+      "description": "已退出曾长期从事的主要工作。"
+    }
+  ],
+  "personality_axes": [
+    {
+      "id": "honesty",
+      "label": "诚实倾向",
+      "low_label": "更愿为利益隐瞒事实",
+      "high_label": "更愿如实说明",
+      "description": "描述面对有利可图的隐瞒机会时的倾向，不能由职业或收入猜测。"
+    },
+    {
+      "id": "empathy",
+      "label": "共情倾向",
+      "low_label": "较少自动注意他人感受",
+      "high_label": "更容易体会他人感受",
+      "description": "感受他人处境的倾向不同于是否采取照护行动。"
+    },
+    {
+      "id": "aggression",
+      "label": "攻击倾向",
+      "low_label": "更少用对抗施压",
+      "high_label": "更容易用对抗施压",
+      "description": "描述受阻时施压、威吓或冲突升级的倾向，不代表必然伤害。"
+    },
+    {
+      "id": "dominance",
+      "label": "控制倾向",
+      "low_label": "更愿分享决定权",
+      "high_label": "更想主导他人安排",
+      "description": "主导欲望可能表现为组织，也可能越过他人边界，取决于行动。"
+    },
+    {
+      "id": "cooperativeness",
+      "label": "合作倾向",
+      "low_label": "偏好各自行动",
+      "high_label": "偏好协调共同完成",
+      "description": "合作意愿不等于服从；竞争也不自动意味着伤害。"
+    },
+    {
+      "id": "trust",
+      "label": "初始信任",
+      "low_label": "先保留与核实",
+      "high_label": "先给予一定信任",
+      "description": "描述信息不足时给他人的初始信任，不代表判断一定正确。"
+    },
+    {
+      "id": "caution",
+      "label": "谨慎程度",
+      "low_label": "愿意带着不确定性行动",
+      "high_label": "优先评估损失与后路",
+      "description": "风险态度受到具体收益、代价和信息影响。"
+    },
+    {
+      "id": "impulsivity",
+      "label": "即时反应",
+      "low_label": "更能推迟当下反应",
+      "high_label": "更容易立即行动",
+      "description": "反应速度和自我延迟的倾向，不等于能力或道德等级。"
+    },
+    {
+      "id": "sociability",
+      "label": "交往主动性",
+      "low_label": "偏好较少往来",
+      "high_label": "主动建立较多往来",
+      "description": "交往密度不代表关系深浅，也不表示关怀多少。"
+    },
+    {
+      "id": "persistence",
+      "label": "持续投入",
+      "low_label": "较早调整或退出",
+      "high_label": "遇阻仍持续投入",
+      "description": "持续与退出都可能合理，需要看目标、代价和新信息。"
+    },
+    {
+      "id": "openness",
+      "label": "开放探索",
+      "low_label": "偏好熟悉方法",
+      "high_label": "愿意接触陌生方法",
+      "description": "对新经验的接纳倾向，不用作聪明程度评价。"
+    },
+    {
+      "id": "fairness",
+      "label": "公平倾向",
+      "low_label": "较易优先自身或近人利益",
+      "high_label": "更在意可解释的一致规则",
+      "description": "对分配和程序公正的关注，不能用来自动判定某次行为正当。"
+    }
+  ],
+  "motivations": [
+    {
+      "id": "security",
+      "label": "安全与稳定",
+      "description": "希望降低生活中的威胁与不确定性。"
+    },
+    {
+      "id": "livelihood",
+      "label": "维持生计",
+      "description": "希望获得足够支撑日常负担的资源。"
+    },
+    {
+      "id": "belonging",
+      "label": "群体归属",
+      "description": "希望被某个群体接纳并保持联系。"
+    },
+    {
+      "id": "intimacy",
+      "label": "亲近关系",
+      "description": "希望得到信任、理解与亲密往来。"
+    },
+    {
+      "id": "care",
+      "label": "照顾重要的人",
+      "description": "希望亲近之人的需要得到回应。"
+    },
+    {
+      "id": "achievement",
+      "label": "完成与胜任",
+      "description": "希望做好某件事并确认自己的能力。"
+    },
+    {
+      "id": "autonomy",
+      "label": "自主决定",
+      "description": "希望对自己的时间、生活和边界保有决定权。"
+    },
+    {
+      "id": "status",
+      "label": "地位与认可",
+      "description": "希望获得声望、尊重或群体中的位置。"
+    },
+    {
+      "id": "curiosity",
+      "label": "探索与求知",
+      "description": "希望理解陌生的人、事物和方法。"
+    },
+    {
+      "id": "justice",
+      "label": "公正与问责",
+      "description": "希望分配与处理程序可解释，并回应受到的侵害。"
+    },
+    {
+      "id": "influence",
+      "label": "影响与掌控",
+      "description": "希望使局面或他人的安排符合自己的意愿。"
+    },
+    {
+      "id": "retaliation",
+      "label": "报复冲动",
+      "description": "受到冒犯后希望让对方付出代价，不意味着一定实施伤害。"
+    }
+  ],
+  "names": {
+    "family": [
+      "林",
+      "许",
+      "周",
+      "陈",
+      "沈",
+      "苏",
+      "顾",
+      "陆",
+      "何",
+      "宋",
+      "叶",
+      "方",
+      "程",
+      "江",
+      "唐",
+      "杨",
+      "夏",
+      "孟",
+      "秦",
+      "罗",
+      "陶",
+      "温",
+      "任",
+      "白",
+      "邵",
+      "谢",
+      "姜",
+      "梁",
+      "杜",
+      "钟",
+      "韩",
+      "闻"
+    ],
+    "given": [
+      "川",
+      "岚",
+      "远",
+      "安",
+      "宁",
+      "禾",
+      "青",
+      "言",
+      "澄",
+      "遥",
+      "舟",
+      "屿",
+      "明",
+      "乔",
+      "乐",
+      "秋",
+      "清",
+      "微",
+      "星",
+      "朗",
+      "雨",
+      "松",
+      "竹",
+      "原",
+      "晓",
+      "溪",
+      "尧",
+      "岑",
+      "茵",
+      "晏",
+      "予安",
+      "知远",
+      "清禾",
+      "云舒",
+      "书言",
+      "景明",
+      "初宁",
+      "雨辰",
+      "若溪",
+      "子乔",
+      "嘉树",
+      "星遥",
+      "亦舟",
+      "可岚",
+      "庭安",
+      "怀谷",
+      "映秋",
+      "晓川",
+      "明澈",
+      "静原",
+      "安和",
+      "南风",
+      "秋白",
+      "思宁",
+      "云岑",
+      "冬青",
+      "林溪",
+      "照晚",
+      "允中",
+      "怀瑾",
+      "时雨",
+      "闻笙",
+      "舒言",
+      "春和",
+      "亦然",
+      "知夏",
+      "向晚",
+      "景澄",
+      "沐青",
+      "嘉宁",
+      "易安",
+      "长宁",
+      "予真",
+      "清晏",
+      "若竹",
+      "明溪",
+      "一诺",
+      "晏如",
+      "怀远",
+      "星河"
+    ]
+  },
+  "interactions": [
+    {
+      "id": "npc.bridge_expenses",
+      "title": "先渡过眼前这几天",
+      "kind": "support",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "actor.stats.cash",
+          "op": "gte",
+          "value": 120
+        },
+        {
+          "path": "target.stats.cash",
+          "op": "lte",
+          "value": 400
+        },
+        {
+          "path": "actor.traits.empathy",
+          "op": "gte",
+          "value": 45
+        }
+      ],
+      "weight": 5,
+      "cooldown": 6,
+      "visibility": "participants",
+      "text": "{actor}拿出一笔钱，帮{target}应付眼前的日常开支，并说明这次不用归还。余钱少了一些，往后的负担仍需要另外安排。",
+      "effects": [
+        {
+          "op": "transfer",
+          "from": "actor",
+          "to": "target",
+          "amount": 120
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": -6
+        },
+        {
+          "op": "relation",
+          "direction": "target_actor",
+          "key": "trust",
+          "delta": 6
+        },
+        {
+          "op": "edge_flag",
+          "direction": "actor_target",
+          "key": "assistance_given",
+          "value": true
+        }
+      ],
+      "tags": [
+        "aid",
+        "resources"
+      ]
+    },
+    {
+      "id": "npc.care_respite",
+      "title": "替照护者接过一段时间",
+      "kind": "support",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "target.occupation",
+          "op": "eq",
+          "value": "unpaid_caregiver"
+        },
+        {
+          "path": "actor.stats.stress",
+          "op": "lte",
+          "value": 65
+        },
+        {
+          "path": "target.stats.stress",
+          "op": "gte",
+          "value": 45
+        }
+      ],
+      "weight": 3,
+      "cooldown": 4,
+      "visibility": "participants",
+      "text": "{actor}按约替{target}接过一段照护和家务，让对方腾出一点自己的时间。临时换手需要交代许多细节，{actor}也比平时疲惫。",
+      "effects": [
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "stress",
+          "delta": 6
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": -10
+        },
+        {
+          "op": "relation",
+          "direction": "target_actor",
+          "key": "affinity",
+          "delta": 5
+        }
+      ],
+      "tags": [
+        "care",
+        "time_cost"
+      ]
+    },
+    {
+      "id": "npc.learning_help",
+      "title": "一起把难题拆开",
+      "kind": "support",
+      "min_age": 16,
+      "requires": [
+        {
+          "path": "actor.occupation",
+          "op": "eq",
+          "value": "teacher"
+        },
+        {
+          "path": "target.occupation",
+          "op": "eq",
+          "value": "student"
+        },
+        {
+          "path": "actor.stats.stress",
+          "op": "lte",
+          "value": 65
+        }
+      ],
+      "weight": 3,
+      "cooldown": 4,
+      "visibility": "participants",
+      "text": "{actor}抽出一段课余时间，陪{target}把卡住的问题拆成几步。困惑减轻了，答疑也占去了{actor}原本的休息。",
+      "effects": [
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "stress",
+          "delta": 4
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": -5
+        },
+        {
+          "op": "relation",
+          "direction": "target_actor",
+          "key": "trust",
+          "delta": 5
+        },
+        {
+          "op": "flag",
+          "who": "target",
+          "key": "received_learning_help",
+          "value": true
+        }
+      ],
+      "tags": [
+        "learning",
+        "support"
+      ]
+    },
+    {
+      "id": "npc.accompany_request",
+      "title": "有人陪着走一趟窗口",
+      "kind": "support",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "target.stats.stress",
+          "op": "gte",
+          "value": 65
+        },
+        {
+          "path": "actor.stats.stress",
+          "op": "lte",
+          "value": 55
+        },
+        {
+          "path": "actor.traits.cooperativeness",
+          "op": "gte",
+          "value": 45
+        }
+      ],
+      "weight": 3,
+      "cooldown": 4,
+      "visibility": "participants",
+      "text": "{actor}陪{target}去说明一件难以独自处理的事，帮忙记下需要补充的材料。事情还没有立刻解决，但{target}不必一个人承受那次来回。",
+      "effects": [
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "stress",
+          "delta": 4
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": -8
+        },
+        {
+          "op": "relation",
+          "direction": "target_actor",
+          "key": "trust",
+          "delta": 5
+        }
+      ],
+      "tags": [
+        "help_seeking",
+        "support"
+      ]
+    },
+    {
+      "id": "npc.purchase_fulfilled",
+      "title": "受托的采购按约完成",
+      "kind": "cooperate",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "edge.flags.entrusted_fund",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "actor.stats.cash",
+          "op": "gte",
+          "value": 600
+        }
+      ],
+      "weight": 5,
+      "cooldown": 4,
+      "visibility": "participants",
+      "text": "{actor}按记录的用途完成了受托采购，并把物品与凭证交给{target}核对。经手款项花在约定事项上，清楚的交接让双方少了猜疑，也占去了{actor}一些时间。",
+      "effects": [
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "cash",
+          "delta": -600
+        },
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "stress",
+          "delta": 4
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": -6
+        },
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "reputation",
+          "delta": 3
+        },
+        {
+          "op": "relation",
+          "direction": "target_actor",
+          "key": "trust",
+          "delta": 6
+        },
+        {
+          "op": "flag",
+          "who": "target",
+          "key": "supplies_received",
+          "value": true
+        },
+        {
+          "op": "edge_flag",
+          "direction": "actor_target",
+          "key": "entrusted_fund",
+          "value": false
+        }
+      ],
+      "tags": [
+        "contract_followup",
+        "custody",
+        "fulfillment"
+      ]
+    },
+    {
+      "id": "npc.entrusted_purchase",
+      "title": "采购款交给了经手人",
+      "kind": "cooperate",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "actor.occupation",
+          "op": "eq",
+          "value": "bookkeeper"
+        },
+        {
+          "path": "target.occupation",
+          "op": "eq",
+          "value": "cooperative_member"
+        },
+        {
+          "path": "target.stats.cash",
+          "op": "gte",
+          "value": 600
+        },
+        {
+          "path": "edge.flags.entrusted_fund",
+          "op": "eq",
+          "value": false
+        },
+        {
+          "path": "edge.flags.fund_misappropriation_pending",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 3,
+      "cooldown": 8,
+      "visibility": "participants",
+      "text": "{target}把自己负责的一笔合作采购款交给{actor}经手，双方记下金额和用途。资金暂时由{actor}保管，采购能否顺利完成还要看后续履约。",
+      "effects": [
+        {
+          "op": "transfer",
+          "from": "target",
+          "to": "actor",
+          "amount": 600
+        },
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "stress",
+          "delta": 3
+        },
+        {
+          "op": "relation",
+          "direction": "actor_target",
+          "key": "trust",
+          "delta": 3
+        },
+        {
+          "op": "edge_flag",
+          "direction": "actor_target",
+          "key": "entrusted_fund",
+          "value": true
+        }
+      ],
+      "tags": [
+        "custody",
+        "case_origin"
+      ]
+    },
+    {
+      "id": "npc.peer_study",
+      "title": "两本笔记摊在一张桌上",
+      "kind": "cooperate",
+      "min_age": 6,
+      "requires": [
+        {
+          "path": "actor.occupation",
+          "op": "eq",
+          "value": "student"
+        },
+        {
+          "path": "target.occupation",
+          "op": "eq",
+          "value": "student"
+        },
+        {
+          "path": "actor.stats.stress",
+          "op": "lte",
+          "value": 75
+        }
+      ],
+      "weight": 5,
+      "cooldown": 3,
+      "visibility": "participants",
+      "text": "{actor}和{target}相约一起复习，各自讲清一处会做的题。准备讲解多花了些工夫，也让原本闷在心里的困难可以说出来。",
+      "effects": [
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "stress",
+          "delta": 3
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": -4
+        },
+        {
+          "op": "relation",
+          "direction": "actor_target",
+          "key": "affinity",
+          "delta": 4
+        },
+        {
+          "op": "relation",
+          "direction": "target_actor",
+          "key": "affinity",
+          "delta": 4
+        }
+      ],
+      "tags": [
+        "learning",
+        "reciprocity"
+      ]
+    },
+    {
+      "id": "npc.delivery_handoff",
+      "title": "有人接住了临时加单",
+      "kind": "cooperate",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "actor.occupation",
+          "op": "eq",
+          "value": "delivery_worker"
+        },
+        {
+          "path": "target.occupation",
+          "op": "eq",
+          "value": "freight_dispatcher"
+        },
+        {
+          "path": "target.stats.cash",
+          "op": "gte",
+          "value": 100
+        },
+        {
+          "path": "actor.stats.stress",
+          "op": "lte",
+          "value": 65
+        }
+      ],
+      "weight": 3,
+      "cooldown": 4,
+      "visibility": "participants",
+      "text": "{target}请{actor}接下一批临时配送，并当面付清额外报酬。积压减轻了，{actor}当天的路程和负担也更重。",
+      "effects": [
+        {
+          "op": "transfer",
+          "from": "target",
+          "to": "actor",
+          "amount": 100
+        },
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "stress",
+          "delta": 5
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": -5
+        },
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "reputation",
+          "delta": 3
+        },
+        {
+          "op": "relation",
+          "direction": "target_actor",
+          "key": "trust",
+          "delta": 4
+        }
+      ],
+      "tags": [
+        "work",
+        "paid_help"
+      ]
+    },
+    {
+      "id": "npc.public_argument",
+      "title": "争执在旁人面前升级",
+      "kind": "conflict",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "edge.tension",
+          "op": "gte",
+          "value": 40
+        },
+        {
+          "path": "actor.traits.aggression",
+          "op": "gte",
+          "value": 60
+        },
+        {
+          "path": "edge.flags.threat_pending",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 3,
+      "cooldown": 4,
+      "visibility": "public",
+      "text": "{actor}和{target}原本的分歧在一次当众交谈中升级，话越说越重。旁人停止了手边的事，两人也更难继续原来的合作。",
+      "effects": [
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "reputation",
+          "delta": -4
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": 6
+        },
+        {
+          "op": "relation",
+          "direction": "actor_target",
+          "key": "tension",
+          "delta": 10
+        },
+        {
+          "op": "relation",
+          "direction": "target_actor",
+          "key": "trust",
+          "delta": -5
+        }
+      ],
+      "tags": [
+        "argument",
+        "public_consequence"
+      ]
+    },
+    {
+      "id": "npc.competing_shift",
+      "title": "同一份机会只留下一个人",
+      "kind": "conflict",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "actor.sector",
+          "op": "eq",
+          "value": "商贸服务"
+        },
+        {
+          "path": "target.sector",
+          "op": "eq",
+          "value": "商贸服务"
+        },
+        {
+          "path": "actor.stats.cash",
+          "op": "lte",
+          "value": 1000
+        },
+        {
+          "path": "target.stats.cash",
+          "op": "lte",
+          "value": 1000
+        }
+      ],
+      "weight": 3,
+      "cooldown": 4,
+      "visibility": "participants",
+      "text": "{actor}与{target}都争取同一份额外工作，最后由{actor}接下。机会带来一点收入，也让落空的一方更难轻松看待这段往来。",
+      "effects": [
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "cash",
+          "delta": 120
+        },
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "stress",
+          "delta": 5
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": 6
+        },
+        {
+          "op": "relation",
+          "direction": "target_actor",
+          "key": "affinity",
+          "delta": -4
+        }
+      ],
+      "tags": [
+        "competition",
+        "scarcity"
+      ]
+    },
+    {
+      "id": "npc.favor_refused",
+      "title": "这一次没有答应帮忙",
+      "kind": "conflict",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "actor.traits.dominance",
+          "op": "gte",
+          "value": 55
+        },
+        {
+          "path": "target.stats.stress",
+          "op": "gte",
+          "value": 65
+        },
+        {
+          "path": "edge.trust",
+          "op": "gte",
+          "value": 25
+        }
+      ],
+      "weight": 3,
+      "cooldown": 4,
+      "visibility": "participants",
+      "text": "{actor}提出一件希望{target}帮忙的事，{target}说明自己已经顾不过来，拒绝了这次请求。{actor}感到失落，{target}也终于留下了一点余地。",
+      "effects": [
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "stress",
+          "delta": 5
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": -3
+        },
+        {
+          "op": "relation",
+          "direction": "actor_target",
+          "key": "affinity",
+          "delta": -4
+        }
+      ],
+      "tags": [
+        "refusal",
+        "boundary"
+      ]
+    },
+    {
+      "id": "npc.decision_boundary",
+      "title": "把自己的决定权说出来",
+      "kind": "conflict",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "target.traits.dominance",
+          "op": "gte",
+          "value": 65
+        },
+        {
+          "path": "actor.traits.aggression",
+          "op": "lte",
+          "value": 55
+        },
+        {
+          "path": "edge.affinity",
+          "op": "gte",
+          "value": 25
+        }
+      ],
+      "weight": 3,
+      "cooldown": 4,
+      "visibility": "participants",
+      "text": "{target}想替{actor}安排一件私人事务，{actor}当面说明哪些部分愿意商量、哪些需要自己决定。谈话让关系有些紧绷，也把原先含糊的边界摆到了桌上。",
+      "effects": [
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "stress",
+          "delta": 3
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": 3
+        },
+        {
+          "op": "relation",
+          "direction": "actor_target",
+          "key": "tension",
+          "delta": 4
+        },
+        {
+          "op": "flag",
+          "who": "actor",
+          "key": "stated_boundary",
+          "value": true
+        }
+      ],
+      "tags": [
+        "autonomy",
+        "boundary"
+      ]
+    },
+    {
+      "id": "npc.concealed_defect",
+      "title": "一笔隐瞒了缺陷的交易",
+      "kind": "deception",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "actor.sector",
+          "op": "eq",
+          "value": "商贸服务"
+        },
+        {
+          "path": "actor.traits.honesty",
+          "op": "lte",
+          "value": 35
+        },
+        {
+          "path": "target.stats.cash",
+          "op": "gte",
+          "value": 450
+        },
+        {
+          "path": "edge.flags.fraud_pending",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 2,
+      "cooldown": 10,
+      "visibility": "private",
+      "text": "{actor}在交易时隐瞒了自己已知的缺陷，收下{target}的付款。{target}拿到东西后发现用途受限，眼前的损失还没有得到说明。",
+      "effects": [
+        {
+          "op": "transfer",
+          "from": "target",
+          "to": "actor",
+          "amount": 450
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": 7
+        },
+        {
+          "op": "relation",
+          "direction": "target_actor",
+          "key": "trust",
+          "delta": -8
+        },
+        {
+          "op": "edge_flag",
+          "direction": "actor_target",
+          "key": "fraud_pending",
+          "value": true
+        }
+      ],
+      "tags": [
+        "deception",
+        "property_harm",
+        "case_origin"
+      ]
+    },
+    {
+      "id": "npc.promise_betrayal",
+      "title": "拿到代垫款后失约",
+      "kind": "deception",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "actor.traits.honesty",
+          "op": "lte",
+          "value": 40
+        },
+        {
+          "path": "edge.affinity",
+          "op": "gte",
+          "value": 45
+        },
+        {
+          "path": "target.stats.cash",
+          "op": "gte",
+          "value": 300
+        },
+        {
+          "path": "edge.flags.promise_pending",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 2,
+      "cooldown": 10,
+      "visibility": "private",
+      "text": "{actor}请{target}代垫一笔钱并承诺按约归还，收下后却故意失约。{target}原本留给别处的安排因此被打乱，熟悉的关系也变得难以信任。",
+      "effects": [
+        {
+          "op": "transfer",
+          "from": "target",
+          "to": "actor",
+          "amount": 300
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": 8
+        },
+        {
+          "op": "relation",
+          "direction": "target_actor",
+          "key": "trust",
+          "delta": -12
+        },
+        {
+          "op": "edge_flag",
+          "direction": "actor_target",
+          "key": "promise_pending",
+          "value": true
+        }
+      ],
+      "tags": [
+        "betrayal",
+        "money",
+        "case_origin"
+      ]
+    },
+    {
+      "id": "npc.credit_stealing",
+      "title": "共同成果只留下一个署名",
+      "kind": "deception",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "actor.sector",
+          "op": "eq",
+          "value": "组织经营"
+        },
+        {
+          "path": "actor.traits.honesty",
+          "op": "lte",
+          "value": 40
+        },
+        {
+          "path": "actor.traits.dominance",
+          "op": "gte",
+          "value": 55
+        },
+        {
+          "path": "target.stats.reputation",
+          "op": "gte",
+          "value": 30
+        },
+        {
+          "path": "edge.flags.credit_claim_pending",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 2,
+      "cooldown": 10,
+      "visibility": "participants",
+      "text": "{actor}把{target}明确参与的工作说成自己的独立成果，拿走了原本应共同分享的认可。{target}发现公开说明里没有自己的位置，却还需要整理能证明贡献的材料。",
+      "effects": [
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "reputation",
+          "delta": 8
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "reputation",
+          "delta": -6
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": 8
+        },
+        {
+          "op": "relation",
+          "direction": "target_actor",
+          "key": "trust",
+          "delta": -10
+        },
+        {
+          "op": "edge_flag",
+          "direction": "actor_target",
+          "key": "credit_claim_pending",
+          "value": true
+        }
+      ],
+      "tags": [
+        "credit",
+        "betrayal",
+        "case_origin"
+      ]
+    },
+    {
+      "id": "npc.false_rumor",
+      "title": "失实的话沿着熟人传开",
+      "kind": "deception",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "actor.traits.honesty",
+          "op": "lte",
+          "value": 30
+        },
+        {
+          "path": "edge.tension",
+          "op": "gte",
+          "value": 35
+        },
+        {
+          "path": "target.stats.reputation",
+          "op": "gte",
+          "value": 40
+        },
+        {
+          "path": "edge.flags.rumor_pending",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 2,
+      "cooldown": 10,
+      "visibility": "private",
+      "text": "{actor}向熟人传播针对{target}的失实说法，部分人没有核实就转述出去。{target}察觉态度的变化，却一时难以追清消息从哪里开始。",
+      "effects": [
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "reputation",
+          "delta": -8
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": 8
+        },
+        {
+          "op": "relation",
+          "direction": "target_actor",
+          "key": "tension",
+          "delta": 8
+        },
+        {
+          "op": "edge_flag",
+          "direction": "actor_target",
+          "key": "rumor_pending",
+          "value": true
+        }
+      ],
+      "tags": [
+        "slander",
+        "reputation_harm",
+        "case_origin"
+      ]
+    },
+    {
+      "id": "npc.withheld_wages",
+      "title": "说好的工钱少了一大截",
+      "kind": "exploitation",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "actor.occupation",
+          "op": "eq",
+          "value": "business_owner"
+        },
+        {
+          "path": "actor.stats.cash",
+          "op": "gte",
+          "value": 80
+        },
+        {
+          "path": "target.stats.cash",
+          "op": "lte",
+          "value": 600
+        },
+        {
+          "path": "actor.traits.fairness",
+          "op": "lte",
+          "value": 35
+        },
+        {
+          "path": "edge.flags.wages_pending",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 2,
+      "cooldown": 10,
+      "visibility": "participants",
+      "text": "{target}按约完成了四百元的短工，{actor}却只付八十元，并把原先没有说明的条件推给对方。手头紧的{target}一时拿不回余款，也难以把这件事放下。",
+      "effects": [
+        {
+          "op": "transfer",
+          "from": "actor",
+          "to": "target",
+          "amount": 80
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": 10
+        },
+        {
+          "op": "relation",
+          "direction": "target_actor",
+          "key": "trust",
+          "delta": -12
+        },
+        {
+          "op": "edge_flag",
+          "direction": "actor_target",
+          "key": "wages_pending",
+          "value": true
+        }
+      ],
+      "tags": [
+        "labor_abuse",
+        "unpaid_balance_320",
+        "case_origin"
+      ]
+    },
+    {
+      "id": "npc.conditional_help",
+      "title": "曾经的帮助附上了控制条件",
+      "kind": "exploitation",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "edge.flags.assistance_given",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "edge.flags.coercion_pending",
+          "op": "eq",
+          "value": false
+        },
+        {
+          "path": "actor.traits.dominance",
+          "op": "gte",
+          "value": 75
+        },
+        {
+          "path": "target.stats.cash",
+          "op": "lte",
+          "value": 800
+        }
+      ],
+      "weight": 2,
+      "cooldown": 10,
+      "visibility": "participants",
+      "text": "{actor}拿先前的帮助作筹码，要求{target}按自己的意思安排私人生活，否则就撤回往后的支持。{target}开始担心每一次拒绝都会带来新的代价。",
+      "effects": [
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "stress",
+          "delta": -2
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": 10
+        },
+        {
+          "op": "relation",
+          "direction": "target_actor",
+          "key": "trust",
+          "delta": -8
+        },
+        {
+          "op": "relation",
+          "direction": "target_actor",
+          "key": "tension",
+          "delta": 10
+        },
+        {
+          "op": "edge_flag",
+          "direction": "actor_target",
+          "key": "coercion_pending",
+          "value": true
+        }
+      ],
+      "tags": [
+        "coercion",
+        "abuse_of_dependence",
+        "case_origin"
+      ]
+    },
+    {
+      "id": "npc.humiliation",
+      "title": "聚会里的嘲弄没有停下",
+      "kind": "exploitation",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "actor.traits.aggression",
+          "op": "gte",
+          "value": 65
+        },
+        {
+          "path": "actor.traits.dominance",
+          "op": "gte",
+          "value": 60
+        },
+        {
+          "path": "edge.affinity",
+          "op": "lte",
+          "value": 40
+        },
+        {
+          "path": "edge.flags.bullying_pending",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 2,
+      "cooldown": 10,
+      "visibility": "participants",
+      "text": "{actor}在一次聚会中接连拿{target}的处境开侮辱性的玩笑，对方表示不愿听后仍没有停下。{target}提前离开，也更不愿再进入同样的场合。",
+      "effects": [
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": 10
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "reputation",
+          "delta": -3
+        },
+        {
+          "op": "relation",
+          "direction": "target_actor",
+          "key": "trust",
+          "delta": -10
+        },
+        {
+          "op": "relation",
+          "direction": "target_actor",
+          "key": "tension",
+          "delta": 10
+        },
+        {
+          "op": "edge_flag",
+          "direction": "actor_target",
+          "key": "bullying_pending",
+          "value": true
+        }
+      ],
+      "tags": [
+        "bullying",
+        "humiliation",
+        "case_origin"
+      ]
+    },
+    {
+      "id": "npc.diverted_funds",
+      "title": "受托保管的钱出了缺口",
+      "kind": "crime",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "edge.flags.entrusted_fund",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "edge.flags.fund_misappropriation_pending",
+          "op": "eq",
+          "value": false
+        },
+        {
+          "path": "actor.stats.cash",
+          "op": "gte",
+          "value": 600
+        },
+        {
+          "path": "actor.traits.honesty",
+          "op": "lte",
+          "value": 35
+        }
+      ],
+      "weight": 2,
+      "cooldown": 12,
+      "visibility": "private",
+      "text": "{actor}擅自把受托保管的采购款用于个人支出，留下无法按用途交付的缺口。到了需要付款时，{target}才发现原定的采购不能照常继续。",
+      "effects": [
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "cash",
+          "delta": -300
+        },
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "stress",
+          "delta": 4
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": 9
+        },
+        {
+          "op": "relation",
+          "direction": "target_actor",
+          "key": "trust",
+          "delta": -12
+        },
+        {
+          "op": "edge_flag",
+          "direction": "actor_target",
+          "key": "entrusted_fund",
+          "value": false
+        },
+        {
+          "op": "edge_flag",
+          "direction": "actor_target",
+          "key": "fund_misappropriation_pending",
+          "value": true
+        }
+      ],
+      "tags": [
+        "misappropriation",
+        "case_origin"
+      ]
+    },
+    {
+      "id": "npc.coerced_payment",
+      "title": "正常受理被换成了私下好处",
+      "kind": "crime",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "actor.occupation",
+          "op": "eq",
+          "value": "public_clerk"
+        },
+        {
+          "path": "target.occupation",
+          "op": "eq",
+          "value": "business_owner"
+        },
+        {
+          "path": "actor.traits.honesty",
+          "op": "lte",
+          "value": 30
+        },
+        {
+          "path": "actor.traits.dominance",
+          "op": "gte",
+          "value": 50
+        },
+        {
+          "path": "target.stats.cash",
+          "op": "gte",
+          "value": 300
+        },
+        {
+          "path": "edge.flags.corruption_pending",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 1,
+      "cooldown": 12,
+      "visibility": "private",
+      "text": "{actor}利用经手事务的便利，把本该正常受理的事项同私下好处挂钩。{target}在压力下付了钱，事情虽然继续流转，信任与公平却被留在了门外。",
+      "effects": [
+        {
+          "op": "transfer",
+          "from": "target",
+          "to": "actor",
+          "amount": 300
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": 7
+        },
+        {
+          "op": "relation",
+          "direction": "target_actor",
+          "key": "trust",
+          "delta": -10
+        },
+        {
+          "op": "edge_flag",
+          "direction": "actor_target",
+          "key": "corruption_pending",
+          "value": true
+        }
+      ],
+      "tags": [
+        "corruption",
+        "abuse_of_office",
+        "case_origin"
+      ]
+    },
+    {
+      "id": "npc.threat",
+      "title": "威胁越过了争执的界线",
+      "kind": "crime",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "actor.traits.aggression",
+          "op": "gte",
+          "value": 70
+        },
+        {
+          "path": "actor.traits.dominance",
+          "op": "gte",
+          "value": 55
+        },
+        {
+          "path": "edge.tension",
+          "op": "gte",
+          "value": 35
+        },
+        {
+          "path": "edge.flags.threat_pending",
+          "op": "eq",
+          "value": false
+        },
+        {
+          "path": "edge.flags.injury_pending",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 1,
+      "cooldown": 10,
+      "visibility": "participants",
+      "text": "{actor}在争执中向{target}发出人身威胁，要求对方照办。{target}开始担心再次碰面，原本的分歧已经变成了对安全的顾虑。",
+      "effects": [
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "stress",
+          "delta": 4
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": 12
+        },
+        {
+          "op": "relation",
+          "direction": "target_actor",
+          "key": "trust",
+          "delta": -12
+        },
+        {
+          "op": "relation",
+          "direction": "actor_target",
+          "key": "tension",
+          "delta": 14
+        },
+        {
+          "op": "edge_flag",
+          "direction": "actor_target",
+          "key": "threat_pending",
+          "value": true
+        }
+      ],
+      "tags": [
+        "threat",
+        "safety_harm",
+        "case_origin"
+      ]
+    },
+    {
+      "id": "npc.physical_harm",
+      "title": "冲突造成了身体伤害",
+      "kind": "crime",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "edge.flags.threat_pending",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "edge.flags.injury_pending",
+          "op": "eq",
+          "value": false
+        },
+        {
+          "path": "actor.traits.aggression",
+          "op": "gte",
+          "value": 80
+        },
+        {
+          "path": "actor.traits.impulsivity",
+          "op": "gte",
+          "value": 65
+        },
+        {
+          "path": "target.stats.health",
+          "op": "gte",
+          "value": 20
+        }
+      ],
+      "weight": 1,
+      "cooldown": 12,
+      "visibility": "participants",
+      "text": "先前的威胁之后，{actor}再次与{target}冲突并造成身体伤害。{target}不得不暂停一些日常活动，也更难独自面对接下来的接触。",
+      "effects": [
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "health",
+          "delta": -10
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": 14
+        },
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "stress",
+          "delta": 6
+        },
+        {
+          "op": "relation",
+          "direction": "target_actor",
+          "key": "trust",
+          "delta": -20
+        },
+        {
+          "op": "edge_flag",
+          "direction": "actor_target",
+          "key": "threat_pending",
+          "value": false
+        },
+        {
+          "op": "edge_flag",
+          "direction": "actor_target",
+          "key": "injury_pending",
+          "value": true
+        }
+      ],
+      "tags": [
+        "violence",
+        "non_graphic",
+        "case_origin"
+      ]
+    },
+    {
+      "id": "npc.false_corroboration",
+      "title": "有人替被核查者说了假话",
+      "kind": "crime",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "target.flags.under_review",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "actor.traits.honesty",
+          "op": "lte",
+          "value": 35
+        },
+        {
+          "path": "edge.affinity",
+          "op": "gte",
+          "value": 45
+        },
+        {
+          "path": "edge.flags.coverup_pending",
+          "op": "eq",
+          "value": false
+        }
+      ],
+      "weight": 1,
+      "cooldown": 12,
+      "visibility": "private",
+      "text": "{target}正在接受行为核查，{actor}却提供了与自己所知不符的说法，试图替对方遮掩。核对变得更困难，这段支持也把{actor}卷进了尚未解决的责任。",
+      "effects": [
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "stress",
+          "delta": 6
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": -3
+        },
+        {
+          "op": "edge_flag",
+          "direction": "actor_target",
+          "key": "coverup_pending",
+          "value": true
+        },
+        {
+          "op": "flag",
+          "who": "target",
+          "key": "review_obstructed",
+          "value": true
+        }
+      ],
+      "tags": [
+        "coverup",
+        "false_statement"
+      ]
+    },
+    {
+      "id": "npc.defect_refund",
+      "title": "有缺陷的交易终于退回款项",
+      "kind": "repair",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "edge.flags.fraud_pending",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "actor.stats.cash",
+          "op": "gte",
+          "value": 450
+        }
+      ],
+      "weight": 4,
+      "cooldown": 4,
+      "visibility": "participants",
+      "text": "核对交易情况后，{actor}向{target}退回原先的付款，并承认当时没有说明缺陷。钱回来了，被耽误的安排与失去的信任仍需要时间。",
+      "effects": [
+        {
+          "op": "transfer",
+          "from": "actor",
+          "to": "target",
+          "amount": 450
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": -6
+        },
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "reputation",
+          "delta": -3
+        },
+        {
+          "op": "relation",
+          "direction": "target_actor",
+          "key": "trust",
+          "delta": 4
+        },
+        {
+          "op": "edge_flag",
+          "direction": "actor_target",
+          "key": "fraud_pending",
+          "value": false
+        }
+      ],
+      "tags": [
+        "case_followup",
+        "restitution"
+      ]
+    },
+    {
+      "id": "npc.promise_repayment",
+      "title": "失约的代垫款得到归还",
+      "kind": "repair",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "edge.flags.promise_pending",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "actor.stats.cash",
+          "op": "gte",
+          "value": 300
+        }
+      ],
+      "weight": 4,
+      "cooldown": 4,
+      "visibility": "participants",
+      "text": "{actor}把之前失约的代垫款还给{target}，也说明自己确实违背了约定。{target}收下钱，没有因此承诺恢复从前的亲近。",
+      "effects": [
+        {
+          "op": "transfer",
+          "from": "actor",
+          "to": "target",
+          "amount": 300
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": -5
+        },
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "stress",
+          "delta": 3
+        },
+        {
+          "op": "relation",
+          "direction": "target_actor",
+          "key": "trust",
+          "delta": 3
+        },
+        {
+          "op": "edge_flag",
+          "direction": "actor_target",
+          "key": "promise_pending",
+          "value": false
+        }
+      ],
+      "tags": [
+        "case_followup",
+        "repayment"
+      ]
+    },
+    {
+      "id": "npc.credit_correction",
+      "title": "遗漏的贡献被重新写上",
+      "kind": "repair",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "edge.flags.credit_claim_pending",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 4,
+      "cooldown": 4,
+      "visibility": "public",
+      "text": "在材料核对与见证者说明之后，{actor}承认此前的成果说明遗漏了{target}的工作，公开记录补上了相应贡献。更正让{target}获得应有的认可，也留下了这次失信的痕迹。",
+      "effects": [
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "reputation",
+          "delta": -6
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "reputation",
+          "delta": 6
+        },
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "stress",
+          "delta": 5
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": -6
+        },
+        {
+          "op": "edge_flag",
+          "direction": "actor_target",
+          "key": "credit_claim_pending",
+          "value": false
+        }
+      ],
+      "tags": [
+        "case_followup",
+        "attribution"
+      ]
+    },
+    {
+      "id": "npc.rumor_correction",
+      "title": "失实传言得到公开澄清",
+      "kind": "repair",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "edge.flags.rumor_pending",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.knowledge_access",
+          "op": "gte",
+          "value": 40
+        }
+      ],
+      "weight": 4,
+      "cooldown": 4,
+      "visibility": "public",
+      "text": "记录和证词经过核对后，针对{target}的失实说法被逐项澄清，传播它的{actor}也公开作了更正。部分误解开始消退，已经造成的难堪并不会随告示一起消失。",
+      "effects": [
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "reputation",
+          "delta": -8
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "reputation",
+          "delta": 7
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": -5
+        },
+        {
+          "op": "edge_flag",
+          "direction": "actor_target",
+          "key": "rumor_pending",
+          "value": false
+        }
+      ],
+      "tags": [
+        "case_followup",
+        "correction"
+      ]
+    },
+    {
+      "id": "npc.wages_settled",
+      "title": "被扣下的余款付清了",
+      "kind": "repair",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "edge.flags.wages_pending",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "actor.stats.cash",
+          "op": "gte",
+          "value": 320
+        }
+      ],
+      "weight": 4,
+      "cooldown": 4,
+      "visibility": "participants",
+      "text": "核对原先的工作约定后，{actor}向{target}补付了拖欠的三百二十元。{target}暂时缓解了手头压力，也重新考虑以后还要不要接这样的工作。",
+      "effects": [
+        {
+          "op": "transfer",
+          "from": "actor",
+          "to": "target",
+          "amount": 320
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": -7
+        },
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "stress",
+          "delta": 3
+        },
+        {
+          "op": "relation",
+          "direction": "target_actor",
+          "key": "trust",
+          "delta": 4
+        },
+        {
+          "op": "edge_flag",
+          "direction": "actor_target",
+          "key": "wages_pending",
+          "value": false
+        }
+      ],
+      "tags": [
+        "case_followup",
+        "labor_restitution"
+      ]
+    },
+    {
+      "id": "npc.funds_audited",
+      "title": "采购缺口经核对得到归还",
+      "kind": "repair",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "edge.flags.fund_misappropriation_pending",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.institutional_capacity",
+          "op": "gte",
+          "value": 45
+        },
+        {
+          "path": "actor.stats.cash",
+          "op": "gte",
+          "value": 600
+        }
+      ],
+      "weight": 4,
+      "cooldown": 4,
+      "visibility": "public",
+      "text": "采购凭证与交接记录核对后，受托款项被确认遭到挪用，{actor}向{target}归还六百元，并接受进一步责任核查。归还款项恢复了采购余地，后续处理没有被这笔退还替代。",
+      "effects": [
+        {
+          "op": "transfer",
+          "from": "actor",
+          "to": "target",
+          "amount": 600
+        },
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "reputation",
+          "delta": -12
+        },
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "stress",
+          "delta": 12
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": -6
+        },
+        {
+          "op": "flag",
+          "who": "actor",
+          "key": "under_review",
+          "value": true
+        },
+        {
+          "op": "edge_flag",
+          "direction": "actor_target",
+          "key": "fund_misappropriation_pending",
+          "value": false
+        }
+      ],
+      "tags": [
+        "case_followup",
+        "accountability",
+        "restitution"
+      ]
+    },
+    {
+      "id": "npc.coercion_boundary",
+      "title": "帮助不再能换来支配",
+      "kind": "repair",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "edge.flags.coercion_pending",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "weight": 4,
+      "cooldown": 4,
+      "visibility": "participants",
+      "text": "{target}重新安排生活支持，明确拒绝{actor}给帮助附加的控制条件。两人的往来因此减少，{target}的眼前压力轻了一些，重新安顿仍要自己花时间。",
+      "effects": [
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": -8
+        },
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "stress",
+          "delta": 4
+        },
+        {
+          "op": "relation",
+          "direction": "target_actor",
+          "key": "affinity",
+          "delta": -8
+        },
+        {
+          "op": "relation",
+          "direction": "actor_target",
+          "key": "tension",
+          "delta": 3
+        },
+        {
+          "op": "edge_flag",
+          "direction": "actor_target",
+          "key": "coercion_pending",
+          "value": false
+        }
+      ],
+      "tags": [
+        "case_followup",
+        "boundary",
+        "autonomy"
+      ]
+    },
+    {
+      "id": "npc.harm_protection",
+      "title": "伤害记录进入保护处理",
+      "kind": "repair",
+      "min_age": 18,
+      "requires": [
+        {
+          "path": "edge.flags.injury_pending",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "world.metrics.institutional_capacity",
+          "op": "gte",
+          "value": 45
+        }
+      ],
+      "weight": 4,
+      "cooldown": 4,
+      "visibility": "public",
+      "text": "核查人员确认了伤害记录，要求{actor}在后续处理期间停止接近{target}，并对其行动作出临时限制。{target}得到保护安排，事实核查与后续责任处理仍分别进行。",
+      "effects": [
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "reputation",
+          "delta": -15
+        },
+        {
+          "op": "stat",
+          "who": "actor",
+          "key": "stress",
+          "delta": 12
+        },
+        {
+          "op": "stat",
+          "who": "target",
+          "key": "stress",
+          "delta": -5
+        },
+        {
+          "op": "flag",
+          "who": "actor",
+          "key": "under_review",
+          "value": true
+        },
+        {
+          "op": "flag",
+          "who": "actor",
+          "key": "detained",
+          "value": true
+        },
+        {
+          "op": "flag",
+          "who": "target",
+          "key": "under_protection",
+          "value": true
+        },
+        {
+          "op": "edge_flag",
+          "direction": "actor_target",
+          "key": "injury_pending",
+          "value": false
+        }
+      ],
+      "tags": [
+        "case_followup",
+        "protection",
+        "no_verdict"
+      ]
+    }
+  ]
+}

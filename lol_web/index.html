@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>LOL 上路对线实验室 · 26.18</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">PATCH-PINNED LAB</p>
+        <h1>上路 1–6 级对线实验室</h1>
+        <p class="lede">把对线假设写成可复现配置：比较换血、控线、技能加点和出门装，再看模型里哪组候选更稳。</p>
+      </div>
+      <div id="version" class="version">读取版本中…</div>
+    </header>
+
+    <section class="notice"><strong>模型边界</strong>　数据固定为 Riot Data Dragon 16.18.1（游戏 26.18）。结果是给定命中率、对手策略和随机种子下的候选比较，不等同于实战胜率；命中、兵线仇恨、打野和逐帧动画都做了简化。</section>
+
+    <section class="grid two">
+      <div id="player-card" class="card"></div>
+      <div id="opponent-card" class="card"></div>
+    </section>
+
+    <section class="card scenario">
+      <div class="card-head"><div><p class="eyebrow">SCENARIO</p><h2>场景参数</h2></div><button id="reset" class="ghost">恢复默认</button></div>
+      <div class="form-grid compact">
+        <label>持续秒数<input id="duration" type="number" min="1" max="600" step="1"></label>
+        <label>起始时间<input id="start-time" type="number" min="0" max="600" step="1"></label>
+        <label>玩家命中率<input id="accuracy" type="number" min="0" max="1" step="0.05"></label>
+        <label>对手命中率<input id="opponent-accuracy" type="number" min="0" max="1" step="0.05"></label>
+        <label>初始距离<input id="distance" type="number" min="0" max="1200" step="25"></label>
+        <label>模式<select id="mode"><option value="lane">兵线对局</option><option value="duel">纯对拼</option></select></label>
+        <label>随机种子<input id="seed" type="number" min="0" max="4294967295" step="1"></label>
+        <label>初始金币<input id="starting-gold" type="number" min="0" max="10000" step="50"></label>
+      </div>
+      <div class="actions"><button id="simulate" class="primary">运行单局</button><button id="optimize" class="secondary">搜索候选最优</button><button id="copy-config" class="ghost">复制配置 JSON</button></div>
+    </section>
+
+    <section class="card result-card">
+      <div class="card-head"><div><p class="eyebrow">RESULT</p><h2>结果</h2></div><span id="busy" class="muted"></span></div>
+      <div id="result" class="result empty">还没有运行。先调整参数，然后运行单局或搜索。</div>
+    </section>
+
+    <footer>本地服务：<code>python -m lol_sim serve --port 8767</code> · CLI：<code>python -m lol_sim simulate --config scenario.json</code></footer>
+  </main>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
